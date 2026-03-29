@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;800&amp;family=Lexend:wght@400;500;600&amp;family=Source+Serif+Four:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-dim": "#75c1ee",
+              "on-tertiary-container": "#664261",
+              "inverse-on-surface": "#465768",
+              "tertiary-container": "#ffcef4",
+              "secondary-fixed-dim": "#ffc2f1",
+              "surface": "#000f1e",
+              "outline-variant": "#284b69",
+              "inverse-surface": "#f7f9ff",
+              "secondary-dim": "#fc95ec",
+              "primary": "#a5dbff",
+              "on-secondary": "#70196a",
+              "tertiary": "#ffe3f7",
+              "primary-fixed": "#83cffd",
+              "surface-container-low": "#001526",
+              "on-primary-fixed": "#003044",
+              "surface-variant": "#002843",
+              "primary-fixed-dim": "#75c1ee",
+              "on-primary": "#004f6e",
+              "error-container": "#8a1a1e",
+              "surface-bright": "#002e4d",
+              "on-error-container": "#ff9993",
+              "tertiary-fixed": "#ffcef4",
+              "error": "#ff716c",
+              "tertiary-dim": "#f0c1e6",
+              "primary-container": "#83cffd",
+              "surface-container-high": "#002139",
+              "tertiary-fixed-dim": "#f0c1e6",
+              "on-secondary-container": "#e481d6",
+              "on-primary-container": "#004561",
+              "secondary-container": "#4a0047",
+              "on-primary-fixed-variant": "#004f6e",
+              "surface-tint": "#a5dbff",
+              "surface-container-highest": "#002843",
+              "on-secondary-fixed": "#6f1869",
+              "on-tertiary-fixed-variant": "#714c6b",
+              "on-tertiary-fixed": "#52304e",
+              "inverse-primary": "#00668d",
+              "outline": "#577899",
+              "surface-container": "#001b30",
+              "background": "#000f1e",
+              "on-tertiary": "#704b6a",
+              "secondary": "#ffabef",
+              "on-error": "#490006",
+              "surface-dim": "#000f1e",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#d4e8ff",
+              "on-surface-variant": "#8daed1",
+              "on-background": "#d4e8ff",
+              "error-dim": "#c94947",
+              "secondary-fixed": "#ffd7f3",
+              "on-secondary-fixed-variant": "#903888"
+            },
+            fontFamily: {
+              "headline": ["Source Serif Four"],
+              "body": ["Public Sans"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .bg-glass {
+        background: rgba(0, 15, 30, 0.7);
+        backdrop-filter: blur(12px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950 flex justify-between items-center px-4 h-16 w-full border-b border-slate-800 shadow-lg shadow-black/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-500" data-icon="location_on">location_on</span>
+<h1 class="font-serif font-bold text-xl font-black text-sky-500 dark:text-sky-400">KasiLink</h1>
+</div>
+<button class="p-2 rounded-full hover:bg-slate-900 transition-colors active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-slate-400" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-4 max-w-5xl mx-auto">
+<!-- Hero Section / Context -->
+<section class="mb-12 text-center">
+<h2 class="font-headline text-4xl mb-4 text-on-surface">KasiLink Gig Life Cycle</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto font-body">Follow the journey from posting a local service to successful completion and community trust building.</p>
+</section>
+<!-- Flowchart Container -->
+<div class="relative flex flex-col items-center">
+<!-- Step 1: Provider Posts -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl flex items-start gap-6 shadow-xl relative z-10 hover:border-primary transition-colors">
+<div class="bg-primary-container/20 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="post_add">post_add</span>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-primary-dim mb-1 block">Step 01</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Provider Posts Gig</h3>
+<p class="text-on-surface-variant text-sm">Local experts list their services with clear pricing, duration, and skill requirements.</p>
+</div>
+</div>
+<!-- Connector Arrow -->
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary/40 hidden md:block">
+<span class="material-symbols-outlined text-4xl" data-icon="south">south</span>
+</div>
+</div>
+<!-- Step 2: Discovery -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl flex items-start gap-6 shadow-xl relative z-10 hover:border-secondary transition-colors">
+<div class="bg-secondary-container/20 p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="location_searching">location_searching</span>
+</div>
+<div class="flex-1">
+<span class="font-label text-xs uppercase tracking-widest text-secondary mb-1 block">Step 02</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Seeker Discovers &amp; Applies</h3>
+<p class="text-on-surface-variant text-sm mb-4">Nearby users filter by location to find urgent help or planned services within their neighborhood.</p>
+<div class="flex gap-2">
+<span class="bg-surface-variant px-3 py-1 rounded-full text-xs font-label text-on-surface-variant">Nearby Filter</span>
+<span class="bg-surface-variant px-3 py-1 rounded-full text-xs font-label text-on-surface-variant">Real-time Map</span>
+</div>
+</div>
+</div>
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary/40 hidden md:block">
+<span class="material-symbols-outlined text-4xl" data-icon="south">south</span>
+</div>
+</div>
+<!-- Step 3: Assignment -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl flex items-start gap-6 shadow-xl relative z-10 hover:border-tertiary transition-colors">
+<div class="bg-tertiary-container/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-icon="assignment_ind">assignment_ind</span>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-tertiary mb-1 block">Step 03</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Provider Reviews &amp; Assigns</h3>
+<p class="text-on-surface-variant text-sm">Providers check seeker profiles and previous ratings before accepting the application.</p>
+</div>
+</div>
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary/40 hidden md:block">
+<span class="material-symbols-outlined text-4xl" data-icon="south">south</span>
+</div>
+</div>
+<!-- Step 4: Communication (Asymmetric Side) -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl flex items-start gap-6 shadow-xl relative z-10 hover:border-primary transition-colors">
+<div class="bg-primary-container/20 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="forum">forum</span>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-primary-dim mb-1 block">Step 04</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Real-time Chat Coordination</h3>
+<p class="text-on-surface-variant text-sm">Direct messaging to finalize logistics, share location pins, and clarify tasks before starting.</p>
+</div>
+</div>
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary/40 hidden md:block">
+<span class="material-symbols-outlined text-4xl" data-icon="south">south</span>
+</div>
+</div>
+<!-- Step 5: Execution -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container border border-outline-variant p-6 rounded-xl flex items-start gap-6 shadow-xl relative z-10 hover:border-secondary transition-colors">
+<div class="bg-secondary-container/20 p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="engineering">engineering</span>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-secondary mb-1 block">Step 05</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Gig Execution</h3>
+<p class="text-on-surface-variant text-sm">The job is performed. Both parties can track status updates within the KasiLink app.</p>
+</div>
+</div>
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 text-primary/40 hidden md:block">
+<span class="material-symbols-outlined text-4xl" data-icon="south">south</span>
+</div>
+</div>
+<!-- Step 6: Completion -->
+<div class="group relative w-full md:w-3/4 lg:w-2/3 mb-16">
+<div class="bg-surface-container-highest border-2 border-primary p-8 rounded-xl flex items-start gap-6 shadow-2xl relative z-10">
+<div class="bg-primary/20 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="verified" data-weight="fill">verified</span>
+</div>
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-primary mb-1 block">Step 06</span>
+<h3 class="font-headline text-2xl text-on-surface mb-2">Completion &amp; Review</h3>
+<p class="text-on-surface-variant text-sm mb-4">The final milestone. Payments are released, and mutual ratings/feedback build community trust.</p>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute top-0 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-40 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+</div>
+<!-- Call to Action -->
+<div class="mt-8 mb-20 p-8 rounded-xl bg-gradient-to-br from-surface-container-high to-surface-container text-center border border-outline-variant">
+<h4 class="font-headline text-2xl mb-2">Ready to list a gig?</h4>
+<p class="text-on-surface-variant mb-6 font-body">Connect with your community today and start earning or getting things done.</p>
+<button class="bg-primary text-on-primary-container px-8 py-3 rounded-full font-label font-semibold hover:bg-primary-dim transition-all active:scale-95">
+                Create First Gig
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl bg-slate-950/95 backdrop-blur-md border-t border-slate-800 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] flex justify-around items-center h-20 px-2 pb-safe w-full">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-sky-400 bg-sky-500/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,39 @@
+# Technical Specifications: KasiLink
+
+## 📝 Summary
+**Project Name:** KasiLink (Kasi = township slang for "home/community" in SA)
+KasiLink is a mobile-first Progressive Web App (PWA) built with Next.js, TypeScript, TailwindCSS, MongoDB, and Clerk. It connects unemployed youth and small informal businesses in Gauteng with instant local gigs (car washes, tutoring, repairs, etc.).
+**Unique SA Twist:** Community features for load-shedding coordination, neighborhood safety alerts, and success stories.
+
+## 📗 Background
+**Purpose:** Empower informal economy participants with a tool built for South African realities (township context, data costs, trust issues).
+**Scope:** Phase 1 focuses on Gauteng (Johannesburg) with a PWA offering a gig marketplace and community safety hub.
+
+## ✅ Requirements (Use Cases)
+1. **Gig Seeker:** Browse/post for same-day gigs, match by location, chat securely.
+2. **Gig Provider:** Post work, find helpers, manage bookings.
+3. **Community Member:** Share load-shedding tips, report safety incidents, share success stories.
+
+## 🏛️ Architecture
+- **Frontend:** Next.js (App Router), TailwindCSS, Framer Motion.
+- **Backend:** Next.js API routes, Node/Express, MongoDB.
+- **Auth:** Clerk (Phone-first OTP, social login, Organizations for small biz).
+- **Deployment:** Vercel, MongoDB Atlas.
+
+## 🎨 UI Components
+- **Mobile Interaction:** Clean, vibrant, culturally resonant design.
+- **Key Screens:** 
+  - Clerk-powered Sign In/Up (Phone-first).
+  - Home Feed: Nearby gigs + Safety alerts + Load-shedding status.
+  - Gig Marketplace: Map/List view with filters.
+  - In-app Chat & Community Forum.
+
+## 📈 Metrics
+- Daily Active Users (Target: 5k in Month 1).
+- Gigs Completed (Target: 1,000/month).
+- Viral Coefficient via WhatsApp shares.
+
+## ⏳ Project Timeline
+- **Milestone 1 (MVP Core):** Auth, Profiles, Gig CRUD. (End April 2026)
+- **Milestone 2 (Community + Polish):** Safety, Load-shedding, Chat, PWA. (Mid May 2026)
+- **Milestone 3 (Launch):** Vercel deployment, Marketing push. (End May 2026)

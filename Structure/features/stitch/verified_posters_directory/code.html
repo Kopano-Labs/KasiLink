@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verified Posters - KasiLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#fff5e4",
+              "outline": "#867645",
+              "secondary-dim": "#654c00",
+              "on-secondary": "#fff1d9",
+              "surface-container": "#ffe7a3",
+              "error-container": "#f95630",
+              "on-primary-fixed": "#4a4400",
+              "error-dim": "#b92902",
+              "on-secondary-container": "#5b4400",
+              "on-surface-variant": "#695a2d",
+              "outline-variant": "#bfac76",
+              "surface-tint": "#655d00",
+              "secondary-container": "#ffca3f",
+              "surface-variant": "#f5db90",
+              "secondary-fixed": "#ffca3f",
+              "inverse-on-surface": "#ae9c67",
+              "on-tertiary-container": "#5c5b00",
+              "tertiary-fixed-dim": "#e7e64a",
+              "on-primary": "#fff5a9",
+              "on-primary-fixed-variant": "#696000",
+              "secondary-fixed-dim": "#f0bd30",
+              "surface-container-low": "#fff0ca",
+              "on-tertiary": "#fbf95c",
+              "surface-container-highest": "#f5db90",
+              "primary-fixed": "#faeb61",
+              "background": "#fff5e4",
+              "primary-fixed-dim": "#ecdd54",
+              "on-primary-container": "#5e5600",
+              "primary-dim": "#585100",
+              "on-secondary-fixed-variant": "#664d00",
+              "surface-container-high": "#fae199",
+              "primary-container": "#faeb61",
+              "on-tertiary-fixed": "#494900",
+              "tertiary-fixed": "#f6f557",
+              "tertiary-dim": "#535200",
+              "on-surface": "#392d04",
+              "surface-dim": "#edd283",
+              "inverse-primary": "#faeb61",
+              "on-tertiary-fixed-variant": "#666600",
+              "surface": "#fff5e4",
+              "primary": "#655d00",
+              "tertiary-container": "#f6f557",
+              "inverse-surface": "#130d00",
+              "tertiary": "#5f5f00",
+              "surface-container-lowest": "#ffffff",
+              "on-error": "#ffefec",
+              "on-secondary-fixed": "#433200",
+              "secondary": "#735700",
+              "on-background": "#392d04",
+              "on-error-container": "#520c00",
+              "error": "#b02500"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #fff5e4;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 flex items-center justify-between w-full px-4 h-16 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="transition-colors duration-200 active:opacity-70 hover:bg-stone-100 dark:hover:bg-stone-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-stone-500 dark:text-stone-400">arrow_back</span>
+</button>
+<h1 class="font-public-sans text-lg font-bold text-stone-800 dark:text-stone-100">Verified Posters</h1>
+</div>
+<div class="flex items-center">
+<button class="transition-colors duration-200 active:opacity-70 hover:bg-stone-100 dark:hover:bg-stone-800 p-2 rounded-full">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400">filter_list</span>
+</button>
+</div>
+</header>
+<main class="px-4 py-6 max-w-2xl mx-auto space-y-6">
+<!-- Search Section -->
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-2 border-outline-variant focus:border-primary rounded-xl py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline/60 focus:ring-0 transition-all" placeholder="Search verified providers..." type="text"/>
+</div>
+<!-- Featured/Trust Banner -->
+<div class="bg-primary-container rounded-xl p-4 flex items-center gap-4 border border-primary/20">
+<div class="bg-white p-3 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-primary-container">KasiLink Verified</p>
+<p class="text-sm text-on-primary-container/80">Every poster here has passed our identity and skill verification process.</p>
+</div>
+</div>
+<!-- List of Posters -->
+<div class="space-y-4">
+<!-- Poster Card 1 -->
+<div class="bg-white rounded-xl p-4 shadow-sm border border-stone-100 flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="relative w-16 h-16 shrink-0">
+<img alt="Profile" class="w-full h-full object-cover rounded-xl" data-alt="Close-up portrait of a professional African woman smiling warmly in an office setting with natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5q8S2u5QH9vWzpyCmoNCEDsQ027vmVKVk2reieVq99aRhuLVi6_EYWGbz64zelzhwt4w3y8aHlOPE8ZY4wg-YOrUIRnAEsnO-sxLy7GldoG7Iv8Nuft24i8V22keI_yTgE2eWlKxRzZlMJV_6T6cD-nVxBNIrR-0Z0eRfV9yVwB1wy84QaiJpBnujn6kWnzInZERqkYnihH7yIKBjl4-TuF1pK4g6JDwIiYedLybEIAAmNpXcUhHQ7lwNqjn0Od_zUfNq9pkpSrN7"/>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-on-surface truncate">Thandiwe Molefe</h3>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs text-secondary-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.9</span>
+</div>
+</div>
+<p class="font-label text-sm text-outline italic">Professional Tailor &amp; Seamstress</p>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>Soweto, GP</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">work_history</span>
+<span>124 Gigs</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">Book Now</button>
+<button class="flex-1 border border-outline-variant text-on-surface py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">View Profile</button>
+</div>
+</div>
+<!-- Poster Card 2 -->
+<div class="bg-white rounded-xl p-4 shadow-sm border border-stone-100 flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="relative w-16 h-16 shrink-0">
+<img alt="Profile" class="w-full h-full object-cover rounded-xl" data-alt="Headshot of a confident young man with a neat beard in a clean workshop environment with warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9zLPWcrUgZviccVyUhXd-2zxLxEXkkwDJZR3hp7v0HHYw3vS1_ApVoO9MGhckHK6XiIOmcL9-Yl3AOKh26TB81pru7G9uUjM5K1-vbFUqvhxL8aFsNZbzTm7D-TQrt9Fv5DeKda9jr7jcFSayy0TL7PJyx4OI5O6GjcUm_SjEhYMWWOpkIOp4dE3XHMGS9AK_CUk202GEbctya3cZxxYvFjfCLXqaphPvPldn_h8as7k_jCIGo_ajueXRqmnzUGsD0RqJUMLPe2vY"/>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-on-surface truncate">Kabelo Mashigo</h3>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs text-secondary-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.8</span>
+</div>
+</div>
+<p class="font-label text-sm text-outline italic">General Handyman &amp; Plumber</p>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>Mamelodi, GP</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">work_history</span>
+<span>89 Gigs</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">Book Now</button>
+<button class="flex-1 border border-outline-variant text-on-surface py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">View Profile</button>
+</div>
+</div>
+<!-- Poster Card 3 -->
+<div class="bg-white rounded-xl p-4 shadow-sm border border-stone-100 flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="relative w-16 h-16 shrink-0">
+<img alt="Profile" class="w-full h-full object-cover rounded-xl" data-alt="Portrait of a creative young woman with glasses smiling, wearing a colorful headwrap in a bright studio space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLiF62DYSCxHw61FiMwK9UYuPrVBe0Z3ZU2KlPfVt9pw7HxczeQ1dnbJ0DgZE5QlHz30DO5frJSm7z2IhGgxC-6Krc7IVqyyS2U3SqJJBtvsyZQ5v2DDQ7yXnFphWAFLEaxbaXIO76RxEgc8aaRKVMDVVp7f-wZgJwgCRnbSwBguYfiaCck-9QksCf5th08tKqDoH6DQjH6woNLVUe55LALprwvqZey85VUBnLOnQCdpNMNRgJHUWfs9nZIrILgavXth9HeJQTyF9L"/>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-on-surface truncate">Zanele Dube</h3>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs text-secondary-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">5.0</span>
+</div>
+</div>
+<p class="font-label text-sm text-outline italic">Event Decor &amp; Catering</p>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>Umlazi, KZN</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">work_history</span>
+<span>45 Gigs</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">Book Now</button>
+<button class="flex-1 border border-outline-variant text-on-surface py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">View Profile</button>
+</div>
+</div>
+<!-- Poster Card 4 -->
+<div class="bg-white rounded-xl p-4 shadow-sm border border-stone-100 flex flex-col gap-4">
+<div class="flex gap-4">
+<div class="relative w-16 h-16 shrink-0">
+<img alt="Profile" class="w-full h-full object-cover rounded-xl" data-alt="Professional headshot of a middle-aged man in a collared shirt looking directly at the camera with a confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF0k3K0fF7NyJqiM410azyNI0qC8HoYQOtSpfy04lQctDOpjDO5CKtpj_HVNs1TT1gDIU5URJpU4IujBf_ku502vEAVqlk3-0ZrHcOy0z49lK8NdF5vz28s5Ch8KE-m8l0amLqRpmFO96tVU55EjEXRqqWCGMtT66LH9GybP5NO2ssDthdMilkzT9rq1JhHqwbsTQNIUTtx83wIAdQpM7xskKB-4FWbDHcazpzZHpl_H5Ep6JV2mFugJRdus9mlKEMh_0KG2fXxlxk"/>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-yellow-500 text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-on-surface truncate">Lwazi Nkosi</h3>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs text-secondary-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface">4.7</span>
+</div>
+</div>
+<p class="font-label text-sm text-outline italic">Professional Tutor (Math &amp; Physics)</p>
+<div class="flex items-center gap-3 mt-2">
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">location_on</span>
+<span>Khayelitsha, WC</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-stone-500">
+<span class="material-symbols-outlined text-xs">work_history</span>
+<span>67 Gigs</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">Book Now</button>
+<button class="flex-1 border border-outline-variant text-on-surface py-2.5 rounded-lg font-bold text-sm transition-transform active:scale-95">View Profile</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center py-2 px-4 bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 rounded-t-lg shadow-lg dark:shadow-none h-16">
+<button class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 active:scale-95 transition-transform duration-150 hover:text-yellow-600 dark:hover:text-yellow-300">
+<span class="material-symbols-outlined">home</span>
+<span class="font-public-sans text-xs font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-xl px-3 py-1 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-public-sans text-xs font-medium">Directory</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 active:scale-95 transition-transform duration-150 hover:text-yellow-600 dark:hover:text-yellow-300">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-public-sans text-xs font-medium">Post</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 active:scale-95 transition-transform duration-150 hover:text-yellow-600 dark:hover:text-yellow-300">
+<span class="material-symbols-outlined">person</span>
+<span class="font-public-sans text-xs font-medium">Profile</span>
+</button>
+</nav>
+</body></html>

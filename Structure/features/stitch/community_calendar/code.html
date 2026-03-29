@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Calendar - KasiLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed-variant": "#666600",
+              "secondary-dim": "#654c00",
+              "secondary": "#735700",
+              "on-primary-container": "#5e5600",
+              "tertiary-fixed": "#f6f557",
+              "error-container": "#f95630",
+              "primary-fixed": "#faeb61",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed": "#494900",
+              "surface-container-highest": "#f5db90",
+              "primary-dim": "#585100",
+              "outline-variant": "#bfac76",
+              "tertiary-fixed-dim": "#e7e64a",
+              "on-secondary-fixed-variant": "#664d00",
+              "primary-fixed-dim": "#ecdd54",
+              "on-secondary": "#fff1d9",
+              "error": "#b02500",
+              "on-secondary-container": "#5b4400",
+              "surface-bright": "#fff5e4",
+              "on-tertiary-container": "#5c5b00",
+              "on-tertiary": "#fbf95c",
+              "surface-variant": "#f5db90",
+              "secondary-fixed": "#ffca3f",
+              "on-error": "#ffefec",
+              "surface-container-low": "#fff0ca",
+              "surface-dim": "#edd283",
+              "background": "#fff5e4",
+              "on-primary-fixed-variant": "#696000",
+              "on-surface-variant": "#695a2d",
+              "on-surface": "#392d04",
+              "on-primary-fixed": "#4a4400",
+              "tertiary-dim": "#535200",
+              "tertiary": "#5f5f00",
+              "surface-tint": "#655d00",
+              "secondary-container": "#ffca3f",
+              "outline": "#867645",
+              "inverse-surface": "#130d00",
+              "error-dim": "#b92902",
+              "surface-container-high": "#fae199",
+              "on-background": "#392d04",
+              "surface-container": "#ffe7a3",
+              "surface": "#fff5e4",
+              "primary-container": "#faeb61",
+              "inverse-on-surface": "#ae9c67",
+              "on-error-container": "#520c00",
+              "primary": "#655d00",
+              "tertiary-container": "#f6f557",
+              "secondary-fixed-dim": "#f0bd30",
+              "on-secondary-fixed": "#433200",
+              "inverse-primary": "#faeb61",
+              "on-primary": "#fff5a9"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #fff5e4;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 shadow-sm dark:shadow-none fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 h-16">
+<button class="text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-['Public_Sans'] font-bold text-lg dark:text-stone-100">Community Calendar</h1>
+<button class="text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="flex-grow pt-20 pb-24 px-4 max-w-2xl mx-auto w-full">
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-4 mb-2">
+<button class="whitespace-nowrap px-4 py-2 bg-primary-container text-on-primary-container rounded-full text-sm font-semibold flex items-center gap-2 shadow-sm border border-primary/10">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                Gigs
+            </button>
+<button class="whitespace-nowrap px-4 py-2 bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-full text-sm font-medium flex items-center gap-2 border border-stone-200 dark:border-stone-700">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                Safety Alerts
+            </button>
+<button class="whitespace-nowrap px-4 py-2 bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-full text-sm font-medium flex items-center gap-2 border border-stone-200 dark:border-stone-700">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                Community Meetings
+            </button>
+<button class="whitespace-nowrap px-4 py-2 bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-full text-sm font-medium flex items-center gap-2 border border-stone-200 dark:border-stone-700">
+<span class="w-2 h-2 rounded-full bg-stone-900 dark:bg-white"></span>
+                Load-shedding
+            </button>
+</div>
+<!-- Month Switcher & Year -->
+<div class="flex items-center justify-between mb-6 bg-white dark:bg-stone-900 p-4 rounded-2xl shadow-sm">
+<div class="flex flex-col">
+<span class="text-xs text-stone-500 font-medium uppercase tracking-widest">October 2024</span>
+<h2 class="text-2xl font-black text-on-surface">Spooky Season</h2>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-xl bg-stone-100 dark:bg-stone-800 text-on-surface hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-xl bg-stone-100 dark:bg-stone-800 text-on-surface hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Container -->
+<section class="bg-white dark:bg-stone-900 rounded-2xl shadow-xl overflow-hidden border border-stone-100 dark:border-stone-800 mb-6">
+<div class="calendar-grid bg-stone-50 dark:bg-stone-800/50 border-b border-stone-100 dark:border-stone-800">
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Sun</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Mon</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Tue</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Wed</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Thu</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Fri</div>
+<div class="py-3 text-center text-xs font-bold text-stone-400 uppercase tracking-tighter">Sat</div>
+</div>
+<div class="calendar-grid">
+<!-- Empty Slots for prev month -->
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 opacity-20">29</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 opacity-20">30</div>
+<!-- October Dates -->
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">1</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">2</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">3</span>
+<div class="flex gap-0.5 mt-auto"></div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between bg-primary-container/20 group cursor-pointer">
+<span class="text-sm font-black text-primary group-hover:scale-110 transition-transform">4</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">5</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+</div>
+<!-- Week 2 -->
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">6</span>
+<div class="flex gap-0.5 mt-auto"></div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">7</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">8</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between bg-primary-container text-on-primary-container ring-4 ring-white dark:ring-stone-900 rounded-lg group cursor-pointer z-10 shadow-lg">
+<span class="text-sm font-black group-hover:scale-110 transition-transform">9</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-stone-100"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">10</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">11</span>
+<div class="flex gap-0.5 mt-auto">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</div>
+</div>
+<div class="aspect-square p-2 border-r border-b border-stone-50 dark:border-stone-800/50 flex flex-col items-center justify-between hover:bg-stone-50 dark:hover:bg-stone-800 transition-colors cursor-pointer group">
+<span class="text-sm font-semibold group-hover:scale-110 transition-transform">12</span>
+<div class="flex gap-0.5 mt-auto"></div>
+</div>
+<!-- Additional rows implied for standard month -->
+<div class="calendar-grid col-span-7 py-4 text-center text-xs text-stone-400 italic">... rest of October displayed ...</div>
+</div>
+</section>
+<!-- Events List (Today) -->
+<div class="space-y-4">
+<h3 class="font-['Noto_Serif'] font-bold text-xl flex items-center justify-between">
+                Events for Oct 9
+                <span class="text-xs font-['Public_Sans'] font-medium px-2 py-1 bg-stone-100 dark:bg-stone-800 rounded text-stone-500 uppercase">Today</span>
+</h3>
+<!-- Event Card 1: Load-shedding -->
+<div class="bg-white dark:bg-stone-900 p-4 rounded-2xl border-l-4 border-stone-900 dark:border-white shadow-sm flex items-start gap-4">
+<div class="bg-stone-100 dark:bg-stone-800 p-2 rounded-xl">
+<span class="material-symbols-outlined text-stone-900 dark:text-stone-100">bolt</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-stone-900 dark:text-stone-100">Stage 2 Load-shedding</h4>
+<p class="text-sm text-stone-500 mb-2">Primary Substation Maintenance</p>
+<div class="flex items-center text-xs font-semibold text-stone-400 gap-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 14:00 - 16:30</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> Zone 4, Block B</span>
+</div>
+</div>
+</div>
+<!-- Event Card 2: Gig -->
+<div class="bg-primary-container/10 dark:bg-primary/5 p-4 rounded-2xl border-l-4 border-primary shadow-sm flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
+<img alt="Concert scene" class="w-full h-full object-cover" data-alt="vibrant local music venue with warm stage lighting and silhouettes of a live band performing for a crowd" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT6KwpLpyN_QbwChuAblE7du4rJZqco50JNZiNioXzxieR0vypqqCGn18iF9el3lLwOkFIrlFt4UfzpTScbhQD8LpVArmovVxn49U1rehs7vWv1dYLu3Ghq1tbG5L0Z60GXU74IXXfEGuVgmikXeHQ8mvFEjzLCvRhRSOGOhGoSyVT35biDcBak4X_5zHLKSXS1EAdaKiEsNaT9MpaS3tRYGYIwq0_9pHdLf0j_RYiwTwsmfztCslopDn9ZSsRDMq_RqpOf3ycGps6"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-stone-900 dark:text-stone-100">Soul Sundays at Thabo's</h4>
+<span class="text-[10px] font-bold bg-primary text-on-primary-container px-1.5 py-0.5 rounded">HOT</span>
+</div>
+<p class="text-sm text-stone-600 dark:text-stone-400 mb-2">Live Jazz &amp; Traditional Braai</p>
+<div class="flex items-center text-xs font-semibold text-primary gap-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 18:00 - Late</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">local_activity</span> R50 Entry</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-white dark:bg-stone-900 rounded-t-lg border-t border-stone-200 dark:border-stone-800 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all duration-150 font-['Public_Sans'] text-[10px] font-medium" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all duration-150 font-['Public_Sans'] text-[10px] font-medium" href="#">
+<span class="material-symbols-outlined mb-1">work</span>
+            Gigs
+        </a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all duration-150 font-['Public_Sans'] text-[10px] font-medium" href="#">
+<span class="material-symbols-outlined mb-1">warning</span>
+            Alerts
+        </a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all duration-150 font-['Public_Sans'] text-[10px] font-medium" href="#">
+<span class="material-symbols-outlined mb-1">chat</span>
+            Chat
+        </a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all duration-150 font-['Public_Sans'] text-[10px] font-medium" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+            Profile
+        </a>
+</nav>
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink - Find your next hustle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@700;800&amp;family=Dm+Sans:wght@400;500;700&amp;family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary-fixed-variant": "#714c6b",
+                        "on-surface-variant": "#8daed1",
+                        "primary-container": "#83cffd",
+                        "primary-fixed": "#83cffd",
+                        "primary-dim": "#75c1ee",
+                        "surface-container-highest": "#002843",
+                        "secondary-fixed": "#ffd7f3",
+                        "outline-variant": "#284b69",
+                        "on-primary-container": "#004561",
+                        "tertiary-container": "#ffcef4",
+                        "on-tertiary-container": "#664261",
+                        "on-surface": "#d4e8ff",
+                        "error": "#ff716c",
+                        "inverse-surface": "#f7f9ff",
+                        "inverse-primary": "#00668d",
+                        "outline": "#577899",
+                        "surface": "#000f1e",
+                        "surface-dim": "#000f1e",
+                        "on-error-container": "#ff9993",
+                        "tertiary-fixed-dim": "#f0c1e6",
+                        "on-tertiary-fixed": "#52304e",
+                        "tertiary-dim": "#f0c1e6",
+                        "error-container": "#8a1a1e",
+                        "tertiary": "#ffe3f7",
+                        "surface-bright": "#002e4d",
+                        "on-primary-fixed-variant": "#004f6e",
+                        "surface-container": "#001b30",
+                        "on-tertiary": "#704b6a",
+                        "on-secondary": "#70196a",
+                        "secondary": "#ffabef",
+                        "on-error": "#490006",
+                        "secondary-container": "#4a0047",
+                        "on-background": "#d4e8ff",
+                        "primary-fixed-dim": "#75c1ee",
+                        "surface-container-low": "#001526",
+                        "on-secondary-fixed": "#6f1869",
+                        "inverse-on-surface": "#465768",
+                        "surface-container-high": "#002139",
+                        "on-primary": "#004f6e",
+                        "primary": "#a5dbff",
+                        "background": "#000f1e",
+                        "secondary-fixed-dim": "#ffc2f1",
+                        "on-secondary-container": "#e481d6",
+                        "surface-tint": "#a5dbff",
+                        "secondary-dim": "#fc95ec",
+                        "surface-variant": "#002843",
+                        "on-primary-fixed": "#003044",
+                        "tertiary-fixed": "#ffcef4",
+                        "on-secondary-fixed-variant": "#903888",
+                        "error-dim": "#c94947"
+                    },
+                    fontFamily: {
+                        "headline": ["Source Serif 4"],
+                        "body": ["Dm Sans"],
+                        "label": ["Lexend"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000f1e;
+            color: #d4e8ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800 shadow-lg shadow-black/20 flex justify-between items-center px-4 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-500" data-icon="location_on">location_on</span>
+<span class="text-xl font-black text-sky-500 dark:text-sky-400 font-headline">KasiLink</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-slate-900 transition-colors rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-20 pb-24 px-4 max-w-5xl mx-auto">
+<!-- Header Section -->
+<header class="mb-8">
+<h1 class="font-headline text-4xl font-extrabold text-on-surface mb-2 tracking-tight">Find your next hustle.</h1>
+<p class="text-on-surface-variant font-label text-sm">Empowering local talent, one gig at a time.</p>
+</header>
+<!-- Search & Filter Bar -->
+<div class="flex gap-3 mb-8">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary" placeholder="Search for gigs..." type="text"/>
+</div>
+<button class="bg-surface-container-high aspect-square w-14 flex items-center justify-center rounded-xl text-primary hover:bg-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+<!-- Category Chips -->
+<div class="flex gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label font-medium text-sm whitespace-nowrap">All Gigs</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label font-medium text-sm whitespace-nowrap hover:bg-surface-variant transition-colors">Car Wash</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label font-medium text-sm whitespace-nowrap hover:bg-surface-variant transition-colors">Tutoring</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label font-medium text-sm whitespace-nowrap hover:bg-surface-variant transition-colors">Gardening</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label font-medium text-sm whitespace-nowrap hover:bg-surface-variant transition-colors">Delivery</button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Featured Gig: Weekend Car Detailing -->
+<div class="group bg-surface-container-low border border-outline-variant rounded-2xl overflow-hidden hover:border-primary/50 transition-all">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="high-end luxury car being detailed with soap foam and micro-fiber cloth in a professional garage setting with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd1dIDIF43ilMjOIQ75hU4l1U06P1Slx0FrXgelW4h2oa51d-ZgwU2uVxlY0cqZe9xiBIMMmVdm-L3oWFVu4q1suGW8xeCHlrhh_sg0BddD2ECogkd8YwBOXoxl0_DEQIvcWRxO6EfeVlrdBwSrcyjKMx_e9EQqPuzSkWNtm7uLVx7vzNoOMFyO33I9Sg597tBslT7WGvvOOOMBwVqskX36ERkNf59wg9k_mRF1Qq69jE_m4LNom29XrZZvTvGAZyZYksJ8dq-3Zkf"/>
+<div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-label font-bold">R450</div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Service</span>
+<span class="text-on-surface-variant text-xs flex items-center gap-1 font-label">
+<span class="material-symbols-outlined text-[14px]" data-icon="distance">distance</span> 2.4 km away
+                        </span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2">Weekend Car Detailing</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Full exterior wash, wax, and deep interior cleaning. I come to you with all professional equipment.</p>
+<button class="w-full bg-primary text-on-primary font-label font-bold py-3 rounded-xl active:scale-95 transition-transform hover:brightness-110">View Gig</button>
+</div>
+</div>
+<!-- Math Tutor Card -->
+<div class="group bg-surface-container-low border border-outline-variant rounded-2xl overflow-hidden hover:border-primary/50 transition-all">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="neatly organized study desk with math textbooks, calculator, and graphite pencils under a soft desk lamp glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxoiZnANz7vafnSN1KzNwl9wIBM_isNBwmJ8zByb4He2BpJk7NI0jjSAJzDHFplcdaLKpV517TCCRdv4Doynb84Nmco3Nyk6E8JlYQg7IY_yh8iF5vNjDubjkK0gtf5LV5J3YiY19b98_32uB7zWvSqswHMuSYxa1XGEwReEnvkT2H2nz9Eh4x-M7TfzFZLtyFu2aQzbHb17ckiZvWxitWCSNpQcMMme9Za0RLSbh14vyw-uOgwYIPyIVM2XzhLsaY1LROKr7nCqlr"/>
+<div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-lg text-primary font-label font-bold">R150/hr</div>
+</div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Education</span>
+<span class="text-on-surface-variant text-xs flex items-center gap-1 font-label">
+<span class="material-symbols-outlined text-[14px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (12 reviews)
+                        </span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-2">Math Tutor</h3>
+<p class="text-on-surface-variant text-sm mb-6 line-clamp-2">Grade 8-12 mathematics. Specialized in Algebra and Trigonometry. Proven track record of improving grades.</p>
+<button class="w-full bg-primary text-on-primary font-label font-bold py-3 rounded-xl active:scale-95 transition-transform hover:brightness-110">View Gig</button>
+</div>
+</div>
+<!-- Promotion Card / Asymmetric layout element -->
+<div class="md:col-span-2 bg-gradient-to-br from-surface-container-highest to-surface-container p-6 rounded-2xl border border-primary/20 flex flex-col md:flex-row items-center gap-6">
+<div class="flex-grow">
+<h4 class="text-2xl font-headline font-bold text-primary mb-2">Ready to earn?</h4>
+<p class="text-on-surface-variant max-w-md">Turn your skills into extra cash. Join thousands of hustlers in your neighborhood today.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-8 py-3 rounded-xl font-label font-bold shadow-lg shadow-secondary/20 active:scale-95 transition-transform">Post a Gig</button>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-28 w-16 h-16 bg-primary text-on-primary-container rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center z-[60] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl bg-slate-950/95 backdrop-blur-md border-t border-slate-800 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] flex justify-around items-center h-20 px-2 pb-safe w-full">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-sky-400 bg-sky-500/10 rounded-xl px-3 py-1 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="work" style="font-variation-settings: 'FILL' 1;">work</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

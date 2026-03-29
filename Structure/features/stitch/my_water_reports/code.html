@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Water Reports</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#696000",
+              "tertiary-container": "#f6f557",
+              "on-primary-container": "#5e5600",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed": "#433200",
+              "surface-dim": "#edd283",
+              "error-dim": "#b92902",
+              "outline": "#867645",
+              "on-error": "#ffefec",
+              "error-container": "#f95630",
+              "primary-fixed-dim": "#ecdd54",
+              "tertiary-fixed-dim": "#e7e64a",
+              "surface-container-highest": "#f5db90",
+              "secondary-fixed-dim": "#f0bd30",
+              "on-secondary": "#fff1d9",
+              "on-tertiary-fixed": "#494900",
+              "surface-bright": "#fff5e4",
+              "on-surface": "#392d04",
+              "on-tertiary-fixed-variant": "#666600",
+              "on-background": "#392d04",
+              "error": "#b02500",
+              "on-primary": "#fff5a9",
+              "on-tertiary": "#fbf95c",
+              "secondary-fixed": "#ffca3f",
+              "surface-container-high": "#fae199",
+              "tertiary-fixed": "#f6f557",
+              "on-surface-variant": "#695a2d",
+              "inverse-primary": "#faeb61",
+              "primary-dim": "#585100",
+              "inverse-surface": "#130d00",
+              "surface-container-low": "#fff0ca",
+              "on-error-container": "#520c00",
+              "background": "#fff5e4",
+              "surface-tint": "#655d00",
+              "secondary-container": "#ffca3f",
+              "primary-fixed": "#faeb61",
+              "outline-variant": "#bfac76",
+              "on-secondary-fixed-variant": "#664d00",
+              "surface": "#fff5e4",
+              "primary": "#655d00",
+              "tertiary-dim": "#535200",
+              "secondary": "#735700",
+              "surface-container": "#ffe7a3",
+              "on-primary-fixed": "#4a4400",
+              "on-secondary-container": "#5b4400",
+              "secondary-dim": "#654c00",
+              "primary-container": "#faeb61",
+              "surface-variant": "#f5db90",
+              "on-tertiary-container": "#5c5b00",
+              "tertiary": "#5f5f00",
+              "inverse-on-surface": "#ae9c67"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #fff5e4;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-20">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-zinc-900 shadow-sm border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-4 w-full h-16 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400">water_drop</span>
+<h1 class="font-public-sans text-lg font-bold text-zinc-900 dark:text-white">Water Reports</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-zinc-600 dark:text-zinc-400">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="portrait of a young man with a friendly expression in a professional corporate profile style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3eWmywaVnvSg6wnidnz-gn74CmxA0VJeMq-o7d2IO2lw2IPATk8foVb6IINSDxaU5ciOODpRaZeGdXWz7_gJw93Ni1tVKEF4jHTAIFAPHE_BacAjBP2n9457qpGk7VDBwONiKmxA2zNNpMogEzqMyuC8DNR0m1ze4S6NDOQ2FD1wKM4jMdGn88bn2scHJSlDF85jgoP3YhCUGspZz_PKJl6JL8j995Gj89YAsyDF3Fq3ZXHcykUZfbaexmsF09wUk4RByhRDHs04Q"/>
+</div>
+</div>
+</header>
+<main class="max-w-2xl mx-auto p-4 md:p-6 space-y-6">
+<!-- Header Section -->
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-black tracking-tight text-on-surface">My Water Reports</h2>
+<p class="text-on-surface-variant font-medium">Track your submitted issues and their progress.</p>
+</div>
+<!-- Filter Chips (Custom Component for high-end UI) -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="bg-primary-container text-on-primary-container px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap active:scale-95 transition-all shadow-sm">All Reports</button>
+<button class="bg-white border border-outline-variant text-on-surface-variant px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap active:scale-95 transition-all shadow-sm">In Progress</button>
+<button class="bg-white border border-outline-variant text-on-surface-variant px-5 py-2 rounded-full font-bold text-sm whitespace-nowrap active:scale-95 transition-all shadow-sm">Resolved</button>
+</div>
+<!-- Reports List: Asymmetric/Bento-style Cards -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Item 1: Resolved -->
+<div class="group bg-white rounded-xl p-5 border border-zinc-100 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-zinc-900">Burst Pipe</h3>
+<p class="text-zinc-500 text-sm font-medium">Reported: Oct 24, 2023</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Resolved</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Item 2: In Progress -->
+<div class="group bg-white rounded-xl p-5 border border-zinc-100 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">opacity</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-zinc-900">Low Pressure</h3>
+<p class="text-zinc-500 text-sm font-medium">Reported: Nov 02, 2023</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">In Progress</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Item 3: Under Review -->
+<div class="group bg-white rounded-xl p-5 border border-zinc-100 shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending</span>
+</div>
+<div>
+<h3 class="font-bold text-lg text-zinc-900">No Water</h3>
+<p class="text-zinc-500 text-sm font-medium">Reported: Today, 09:45 AM</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Under Review</span>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+<!-- Item 4: Burst Pipe (Large Visual) -->
+<div class="group bg-white rounded-xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all active:scale-[0.98] cursor-pointer">
+<div class="h-32 bg-zinc-200 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="underground water pipe being repaired in a trench with construction workers and bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz8IItaU12mrxFbJv9jo6o4I9oxdxGD8zb6jYMPxgtzw8dZwGbH15bIMR-QpCAiimu41Wy36ff6pcUynULBY3Xd17leDLoWIC5HCvyDhZkkbw7EbOl7yLF4GAiyhK28vF4wWsH6NRNkVGCEutxEv8qXgcxUTh1vmZyEYOLh9uyM5UZ1hKOzgzfVAIsnws4N8fHdi2Ll5ty_zJGPoHWVVENK11my16Tvcx69Tqw7YGAbu5HAj9WBijN_iYGzgIAJvfb8IT0T9YuzSt6"/>
+<div class="absolute top-3 left-3">
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Resolved</span>
+</div>
+</div>
+<div class="p-5 flex items-center justify-between">
+<div>
+<h3 class="font-bold text-lg text-zinc-900">Major Leak: Main St</h3>
+<p class="text-zinc-500 text-sm font-medium">Reported: Sep 12, 2023</p>
+</div>
+<span class="material-symbols-outlined text-zinc-300 group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Featured Map Section (Contextual UI) -->
+<div class="bg-surface-container rounded-xl p-4 space-y-3">
+<h4 class="font-bold text-on-surface text-sm uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Incident Map
+            </h4>
+<div class="aspect-video w-full bg-zinc-300 rounded-lg overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="stylized city map visualization with bright yellow markers indicating specific incident locations and light gray grid lines" data-location="Johannesburg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCflIzw-F4plGveqpjkf0E90-KB8k5FuwrJNmD-Fhp7XByL-kdWy75p5CXdy5qzR1eb9Y9zmX955y-TZp4Z0Fp87BO9Zkim_ZrGT5ow3w-OHpjOdRla0t2Kme80KjsJPX-FS4UNSPG9ulUaAhz1-d5-7Hy71FOJlBRx6w2l1J3mJFn4UfIhdZXsUlFYKAI_FV6f7NqMfS77Qxl49Oxt1cNm85co49w9eXAW1SIv8DHPg9WNWBn10UFr2VJUk3_LPUhs_voU4VUvueH-"/>
+</div>
+<p class="text-xs text-on-surface-variant font-medium text-center">Viewing reports within 5km of your location.</p>
+</div>
+</main>
+<!-- FAB for New Report -->
+<button class="fixed bottom-20 right-4 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined" style="font-size: 32px;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 rounded-t-lg shadow-lg">
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-public-sans text-xs font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-2xl px-4 py-1 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-public-sans text-xs font-medium">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-300 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-public-sans text-xs font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

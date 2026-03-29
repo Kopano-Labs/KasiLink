@@ -1,0 +1,31 @@
+# KasiLink: Architecture-Driven Backend Routing
+
+Based on the provided architecture diagram, here is how the KasiLink backend is structured to handle CLI commands, Agent Orchestration, and Messaging.
+
+## 1. Audit & Monitoring (CLI Controller)
+This layer handles initial inputs and tracks system health.
+- `POST /api/v1/cli/command` - Entry point for CLI-driven actions.
+- `GET /api/v1/audit/logs` - Retrieves logs from the Audit Logger.
+- `GET /api/v1/insights` - Fetches data processed by the Learning Engine from MongoDB.
+
+## 2. Agent Orchestration (The Brain)
+Routes requests to different LLM adapters as shown in the diagram.
+- `POST /api/v1/agents/orchestrate` - The "Agent Manager" endpoint.
+- `POST /api/v1/agents/gemini` - Route to the Gemini Adapter.
+- `POST /api/v1/agents/grok` - Route to the Grok Adapter.
+- `POST /api/v1/agents/claude` - Route to the Claude Adapter.
+
+## 3. External Integration (Messaging Bridge)
+Handles communication with external platforms.
+- `POST /api/v1/bridge/whatsapp` - Outbound/Inbound for WhatsApp.
+- `POST /api/v1/bridge/slack` - Outbound/Inbound for Slack.
+- `POST /api/v1/bridge/discord` - Outbound/Inbound for Discord.
+- `GET /api/v1/bridge/history` - Pulls history from the Learning Engine to contextualize messages.
+
+## 4. Data Flow (Frontend to Backend)
+1. **User Action:** User sends a message via the Mobile/Web UI.
+2. **Messaging Bridge:** The request hits the `Messaging Bridge` on the backend.
+3. **Agent Manager:** The bridge requests a response from the `Agent Manager`.
+4. **Adapter Selection:** The `Agent Manager` picks the best adapter (Gemini, Grok, or Claude) based on the task.
+5. **Audit Logger:** The request and response are logged for the `Learning Engine`.
+6. **Response:** The finalized response is sent back through the bridge to the user's interface.

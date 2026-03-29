@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink - Chameleon Chat Selector</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Four:ital,wght@0,400;0,700;0,900;1,400&amp;family=Dm+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Lexend:wght@300;400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#e481d6",
+                        "secondary-container": "#4a0047",
+                        "on-primary-container": "#004561",
+                        "primary-container": "#83cffd",
+                        "surface-container-high": "#002139",
+                        "tertiary-fixed-dim": "#f0c1e6",
+                        "surface-container-highest": "#002843",
+                        "on-secondary-fixed": "#6f1869",
+                        "on-tertiary-fixed-variant": "#714c6b",
+                        "on-primary-fixed-variant": "#004f6e",
+                        "surface-tint": "#a5dbff",
+                        "on-tertiary": "#704b6a",
+                        "secondary": "#ffabef",
+                        "on-error": "#490006",
+                        "surface-dim": "#000f1e",
+                        "surface-container-lowest": "#000000",
+                        "on-surface": "#d4e8ff",
+                        "on-tertiary-fixed": "#52304e",
+                        "inverse-primary": "#00668d",
+                        "surface-container": "#001b30",
+                        "outline": "#577899",
+                        "background": "#000f1e",
+                        "error-dim": "#c94947",
+                        "secondary-fixed": "#ffd7f3",
+                        "on-secondary-fixed-variant": "#903888",
+                        "on-surface-variant": "#8daed1",
+                        "on-background": "#d4e8ff",
+                        "surface": "#000f1e",
+                        "primary-dim": "#75c1ee",
+                        "on-tertiary-container": "#664261",
+                        "inverse-on-surface": "#465768",
+                        "secondary-fixed-dim": "#ffc2f1",
+                        "tertiary-container": "#ffcef4",
+                        "tertiary": "#ffe3f7",
+                        "primary-fixed": "#83cffd",
+                        "on-secondary": "#70196a",
+                        "surface-container-low": "#001526",
+                        "on-primary-fixed": "#003044",
+                        "outline-variant": "#284b69",
+                        "secondary-dim": "#fc95ec",
+                        "inverse-surface": "#f7f9ff",
+                        "primary": "#a5dbff",
+                        "error-container": "#8a1a1e",
+                        "surface-bright": "#002e4d",
+                        "surface-variant": "#002843",
+                        "on-primary": "#004f6e",
+                        "primary-fixed-dim": "#75c1ee",
+                        "tertiary-dim": "#f0c1e6",
+                        "on-error-container": "#ff9993",
+                        "tertiary-fixed": "#ffcef4",
+                        "error": "#ff716c"
+                    },
+                    fontFamily: {
+                        "headline": ["Source Serif Four"],
+                        "body": ["Dm Sans"],
+                        "label": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Dm Sans', sans-serif;
+            background-color: #000f1e;
+        }
+        .glass-card {
+            background: rgba(0, 27, 48, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(87, 120, 153, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-slate-900 dark:bg-black border-b border-slate-800 dark:border-zinc-800 shadow-lg dark:shadow-none">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary" data-alt="professional close-up portrait of a young south african man with a confident expression and stylish haircut" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAGh7UWh9dZkUUzmAYmNkw-hufdIvE_66NyzskTs1zkFFCYokdrnkAIzZ1UKhJStxFzEkTF3niAYh30op41nWnP8JeJNAPSsTy5WqDSUOpDxIqwDyHRySuCYjhRttxRRt9VNQtgYXlVXzOr3EfeEBNYlH0Sa3rMrYpCsh97KBRHP6S5vsz_xeqZeBnPpwlVJvo3aNcF4vTIlI4rbehYhnUi_vMtyizRTulCid3D5UyH3S-pbh6SyOAp36OAOpcBMpvPJ9D2qaZy4X2"/>
+<span class="absolute -bottom-1 -right-1 bg-primary text-on-primary-container text-[10px] px-1 rounded-full font-bold">PRO</span>
+</div>
+<div>
+<h1 class="text-2xl font-black text-sky-500 dark:text-sky-400 tracking-tighter font-headline">KasiLink</h1>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label text-[10px] text-primary-dim uppercase tracking-wider">Verified Seeker</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex flex-col items-end">
+<span class="font-mono text-[10px] text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">bolt</span> Stage 4 Load-Shedding
+                </span>
+<span class="text-[10px] text-on-surface-variant font-label">Grid 4 Status</span>
+</div>
+<button class="p-2 rounded-xl bg-slate-800 dark:bg-zinc-900 text-sky-500 active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-7xl mx-auto">
+<!-- Hero Section & Preview -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+<div class="lg:col-span-7">
+<h2 class="text-4xl md:text-5xl font-bold font-headline mb-4 text-on-surface">Chameleon Chat Selector</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl font-body leading-relaxed">
+                    Adapt your identity instantly. Switch between premium skins to match your environment, mood, or platform preference while keeping your KasiLink encryption intact.
+                </p>
+<!-- Status Banner Mobile -->
+<div class="md:hidden mt-6 p-3 rounded-xl bg-error/10 border border-error/20 flex items-center justify-between">
+<span class="font-mono text-xs text-error font-bold uppercase tracking-tighter">Stage 4 Load-Shedding Alert</span>
+<span class="text-[10px] text-error-dim">Area: Kempton Park</span>
+</div>
+</div>
+<!-- Live Preview Area -->
+<div class="lg:col-span-5">
+<div class="glass-card rounded-3xl p-6 relative overflow-hidden h-64 flex flex-col justify-end">
+<div class="absolute top-4 left-6 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label text-xs text-primary-dim uppercase">Live Preview: WhatsApp Skin</span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-start">
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-bl-none max-w-[80%] shadow-sm border border-outline-variant/30">
+<p class="text-sm">Hey! Are the KasiLink servers stable during stage 4?</p>
+<span class="text-[10px] text-on-surface-variant block mt-1 text-right">09:15 AM</span>
+</div>
+</div>
+<div class="flex justify-end">
+<div class="bg-[#25D366]/20 text-on-surface p-4 rounded-2xl rounded-br-none max-w-[80%] shadow-sm border border-[#25D366]/40">
+<p class="text-sm">Absolutely. We have redundant solar backups at the Kempton hub. ⚡</p>
+<span class="text-[10px] text-on-surface-variant block mt-1 text-right">09:16 AM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Skin Selection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+<!-- Skin: WhatsApp -->
+<div class="group relative bg-surface-container rounded-2xl overflow-hidden border border-outline-variant hover:border-primary/50 transition-all duration-300">
+<div class="h-32 bg-[#075E54] relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" data-alt="subtle geometric cube pattern texture on deep teal background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBI_wwIQrCvGD8nF6ljoTTcB5Ey7JDxuI04p3HdM4p1ywapXzgi2F0ybuHpa6f2_CjarpQOqluuY1hhtt__m71MtTqy7dClYFBJLRHPXzVTAoZ21qcMp7K9eAd8gk_Cl6Ngwh3yCJnjDoiBlY102d08Gpjgvhbdfzp0We2WS4ZOFe28tdFMkwym3ACOWY6l5fVHO406rUHAPU9lW8uau6EkivmhwcL-oXjhxVsFpUGK6D_vxSDn3KzyeZfXw5gAAhiTeT3mAUJafUri');"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-40">chat</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold">WhatsApp</h3>
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full font-label font-bold">ACTIVE</span>
+</div>
+<p class="text-on-surface-variant text-sm font-body mb-6 h-12 overflow-hidden">Classic familiarity with high-contrast bubbles and trusted delivery ticks.</p>
+<button class="w-full py-3 rounded-xl bg-primary text-on-primary-container font-label font-bold text-sm tracking-wide transition-transform group-active:scale-95">
+                        Selected
+                    </button>
+</div>
+</div>
+<!-- Skin: Instagram -->
+<div class="group relative bg-surface-container rounded-2xl overflow-hidden border border-outline-variant hover:border-secondary/50 transition-all duration-300">
+<div class="h-32 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] relative">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-40">photo_camera</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-xl font-bold mb-2">Instagram</h3>
+<p class="text-on-surface-variant text-sm font-body mb-6 h-12 overflow-hidden">Vibrant gradients and modern rounded bubbles for the aesthetic-focused seeker.</p>
+<button class="w-full py-3 rounded-xl bg-secondary-container text-on-secondary-container border border-secondary/30 font-label font-bold text-sm tracking-wide hover:bg-secondary-container/80 transition-transform group-active:scale-95">
+                        Select Skin
+                    </button>
+</div>
+</div>
+<!-- Skin: Discord -->
+<div class="group relative bg-surface-container rounded-2xl overflow-hidden border border-outline-variant hover:border-[#5865F2]/50 transition-all duration-300">
+<div class="h-32 bg-[#5865F2] relative">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-40">sports_esports</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-xl font-bold mb-2">Discord</h3>
+<p class="text-on-surface-variant text-sm font-body mb-6 h-12 overflow-hidden">Dark-themed compact layout designed for rapid-fire community communication.</p>
+<button class="w-full py-3 rounded-xl bg-surface-container-high text-on-surface border border-outline-variant font-label font-bold text-sm tracking-wide hover:bg-surface-container-highest transition-transform group-active:scale-95">
+                        Select Skin
+                    </button>
+</div>
+</div>
+<!-- Skin: X (Twitter) -->
+<div class="group relative bg-surface-container rounded-2xl overflow-hidden border border-outline-variant hover:border-on-surface/50 transition-all duration-300">
+<div class="h-32 bg-black relative">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl opacity-40">close</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline text-xl font-bold mb-2">X (Twitter)</h3>
+<p class="text-on-surface-variant text-sm font-body mb-6 h-12 overflow-hidden">Minimalist, text-forward design for focused 1-on-1 direct messaging.</p>
+<button class="w-full py-3 rounded-xl bg-surface-container-high text-on-surface border border-outline-variant font-label font-bold text-sm tracking-wide hover:bg-surface-container-highest transition-transform group-active:scale-95">
+                        Select Skin
+                    </button>
+</div>
+</div>
+</div>
+<!-- Premium Upsell -->
+<div class="mt-12 p-8 rounded-3xl bg-gradient-to-r from-surface-container-high to-surface-container overflow-hidden relative border border-primary/20">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="text-center md:text-left">
+<h4 class="text-2xl font-headline font-bold text-primary mb-2">Custom Brand Skins</h4>
+<p class="text-on-surface-variant font-body">Upload your own CSS and SVG assets to create a completely bespoke KasiLink experience.</p>
+</div>
+<button class="px-8 py-4 bg-primary-fixed text-on-primary-fixed font-label font-bold rounded-2xl whitespace-nowrap shadow-xl shadow-primary/10">
+                    Unlock Creator Mode
+                </button>
+</div>
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-24 -mt-24 blur-3xl"></div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-slate-900/95 dark:bg-black/95 backdrop-blur-md rounded-t-2xl border-t border-slate-800 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Chats</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-sky-500/10 dark:bg-sky-400/10 text-sky-500 dark:text-sky-400 rounded-xl px-3 py-1 duration-200 active:translate-y-0.5" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Chameleon</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button - Only on relevant screens -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary rounded-full flex items-center justify-center text-on-primary-container shadow-2xl active:scale-90 transition-transform md:hidden">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_comment</span>
+</button>
+</body></html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#b02500",
+              "on-error-container": "#520c00",
+              "secondary": "#735700",
+              "on-background": "#392d04",
+              "on-secondary-fixed": "#433200",
+              "on-error": "#ffefec",
+              "tertiary": "#5f5f00",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-container": "#f6f557",
+              "inverse-surface": "#130d00",
+              "primary": "#655d00",
+              "surface": "#fff5e4",
+              "on-tertiary-fixed-variant": "#666600",
+              "inverse-primary": "#faeb61",
+              "surface-dim": "#edd283",
+              "on-surface": "#392d04",
+              "tertiary-dim": "#535200",
+              "tertiary-fixed": "#f6f557",
+              "surface-container-high": "#fae199",
+              "primary-container": "#faeb61",
+              "on-tertiary-fixed": "#494900",
+              "primary-dim": "#585100",
+              "on-secondary-fixed-variant": "#664d00",
+              "primary-fixed-dim": "#ecdd54",
+              "on-primary-container": "#5e5600",
+              "background": "#fff5e4",
+              "primary-fixed": "#faeb61",
+              "surface-container-highest": "#f5db90",
+              "on-tertiary": "#fbf95c",
+              "surface-container-low": "#fff0ca",
+              "secondary-fixed-dim": "#f0bd30",
+              "on-primary-fixed-variant": "#696000",
+              "on-primary": "#fff5a9",
+              "tertiary-fixed-dim": "#e7e64a",
+              "on-tertiary-container": "#5c5b00",
+              "inverse-on-surface": "#ae9c67",
+              "secondary-fixed": "#ffca3f",
+              "surface-variant": "#f5db90",
+              "secondary-container": "#ffca3f",
+              "surface-tint": "#655d00",
+              "outline-variant": "#bfac76",
+              "on-surface-variant": "#695a2d",
+              "on-secondary-container": "#5b4400",
+              "error-dim": "#b92902",
+              "on-primary-fixed": "#4a4400",
+              "surface-container": "#ffe7a3",
+              "error-container": "#f95630",
+              "secondary-dim": "#654c00",
+              "on-secondary": "#fff1d9",
+              "surface-bright": "#fff5e4",
+              "outline": "#867645"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-pulse-yellow { background-color: #ffd415; }
+        .text-pulse-yellow { color: #ffd415; }
+        .border-pulse-yellow { border-color: #ffd415; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-yellow-400 dark:bg-yellow-600 text-stone-800 dark:text-stone-50 border-b-2 border-stone-800 dark:border-stone-700 shadow-sm h-16 flex justify-between items-center px-4">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined p-2 hover:bg-yellow-500 dark:hover:bg-yellow-700 transition-colors active:scale-95 duration-150 rounded-full" data-icon="menu">menu</button>
+<h1 class="font-headline font-black tracking-tighter text-2xl text-stone-900 dark:text-white">KasiLink</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-stone-800">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a smiling community member with a vibrant urban background and warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT-aYE1DXpuFyK-WOh3VQpJBPDgxgZ0-RwHjM_0_JS6NTHZ8pOBTuDJ-b3CqeynrQeHIrD21z5KPAyLSSTHwdjWnvTE1hkGASG4NUyi-SsEbPMST8YqUK5bxshmNJMXvPmbL7ItzUxsvJYJgzoQ3IbJwRkAuNAFkD7nd1x6YEb5UeH7XhfBRLNFc2t28CeUxfE4GfesbB-WAQY_eBHTDoD8xSZKEVL41eygLWICqdyYUZWfajyhuvrXLmHO1gBCQtuYtgP6et2HUZ3"/>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-2xl mx-auto">
+<div class="mt-6 mb-8">
+<h2 class="font-headline text-3xl font-extrabold text-stone-900 mb-2">Report an Incident</h2>
+<p class="text-on-surface-variant font-medium">Help your community stay safe and connected by reporting local issues.</p>
+</div>
+<form class="space-y-6">
+<!-- Category Selector -->
+<section class="space-y-4">
+<h3 class="font-label text-lg font-bold text-on-surface">1. What is the issue?</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="category" type="radio" value="water"/>
+<div class="flex flex-col items-center justify-center p-6 bg-surface-container-low border-2 border-transparent rounded-xl peer-checked:border-pulse-yellow peer-checked:bg-white shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-4xl mb-2 text-blue-600" data-icon="water_drop">water_drop</span>
+<span class="font-bold text-sm text-center">No Water/Water Leak</span>
+</div>
+</label>
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="category" type="radio" value="power"/>
+<div class="flex flex-col items-center justify-center p-6 bg-surface-container-low border-2 border-transparent rounded-xl peer-checked:border-pulse-yellow peer-checked:bg-white shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-4xl mb-2 text-amber-500" data-icon="bolt">bolt</span>
+<span class="font-bold text-sm text-center">Power Outage</span>
+</div>
+</label>
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="category" type="radio" value="safety"/>
+<div class="flex flex-col items-center justify-center p-6 bg-surface-container-low border-2 border-transparent rounded-xl peer-checked:border-pulse-yellow peer-checked:bg-white shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-4xl mb-2 text-error" data-icon="warning">warning</span>
+<span class="font-bold text-sm text-center">Safety Concern</span>
+</div>
+</label>
+</div>
+</section>
+<!-- Location Section -->
+<section class="space-y-4">
+<h3 class="font-label text-lg font-bold text-on-surface">2. Where did it happen?</h3>
+<div class="space-y-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="location_on">location_on</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest focus:border-pulse-yellow focus:ring-0 transition-all font-medium h-16 text-lg" placeholder="Street address or landmark" type="text"/>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-pulse-yellow text-stone-900 font-bold hover:bg-yellow-50 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="my_location">my_location</span>
+                        Use Current Location
+                    </button>
+<div class="w-full h-40 rounded-xl overflow-hidden border-2 border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="a map view of a residential neighborhood with clean streets and green spaces under soft sunlight" data-location="Soweto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaEZQCF2VdKBzkGzSyWa-1Q9frQxZOuuT6pzTo5HKtN9zmzcrINg5D9fCIKZzf24ddnGDI2-oZLhmY4HTtdj7fE8PYgkiuTK3KFGxnWJ6fltU5uGN10SJnsr6WGWnohG11qbvw8KuqPFlsButs_Q_ag6Rv7DqlWcx3BEQkXGZNvAoXgzlthgkB5UvmlqxPZtTZ_1ZdfdJLOiLjtcAJEL0SuY6l0DEsb3P3_UEeRCBkJuKqRfBH6SicYDkcGyeo-d3At6YWaxlRqAld"/>
+</div>
+</div>
+</section>
+<!-- Details Section -->
+<section class="space-y-4">
+<h3 class="font-label text-lg font-bold text-on-surface">3. Provide details</h3>
+<textarea class="w-full p-4 rounded-xl border-2 border-outline-variant bg-surface-container-lowest focus:border-pulse-yellow focus:ring-0 transition-all font-medium text-lg" placeholder="Describe the situation... (e.g. 'Street lights are out on 5th Avenue')" rows="4"></textarea>
+</section>
+<!-- Photo Upload Section -->
+<section class="space-y-4">
+<h3 class="font-label text-lg font-bold text-on-surface">4. Add photos (Optional)</h3>
+<div class="flex gap-3 overflow-x-auto pb-2">
+<button class="flex-shrink-0 w-32 h-32 flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-3xl text-outline" data-icon="add_a_photo">add_a_photo</span>
+<span class="text-xs font-bold mt-1">Upload</span>
+</button>
+<div class="flex-shrink-0 w-32 h-32 rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="high contrast photo of water splashing on a pavement from a broken pipe with bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1CE_a8BwR_2vZoCTrt_NYGc-MlBVDpRscMHDui-2jguUr3_dO042poPDUtdnrtdSeujLGn4LLiZXBBWa4VutgBEVWOz0vygBmSEkZGj8YSsOZV1qev03dHY28Ld0Asr4qQPwx3OvMvd_6PzLxRXMWJlRy-H9l61MSsHVSRcK4ZYgBieyj-HkMJj7p7R0VIj2jChdrV8eUABmk9lebsQh-1rt30ZSBcPlC9muGKlzUt8WU_C8jnJwQKf4ru4mn75Kq_s6g-NmvS48i"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white rounded-full p-1"><span class="material-symbols-outlined text-sm" data-icon="close">close</span></button>
+</div>
+</div>
+</section>
+<!-- Submit Button -->
+<div class="pt-4 pb-8">
+<button class="w-full bg-pulse-yellow py-5 rounded-2xl text-stone-900 font-black text-xl shadow-lg hover:shadow-xl hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-3" type="submit">
+                    Submit Report
+                    <span class="material-symbols-outlined font-bold" data-icon="send">send</span>
+</button>
+<p class="text-center text-sm mt-4 text-outline font-medium">Your report will be sent to community leaders and municipal services.</p>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-20 bg-white dark:bg-stone-900 border-t-2 border-stone-100 dark:border-stone-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full px-5 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

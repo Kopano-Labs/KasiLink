@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink | Community Forum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ffd415",
+              "on-primary": "#000000",
+              "secondary": "#2b1c00",
+              "surface": "#ffffff",
+              "on-surface": "#1a1c1e",
+              "on-surface-variant": "#444653",
+              "outline": "#757684",
+              "outline-variant": "#c5c5d5",
+              "surface-container": "#f4f4f5",
+              "surface-container-low": "#f9f9fc",
+              "surface-container-highest": "#e2e2e5"
+            },
+            fontFamily: {
+              "public-sans": ["Public Sans", "sans-serif"],
+              "headline": ["Public Sans", "sans-serif"],
+              "body": ["Public Sans", "sans-serif"],
+              "label": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "9999px",
+              "lg": "9999px",
+              "xl": "9999px",
+              "2xl": "32px",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+          min-height: max(884px, 100dvh);
+          font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24 font-public-sans">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white dark:bg-zinc-900 border-b border-zinc-100 dark:border-zinc-800 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-4 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400">location_on</span>
+<h1 class="text-xl font-black text-yellow-600 dark:text-yellow-400 tracking-tight">KasiLink</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-yellow-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500 dark:text-zinc-400">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-yellow-50 dark:hover:bg-zinc-800 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500 dark:text-zinc-400">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-2xl mx-auto">
+<!-- Welcome Section (Editorial Hero) -->
+<section class="mb-8 mt-4">
+<h2 class="text-4xl font-black tracking-tight leading-none mb-2 text-on-surface">
+                Community <span class="text-primary">Heartbeat</span>
+</h2>
+<p class="text-on-surface-variant font-medium">Connect, support, and grow with your neighbors.</p>
+</section>
+<!-- Category Horizontal Scroll -->
+<nav class="flex gap-3 overflow-x-auto hide-scrollbar mb-8 -mx-4 px-4">
+<button class="flex-none bg-primary text-on-primary px-6 py-2.5 rounded-full font-bold text-sm shadow-sm active:scale-95 transition-transform">All Stories</button>
+<button class="flex-none bg-surface-container text-on-surface-variant border border-outline-variant/20 px-6 py-2.5 rounded-full font-bold text-sm hover:bg-yellow-50 transition-colors">Safety Tips</button>
+<button class="flex-none bg-surface-container text-on-surface-variant border border-outline-variant/20 px-6 py-2.5 rounded-full font-bold text-sm hover:bg-yellow-50 transition-colors">Load-shedding</button>
+<button class="flex-none bg-surface-container text-on-surface-variant border border-outline-variant/20 px-6 py-2.5 rounded-full font-bold text-sm hover:bg-yellow-50 transition-colors">Local Gigs</button>
+</nav>
+<!-- Featured Alert (Accent Card) -->
+<div class="mb-8 p-6 rounded-2xl bg-secondary text-white relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-primary/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="bg-primary p-3 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h3 class="font-bold text-primary text-xl">Stage 4 Coordination</h3>
+<p class="text-white/80 text-sm mt-1 leading-relaxed">Schedule updated for Block A &amp; C. Join the thread to coordinate shared generator time.</p>
+<button class="mt-4 text-primary font-bold text-sm flex items-center gap-2 group/btn">
+                        View Schedule 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Feed Section -->
+<div class="space-y-6">
+<!-- Success Story Post -->
+<article class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden border border-zinc-100">
+<div class="p-5">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<img alt="Lerato Mokoena" class="w-12 h-12 rounded-full object-cover ring-2 ring-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARQAm8USt4SfY4XMCgMaQFWMAXi1wbpLV5drMyUtds8hjidjNMTuwmyfQxuLb2Hims4FvNB4-mpRD_91fmnZoGuP6F1PxqOkfrB3sWUsHwoFSDXVlIB5_FCjt458Qlo0fioVAjsoGpb7d_6OKMDtyQI2VK2Ktz1ifAC9KRJIkIKkX35cekUj5wWnf2QrXlH6_FWEEUzM8XVap0HGVLrci0wCvEfNgBqcTH4-u5P6wnqUUrQkitiDGJj2mugxjU3KmcMO9givACYLDM"/>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Lerato Mokoena</h4>
+<span class="text-[11px] text-on-surface-variant font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-yellow-600">verified</span> Success Story • 2h ago
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:bg-zinc-50 p-1 rounded-full">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<h3 class="font-black text-xl mb-3 leading-tight">Opened my 3rd Spaza shop!</h3>
+<p class="text-on-surface-variant text-sm font-medium leading-relaxed mb-4">
+                        Couldn't have done it without the KasiLink community. Big thanks to those who helped with the interior painting last week! Expansion is real.
+                    </p>
+<img alt="Community Spaza shop" class="w-full h-56 object-cover rounded-2xl mb-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqL7xWWo0HuYONKCkbnLZ_gesEbZqjD11rjak7e_N8LiaBw5kRFHbmXMqCgnaZBmJRljokUdjIQpvBIKLFEGQapx2Tcm7fejIp_HOecQvXzaNPpbrxxhAPJaQ8Rs8MwYOyn0dRhe8BcCXUvjo_kng_QmWCjmCNywT8qP6dG3YWw0yCHa5I7VpbiHzNCkuWWe5UtYNuwShvApdCKAImQaxPXAeHEswjCSxOggAXxf_DmeUC4bbmfQBLCJ9EkkCw3ZwDRBspo_cuyL69"/>
+<div class="flex items-center justify-between pt-4 border-t border-zinc-50">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-yellow-600 transition-colors">
+<span class="material-symbols-outlined text-xl">favorite</span>
+<span class="text-xs font-bold">124</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-yellow-600 transition-colors">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+<span class="text-xs font-bold">42</span>
+</button>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-full hover:bg-yellow-400 transition-colors font-bold text-xs">
+<span class="material-symbols-outlined text-sm">share</span>
+                            WhatsApp
+                        </button>
+</div>
+</div>
+</article>
+<!-- Safety Tip Post -->
+<article class="bg-yellow-50 rounded-2xl p-6 relative overflow-hidden border border-primary/20">
+<div class="absolute right-0 top-0 w-40 h-40 bg-primary/10 rounded-full -mr-16 -mt-16"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Community Watch</h4>
+<span class="text-[11px] text-on-surface-variant font-bold uppercase tracking-wider">Safety Tips • 5h ago</span>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="flex-1">
+<h3 class="font-black text-xl mb-2 text-on-surface">Streetlight Outage on 14th Ave</h3>
+<p class="text-on-surface-variant text-sm font-medium leading-relaxed">
+                                Please be careful when walking tonight. We've reported it, but it's still dark. Use the buddy system!
+                            </p>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-zinc-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-zinc-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-zinc-400"></div>
+</div>
+<span class="text-xs text-on-surface-variant font-bold">Sizwe and 18 others commented</span>
+</div>
+</div>
+</article>
+<!-- Regular Interaction Card -->
+<article class="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 border border-zinc-100">
+<div class="flex items-center gap-3 mb-4">
+<img alt="Thabo Zulu" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGboj6Mu-_RXdW262ZancVYu1rpnLrBQqCFQb3o0U-xxVfqBsGet529Zn8T7GrGxc_Vtk1NF3rELeY7uyvKrR05nIRBz7LSV5eQdLdwvYK6KY9Ta9aQOWBn1p-l_Knv7oQkyas79cmx44yfQdkATBoAAh95fRMgRZg6mF4hmWbZjsXtWJsal5D1qX2OFP5GCvpARjAwgql4o7Qiu3OIJkQ9oIuQ10IzQyOxumTxTf_ihHe1XFZXJpgK4i0Lkqqe0XaiFDmM_T3EIMF"/>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Thabo Zulu</h4>
+<span class="text-[11px] text-on-surface-variant font-bold uppercase tracking-wider">Question • 8h ago</span>
+</div>
+</div>
+<h3 class="font-black text-xl mb-2">Anyone know a reliable plumber?</h3>
+<p class="text-on-surface-variant text-sm font-medium leading-relaxed mb-6">
+                    Got a major leak in the yard since the rain started. Looking for someone local who can come out this afternoon.
+                </p>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-yellow-600 transition-colors">
+<span class="material-symbols-outlined text-xl">thumb_up</span>
+<span class="text-xs font-black">8</span>
+</button>
+<button class="flex items-center gap-1.5 text-on-surface-variant hover:text-yellow-600 transition-colors">
+<span class="material-symbols-outlined text-xl">comment</span>
+<span class="text-xs font-black">12</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-28 right-6 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-all duration-200 z-40 group ring-4 ring-white/50">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform font-black">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-6 pt-3 bg-white dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] rounded-t-[32px]">
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-public-sans text-[11px] font-bold mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">work</span>
+<span class="font-public-sans text-[11px] font-bold mt-1">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-public-sans text-[11px] font-bold mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat</span>
+<span class="font-public-sans text-[11px] font-bold mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-public-sans text-[11px] font-bold mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

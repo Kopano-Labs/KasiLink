@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink | Local Pulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;800&amp;family=Lexend:wght@400;500;600&amp;family=Source+Serif+4:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed-variant": "#714c6b",
+              "on-surface-variant": "#8daed1",
+              "primary-container": "#83cffd",
+              "primary-fixed": "#83cffd",
+              "primary-dim": "#75c1ee",
+              "surface-container-highest": "#002843",
+              "secondary-fixed": "#ffd7f3",
+              "outline-variant": "#284b69",
+              "on-primary-container": "#004561",
+              "tertiary-container": "#ffcef4",
+              "on-tertiary-container": "#664261",
+              "on-surface": "#d4e8ff",
+              "error": "#ff716c",
+              "inverse-surface": "#f7f9ff",
+              "inverse-primary": "#00668d",
+              "outline": "#577899",
+              "surface": "#000f1e",
+              "surface-dim": "#000f1e",
+              "on-error-container": "#ff9993",
+              "tertiary-fixed-dim": "#f0c1e6",
+              "on-tertiary-fixed": "#52304e",
+              "tertiary-dim": "#f0c1e6",
+              "error-container": "#8a1a1e",
+              "tertiary": "#ffe3f7",
+              "surface-bright": "#002e4d",
+              "on-primary-fixed-variant": "#004f6e",
+              "surface-container": "#001b30",
+              "on-tertiary": "#704b6a",
+              "on-secondary": "#70196a",
+              "secondary": "#ffabef",
+              "on-error": "#490006",
+              "secondary-container": "#4a0047",
+              "on-background": "#d4e8ff",
+              "primary-fixed-dim": "#75c1ee",
+              "surface-container-low": "#001526",
+              "on-secondary-fixed": "#6f1869",
+              "inverse-on-surface": "#465768",
+              "surface-container-high": "#002139",
+              "on-primary": "#004f6e",
+              "primary": "#a5dbff",
+              "background": "#000f1e",
+              "secondary-fixed-dim": "#ffc2f1",
+              "on-secondary-container": "#e481d6",
+              "surface-tint": "#a5dbff",
+              "secondary-dim": "#fc95ec",
+              "surface-variant": "#002843",
+              "on-primary-fixed": "#003044",
+              "tertiary-fixed": "#ffcef4",
+              "on-secondary-fixed-variant": "#903888",
+              "error-dim": "#c94947"
+            },
+            fontFamily: {
+              "headline": ["Source Serif Four"],
+              "body": ["Dm Sans"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000f1e;
+            color: #d4e8ff;
+            font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background pb-24">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800 shadow-lg shadow-black/20 flex justify-between items-center px-4 h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-500" data-icon="location_on">location_on</span>
+<h1 class="text-xl font-black text-sky-500 dark:text-sky-400 font-serif">KasiLink</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:bg-slate-900 transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</nav>
+<main class="pt-20 px-4 max-w-2xl mx-auto space-y-6">
+<!-- System Status Card -->
+<section class="bg-surface-container-high rounded-xl p-4 border border-outline-variant relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3">
+<span class="flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-error-container p-3 rounded-lg text-on-error-container">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h2 class="font-headline text-lg font-bold text-on-surface">System Status</h2>
+<p class="font-label text-error text-sm font-medium">Stage 2 Active load shedding</p>
+<p class="text-on-surface-variant text-xs mt-1">Soshanguve Block L: Power off until 18:30</p>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-2">
+<div class="bg-surface-container p-2 rounded-lg text-center">
+<p class="text-[10px] uppercase font-label text-outline">Next Slot</p>
+<p class="font-bold text-on-surface">22:00 - 00:30</p>
+</div>
+<div class="bg-surface-container p-2 rounded-lg text-center">
+<p class="text-[10px] uppercase font-label text-outline">Grid Load</p>
+<p class="font-bold text-on-surface">Critical</p>
+</div>
+</div>
+</section>
+<!-- Nearby Safety Alerts (Horizontal Scroll) -->
+<section>
+<div class="flex justify-between items-center mb-3 px-1">
+<h3 class="font-headline font-bold text-on-surface">Nearby Safety Alerts</h3>
+<button class="text-primary text-sm font-label">View Map</button>
+</div>
+<div class="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-4 px-4">
+<!-- Alert 1 -->
+<div class="min-w-[280px] bg-surface-container-highest/50 backdrop-blur-sm border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="bg-secondary-container p-2 rounded-full text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="font-label font-semibold text-on-surface text-sm">Suspicious Vehicle</p>
+<p class="text-xs text-on-surface-variant">2 mins ago • Extension 4</p>
+</div>
+</div>
+<!-- Alert 2 -->
+<div class="min-w-[280px] bg-surface-container-highest/50 backdrop-blur-sm border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="bg-tertiary-container p-2 rounded-full text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<div>
+<p class="font-label font-semibold text-on-surface text-sm">Community Patrol</p>
+<p class="text-xs text-on-surface-variant">Active now • Main St</p>
+</div>
+</div>
+<!-- Alert 3 -->
+<div class="min-w-[280px] bg-surface-container-highest/50 backdrop-blur-sm border border-outline-variant p-4 rounded-xl flex items-center gap-4">
+<div class="bg-primary-container p-2 rounded-full text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<p class="font-label font-semibold text-on-surface text-sm">Clinic Queue Update</p>
+<p class="text-xs text-on-surface-variant">15 mins ago • Block H</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Local Hero Success Story (Asymmetric/Bento style) -->
+<section class="relative rounded-2xl overflow-hidden aspect-[16/10] group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="portrait of a proud local entrepreneur in a vibrant colorful township setting with warm afternoon sunlight and bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBPXEhvmST8hS9G3Cao9om5JTs-F6gMEqNfVV9mvrZvH7CshCyAFRByaW1Rh_U2fY1GTv9luIAei_QmGYFnFPVZ-aF9LordopKu1lSRF9xPnZXDLOEztap1MDLGg4tInI8BwbgZnxlMk1OS2qBbmW-O2zbKBwM8J835ixLSgsIWazDLvvjemxjwaznNhI-OCEclCFsfzdjjnUAQWZCn6rKbmDG-LMERJLPNDVqxsKtRVQM4c4ocLQt330Q12PEniV6sxHsIOAOvpy2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<span class="bg-secondary text-on-secondary font-label text-[10px] px-2 py-1 rounded-full uppercase tracking-wider font-bold mb-2 inline-block">Local Hero</span>
+<h2 class="text-2xl font-headline font-black text-white leading-tight mb-2">Thabo's Spaza: From One Crate to a Community Hub</h2>
+<div class="flex items-center justify-between mt-4">
+<p class="text-on-surface-variant text-sm max-w-[60%] line-clamp-2">How Thabo used KasiLink Gigs to fund his dream store in Block TT.</p>
+<button class="bg-primary text-on-primary font-label font-bold py-2 px-5 rounded-full text-sm shadow-xl active:scale-95 transition-transform">Read Story</button>
+</div>
+</div>
+</section>
+<!-- Available Gigs Nearby -->
+<section>
+<div class="flex justify-between items-center mb-4 px-1">
+<h3 class="font-headline font-bold text-on-surface text-xl">Available Gigs Nearby</h3>
+<span class="material-symbols-outlined text-outline" data-icon="tune">tune</span>
+</div>
+<div class="space-y-3">
+<!-- Gig Item 1 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="local_car_wash">local_car_wash</span>
+</div>
+<div>
+<h4 class="font-label font-bold text-on-surface">Mobile Car Wash</h4>
+<p class="text-xs text-on-surface-variant">3 Vehicles • R150 each</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-secondary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-on-surface-variant">4.8 (12 reviews)</span>
+</div>
+</div>
+</div>
+<button class="border border-primary text-primary font-label font-medium px-4 py-1.5 rounded-lg text-sm group-hover:bg-primary group-hover:text-on-primary transition-all">Apply</button>
+</div>
+<!-- Gig Item 2 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary-dim">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+</div>
+<div>
+<h4 class="font-label font-bold text-on-surface">Grade 11 Math Tutor</h4>
+<p class="text-xs text-on-surface-variant">2 Hours • R200/hr</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-secondary" data-icon="schedule">schedule</span>
+<span class="text-[10px] text-on-surface-variant">Starts in 4h</span>
+</div>
+</div>
+</div>
+<button class="border border-primary text-primary font-label font-medium px-4 py-1.5 rounded-lg text-sm group-hover:bg-primary group-hover:text-on-primary transition-all">Apply</button>
+</div>
+<!-- Gig Item 3 -->
+<div class="bg-surface-container-low border border-outline-variant p-4 rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl" data-icon="package_2">package_2</span>
+</div>
+<div>
+<h4 class="font-label font-bold text-on-surface">Grocery Delivery</h4>
+<p class="text-xs text-on-surface-variant">5 Items • R50 tip</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-primary" data-icon="distance">distance</span>
+<span class="text-[10px] text-on-surface-variant">0.4 km away</span>
+</div>
+</div>
+</div>
+<button class="border border-primary text-primary font-label font-medium px-4 py-1.5 rounded-lg text-sm group-hover:bg-primary group-hover:text-on-primary transition-all">Apply</button>
+</div>
+</div>
+<button class="w-full mt-4 py-3 bg-surface-container-highest text-on-surface-variant font-label text-sm rounded-xl hover:text-primary transition-colors">
+                Discover More Opportunities
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 rounded-t-2xl shadow-[0_-4px_10px_rgba(0,0,0,0.3)] flex justify-around items-center h-20 px-2 pb-safe">
+<!-- Home Active -->
+<a class="flex flex-col items-center justify-center text-sky-400 bg-sky-500/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide mt-1">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide mt-1">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>

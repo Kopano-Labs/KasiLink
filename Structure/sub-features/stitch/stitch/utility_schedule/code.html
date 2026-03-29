@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Utility Schedule - KasiLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#b02500",
+              "on-error-container": "#520c00",
+              "secondary": "#735700",
+              "on-background": "#392d04",
+              "on-secondary-fixed": "#433200",
+              "on-error": "#ffefec",
+              "tertiary": "#5f5f00",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-container": "#f6f557",
+              "inverse-surface": "#130d00",
+              "primary": "#655d00",
+              "surface": "#fff5e4",
+              "on-tertiary-fixed-variant": "#666600",
+              "inverse-primary": "#faeb61",
+              "surface-dim": "#edd283",
+              "on-surface": "#392d04",
+              "tertiary-dim": "#535200",
+              "tertiary-fixed": "#f6f557",
+              "surface-container-high": "#fae199",
+              "primary-container": "#faeb61",
+              "on-tertiary-fixed": "#494900",
+              "primary-dim": "#585100",
+              "on-secondary-fixed-variant": "#664d00",
+              "primary-fixed-dim": "#ecdd54",
+              "on-primary-container": "#5e5600",
+              "background": "#fff5e4",
+              "primary-fixed": "#faeb61",
+              "surface-container-highest": "#f5db90",
+              "on-tertiary": "#fbf95c",
+              "surface-container-low": "#fff0ca",
+              "secondary-fixed-dim": "#f0bd30",
+              "on-primary-fixed-variant": "#696000",
+              "on-primary": "#fff5a9",
+              "tertiary-fixed-dim": "#e7e64a",
+              "on-tertiary-container": "#5c5b00",
+              "inverse-on-surface": "#ae9c67",
+              "secondary-fixed": "#ffca3f",
+              "surface-variant": "#f5db90",
+              "secondary-container": "#ffca3f",
+              "surface-tint": "#655d00",
+              "outline-variant": "#bfac76",
+              "on-surface-variant": "#695a2d",
+              "on-secondary-container": "#5b4400",
+              "error-dim": "#b92902",
+              "on-primary-fixed": "#4a4400",
+              "surface-container": "#ffe7a3",
+              "error-container": "#f95630",
+              "secondary-dim": "#654c00",
+              "on-secondary": "#fff1d9",
+              "surface-bright": "#fff5e4",
+              "outline": "#867645"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-yellow-400 dark:bg-yellow-600 text-stone-800 dark:text-stone-50 font-['Public_Sans'] font-bold text-lg docked full-width top-0 border-b-2 border-stone-800 dark:border-stone-700 shadow-sm flex justify-between items-center w-full px-4 h-16 sticky z-50">
+<div class="flex items-center gap-3">
+<button class="hover:bg-yellow-500 dark:hover:bg-yellow-700 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-2xl font-black tracking-tighter text-stone-900 dark:text-white">KasiLink</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-stone-900 dark:text-white font-bold hidden md:block">Reports</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-stone-800 overflow-hidden">
+<img alt="Profile" data-alt="close-up portrait of a cheerful African community member with a stylish haircut and colorful attire against a warm yellow background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB72eo0IxVy_jQu4UE4ABocDSv1uuH_yYGDhILY_2q-JOGCJEolOZkug4WoKN5wzfgz5UceTBYmyIITX4PuLjThBwe-bncB92ldxDOt6R36XOsFntgF3eXznhQwlMQbUhQiuY5yCj2_Jly2kEGzR2KBzlB9V_Rn_wzHrVgvR2Ro91U6_c_1IKYvNwkjscPAcXQvfjZZWb961lasKknbX1JdCUVSGZqLQUxJqssV3DE0rmuAfWsRGu1q5Fus_MjysGg69jS8Bz9NvTUc"/>
+</div>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-6">
+<!-- Hero Status Card -->
+<section class="mb-8 bg-primary-container text-on-primary-container rounded-xl p-6 shadow-md border border-outline-variant relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="bolt">bolt</span>
+</div>
+<div class="relative z-10">
+<p class="font-label italic text-sm mb-1">Soweto, Zone 4</p>
+<h2 class="text-3xl font-black mb-4">Utility Schedule</h2>
+<div class="flex items-center gap-4 bg-white/40 backdrop-blur-sm rounded-lg p-4 inline-flex">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+<div>
+<p class="text-xs uppercase tracking-wider font-bold opacity-70">Next Outage In</p>
+<p class="text-2xl font-black text-secondary">2h 15m</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
+                Next 48 Hours
+            </h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs font-bold rounded-full border border-secondary">Power</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-bold rounded-full border border-outline">Water</span>
+</div>
+</div>
+<!-- Asymmetric Bento-style Timeline -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Day 1 Header -->
+<div class="md:col-span-12 py-2 border-b border-outline-variant">
+<span class="font-label font-bold text-secondary">Today, 24 October</span>
+</div>
+<!-- Outage Block: Power -->
+<div class="md:col-span-8 bg-white dark:bg-stone-900 border-2 border-secondary rounded-xl p-5 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Load Shedding Stage 4</h4>
+<p class="text-sm opacity-70">Grid maintenance &amp; demand peak</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="mt-6 flex items-end justify-between">
+<div>
+<span class="text-2xl font-black text-secondary">16:00 - 18:30</span>
+<p class="text-xs font-medium">Estimated duration: 2.5 hours</p>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-error-container text-on-error-container rounded">CONFIRMED</span>
+</div>
+</div>
+<!-- Outage Block: Water (Side Card) -->
+<div class="md:col-span-4 bg-surface-container-low border border-outline-variant rounded-xl p-5 flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="font-bold">Water Interruption</span>
+</div>
+<p class="text-sm mb-4 leading-snug">Pipe replacement on Main St affecting Zone 4 supply.</p>
+<div class="mt-auto">
+<p class="text-xl font-black text-primary">20:00 - 23:00</p>
+<div class="mt-3 flex items-center justify-between">
+<span class="text-xs font-bold opacity-60 uppercase">Alert</span>
+<label class="relative inline-flex items-center cursor-pointer scale-75">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Day 2 Header -->
+<div class="md:col-span-12 py-2 mt-4 border-b border-outline-variant">
+<span class="font-label font-bold text-stone-500">Tomorrow, 25 October</span>
+</div>
+<!-- Small Block -->
+<div class="md:col-span-6 bg-white dark:bg-stone-900 border border-outline-variant rounded-xl p-4 flex gap-4 items-center">
+<div class="bg-secondary-container/30 p-3 rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold opacity-60">MORNING SLOT</p>
+<p class="font-black text-xl">04:00 - 06:30</p>
+</div>
+<span class="material-symbols-outlined text-stone-300" data-icon="notifications_off">notifications_off</span>
+</div>
+<!-- Small Block -->
+<div class="md:col-span-6 bg-white dark:bg-stone-900 border border-outline-variant rounded-xl p-4 flex gap-4 items-center">
+<div class="bg-secondary-container/30 p-3 rounded-full">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold opacity-60">MIDDAY SLOT</p>
+<p class="font-black text-xl">12:00 - 14:30</p>
+</div>
+<button class="bg-secondary text-white p-2 rounded-full active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</button>
+</div>
+<!-- Featured "Status Map" Image/Card -->
+<div class="md:col-span-12 bg-stone-900 rounded-xl overflow-hidden relative min-h-[160px] group shadow-lg">
+<img alt="Neighborhood Map" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" data-alt="dramatic night aerial view of a sprawling suburban township with warm streetlights and patches of darkness illustrating load shedding areas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxH57q2NFoIHVJJLgXDfveoEyAs1_9rbrwglBEC2d2jtmKU4Uk53ceG_rBNAA_luPc5ktAsPB42fRTVmwnt8KjoET9CsZys5MFVIir87fuaoVGI2PjWyYgfvka6iaa3pI6JnUttNtZA81Fv30Xz1zAILrCjcfDMA8wVlfxtISLXN0hM8buzJySCN8vDo4VpaaUnyJm8RuPnDvJAE4F9lATTonhQ2CkXLLHLIdRv2-3nu2FpHeJMIVwl61-9srCY2O2dIOhuEsZ_4cM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+<h5 class="text-white font-black text-lg">Area Outage Map</h5>
+<p class="text-white/70 text-sm">Visual view of all current utility issues in Soweto.</p>
+</div>
+<div class="absolute top-4 right-4 bg-yellow-400 text-stone-900 text-[10px] font-black px-2 py-1 rounded">LIVE UPDATES</div>
+</div>
+</div>
+<!-- Utility Providers Info -->
+<section class="mt-10">
+<h3 class="font-headline font-bold text-lg mb-4">Service Providers</h3>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full">
+<div class="w-6 h-6 rounded-full bg-secondary"></div>
+<span class="text-sm font-bold">Eskom Direct</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full">
+<div class="w-6 h-6 rounded-full bg-primary"></div>
+<span class="text-sm font-bold">Joburg Water</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full">
+<div class="w-6 h-6 rounded-full bg-stone-400"></div>
+<span class="text-sm font-bold">City Power</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-20 bg-white dark:bg-stone-900 border-t-2 border-stone-100 dark:border-stone-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full px-5 py-1 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform cursor-pointer relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Alerts</span>
+<span class="absolute top-1 right-5 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium">Profile</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink | Home Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ffd415",
+              "on-primary": "#000000",
+              "secondary": "#27272a",
+              "on-secondary": "#ffffff",
+              "surface": "#ffffff",
+              "on-surface": "#09090b",
+              "surface-variant": "#f4f4f5",
+              "on-surface-variant": "#71717a",
+              "outline": "#e4e4e7",
+              "error": "#ef4444",
+              "success": "#22c55e"
+            },
+            fontFamily: {
+              "public-sans": ["Public Sans", "sans-serif"],
+              "body": ["Public Sans", "sans-serif"],
+              "headline": ["Public Sans", "sans-serif"],
+              "label": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "9999px",
+              "lg": "9999px",
+              "xl": "9999px",
+              "2xl": "9999px",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+            min-height: 100dvh;
+            font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white dark:bg-zinc-900 shadow-sm dark:shadow-none border-b border-zinc-100 dark:border-zinc-800">
+<div class="flex justify-between items-center px-4 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-600 dark:text-yellow-400">location_on</span>
+<h1 class="text-xl font-black text-yellow-600 dark:text-yellow-400 tracking-tight font-public-sans">KasiLink</h1>
+</div>
+<button class="hover:bg-yellow-50 dark:hover:bg-zinc-800 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined text-zinc-500 dark:text-zinc-400">notifications</span>
+</button>
+</div>
+</header>
+<main class="mt-20 px-4 space-y-8 max-w-2xl mx-auto">
+<!-- Load-shedding Status Widget -->
+<section class="relative overflow-hidden rounded-full bg-secondary p-6 text-on-secondary shadow-lg">
+<div class="relative z-10 flex justify-between items-center px-4">
+<div>
+<span class="text-primary text-[10px] font-black uppercase tracking-widest mb-1 block">System Status</span>
+<h2 class="text-2xl font-black tracking-tight mb-0.5">Stage 2 Active</h2>
+<p class="text-zinc-400 text-xs font-medium italic">Next cut in 2h 14m</p>
+</div>
+<div class="bg-primary p-4 rounded-full shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary text-3xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+<!-- Decorative subtle pattern -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-primary opacity-5 rounded-full blur-3xl"></div>
+</section>
+<!-- Safety Alerts Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between px-2">
+<h3 class="text-xl font-black text-on-surface">Nearby Safety Alerts</h3>
+<span class="text-xs font-bold text-yellow-600 bg-yellow-50 px-3 py-1 rounded-full">View Area Map</span>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2 -mx-4 px-4 snap-x">
+<!-- Alert Card 1 -->
+<div class="min-w-[300px] snap-center bg-white p-5 rounded-full shadow-md border border-outline flex items-center gap-4">
+<div class="bg-error/10 text-error p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex justify-between items-center pr-4">
+<span class="text-[9px] font-black text-error uppercase">High Alert</span>
+<span class="text-[9px] text-zinc-400">12m ago</span>
+</div>
+<p class="text-sm font-bold text-on-surface truncate">Water Outage Reported</p>
+<p class="text-[11px] text-on-surface-variant truncate">Maintenance on Section 4 main line.</p>
+</div>
+</div>
+<!-- Alert Card 2 -->
+<div class="min-w-[300px] snap-center bg-white p-5 rounded-full shadow-md border border-outline flex items-center gap-4">
+<div class="bg-success/10 text-success p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<div class="flex justify-between items-center pr-4">
+<span class="text-[9px] font-black text-success uppercase">Community</span>
+<span class="text-[9px] text-zinc-400">45m ago</span>
+</div>
+<p class="text-sm font-bold text-on-surface truncate">SAPS Patrol Active</p>
+<p class="text-[11px] text-on-surface-variant truncate">Increased visibility around taxi rank.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Gigs Feed -->
+<section class="space-y-4">
+<h3 class="text-xl font-black text-on-surface px-2">Available Gigs Nearby</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Gig Card 1 -->
+<div class="bg-surface-variant p-4 rounded-full flex items-center gap-4 group transition-all active:scale-[0.98] border border-transparent hover:border-primary/30">
+<div class="relative">
+<img alt="Car Wash Service" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_-7M8-1JIvCRzgH-nkAGNnuBR7P4950P3-zobHW0eQAq97SwAR8ozfGWgLIwnwjmmNJCCAwXqmfCP4ZIwAJSYUEXA7hpqyNWiCFNPGNSkEmO1uiracREXxW__PFmAw_X8cyRF0XRDwHQ0_vbezypJWim9iPrj0Jn_HBOFgfBYsz_ignzhN9RNr4x4VAZJrcX9pb3VLolMx20JxV1LLmX1nyvYqoa_6uJxV2sDPW37rIZAlm3B1qubPoPBKCrjV-sNF9JkM9IDC4-d"/>
+<div class="absolute -bottom-1 -right-1 bg-success text-white text-[8px] font-black p-1 rounded-full shadow-sm"><span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">check</span></div>
+</div>
+<div class="flex-1 pr-6">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-on-surface text-sm">Express Exterior Wash</h4>
+<span class="font-black text-yellow-600 text-sm">R120</span>
+</div>
+<div class="flex items-center gap-3 mt-1.5">
+<span class="flex items-center gap-1 text-[10px] font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">distance</span> 0.8 km
+                        </span>
+<span class="flex items-center gap-1 text-[10px] font-bold text-yellow-600">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                        </span>
+</div>
+</div>
+</div>
+<!-- Gig Card 2 -->
+<div class="bg-surface-variant p-4 rounded-full flex items-center gap-4 group transition-all active:scale-[0.98] border border-transparent hover:border-primary/30">
+<div class="relative">
+<img alt="Tutoring Service" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6frYkPdRWX2eW0-dpTlzUcIk62fSXNDQ_G6jId_JfFxH22pMEV05ZkU8qGvU8yEngTS5d0eCPjBn0EPfO4ZyUKXPRdBI3Rc3cyKNxGh-9TKALKSDQAiPem8EE5LXkPWe91MeKKl0f4fm3NahOyTjNcx1Ggr9cdPVmGcO4sthI77SXh0tq_C6HlqIGqeV4AturbR6VgVgCvE7SWB47guxLw9O5ToRlUYPy_nVrqjpCz6zPY_6JDyIQ4aMn8TUbAo6Oc0MTuD6KgMs2"/>
+</div>
+<div class="flex-1 pr-6">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-on-surface text-sm">Maths Grade 10-12</h4>
+<span class="font-black text-yellow-600 text-sm">R200/hr</span>
+</div>
+<div class="flex items-center gap-3 mt-1.5">
+<span class="flex items-center gap-1 text-[10px] font-bold text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">distance</span> 1.2 km
+                        </span>
+<span class="flex items-center gap-1 text-[10px] font-bold text-yellow-600">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span> 5.0
+                        </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Success Story Card -->
+<section class="pb-12">
+<div class="relative bg-zinc-900 rounded-[40px] overflow-hidden min-h-[260px] flex items-end shadow-xl">
+<img alt="Success Story Hero" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7AF3YuAdPVxmT7pxef-NnpP7JIpB43g5eORIJNhL9-lbkAcUYrUBrvWmbReZuiQbcvYqGf3ldEh8Hev61konBQ1C51tMUUbqnUpu9-vzs0lsZPvKzFqn0wq3fxFS3P7lVV4OjBRYvObjoCwjqYk1jE8r_tbxeSbDu36_T0IZrXQXsZXcBYuigpeM8udXGrYwSN6XYOi8Ip_v7BUV6tHVSKIU64PSpUrrTWu3TDSoYzcr0KbQWm7zE7sxbSEgjR72IJt_ScaDrVhL1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent"></div>
+<div class="relative z-10 p-8 text-on-secondary w-full">
+<span class="bg-primary text-on-primary text-[10px] font-black uppercase px-3 py-1 rounded-full mb-3 inline-block">Local Hero</span>
+<h3 class="text-2xl font-black leading-tight">How Mam’ Thandi built her bakery using Gigs</h3>
+<p class="text-sm text-zinc-300 mt-2 font-medium italic line-clamp-2">“I started with one cake order on KasiLink. Now I employ three people.”</p>
+<button class="mt-5 flex items-center justify-center gap-2 text-[11px] font-black text-on-primary bg-primary w-full py-3 rounded-full uppercase tracking-widest shadow-lg shadow-primary/20">
+                    Read Story <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-6 pt-3 bg-white dark:bg-zinc-900 rounded-t-[32px] border-t border-zinc-100 dark:border-zinc-800 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+<!-- Home (Active) -->
+<button class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-public-sans text-[11px] font-medium mt-0.5">Home</span>
+</button>
+<!-- Gigs -->
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-2xl">work</span>
+<span class="font-public-sans text-[11px] font-medium mt-0.5">Gigs</span>
+</button>
+<!-- Alerts -->
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-2xl">warning</span>
+<span class="font-public-sans text-[11px] font-medium mt-0.5">Alerts</span>
+</button>
+<!-- Chat -->
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-2xl">chat</span>
+<span class="font-public-sans text-[11px] font-medium mt-0.5">Chat</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-zinc-500 dark:text-zinc-400 px-4 py-1 hover:text-yellow-600 dark:hover:text-yellow-400 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="font-public-sans text-[11px] font-medium mt-0.5">Profile</span>
+</button>
+</nav>
+<!-- FAB -->
+<button class="fixed right-6 bottom-28 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-all z-40 ring-4 ring-white shadow-primary/40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>
