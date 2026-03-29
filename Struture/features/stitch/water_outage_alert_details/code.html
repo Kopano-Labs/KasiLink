@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alert Details - Water Outage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#392d04",
+                        "primary-dim": "#585100",
+                        "primary-container": "#faeb61",
+                        "on-surface-variant": "#695a2d",
+                        "primary-fixed": "#faeb61",
+                        "error-dim": "#b92902",
+                        "surface-dim": "#edd283",
+                        "on-secondary-fixed-variant": "#664d00",
+                        "tertiary-fixed": "#f6f557",
+                        "inverse-primary": "#faeb61",
+                        "surface-container-highest": "#f5db90",
+                        "secondary": "#735700",
+                        "on-secondary-container": "#5b4400",
+                        "on-primary-fixed": "#4a4400",
+                        "on-error": "#ffefec",
+                        "on-secondary-fixed": "#433200",
+                        "surface-container-low": "#fff0ca",
+                        "tertiary-container": "#f6f557",
+                        "on-surface": "#392d04",
+                        "on-tertiary": "#fbf95c",
+                        "on-primary-container": "#5e5600",
+                        "inverse-surface": "#130d00",
+                        "secondary-container": "#ffca3f",
+                        "outline-variant": "#bfac76",
+                        "outline": "#867645",
+                        "on-primary": "#fff5a9",
+                        "on-secondary": "#fff1d9",
+                        "secondary-fixed-dim": "#f0bd30",
+                        "surface-container-high": "#fae199",
+                        "surface": "#fff5e4",
+                        "primary": "#655d00",
+                        "surface-variant": "#f5db90",
+                        "error": "#b02500",
+                        "background": "#fff5e4",
+                        "error-container": "#f95630",
+                        "on-error-container": "#520c00",
+                        "surface-container": "#ffe7a3",
+                        "surface-bright": "#fff5e4",
+                        "secondary-dim": "#654c00",
+                        "surface-tint": "#655d00"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Noto Serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+        .noto-serif {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-stone-950 text-stone-100 min-h-screen pb-24">
+<!-- TopAppBar Predicted Component -->
+<header class="sticky top-0 w-full z-50 flex items-center px-4 h-16 bg-white dark:bg-stone-900 border-b border-stone-200 dark:border-stone-800 font-public-sans text-stone-800 dark:text-stone-100 transition-transform active:scale-95">
+<button class="mr-4 p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-stone-900 dark:text-white">Alert Details</h1>
+<div class="ml-auto flex items-center gap-2">
+<span class="material-symbols-outlined text-stone-500">share</span>
+<span class="material-symbols-outlined text-stone-500">more_vert</span>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-6 space-y-6">
+<!-- Alert Hero Section (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-12 bg-error-container/10 border border-error/30 rounded-xl p-6 relative overflow-hidden">
+<div class="absolute -right-8 -top-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">water_damage</span>
+</div>
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-error text-white text-[10px] font-bold px-2 py-1 rounded tracking-widest uppercase">High Alert</span>
+<span class="text-stone-400 text-sm font-medium">Reported 12m ago</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center gap-4">
+<div class="bg-error p-4 rounded-2xl flex-shrink-0 w-fit">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</div>
+<div>
+<h2 class="text-2xl font-black text-white leading-tight">Water Outage Reported</h2>
+<p class="text-stone-300 mt-1 max-w-xl">A major pipe burst has been reported on Section 4 main line. Water supply is currently cut for all residents in Block L and Extension 4. Municipal teams have been dispatched.</p>
+</div>
+</div>
+</div>
+<!-- Official Response Card -->
+<div class="md:col-span-7 bg-stone-900 border border-stone-800 rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-yellow-500">engineering</span>
+<h3 class="font-bold text-stone-200">Official Response</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 animate-pulse"></div>
+<div>
+<p class="text-sm font-semibold text-stone-300">Municipal Status: In Progress</p>
+<p class="text-xs text-stone-500">Maintenance Crew ID: #ZA-9921</p>
+</div>
+</div>
+<div class="bg-stone-800/50 rounded-lg p-3 border-l-4 border-yellow-500">
+<p class="text-xs text-stone-400 uppercase tracking-wider font-bold">Estimated Restoration</p>
+<p class="text-lg font-black text-yellow-500">4-6 Hours</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Community Impact Card -->
+<div class="md:col-span-5 bg-stone-900 border border-stone-800 rounded-xl p-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary-fixed">groups</span>
+<h3 class="font-bold text-stone-200">Community Impact</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-stone-400">Affected Households</span>
+<span class="text-stone-200 font-bold">~1,200</span>
+</div>
+<div class="w-full bg-stone-800 rounded-full h-1.5">
+<div class="bg-error w-3/4 h-1.5 rounded-full"></div>
+</div>
+<p class="text-[10px] text-stone-500 leading-relaxed italic noto-serif">Current reporting suggests high severity impact across the northwest quadrant of Section 4.</p>
+</div>
+</div>
+</section>
+<!-- Image of Incident Area -->
+<section class="rounded-xl overflow-hidden aspect-video relative group">
+<img alt="Repair Site" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="dramatic wide shot of a municipal repair crew working on a large water pipe in an urban street at dusk with emergency lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbTwxfgR1waRQ0ExcB3c5CMuKP_uaNzFly9-ZZQuU4aA0GcZimgTHOYbPIZQ8zlVnPXw2m3ZEPek27z3V8y69DVLHZtFjj6-vWE5kvOvjdHzxnIJiCFLWpNJ7gU21yCEgoIvzFSRui0tfrlYyyF7DXLDcbhxiZDENmL_PezV77QAVw26jBJasZgIGgeeU-Pfzx2ELynwcm_zRzfQe3hrZIMs7pRkTPe_nkunDrHEuw45zS1wrYcaIMOx6xMeKv_1Bj4UKBa2GSO_ap"/>
+<div class="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-sm">location_on</span>
+<span class="text-white text-xs font-bold">Corner of Extension 4 &amp; Main</span>
+</div>
+</section>
+<!-- Community Interaction Section -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-stone-200 flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500">forum</span>
+                    Community Updates
+                </h3>
+<span class="text-xs text-yellow-500 font-bold hover:underline cursor-pointer">View All</span>
+</div>
+<div class="space-y-3">
+<!-- Message 1 -->
+<div class="bg-stone-900/50 p-4 rounded-xl border border-stone-800/50 flex gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-stone-800">
+<img alt="User A" data-alt="portrait of a middle aged man with a warm smile in natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH2FRhl6sDw_DZlcVxhZpBPQS4oNrP4KyT4FSYVb2WCkEMlP4Q4m3nIUBG5Ey-D3WeTH10RU7KhAbi_yQ_z6YOqfsEuGsi35aTZw38MwBT8I1zx66Jf2G0vyq0AhDoYFamkbtlA6y13cDCfQarX2_jirINbdZ65NBjtvyIU3VnuVyVn9DLr0i9duPks2kicVVTH2NUuoTR1vkE2YNCu2iG5MZ0p4_F4BnixKRaoW_1_8FgDY-vL3ipBpYHQD737ZC6k_8hf4Oo3xL-"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-yellow-400">User A <span class="text-stone-500 font-normal ml-2 text-xs">Block L</span></h4>
+<span class="text-[10px] text-stone-500 uppercase">3m ago</span>
+</div>
+<p class="text-sm text-stone-300">No water here either in Block L. Tank is almost empty.</p>
+</div>
+</div>
+<!-- Message 2 -->
+<div class="bg-stone-900/50 p-4 rounded-xl border border-stone-800/50 flex gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-stone-800">
+<img alt="User B" data-alt="portrait of a young woman with braided hair smiling in outdoor setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC97vWIMvPO-NNdepc1j0HzThxbYj3Sl6DJaADgcvhDlNTfDaX0sNhLj70FjcZ_Wmhugi9kp8gq_bN4kvNfhvdu11ZzC-uZMeYZVISUFvc0X4upk7XrtHr_o63KA0ev5ym8ed6BllJRZkdy49i9w_vSq3UbVEsyheLbsJ_ON01symrBEWtoLcQmcUG2fY4IJBY-ctsZ3Ce0pYNnOfGEPVhXbEU-uU2nM8hAHPq1m-v6RrXxqF3HgedHOT9Q2MEvPrvOe9vfc7ej15gp"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h4 class="text-sm font-bold text-yellow-400">User B <span class="text-stone-500 font-normal ml-2 text-xs">Primary School Area</span></h4>
+<span class="text-[10px] text-stone-500 uppercase">10m ago</span>
+</div>
+<p class="text-sm text-stone-300">I saw the municipal truck arrive near the primary school. Looks like they are digging already.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Button Section -->
+<section class="pt-4 flex flex-col gap-3">
+<button class="w-full bg-yellow-500 hover:bg-yellow-400 text-stone-950 font-black py-4 rounded-xl transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+                REQUEST WATER TANKER
+            </button>
+<button class="w-full bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold py-4 rounded-xl transition-all active:scale-[0.98] border border-stone-700 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_alert</span>
+                REPORT UPDATE
+            </button>
+</section>
+</main>
+<!-- BottomNavBar Predicted Component -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 shadow-lg dark:shadow-none font-public-sans text-xs transition-all duration-200 ease-in-out">
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="mt-1">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-200 rounded-2xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="mt-1 font-bold">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-3 py-1 hover:text-yellow-600 dark:hover:text-yellow-300" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Status - KasiLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error": "#b02500",
+                        "on-error-container": "#520c00",
+                        "secondary": "#735700",
+                        "on-background": "#392d04",
+                        "on-secondary-fixed": "#433200",
+                        "on-error": "#ffefec",
+                        "tertiary": "#5f5f00",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#f6f557",
+                        "inverse-surface": "#130d00",
+                        "primary": "#655d00",
+                        "surface": "#fff5e4",
+                        "on-tertiary-fixed-variant": "#666600",
+                        "inverse-primary": "#faeb61",
+                        "surface-dim": "#edd283",
+                        "on-surface": "#392d04",
+                        "tertiary-dim": "#535200",
+                        "tertiary-fixed": "#f6f557",
+                        "surface-container-high": "#fae199",
+                        "primary-container": "#faeb61",
+                        "on-tertiary-fixed": "#494900",
+                        "primary-dim": "#585100",
+                        "on-secondary-fixed-variant": "#664d00",
+                        "primary-fixed-dim": "#ecdd54",
+                        "on-primary-container": "#5e5600",
+                        "background": "#fff5e4",
+                        "primary-fixed": "#faeb61",
+                        "surface-container-highest": "#f5db90",
+                        "on-tertiary": "#fbf95c",
+                        "surface-container-low": "#fff0ca",
+                        "secondary-fixed-dim": "#f0bd30",
+                        "on-primary-fixed-variant": "#696000",
+                        "on-primary": "#fff5a9",
+                        "tertiary-fixed-dim": "#e7e64a",
+                        "on-tertiary-container": "#5c5b00",
+                        "inverse-on-surface": "#ae9c67",
+                        "secondary-fixed": "#ffca3f",
+                        "surface-variant": "#f5db90",
+                        "secondary-container": "#ffca3f",
+                        "surface-tint": "#655d00",
+                        "outline-variant": "#bfac76",
+                        "on-surface-variant": "#695a2d",
+                        "on-secondary-container": "#5b4400",
+                        "error-dim": "#b92902",
+                        "on-primary-fixed": "#4a4400",
+                        "surface-container": "#ffe7a3",
+                        "error-container": "#f95630",
+                        "secondary-dim": "#654c00",
+                        "on-secondary": "#fff1d9",
+                        "surface-bright": "#fff5e4",
+                        "outline": "#867645"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Noto Serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-yellow-400 dark:bg-yellow-600 text-stone-800 dark:text-stone-50 border-b-2 border-stone-800 dark:border-stone-700 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+<h1 class="text-2xl font-black tracking-tighter text-stone-900 dark:text-white">KasiLink</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-stone-900">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a young South African man smiling warmly with natural lighting and soft blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH8lALs6RgfhgqcLJhLmY8S63d1nIm12DYKn7sFJSDqX5PktxX2HOaqtoIwxjJkDCaXEHlSo8WSz3t_3JZTdQJKf4n7wHRvFJ-A_vUzk7qg2EPu1y4H7nEN5ILH9d41NE0np9r9tVaMFivgI22WvO1rpB5BOkN2GfBuaM8V8E6t21nqHCrhSNC3djtpsIYq3c4S28eR6OGoubksDR30rYd5vz4sBKYLjMwDM4fVzKVivI5ZPtxzgHo2aGCrf5gbsdwUxd7JdtHNLxe"/>
+</div>
+</header>
+<main class="pt-20 px-4 max-w-5xl mx-auto">
+<!-- Title Section -->
+<section class="mt-4 mb-8">
+<h2 class="font-headline font-black text-4xl tracking-tight text-on-surface">Community Status</h2>
+<p class="text-on-surface-variant font-medium mt-1">Live updates for your local neighborhood</p>
+</section>
+<!-- Bento Grid Status Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<!-- Current Power Status (Large Primary Card) -->
+<div class="md:col-span-8 bg-surface-container rounded-xl p-6 relative overflow-hidden shadow-sm border border-outline-variant/30">
+<div class="absolute top-0 right-0 w-32 h-32 bg-yellow-200/50 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="flex justify-between items-start relative z-10">
+<div>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">Utility Status</span>
+<h3 class="text-3xl font-black mt-4 text-on-surface">Current Power Status</h3>
+<p class="text-xl font-medium text-error flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+                            Load-shedding Stage 4
+                        </p>
+<p class="text-on-surface-variant mt-4 max-w-sm">Scheduled outage affecting Sections 1 through 6 until 18:00 today. Critical infrastructure remains active.</p>
+</div>
+<div class="bg-error-container text-on-error-container px-4 py-2 rounded-full font-bold text-sm">
+                        High Alert
+                    </div>
+</div>
+<div class="mt-6 flex items-center gap-2 text-sm font-medium text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                    Reported 12 mins ago
+                </div>
+</div>
+<!-- Side Card: Quick Stats/Weather/Something else -->
+<div class="md:col-span-4 bg-secondary-container rounded-xl p-6 flex flex-col justify-between border border-outline-variant/30">
+<div class="flex flex-col gap-1">
+<span class="material-symbols-outlined text-4xl text-on-secondary-container" data-icon="cloud_queue">cloud_queue</span>
+<h4 class="text-xl font-bold text-on-secondary-container mt-2">Local Weather</h4>
+<p class="text-on-secondary-container opacity-80">Sunny, 28°C. Perfect day for community markets.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-on-secondary-container/10">
+<div class="flex justify-between text-sm font-bold text-on-secondary-container">
+<span>Safe to Travel</span>
+<span>94%</span>
+</div>
+<div class="w-full bg-white/30 h-2 rounded-full mt-2">
+<div class="bg-on-secondary-container h-full rounded-full" style="width: 94%"></div>
+</div>
+</div>
+</div>
+<!-- Water Utility Alerts (Glassmorphism Style) -->
+<div class="md:col-span-6 bg-glass border border-white/50 rounded-xl p-6 shadow-xl relative group">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<h3 class="font-bold text-xl">Water Utility Alerts</h3>
+<p class="text-on-surface-variant text-sm">Section 4, Main Road</p>
+</div>
+</div>
+<div class="bg-surface-container-highest text-on-surface px-3 py-1 rounded-full font-bold text-xs">
+                        Medium
+                    </div>
+</div>
+<p class="mt-6 text-on-surface leading-relaxed">Major pipe burst detected near the primary school. Repair teams are currently on-site. Expect low pressure in surrounding areas.</p>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs font-semibold text-outline">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                        Reported 45 mins ago
+                    </div>
+<button class="text-primary font-bold text-sm flex items-center gap-1 hover:underline">
+                        View Map
+                        <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Community Safety (Asymmetric/Modern Card) -->
+<div class="md:col-span-6 bg-white dark:bg-stone-800 rounded-xl p-6 shadow-sm border border-stone-200 dark:border-stone-700 flex flex-col">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-xl text-stone-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="shield_with_heart">shield_with_heart</span>
+                            Community Safety
+                        </h3>
+<p class="font-label italic text-stone-500 mt-1">Active Neighborhood Watch</p>
+</div>
+<div class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wide">
+                        Resolved
+                    </div>
+</div>
+<div class="mt-6 p-4 bg-surface-container-low rounded-lg border-l-4 border-secondary">
+<p class="text-on-surface font-medium italic">"Neighborhood watch patrol active in Section 2. Suspect apprehended following petty theft report. Area is now secured."</p>
+</div>
+<div class="mt-auto pt-6 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="close-up of a smiling man with a beard and clear glasses in bright daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEZeg15zUergFsUp4E65X0SvVLMdnt1cey6sGhbeT2acgOhivctqXmLkuJ53jKzOqyWRJNKwI9RtB5ooTWU2NICtTByn-2BukKH7uTCUbY9r9M7CbO1vCPJi1g7wLIgTkcY-r6_3g6FHYKN-5_iF3aWyhc0rQNIhJvsaueAvzhkdQ5infVwlVqFHglR54R4EpWCRUszFE6d40FIPQbeuGPkpPfhW6EOhO_9N4BMJSXX3QS0evpIwPb7WwfhPushewIXT_ownPhYNsF"/>
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="professional portrait of a young woman with a warm smile and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTSi6ithFulTbPkun2AApzpR72VG-_zl_LNqDs7MDnlkKWyncFV_-i-DmN8MH_lDNaugW6H_LpwLSSnnx_ctymUfdoZyuob90QWhmlfLr_Q2ZEgY0liKEzsrPePE0qBhyecDJpHSvavXk0f4nakosDZzwl5O7B-prrk982FeQ91s1ipPuWshTsSzp3QJsOnE0DtZwELhz6JJasIMCvs-UQFC4blFVdwlof5CWts3AcZoH5UwhlaqVdkfjJLv9EwwLLtl9fHxvW2cv8"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-stone-200 flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<div class="text-xs font-bold text-stone-400">Reported 2 hours ago</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<section class="mt-12">
+<h3 class="font-headline font-bold text-xl mb-6">Recent Reports</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-white/50 rounded-xl hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="bg-surface-container-high p-3 rounded-full">
+<span class="material-symbols-outlined" data-icon="light_off">light_off</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">Streetlight out on 5th Ave</h4>
+<p class="text-sm text-on-surface-variant">Section 3 resident reported total darkness.</p>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-outline">18m ago</div>
+<div class="text-xs text-secondary font-bold">Pending</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white/50 rounded-xl hover:bg-white transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="bg-surface-container-high p-3 rounded-full">
+<span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-on-surface">Illegal Dumping Site</h4>
+<p class="text-sm text-on-surface-variant">Corner of Mbeki St. and Nelson Rd.</p>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-outline">42m ago</div>
+<div class="text-xs text-secondary font-bold">Assigned</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-16 h-16 bg-yellow-400 text-stone-900 rounded-full shadow-2xl flex items-center justify-center active:scale-95 duration-150 z-[60] group border-4 border-white/20">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+<span class="absolute right-full mr-4 bg-stone-900 text-white px-3 py-1 rounded text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Report Incident</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-20 bg-white dark:bg-stone-900 border-t-2 border-stone-100 dark:border-stone-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-2xl">
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-full px-5 py-1 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-['Public_Sans'] text-[12px] font-bold mt-1">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium mt-1">Alerts</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-1 hover:text-yellow-700 dark:hover:text-yellow-300 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Public_Sans'] text-[12px] font-medium mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

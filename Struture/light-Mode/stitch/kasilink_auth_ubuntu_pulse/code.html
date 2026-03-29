@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink - Sign In</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ffd415",
+              "on-primary": "#000000",
+              "surface": "#ffffff",
+              "on-surface": "#121212",
+              "surface-variant": "#f4f4f5",
+              "on-surface-variant": "#525252",
+              "outline": "#e4e4e7",
+              "secondary": "#000000",
+              "on-secondary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Public Sans", "sans-serif"],
+              "body": ["Public Sans", "sans-serif"],
+              "label": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {
+                "DEFAULT": "9999px",
+                "lg": "9999px",
+                "xl": "9999px",
+                "2xl": "2.5rem",
+                "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ubuntu-pulse-bg {
+            background-color: #ffffff;
+            background-image: radial-gradient(#ffd415 0.5px, transparent 0.5px);
+            background-size: 32px 32px;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary selection:text-on-primary">
+<div class="relative min-h-screen flex flex-col items-center justify-center p-6 overflow-hidden ubuntu-pulse-bg">
+<!-- Grid Status Indicator (Kasi Context) -->
+<div class="fixed top-6 right-6 z-50">
+<div class="bg-white rounded-full px-4 py-2 shadow-lg flex items-center gap-3 border border-outline">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-lg" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase tracking-wider text-on-surface-variant">Grid Status</p>
+<p class="text-xs font-bold text-on-surface leading-none">Stage 2 Active</p>
+</div>
+</div>
+</div>
+<!-- Auth Container -->
+<main class="w-full max-w-[400px] z-10">
+<!-- Brand Identity -->
+<div class="mb-12 text-center flex flex-col items-center">
+<div class="w-20 h-20 bg-black rounded-[2rem] mb-6 flex items-center justify-center shadow-xl transform rotate-3">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<h1 class="font-headline text-5xl font-black tracking-tighter mb-2 text-on-surface italic">KasiLink</h1>
+<p class="text-on-surface-variant font-medium tracking-tight">Stay connected to your kasi.</p>
+</div>
+<!-- Interaction Card -->
+<div class="bg-white rounded-2xl p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.12)] border border-outline">
+<div class="mb-10">
+<h2 class="font-headline text-3xl font-extrabold mb-2 tracking-tight">Welcome back</h2>
+<p class="text-on-surface-variant text-sm font-medium">Enter your mobile number to continue</p>
+</div>
+<!-- Form -->
+<form class="space-y-6">
+<div class="space-y-3">
+<label class="flex items-center justify-between px-2" for="phone">
+<span class="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Mobile Number</span>
+<span class="inline-flex items-center gap-1 bg-green-50 text-green-700 text-[10px] px-3 py-1 rounded-full font-bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                Verified
+                            </span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+<span class="text-on-surface font-black text-base pr-4 border-r-2 border-outline">+27</span>
+</div>
+<input class="w-full h-16 pl-20 pr-6 bg-surface-variant border-none rounded-full focus:ring-4 focus:ring-primary/30 text-on-surface font-bold text-lg placeholder:text-on-surface-variant/30 transition-all" id="phone" name="phone" placeholder="012 345 6789" required="" type="tel"/>
+</div>
+</div>
+<button class="w-full h-16 bg-primary hover:bg-[#eac313] text-on-primary font-black text-lg rounded-full shadow-xl shadow-primary/20 active:scale-[0.97] transition-all flex items-center justify-center gap-3" type="submit">
+                        Continue
+                        <span class="material-symbols-outlined font-black" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-10">
+<div class="flex-grow h-0.5 bg-outline"></div>
+<span class="px-6 text-[11px] font-black tracking-[0.25em] text-on-surface-variant/50">OR</span>
+<div class="flex-grow h-0.5 bg-outline"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 h-14 bg-surface-variant hover:bg-outline text-on-surface font-bold rounded-full active:scale-[0.95] transition-all border border-transparent">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxDhSgJV-8DYV4AkDm9J_y1KwDAiwcuGrE5jlQsM44eN-gYwfjWZTqW0wxsPrUjZ4HlTPa04lEGInYvFeljLeYBDTfbL7dGGyUNBA3OFZpd7HtxysrUevETzooOfv-T6Ddcm4WhEtU5DR9BMzGA54QW_B2z8EY3cQb-6y2S16y208njtLWfd6h7xzQq5s3HQ_1f_PR3DhUh6vLM6teFwzgL2-ssJ6XOFlM77iGUIIu8_Pf6HrUmhDB_myCRlfyyUr0RA8VCfF6_o_e"/>
+<span class="text-sm">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 h-14 bg-surface-variant hover:bg-outline text-on-surface font-bold rounded-full active:scale-[0.95] transition-all border border-transparent">
+<span class="material-symbols-outlined text-[#25D366]" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="text-sm">WhatsApp</span>
+</button>
+</div>
+</div>
+<!-- Footer Links -->
+<div class="mt-10 text-center space-y-6">
+<p class="text-sm font-medium text-on-surface-variant">
+                    New to KasiLink? <a class="text-on-surface font-black underline decoration-primary decoration-4 underline-offset-4 hover:decoration-black transition-all" href="#">Join the community</a>
+</p>
+<div class="flex items-center justify-center gap-8">
+<a class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-black transition-colors" href="#">Privacy</a>
+<a class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-black transition-colors" href="#">Terms</a>
+<a class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant hover:text-black transition-colors" href="#">Safety</a>
+</div>
+</div>
+</main>
+<!-- Background Editorial Image -->
+<div class="absolute bottom-[-5%] right-[-5%] w-[450px] h-[450px] opacity-[0.05] pointer-events-none -rotate-12">
+<img alt="Community" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdvdn6EMkIT3wlcUsm5F6pHeJIzrfmTwLKsJC2Wzkex5Z_lvPajTRu1Gpi2OFKKguCi-fDpYW77hbodZ1HBZNsWAWdOh9yYAwYgFB01Rhcf2ljfatQfByyUmoYiOMLN4eiOLR8yCqiFnYaGDP88WWVFn0p8J2BQh_aVmziPz1gpHKnB5nBGvrVNja8I6G4WsfgNI47QeC23bLV4nd5fDY1QR7qLmMTubTxyPwOsFxv54nx9qwo1CSBCDfD4aNKQvhhpfbJvXu8Ouue"/>
+</div>
+</div>
+</body></html>

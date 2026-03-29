@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink User Tier System Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&amp;family=Lexend:wght@300;400;500;600&amp;family=Source+Serif+4:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-dim": "#75c1ee",
+                        "on-tertiary-container": "#664261",
+                        "inverse-on-surface": "#465768",
+                        "tertiary-container": "#ffcef4",
+                        "secondary-fixed-dim": "#ffc2f1",
+                        "surface": "#000f1e",
+                        "outline-variant": "#284b69",
+                        "inverse-surface": "#f7f9ff",
+                        "secondary-dim": "#fc95ec",
+                        "primary": "#a5dbff",
+                        "on-secondary": "#70196a",
+                        "tertiary": "#ffe3f7",
+                        "primary-fixed": "#83cffd",
+                        "surface-container-low": "#001526",
+                        "on-primary-fixed": "#003044",
+                        "surface-variant": "#002843",
+                        "primary-fixed-dim": "#75c1ee",
+                        "on-primary": "#004f6e",
+                        "error-container": "#8a1a1e",
+                        "surface-bright": "#002e4d",
+                        "on-error-container": "#ff9993",
+                        "tertiary-fixed": "#ffcef4",
+                        "error": "#ff716c",
+                        "tertiary-dim": "#f0c1e6",
+                        "primary-container": "#83cffd",
+                        "surface-container-high": "#002139",
+                        "tertiary-fixed-dim": "#f0c1e6",
+                        "on-secondary-container": "#e481d6",
+                        "on-primary-container": "#004561",
+                        "secondary-container": "#4a0047",
+                        "on-primary-fixed-variant": "#004f6e",
+                        "surface-tint": "#a5dbff",
+                        "surface-container-highest": "#002843",
+                        "on-secondary-fixed": "#6f1869",
+                        "on-tertiary-fixed-variant": "#714c6b",
+                        "on-tertiary-fixed": "#52304e",
+                        "inverse-primary": "#00668d",
+                        "outline": "#577899",
+                        "surface-container": "#001b30",
+                        "background": "#000f1e",
+                        "on-tertiary": "#704b6a",
+                        "secondary": "#ffabef",
+                        "on-error": "#490006",
+                        "surface-dim": "#000f1e",
+                        "surface-container-lowest": "#000000",
+                        "on-surface": "#d4e8ff",
+                        "on-surface-variant": "#8daed1",
+                        "on-background": "#d4e8ff",
+                        "error-dim": "#c94947",
+                        "secondary-fixed": "#ffd7f3",
+                        "on-secondary-fixed-variant": "#903888"
+                    },
+                    fontFamily: {
+                        "headline": ["Source Serif Four", "serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .swimlane-gradient {
+            background: linear-gradient(180deg, rgba(0, 21, 38, 0.5) 0%, rgba(0, 15, 30, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen pb-24">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800 shadow-lg shadow-black/20 flex justify-between items-center px-4 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-500" data-icon="location_on">location_on</span>
+<h1 class="text-xl font-black text-sky-500 font-headline tracking-tight">KasiLink</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:bg-slate-900 transition-colors rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-4 md:px-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<section class="mb-12">
+<h2 class="text-4xl font-black font-headline text-primary mb-2">User Tier Architecture</h2>
+<p class="text-on-surface-variant font-label max-w-2xl">Visualizing the structural permissions and functional clusters across the KasiLink ecosystem.</p>
+</section>
+<!-- Auth/Common Core Layer (Global/Shared) -->
+<section class="mb-8">
+<div class="relative p-6 rounded-xl bg-surface-container-highest border border-outline-variant shadow-xl">
+<div class="absolute -top-3 left-6 px-3 bg-primary text-on-primary-container text-xs font-bold font-label rounded-full py-1 uppercase tracking-widest">
+                    Common Core Layer
+                </div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="flex items-center gap-3 p-4 bg-surface-container rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<div>
+<p class="font-label text-sm font-bold">Identity Auth</p>
+<p class="text-[10px] text-on-surface-variant">JWT / OAuth2</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="database" style="font-variation-settings: 'FILL' 1;">database</span>
+<div>
+<p class="font-label text-sm font-bold">Data Bridge</p>
+<p class="text-[10px] text-on-surface-variant">Real-time Sync</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+<div>
+<p class="font-label text-sm font-bold">Wallet API</p>
+<p class="text-[10px] text-on-surface-variant">Escrow Services</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-4 bg-surface-container rounded-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<div>
+<p class="font-label text-sm font-bold">Messaging</p>
+<p class="text-[10px] text-on-surface-variant">P2P Socket.io</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Connection Lines (Visual Decor) -->
+<div class="flex justify-around px-20">
+<div class="w-px h-8 bg-gradient-to-b from-primary/50 to-transparent"></div>
+<div class="w-px h-8 bg-gradient-to-b from-primary/50 to-transparent"></div>
+<div class="w-px h-8 bg-gradient-to-b from-primary/50 to-transparent"></div>
+</div>
+</section>
+<!-- Main Flowchart Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Seeker Swimlane -->
+<div class="swimlane-gradient p-1 rounded-2xl border border-sky-500/20 shadow-lg">
+<div class="bg-surface-container-low rounded-[14px] p-6 h-full border border-sky-500/10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sky-400" data-icon="person_search">person_search</span>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-sky-400">Seeker</h3>
+<p class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase">End User Access</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Module: Marketplace -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-sky-500/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Marketplace</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Browse local gigs, filtering by distance and category.</p>
+</div>
+<span class="material-symbols-outlined text-sky-500/50 group-hover:text-sky-400" data-icon="storefront">storefront</span>
+</div>
+</div>
+<!-- Module: Alerts -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-sky-500/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Alerts</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Push notifications for matched gigs and payment updates.</p>
+</div>
+<span class="material-symbols-outlined text-sky-500/50 group-hover:text-sky-400" data-icon="notifications_active">notifications_active</span>
+</div>
+</div>
+<!-- Module: Profile -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-sky-500/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Profile</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">KYC verification, skill badges, and review history.</p>
+</div>
+<span class="material-symbols-outlined text-sky-500/50 group-hover:text-sky-400" data-icon="badge">badge</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Provider Swimlane -->
+<div class="swimlane-gradient p-1 rounded-2xl border border-secondary/20 shadow-lg">
+<div class="bg-surface-container-low rounded-[14px] p-6 h-full border border-secondary/10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="work">work</span>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-secondary">Provider</h3>
+<p class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase">Business Access</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Module: Post Gig -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-secondary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Post Gig</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Rich-text editor for task details, pricing, and timing.</p>
+</div>
+<span class="material-symbols-outlined text-secondary/50 group-hover:text-secondary" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+<!-- Module: Applicant Manager -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-secondary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Applicant Manager</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Review seeker profiles, chat, and hire candidates.</p>
+</div>
+<span class="material-symbols-outlined text-secondary/50 group-hover:text-secondary" data-icon="groups">groups</span>
+</div>
+</div>
+<!-- Module: Calendar -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-secondary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Calendar</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Scheduling engine for multi-day gigs and deadlines.</p>
+</div>
+<span class="material-symbols-outlined text-secondary/50 group-hover:text-secondary" data-icon="calendar_month">calendar_month</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Admin Swimlane -->
+<div class="swimlane-gradient p-1 rounded-2xl border border-tertiary/20 shadow-lg">
+<div class="bg-surface-container-low rounded-[14px] p-6 h-full border border-tertiary/10">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 rounded-full bg-tertiary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-tertiary">Admin</h3>
+<p class="text-[10px] font-label text-on-surface-variant tracking-wider uppercase">System Access</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Module: System Dashboard -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-tertiary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">System Dashboard</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Global metrics, active users, and transaction volume.</p>
+</div>
+<span class="material-symbols-outlined text-tertiary/50 group-hover:text-tertiary" data-icon="monitoring">monitoring</span>
+</div>
+</div>
+<!-- Module: Moderation -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-tertiary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Moderation</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Dispute resolution and content flagging tools.</p>
+</div>
+<span class="material-symbols-outlined text-tertiary/50 group-hover:text-tertiary" data-icon="gavel">gavel</span>
+</div>
+</div>
+<!-- Module: Global Alerts -->
+<div class="group relative p-4 bg-surface rounded-xl border border-outline-variant hover:border-tertiary/50 transition-all duration-300 active:scale-[0.98]">
+<div class="flex items-start justify-between">
+<div>
+<h4 class="font-label text-sm font-semibold mb-1">Global Alerts</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Broadcast system-wide notices or maintenance info.</p>
+</div>
+<span class="material-symbols-outlined text-tertiary/50 group-hover:text-tertiary" data-icon="campaign">campaign</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="order-2 md:order-1">
+<div class="relative rounded-2xl overflow-hidden aspect-video shadow-2xl">
+<img alt="Analytics Interface" class="w-full h-full object-cover grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700" data-alt="futuristic digital dashboard with glowing blue and violet data visualizations on dark glass screens in a high-tech control room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT_ufRrb7WLLL_JwK1JnPt5JjTfS6UG5sYhL5X6-6gcqr5IJFbXvAlXxFFGrqeXAiq0oLDoPSKMDqNEK4n0l39L9TPN-MTSUHkLUn6TB_HCYfjBYPBYC9eQ4Uz3VCOm8jwb2Mn07FmvaP7F-astp8x6SBVkpzhkdRNwBbq5rt6X-0Omh1wSDVQg8ljzHkWZOy1PTfEooeSybWAJSUg8y8wEUb2-sZzosmyl1Nuy2trtOpr6p7RilgAynxIf1NY5sUZoEG-EMyDHOsv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<div class="p-4 bg-surface/80 backdrop-blur-md rounded-lg border border-outline-variant">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-label font-bold uppercase tracking-widest text-on-surface">Live Node Status</span>
+</div>
+<div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 md:order-2 space-y-6">
+<h3 class="text-3xl font-headline font-bold text-on-surface">Tier Interoperability</h3>
+<p class="text-on-surface-variant font-body">The KasiLink architecture is designed for fluid transitions. Users can upgrade from <span class="text-sky-400 font-bold">Seeker</span> to <span class="text-secondary font-bold">Provider</span> through a verified business onboarding process, while the <span class="text-tertiary font-bold">Admin</span> tier operates on a separate, high-security permission scaffold.</p>
+<div class="flex flex-wrap gap-3">
+<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label border border-outline-variant">Cross-Tier Messaging</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label border border-outline-variant">Unified Wallet</span>
+<span class="px-3 py-1 bg-surface-container rounded-full text-xs font-label border border-outline-variant">Global Sync</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl bg-slate-950/95 backdrop-blur-md border-t border-slate-800 shadow-[0_-4px_10px_rgba(0,0,0,0.3)] flex justify-around items-center h-20 px-2 pb-safe w-full">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-sky-400 bg-sky-500/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Gigs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-lexend text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

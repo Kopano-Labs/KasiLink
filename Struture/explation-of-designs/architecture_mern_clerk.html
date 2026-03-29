@@ -1,0 +1,39 @@
+# Project Architecture: MERN + Clerk
+
+## Overview
+This document outlines the high-level architecture for a modern web application built using the MERN stack (MongoDB, Express, React, Node.js) with Clerk for robust user authentication and management.
+
+## 1. Tech Stack
+- **Frontend:** React.js (with Tailwind CSS for styling)
+- **Backend:** Node.js & Express.js
+- **Database:** MongoDB (Atlas for cloud hosting)
+- **Authentication:** Clerk (Social login, email/password, MFA)
+- **Deployment:** Vercel (Frontend) & Render/Heroku (Backend)
+
+## 2. System Components
+
+### A. Client Side (React)
+- **State Management:** React Context API or Redux Toolkit.
+- **Routing:** React Router for client-side navigation.
+- **Authentication:** Integrated via Clerk's `<ClerkProvider>`, `<SignedIn>`, and `<SignedOut>` components.
+- **API Communication:** Axios or Fetch API for interacting with the backend.
+
+### B. Server Side (Node/Express)
+- **Middleware:** Clerk Express Middleware to validate JWTs from the frontend.
+- **REST API:** Endpoints for CRUD operations on business logic.
+- **Security:** CORS, Helmet, and Clerk-verified session checks on protected routes.
+
+### C. Data Layer (MongoDB)
+- **Schema Design:** Mongoose for modeling data.
+- **User Syncing:** Using Clerk Webhooks (Svix) to sync user creation/updates from Clerk to the local MongoDB database if needed for relational data.
+
+## 3. Key User Flows
+1. **Authentication:** User signs up/in via Clerk UI components.
+2. **Authorization:** Frontend sends the Clerk JWT in the Authorization header.
+3. **Data Retrieval:** Backend validates the token and queries MongoDB for user-specific data.
+4. **Real-time Sync:** Webhooks ensure the database stays up to date with user changes.
+
+## 4. Security Considerations
+- JWT validation on every protected API call.
+- Environment variables for sensitive keys (CLERK_SECRET_KEY, MONGODB_URI).
+- HTTPS enforced for all communications.

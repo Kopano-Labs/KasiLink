@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Four:wght@400;700;900&amp;family=Dm+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Lexend:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#e481d6",
+                        "secondary-container": "#4a0047",
+                        "on-primary-container": "#004561",
+                        "primary-container": "#83cffd",
+                        "surface-container-high": "#002139",
+                        "tertiary-fixed-dim": "#f0c1e6",
+                        "surface-container-highest": "#002843",
+                        "on-secondary-fixed": "#6f1869",
+                        "on-tertiary-fixed-variant": "#714c6b",
+                        "on-primary-fixed-variant": "#004f6e",
+                        "surface-tint": "#a5dbff",
+                        "on-tertiary": "#704b6a",
+                        "secondary": "#ffabef",
+                        "on-error": "#490006",
+                        "surface-dim": "#000f1e",
+                        "surface-container-lowest": "#000000",
+                        "on-surface": "#d4e8ff",
+                        "on-tertiary-fixed": "#52304e",
+                        "inverse-primary": "#00668d",
+                        "surface-container": "#001b30",
+                        "outline": "#577899",
+                        "background": "#000f1e",
+                        "error-dim": "#c94947",
+                        "secondary-fixed": "#ffd7f3",
+                        "on-secondary-fixed-variant": "#903888",
+                        "on-surface-variant": "#8daed1",
+                        "on-background": "#d4e8ff",
+                        "surface": "#000f1e",
+                        "primary-dim": "#75c1ee",
+                        "on-tertiary-container": "#664261",
+                        "inverse-on-surface": "#465768",
+                        "secondary-fixed-dim": "#ffc2f1",
+                        "tertiary-container": "#ffcef4",
+                        "tertiary": "#ffe3f7",
+                        "primary-fixed": "#83cffd",
+                        "on-secondary": "#70196a",
+                        "surface-container-low": "#001526",
+                        "on-primary-fixed": "#003044",
+                        "outline-variant": "#284b69",
+                        "secondary-dim": "#fc95ec",
+                        "inverse-surface": "#f7f9ff",
+                        "primary": "#a5dbff",
+                        "error-container": "#8a1a1e",
+                        "surface-bright": "#002e4d",
+                        "surface-variant": "#002843",
+                        "on-primary": "#004f6e",
+                        "primary-fixed-dim": "#75c1ee",
+                        "tertiary-dim": "#f0c1e6",
+                        "on-error-container": "#ff9993",
+                        "tertiary-fixed": "#ffcef4",
+                        "error": "#ff716c"
+                    },
+                    fontFamily: {
+                        "headline": ["Source Serif Four"],
+                        "body": ["Dm Sans"],
+                        "label": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Dm Sans', sans-serif; }
+        .font-serif { font-family: 'Source Serif Four', serif; }
+        .font-mono { font-family: 'Lexend', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-slate-900 dark:bg-black border-b border-slate-800 dark:border-zinc-800 shadow-lg dark:shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary-dim">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a smiling young woman with warm lighting and a soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgY18_Sx-NQ7lF2IMpZPGZARGqXN3_smR16Pg3s2ZM1snclCxBX-m2Sa6cDdpsFCWSFQlbT8n8l-lpdvL3HxskJ-iw2kMniSe8sOuQL6NGWUznuPMg6KzHqcBSJu309Zuhw_9cw0-Y_QpaslsWZI6n5TSUDC3lnycpjRLMlX8615zkLDoZWN7fURvopEiZECEVX2C53StkTHU9mS6XXfBG9L6URdSUMm9NqhWFFlmkH2GGBUvk1t73BUKTTN0ZaioQ-XErUD8FvV51"/>
+</div>
+<div class="flex flex-col">
+<span class="text-xl font-black text-sky-500 dark:text-sky-400 tracking-tighter font-serif">KasiLink</span>
+<span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest leading-none">Vanish Mode Active</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-sky-500 dark:text-sky-400 hover:bg-slate-800 dark:hover:bg-zinc-900 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+</button>
+<button class="text-slate-400 dark:text-zinc-500 hover:bg-slate-800 dark:hover:bg-zinc-900 transition-colors p-2 rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Chat Interface -->
+<main class="flex-1 pt-20 pb-32 px-4 flex flex-col gap-6 overflow-y-auto">
+<!-- Date Marker -->
+<div class="flex justify-center">
+<span class="bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full text-xs font-label">Today</span>
+</div>
+<!-- Chat Bubble: Received -->
+<div class="flex flex-col items-start max-w-[85%] gap-1">
+<span class="font-serif font-bold text-sm ml-2 text-primary">Lerato M.</span>
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-bl-none shadow-sm">
+<p class="text-sm leading-relaxed">Yo! Are we still hitting the market later? Need to grab those supplies before the power goes out. 🕯️</p>
+</div>
+<span class="text-[10px] text-outline ml-2 font-mono">14:02</span>
+</div>
+<!-- Chat Bubble: Sent -->
+<div class="flex flex-col items-end self-end max-w-[85%] gap-1">
+<div class="bg-primary-container text-on-primary-container p-4 rounded-2xl rounded-br-none shadow-sm">
+<p class="text-sm leading-relaxed">Definitely. I just checked the schedule, Stage 4 starts at 4PM. We have a 2-hour window.</p>
+</div>
+<div class="flex items-center gap-1 mr-2">
+<span class="text-[10px] text-outline font-mono">14:05</span>
+<span class="material-symbols-outlined text-[12px] text-primary" data-icon="done_all">done_all</span>
+</div>
+</div>
+<!-- Vanish Mode Prompt -->
+<div class="flex flex-col items-center justify-center py-4 opacity-60">
+<div class="flex items-center gap-2 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="auto_delete">auto_delete</span>
+<span class="text-[11px] font-label">Messages disappear after being viewed</span>
+</div>
+</div>
+<!-- Chat Bubble: Received -->
+<div class="flex flex-col items-start max-w-[85%] gap-1">
+<span class="font-serif font-bold text-sm ml-2 text-primary">Lerato M.</span>
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-bl-none shadow-sm">
+<p class="text-sm leading-relaxed">Perfect. Send me your location when you leave so I can track your safety through the dark zones.</p>
+</div>
+<span class="text-[10px] text-outline ml-2 font-mono">14:06</span>
+</div>
+<!-- Trust Layer Component (The "Safe-Link" Footer) -->
+<div class="mt-4 p-4 rounded-2xl bg-surface-container-high border border-outline-variant/30 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error" data-icon="bolt">bolt</span>
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-error">Stage 4 Active</span>
+</div>
+<div class="text-[10px] font-label text-on-surface-variant">
+                    Next: 18:00 - 20:30
+                </div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="share_location">share_location</span>
+<span class="text-xs font-bold font-label">Send Safe-Link</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl">
+<span class="material-symbols-outlined" data-icon="emergency">emergency</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Message Bar -->
+<div class="fixed bottom-16 w-full px-4 pb-4 bg-background/80 backdrop-blur-lg">
+<div class="flex items-end gap-2 bg-surface-container rounded-3xl p-2 border border-outline-variant/20">
+<button class="p-2 text-primary">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<div class="flex-1 min-h-[40px] flex items-center px-2">
+<span class="text-on-surface-variant text-sm font-label">Message...</span>
+</div>
+<button class="p-2 text-primary">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 text-primary">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-slate-900/95 dark:bg-black/95 backdrop-blur-md rounded-t-2xl border-t border-slate-800 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center bg-sky-500/10 dark:bg-sky-400/10 text-sky-500 dark:text-sky-400 rounded-xl px-3 py-1 active:translate-y-0.5 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Chats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 active:translate-y-0.5 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Chameleon</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 active:translate-y-0.5 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 active:translate-y-0.5 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

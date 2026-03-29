@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink | Architecture Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#ffca3f",
+              "surface-container-highest": "#f5db90",
+              "on-secondary-container": "#5b4400",
+              "secondary-fixed": "#ffca3f",
+              "secondary-dim": "#654c00",
+              "outline-variant": "#bfac76",
+              "on-primary-fixed": "#4a4400",
+              "tertiary": "#5f5f00",
+              "on-tertiary": "#fbf95c",
+              "error-container": "#f95630",
+              "on-primary-container": "#5e5600",
+              "inverse-surface": "#130d00",
+              "surface-container-low": "#fff0ca",
+              "surface-dim": "#edd283",
+              "tertiary-container": "#f6f557",
+              "secondary-fixed-dim": "#f0bd30",
+              "outline": "#867645",
+              "surface-tint": "#655d00",
+              "on-secondary": "#fff1d9",
+              "surface-bright": "#fff5e4",
+              "on-tertiary-container": "#5c5b00",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#392d04",
+              "tertiary-fixed": "#f6f557",
+              "error": "#b02500",
+              "on-primary": "#fff5a9",
+              "inverse-on-surface": "#ae9c67",
+              "on-error-container": "#520c00",
+              "surface-container-high": "#fae199",
+              "surface-variant": "#f5db90",
+              "on-surface": "#392d04",
+              "on-error": "#ffefec",
+              "primary-fixed": "#faeb61",
+              "surface-container": "#ffe7a3",
+              "inverse-primary": "#faeb61",
+              "tertiary-fixed-dim": "#e7e64a",
+              "secondary": "#735700",
+              "on-secondary-fixed": "#433200",
+              "surface": "#fff5e4",
+              "primary-fixed-dim": "#ecdd54",
+              "primary-dim": "#585100",
+              "on-surface-variant": "#695a2d",
+              "error-dim": "#b92902",
+              "on-tertiary-fixed-variant": "#666600",
+              "on-tertiary-fixed": "#494900",
+              "on-secondary-fixed-variant": "#664d00",
+              "primary-container": "#faeb61",
+              "primary": "#655d00",
+              "on-primary-fixed-variant": "#696000",
+              "background": "#fff5e4",
+              "tertiary-dim": "#535200"
+            },
+            fontFamily: {
+              "headline": ["Public Sans"],
+              "body": ["Public Sans"],
+              "label": ["Noto Serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flow-line {
+            background: repeating-linear-gradient(90deg, #d1a10a, #d1a10a 10px, transparent 10px, transparent 20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body text-on-background antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 shadow-sm flex justify-between items-center px-4 h-16 w-full z-50 fixed top-0 left-0">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-500 dark:text-yellow-400" data-icon="hub">hub</span>
+<h1 class="text-xl font-black text-yellow-600 dark:text-yellow-400 font-headline tracking-tight">KasiLink</h1>
+</div>
+<div class="flex items-center gap-4">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-yellow-600 font-medium transition-colors" href="#">Flows</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-yellow-600 font-medium transition-colors" href="#">Agents</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-yellow-400 font-medium transition-colors" href="#">API</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-yellow-400 font-medium transition-colors" href="#">Settings</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border-2 border-primary-container overflow-hidden active:scale-95 duration-150 transition-all">
+<img alt="User profile" data-alt="professional portrait of a software engineer in a modern workspace with warm amber lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANq2VtGiNJhVGdBaNmLUoz4qvZbfQQZkXtU9tPHABWmtIRwO_KXYruOJyT0qWujxqE3azwR2NDPvyToFA8x3_ESm4_qTqVt1jsSG0NXcX48uLnV4vhRnrIiEWx6DRPLGpkjKWrO6PNw4pwxvJVl5chq5YTk8QrJdMxqBOXMGJcd-Cs27sIgdtcAXt2t-gQfHaMfRzN5ekj5_zs0W4d0-jWFGT86FNlsA4Yc54UwXgNuWJ0zY0MSFEwy28xg4QYMsBZw6Sxzf6MU70Y"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-4 max-w-7xl mx-auto mb-12">
+<!-- Hero Title -->
+<div class="mb-12 text-center md:text-left">
+<span class="inline-block px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-widest mb-4 font-label">System Architecture</span>
+<h2 class="text-4xl md:text-5xl font-extrabold font-headline text-on-background mb-4">Frontend-to-Backend Flow</h2>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">A high-fidelity visualization of how KasiLink orchestrates data between modern client-side interfaces and complex backend integration bridges.</p>
+</div>
+<!-- Flowchart Container (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+<!-- Step 1: Frontend -->
+<div class="relative flex flex-col items-center">
+<div class="w-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-primary-container group hover:border-primary transition-all">
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+</div>
+<span class="font-label italic text-secondary text-sm">Step 01</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Frontend Client</h3>
+<p class="text-sm text-on-surface-variant mb-4">Built with Next.js &amp; React for high-performance interactions.</p>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-xs bg-surface-container p-2 rounded">
+<span class="material-symbols-outlined text-[16px]" data-icon="touch_app">touch_app</span>
+                            User Action Triggered
+                        </li>
+<li class="flex items-center gap-2 text-xs bg-surface-container p-2 rounded">
+<span class="material-symbols-outlined text-[16px]" data-icon="key">key</span>
+                            Fetch Clerk JWT Token
+                        </li>
+</ul>
+</div>
+<!-- Connector Arrow (Mobile hidden, Web visible) -->
+<div class="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="trending_flat">trending_flat</span>
+</div>
+</div>
+<!-- Step 2: Security Handshake -->
+<div class="relative flex flex-col items-center">
+<div class="w-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-error-container group hover:border-error transition-all">
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<span class="font-label italic text-secondary text-sm">Step 02</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Auth Handshake</h3>
+<p class="text-sm text-on-surface-variant mb-4">Clerk Middleware validates incoming request signatures.</p>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-3 bg-background">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-mono uppercase tracking-tighter">JWT Check</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+</div>
+<div class="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="trending_flat">trending_flat</span>
+</div>
+</div>
+<!-- Step 3: Backend Logic -->
+<div class="relative flex flex-col items-center">
+<div class="w-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-secondary-dim group hover:border-secondary transition-all">
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="settings_ethernet">settings_ethernet</span>
+</div>
+<span class="font-label italic text-secondary text-sm">Step 03</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Node/Express API</h3>
+<p class="text-sm text-on-surface-variant mb-4">Core business logic &amp; specialized route controllers.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-[10px] font-bold px-2 py-1 bg-surface-container-high rounded border border-outline-variant">Controllers</span>
+<span class="text-[10px] font-bold px-2 py-1 bg-surface-container-high rounded border border-outline-variant">Services</span>
+<span class="text-[10px] font-bold px-2 py-1 bg-surface-container-high rounded border border-outline-variant">Validation</span>
+</div>
+</div>
+<div class="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="trending_flat">trending_flat</span>
+</div>
+</div>
+<!-- Step 4: External Integrations -->
+<div class="relative flex flex-col items-center">
+<div class="w-full bg-white p-6 rounded-xl shadow-lg border-b-4 border-tertiary group hover:border-tertiary-dim transition-all">
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-tertiary-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<span class="font-label italic text-secondary text-sm">Step 04</span>
+</div>
+<h3 class="font-headline font-bold text-xl mb-3">Data &amp; Bridges</h3>
+<p class="text-sm text-on-surface-variant mb-4">External messaging and database orchestration.</p>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-lowest p-2 rounded border border-neutral-100 flex flex-col items-center">
+<span class="material-symbols-outlined text-green-600 mb-1" data-icon="chat">chat</span>
+<span class="text-[9px] font-bold uppercase">WhatsApp</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded border border-neutral-100 flex flex-col items-center">
+<span class="material-symbols-outlined text-purple-600 mb-1" data-icon="forum">forum</span>
+<span class="text-[9px] font-bold uppercase">Slack</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded border border-neutral-100 flex flex-col items-center">
+<span class="material-symbols-outlined text-indigo-600 mb-1" data-icon="groups">groups</span>
+<span class="text-[9px] font-bold uppercase">Discord</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded border border-neutral-100 flex flex-col items-center">
+<span class="material-symbols-outlined text-blue-800 mb-1" data-icon="database">database</span>
+<span class="text-[9px] font-bold uppercase">MongoDB</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Detail Section -->
+<section class="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 bg-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-48 h-48 bg-primary-container/20 rounded-full -mr-20 -mt-20"></div>
+<h4 class="text-2xl font-headline font-black mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-600" data-icon="layers">layers</span>
+                    Technological Stack
+                </h4>
+<div class="space-y-6 relative z-10">
+<div class="flex gap-4 items-start">
+<div class="mt-1 w-8 h-8 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center font-bold text-xs">1</div>
+<div>
+<h5 class="font-bold text-lg mb-1">Modern UI Layer</h5>
+<p class="text-on-surface-variant text-sm">Next.js 14 utilizing Server Actions and Client Components for a seamless single-page experience that feels like a native app.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="mt-1 w-8 h-8 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center font-bold text-xs">2</div>
+<div>
+<h5 class="font-bold text-lg mb-1">State &amp; Session Management</h5>
+<p class="text-on-surface-variant text-sm">Clerk provides the global identity context, injecting cryptographically signed JWTs into every fetch header automatically.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="mt-1 w-8 h-8 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center font-bold text-xs">3</div>
+<div>
+<h5 class="font-bold text-lg mb-1">The Integration Hub</h5>
+<p class="text-on-surface-variant text-sm">Our Node.js engine acts as a "Message Broker", translating internal business events into external API calls for Slack, WhatsApp, and Discord via secure webhooks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="aspect-square rounded-3xl overflow-hidden shadow-2xl relative">
+<img alt="Server Architecture" class="w-full h-full object-cover" data-alt="Modern server room with glowing yellow and amber light strips on server racks, cinematic atmosphere, high-tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9-q1iiZbldRKzrX5IyXz7FG5LCCZzrLAD9rWjlRB3Zevidkvb53RAwrVySBdXxft9wwErZCP530C1Er5L3_qvPr5_lJNYrnrHTS-MfS4Keaud7uGvqdb5ALfvFo27OK5pxW7FVBXrua8QOGqUv4dbQxqLPp6TjQmDmkH74uPBLzMikd_0cQOLOBRVz3d9WnnaXC54m8uGQzWsQ6ehxHhSKrdr0pmILuzO_Nppuf_Hn3yBPXpjusPCty3cRwRl4vczdZ8416VAw15A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-8">
+<div class="bg-white/90 backdrop-blur-md p-6 rounded-xl w-full">
+<p class="font-label italic text-secondary-dim text-lg">"Communication is the lifeblood of distributed systems."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 z-50 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] flex justify-around items-center px-2 rounded-t-lg">
+<a class="flex flex-col items-center justify-center bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-200 rounded-xl px-3 py-1 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-headline text-[10px] mt-0.5">Flows</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 px-3 py-1 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span class="font-headline text-[10px] mt-0.5">Agents</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 px-3 py-1 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="api">api</span>
+<span class="font-headline text-[10px] mt-0.5">API</span>
+</a>
+<a class="flex flex-col items-center justify-center text-neutral-500 dark:text-neutral-400 px-3 py-1 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-headline text-[10px] mt-0.5">Settings</span>
+</a>
+</nav>
+</body></html>

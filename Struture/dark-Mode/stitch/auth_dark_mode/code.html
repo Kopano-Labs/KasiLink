@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink - Welcome back</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#000000",
+              "on-tertiary-fixed-variant": "#714c6b",
+              "on-surface-variant": "#8daed1",
+              "primary-container": "#83cffd",
+              "primary-fixed": "#83cffd",
+              "primary-dim": "#75c1ee",
+              "surface-container-highest": "#002843",
+              "secondary-fixed": "#ffd7f3",
+              "outline-variant": "#284b69",
+              "on-primary-container": "#004561",
+              "tertiary-container": "#ffcef4",
+              "on-tertiary-container": "#664261",
+              "on-surface": "#d4e8ff",
+              "error": "#ff716c",
+              "inverse-surface": "#f7f9ff",
+              "inverse-primary": "#00668d",
+              "outline": "#577899",
+              "surface": "#000f1e",
+              "surface-dim": "#000f1e",
+              "on-error-container": "#ff9993",
+              "tertiary-fixed-dim": "#f0c1e6",
+              "on-tertiary-fixed": "#52304e",
+              "tertiary-dim": "#f0c1e6",
+              "error-container": "#8a1a1e",
+              "tertiary": "#ffe3f7",
+              "surface-bright": "#002e4d",
+              "on-primary-fixed-variant": "#004f6e",
+              "surface-container": "#001b30",
+              "on-tertiary": "#704b6a",
+              "on-secondary": "#70196a",
+              "secondary": "#ffabef",
+              "on-error": "#490006",
+              "secondary-container": "#4a0047",
+              "on-background": "#d4e8ff",
+              "primary-fixed-dim": "#75c1ee",
+              "surface-container-low": "#001526",
+              "on-secondary-fixed": "#6f1869",
+              "inverse-on-surface": "#465768",
+              "surface-container-high": "#002139",
+              "on-primary": "#004f6e",
+              "primary": "#a5dbff",
+              "background": "#000f1e",
+              "secondary-fixed-dim": "#ffc2f1",
+              "on-secondary-container": "#e481d6",
+              "surface-tint": "#a5dbff",
+              "secondary-dim": "#fc95ec",
+              "surface-variant": "#002843",
+              "on-primary-fixed": "#003044",
+              "tertiary-fixed": "#ffcef4",
+              "on-secondary-fixed-variant": "#903888",
+              "error-dim": "#c94947"
+            },
+            fontFamily: {
+              "headline": ["Source Serif 4"],
+              "body": ["DM Sans"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle at 1px 1px, #284b69 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .glass-panel {
+            background: rgba(0, 15, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(40, 75, 105, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col relative overflow-hidden">
+<!-- Grid Background Layer -->
+<div class="fixed inset-0 grid-pattern opacity-20 pointer-events-none"></div>
+<div class="fixed top-[-10%] right-[-10%] w-[400px] h-[400px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<main class="relative z-10 flex-grow flex flex-col px-6 pt-12 pb-10 max-w-md mx-auto w-full">
+<!-- Status Card: Stage 2 Grid -->
+<div class="mb-10 animate-fade-in">
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between border-l-4 border-l-primary shadow-lg shadow-black/40">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+</div>
+<div>
+<p class="text-xs font-label text-on-surface-variant uppercase tracking-widest">Current Grid Status</p>
+<h3 class="font-headline font-bold text-on-surface">Stage 2 Active</h3>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-label text-primary uppercase">Stable</p>
+<div class="flex gap-0.5 mt-1">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-surface-container-highest"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Header Section -->
+<div class="mb-8">
+<div class="w-12 h-12 bg-primary flex items-center justify-center rounded-xl mb-6 shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined text-on-primary text-3xl font-bold" data-icon="link" style="font-variation-settings: 'FILL' 1;">link</span>
+</div>
+<h1 class="font-headline text-4xl font-black text-on-surface mb-2 tracking-tight">Welcome back</h1>
+<p class="text-on-surface-variant font-body leading-relaxed">Securely access your township network and local opportunities.</p>
+</div>
+<!-- Login Form -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="block font-label text-sm text-on-surface-variant ml-1" for="phone">Phone Number</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="text-on-surface-variant font-label text-sm border-r border-outline-variant pr-3">+27</span>
+</div>
+<input class="block w-full bg-surface-container-high border-outline-variant text-on-surface font-body rounded-xl py-4 pl-20 focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-outline" id="phone" name="phone" placeholder="00 000 0000" type="tel"/>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-dim text-on-primary-container font-label font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group transition-all active:scale-95">
+                Continue with OTP
+                <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Divider -->
+<div class="relative flex py-4 items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink mx-4 text-on-surface-variant font-label text-xs uppercase tracking-widest">Or social login</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="glass-panel hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-3 py-3.5 rounded-xl group active:scale-95">
+<img alt="Google" class="w-5 h-5" data-alt="Official Google G logo icon with vibrant primary colors on a transparent background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu0VOanCfOR5LTLXdrJOZithmtGjBUI1Wss5JkrCoJflixYzN0BlWcV-pgO5TeWrcTW1LmfxOHJwjFTdKSNa1op9shHzQ7yxb39IqTmTGduzmY6_akQl6IJZZyBpR5HhzJIFcE7M_PQEGke8HZw6fwmwiwQ6e5jleTw47bHsiDbk7RRkziXI50cIpNga5550vRTDElOQb9T8-R-EcjTuAc7ONuKu2iCDNj6OFlcPl_x_dKhvTG-yDtVBJjRZFxlhGF0an0XQ4HeHlD"/>
+<span class="font-label text-sm text-on-surface">Google</span>
+</button>
+<button class="glass-panel hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-3 py-3.5 rounded-xl group active:scale-95">
+<div class="bg-[#25D366] p-0.5 rounded-sm">
+<span class="material-symbols-outlined text-white text-base" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+</div>
+<span class="font-label text-sm text-on-surface">WhatsApp</span>
+</button>
+</div>
+</div>
+<!-- Footer Info -->
+<div class="mt-auto pt-8 text-center">
+<p class="text-on-surface-variant text-sm font-body">
+                New to KasiLink? 
+                <a class="text-primary font-label font-medium hover:underline ml-1" href="#">Create Account</a>
+</p>
+<p class="text-[10px] text-outline mt-6 font-label uppercase tracking-widest leading-relaxed">
+                By continuing, you agree to our <br/> <span class="text-on-surface-variant">Terms of Service</span> &amp; <span class="text-on-surface-variant">Privacy Policy</span>
+</p>
+</div>
+</main>
+<!-- Decorative Bottom Gradient -->
+<div class="fixed bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none"></div>
+</body></html>

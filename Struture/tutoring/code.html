@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Session Details - KasiLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&amp;family=Lexend:wght@400;500;700&amp;family=Source+Serif+4:wght@600;700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#004f6e",
+              "inverse-on-surface": "#465768",
+              "surface-container-high": "#002139",
+              "on-error-container": "#ff9993",
+              "error": "#ff716c",
+              "surface-container-lowest": "#000000",
+              "on-background": "#d4e8ff",
+              "tertiary-fixed": "#ffcef4",
+              "on-secondary": "#70196a",
+              "surface-bright": "#002e4d",
+              "on-tertiary-container": "#664261",
+              "secondary-fixed-dim": "#ffc2f1",
+              "surface-tint": "#a5dbff",
+              "outline": "#577899",
+              "tertiary-container": "#ffcef4",
+              "surface-container-low": "#001526",
+              "surface-dim": "#000f1e",
+              "on-tertiary": "#704b6a",
+              "on-primary-container": "#004561",
+              "inverse-surface": "#f7f9ff",
+              "error-container": "#8a1a1e",
+              "tertiary": "#ffe3f7",
+              "secondary-fixed": "#ffd7f3",
+              "surface-container-highest": "#002843",
+              "on-secondary-container": "#e481d6",
+              "on-primary-fixed": "#003044",
+              "secondary-dim": "#fc95ec",
+              "outline-variant": "#284b69",
+              "secondary-container": "#4a0047",
+              "background": "#000f1e",
+              "tertiary-dim": "#f0c1e6",
+              "primary-container": "#83cffd",
+              "primary": "#a5dbff",
+              "on-primary-fixed-variant": "#004f6e",
+              "on-tertiary-fixed": "#52304e",
+              "on-secondary-fixed-variant": "#903888",
+              "on-tertiary-fixed-variant": "#714c6b",
+              "on-surface-variant": "#8daed1",
+              "error-dim": "#c94947",
+              "surface": "#000f1e",
+              "primary-fixed-dim": "#75c1ee",
+              "on-secondary-fixed": "#6f1869",
+              "primary-dim": "#75c1ee",
+              "secondary": "#ffabef",
+              "tertiary-fixed-dim": "#f0c1e6",
+              "inverse-primary": "#00668d",
+              "on-error": "#490006",
+              "surface-container": "#001b30",
+              "primary-fixed": "#83cffd",
+              "surface-variant": "#002843",
+              "on-surface": "#d4e8ff"
+            },
+            fontFamily: {
+              "headline": ["Source Serif 4"],
+              "body": ["DM Sans"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #000f1e;
+        color: #d4e8ff;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container pb-32">
+<!-- TopAppBar -->
+<nav class="bg-slate-950 fixed top-0 w-full z-50 border-b border-slate-800 flex items-center justify-between px-4 h-16 w-full">
+<div class="flex items-center gap-3">
+<button class="text-sky-500 dark:text-sky-400 hover:bg-slate-900 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Public_Sans'] font-bold text-lg text-on-surface">Session Details</h1>
+</div>
+<button class="text-sky-500 dark:text-sky-400 hover:bg-slate-900 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</nav>
+<main class="pt-20 px-4 max-w-2xl mx-auto space-y-6">
+<!-- Status Header -->
+<div class="flex items-center justify-between">
+<div class="bg-primary/10 border border-primary/20 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label text-xs font-bold uppercase tracking-wider text-primary">Confirmed</span>
+</div>
+<span class="font-label text-xs text-on-surface-variant italic">Ref: KL-99231</span>
+</div>
+<!-- Gig Header Card: Bento Style -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/30 shadow-2xl">
+<div class="p-6 flex flex-col md:flex-row gap-6 items-start">
+<div class="relative w-20 h-20 shrink-0">
+<img alt="Tutor Profile" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500" data-alt="Professional portrait of a friendly young African man with a neat beard, warm expression, against a soft blurred study background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2-o4lV_qTpoqYeztWvrepxpNbJHe9Bw2HKCfEHN-dM0WOOcXsytHDM_8yUJfe33Yb4YkDeUhGjRXr03wuwp5Y3fFkrJdnj5zoHa704g_i75zeEgJKPVCeP6QHmc9FSSJQbTWEL7IcfjtvOJaD5mcn_-bbOzVgky5KfXjEgg1AInzGAysnmKNTK5b0v1g6wfzVkPlPEVL8NrcS1GxSJ5IQCP-Bxj97T7riNTku5i0s4O2M7vAO0aRiIO6h1tCmA-FZJvvC02FTQ7-2"/>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary p-1 rounded-lg">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1">
+<h2 class="font-headline text-3xl text-on-surface mb-1 leading-tight">Grade 11 Math Tutor</h2>
+<p class="font-label text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+                        Thabo (Provider)
+                    </p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="bg-surface-variant px-3 py-1 rounded-lg text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">Mathematics</span>
+<span class="bg-surface-variant px-3 py-1 rounded-lg text-[10px] font-label font-bold text-on-surface-variant uppercase tracking-widest">High School</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Time Card -->
+<div class="bg-surface-container-high p-5 rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="calendar_today">calendar_today</span>
+<p class="font-label text-[10px] uppercase text-on-surface-variant tracking-tighter">Date</p>
+<p class="font-bold text-on-surface">Tue, 14 May</p>
+</div>
+<!-- Duration Card -->
+<div class="bg-surface-container-high p-5 rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="schedule">schedule</span>
+<p class="font-label text-[10px] uppercase text-on-surface-variant tracking-tighter">Time</p>
+<p class="font-bold text-on-surface">14:30 (2h)</p>
+</div>
+<!-- Subject Card -->
+<div class="bg-surface-container-high p-5 rounded-xl border border-outline-variant/20 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="school">school</span>
+<p class="font-label text-[10px] uppercase text-on-surface-variant tracking-tighter">Grade</p>
+<p class="font-bold text-on-surface">Grade 11</p>
+</div>
+</div>
+<!-- Location Card -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/30 p-6 flex items-center justify-between group hover:border-primary/50 transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="bg-primary/20 p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Online - Google Meet</h3>
+<p class="text-sm text-on-surface-variant">meeting.google.com/abc-defg-hij</p>
+</div>
+</div>
+<button class="bg-primary text-on-primary font-label font-bold px-6 py-2 rounded-lg hover:brightness-110 active:scale-95 transition-all">
+                Join
+            </button>
+</div>
+<!-- Student Info -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/20 overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-highest border-b border-outline-variant/20">
+<h3 class="font-label font-bold text-xs uppercase tracking-widest text-on-surface-variant">Student Profile</h3>
+</div>
+<div class="p-6 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-lg">
+                    LM
+                </div>
+<div>
+<h4 class="font-bold text-on-surface">Lerato M.</h4>
+<p class="text-sm text-on-surface-variant">Grade 11 • Mathematics Specialist</p>
+</div>
+</div>
+</div>
+<!-- Goals Card -->
+<div class="bg-surface-container-high rounded-xl p-6 border-l-4 border-primary shadow-inner">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="assignment">assignment</span>
+<h3 class="font-label font-bold text-sm uppercase text-primary">Learning Goals &amp; Notes</h3>
+</div>
+<p class="text-on-surface leading-relaxed italic">
+                "Focus: Sine Rule and Trigonometry past papers. Bring scientific calculator."
+            </p>
+</div>
+<!-- Maps/Physical Location (Alternative State) -->
+<div class="relative h-40 rounded-xl overflow-hidden grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer">
+<img alt="Map" class="w-full h-full object-cover" data-alt="Top down dark themed digital map view of a residential suburb layout with glowing blue street lines and markers" data-location="Soshanguve" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNVyXhXz4pFp3TJbOlVBBkaWpBoKoPaR62jX2uatHelviq27gfIWdvzwVirtdJuFNjshJdi75noXa4XqAv2esrtRJtsSiQ-YZFPEcgkFJU_4gIz1WW0_uRIv1cl3FMY2L3uO1Wgv97V4BX5uP-LUyis8uAAivBSOPDLFxhA40rC64ycq4wqYH_yOH-2uzb5tkqvtrS3IVjx1nOcFGlfsEbXY0aAjoVKwg8va2i6exZ2ZFmXM4ZRWr_avykkgdXEk8HjR6pSgaPwp2t"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40">
+<div class="bg-slate-950/80 backdrop-blur px-4 py-2 rounded-lg border border-slate-700 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-sky-400" data-icon="location_on">location_on</span>
+<span class="text-xs font-label">Section B, Soshanguve</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Contextual) -->
+<div class="fixed bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background via-background to-transparent pt-12">
+<button class="w-full bg-sky-500 text-slate-950 font-label font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(14,165,233,0.3)] hover:bg-sky-400 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+            Message Provider
+        </button>
+</div>
+<!-- BottomNavBar (Hidden on desktop as per Shell Visibility rules) -->
+<nav class="md:hidden bg-slate-950/95 backdrop-blur-md fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-2 border-t border-slate-800 z-50">
+<a class="flex flex-col items-center justify-center bg-sky-500/10 text-sky-400 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-['Lexend'] text-[10px] font-medium">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-['Lexend'] text-[10px] font-medium">Students</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-['Lexend'] text-[10px] font-medium">Messages</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-sky-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Lexend'] text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

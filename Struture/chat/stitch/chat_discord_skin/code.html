@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KasiLink Chat Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&amp;family=Lexend:wght@300;400;500;600&amp;family=Source+Serif+4:ital,wght@0,700;1,700&amp;family=Dm+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-container": "#e481d6",
+              "secondary-container": "#4a0047",
+              "on-primary-container": "#004561",
+              "primary-container": "#83cffd",
+              "surface-container-high": "#002139",
+              "tertiary-fixed-dim": "#f0c1e6",
+              "surface-container-highest": "#002843",
+              "on-secondary-fixed": "#6f1869",
+              "on-tertiary-fixed-variant": "#714c6b",
+              "on-primary-fixed-variant": "#004f6e",
+              "surface-tint": "#a5dbff",
+              "on-tertiary": "#704b6a",
+              "secondary": "#ffabef",
+              "on-error": "#490006",
+              "surface-dim": "#000f1e",
+              "surface-container-lowest": "#000000",
+              "on-surface": "#d4e8ff",
+              "on-tertiary-fixed": "#52304e",
+              "inverse-primary": "#00668d",
+              "surface-container": "#001b30",
+              "outline": "#577899",
+              "background": "#000f1e",
+              "error-dim": "#c94947",
+              "secondary-fixed": "#ffd7f3",
+              "on-secondary-fixed-variant": "#903888",
+              "on-surface-variant": "#8daed1",
+              "on-background": "#d4e8ff",
+              "surface": "#000f1e",
+              "primary-dim": "#75c1ee",
+              "on-tertiary-container": "#664261",
+              "inverse-on-surface": "#465768",
+              "secondary-fixed-dim": "#ffc2f1",
+              "tertiary-container": "#ffcef4",
+              "tertiary": "#ffe3f7",
+              "primary-fixed": "#83cffd",
+              "on-secondary": "#70196a",
+              "surface-container-low": "#001526",
+              "on-primary-fixed": "#003044",
+              "outline-variant": "#284b69",
+              "secondary-dim": "#fc95ec",
+              "inverse-surface": "#f7f9ff",
+              "primary": "#a5dbff",
+              "error-container": "#8a1a1e",
+              "surface-bright": "#002e4d",
+              "surface-variant": "#002843",
+              "on-primary": "#004f6e",
+              "primary-fixed-dim": "#75c1ee",
+              "tertiary-dim": "#f0c1e6",
+              "on-error-container": "#ff9993",
+              "tertiary-fixed": "#ffcef4",
+              "error": "#ff716c"
+            },
+            fontFamily: {
+              "headline": ["Source Serif Four"],
+              "body": ["Dm Sans"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            background-color: #000f1e;
+            color: #d4e8ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-slate-900 dark:bg-black border-b border-slate-800 dark:border-zinc-800 shadow-lg dark:shadow-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a friendly professional man with short dark hair and a warm smile in soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFmPtF0c8XzCBwB_qgv9fM_ORiuIRPLf5C-PXQirZSWRRK2JHaIow-I028rHoEQcJvp5h-vldLovEwrYKI4s4_4vgqgjOYSP7UF4E3ALQdTYa2Jl468BPUUc11fqSDBT46TIsaB7No6IGpWe7oydm8fvoCs5kjF5qCOHP6gQlRI9spotKtJ8HTT2gtcSv71WlLYN8moAKAHsa5ND85rcmGAAO1jLkAlggPOyFOudsK5qT8hWfXePt0tKdwJhBlunM57fVnuoM4WwBV"/>
+</div>
+<h1 class="text-2xl font-black text-sky-500 dark:text-sky-400 tracking-tighter font-headline">KasiLink</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-slate-400 dark:text-zinc-500 hover:bg-slate-800 dark:hover:bg-zinc-900 transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+</button>
+<button class="px-3 py-1 text-sky-500 dark:text-sky-400 font-mono text-xs border border-sky-500/30 rounded-lg">
+                Grid 4 Status
+            </button>
+</div>
+</header>
+<!-- KasiLink Trust Layer -->
+<div class="fixed top-16 w-full z-40 bg-surface-container-low px-4 py-3 flex items-center justify-between border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<p class="text-[10px] font-label font-bold text-outline uppercase tracking-wider">Gig Status</p>
+<p class="text-sm font-bold text-on-surface">Grade 11 Math Tutor - Confirmed</p>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-on-secondary-container/10 px-2 py-1 rounded-full border border-on-secondary-container/20">
+<span class="material-symbols-outlined text-on-secondary-container text-xs" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-[10px] font-label font-semibold text-on-secondary-container">Kasi Hero</span>
+</div>
+</div>
+<!-- Main Chat Canvas -->
+<main class="pt-36 pb-24 px-4 max-w-md mx-auto min-h-screen">
+<div class="flex flex-col gap-6">
+<!-- Message Block -->
+<div class="flex gap-4 group">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a young male educator with glasses and a kind expression in a bright classroom setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL_2vzJslM5bVtyw_oOtrAxjUsixo6QbWYW7wlXIN3gl0EkJHxy7Ukc6lbH4FM5gSmxKgctytgJ-uEt6XkUI04ameZXn4bOG8SGFUeJXxWEQ1s_t3UpOr3ZCMTOevmx9mfBrBXuwF1i_aocxEjB81Jp2Il_bAG7RIvEc_jCd8_pVHIcOGWxYyKpe-7FAX8AFRpo7M307a9egA6F-NvrlmJAnDvadnOOUDjxzOJkmq_p2GYg0Tqh7HKVRNggZe6uK8nCLDoBwIDcEK-"/>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary text-sm font-label">Thabo_Dev</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded border border-primary/20">Provider</span>
+<span class="text-[10px] text-outline font-mono">14:22</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Hey! I've confirmed the session for Tuesday. I'll be bringing the trigonometry past papers we discussed.
+                    </p>
+</div>
+</div>
+<!-- Message Block (User) -->
+<div class="flex gap-4 group">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-md bg-surface-container-high border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-secondary text-sm font-label">You</span>
+<span class="text-[10px] text-outline font-mono">14:25</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Perfect, thanks <span class="bg-primary/20 text-primary-container px-1 rounded cursor-pointer font-medium">@Thabo_Dev</span>. My brother is struggling with the sine rule specifically.
+                    </p>
+</div>
+</div>
+<!-- System Notification -->
+<div class="flex items-center gap-4 py-2 opacity-80">
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<span class="text-[10px] font-mono text-outline uppercase tracking-[0.2em]">New Session Milestone</span>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- Message Block -->
+<div class="flex gap-4 group">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="side profile of a male teacher in a minimalist dark navy hoodie looking at a computer screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA6MyVzXmXrOZDmqxc9oR_PEpO0tFy15VOdbEqcrZJJC1CBQtYiklQ2jC-wwxKDUqPydB5xgAGyVrrODbVNFzBZlqykYgrOO_APJ7UM9beWh2LClbpJTaDJsyM-q-5NNenISkrN_C9PNFunfozcA2U9RioTAbj-dAjcrLOfPHRdMLLOz9cGqz9MG8MW0sqTCz8zVRk4GjwJFesQ6YhvrW933AFeR5dYg7HXsFTafjBqo562-AGTU1nC0GRSi_6WFNnMW-TvPKFbd3P"/>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-primary text-sm font-label">Thabo_Dev</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded border border-primary/20">Provider</span>
+<span class="text-[10px] text-outline font-mono">14:30</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Understood. I'll prepare some visual aids for the sine rule. Does he have a scientific calculator ready?
+                    </p>
+<div class="mt-2 p-3 rounded-lg bg-surface-container border border-outline-variant/20 flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="attachment">attachment</span>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-medium truncate">Sine_Rule_Visual_Guide.pdf</p>
+<p class="text-[10px] text-outline">1.2 MB</p>
+</div>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors" data-icon="download">download</span>
+</div>
+</div>
+</div>
+<!-- Message Block -->
+<div class="flex gap-4 group">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-md bg-surface-container-high border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-secondary text-sm font-label">You</span>
+<span class="text-[10px] text-outline font-mono">14:35</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Yes, he has his Casio one. See you Tuesday!
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Chat Input Fixed Bottom (Above Nav) -->
+<div class="fixed bottom-16 w-full px-4 py-3 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md z-40 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 bg-surface-container rounded-xl px-3 py-2 border border-outline-variant/50 focus-within:border-primary/50 transition-all">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="flex-1 bg-transparent border-none text-sm focus:ring-0 placeholder:text-outline/50 py-1" placeholder="Message @Thabo_Dev" type="text"/>
+<div class="flex gap-2">
+<button class="text-outline hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+</button>
+<button class="text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-slate-900/95 dark:bg-black/95 backdrop-blur-md rounded-t-2xl border-t border-slate-800 dark:border-zinc-800 shadow-[0_-4px_12px_rgba(0,0,0,0.5)]">
+<!-- Chats (Active) -->
+<a class="flex flex-col items-center justify-center bg-sky-500/10 dark:bg-sky-400/10 text-sky-500 dark:text-sky-400 rounded-xl px-3 py-1 duration-200 active:translate-y-0.5" href="#">
+<span class="material-symbols-outlined" data-icon="chat" style="font-variation-settings: 'FILL' 1;">chat</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-0.5">Chats</span>
+</a>
+<!-- Chameleon -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200 active:translate-y-0.5" href="#">
+<span class="material-symbols-outlined" data-icon="palette">palette</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-0.5">Chameleon</span>
+</a>
+<!-- Discover -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200 active:translate-y-0.5" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-0.5">Discover</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-zinc-500 hover:text-sky-300 dark:hover:text-sky-200 duration-200 active:translate-y-0.5" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[11px] font-medium font-mono uppercase tracking-widest mt-0.5">Settings</span>
+</a>
+</nav>
+</body></html>
