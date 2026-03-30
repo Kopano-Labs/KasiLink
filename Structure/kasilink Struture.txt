@@ -1,0 +1,31 @@
+kasilink/
+├── app/                # Next.js App Router pages & layouts
+│   ├── layout.tsx      # Global layout
+│   ├── page.tsx        # Landing page
+│   ├── jobs/           # Job listings & gig categories
+│   ├── profile/        # User profiles (job seekers, businesses)
+│   └── auth/           # Clerk/Firebase authentication flows
+│
+├── components/         # Reusable UI components
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   ├── JobCard.tsx
+│   └── ProfileCard.tsx
+│
+├── lib/                # Utility functions
+│   ├── db.ts           # MongoDB connection
+│   ├── auth.ts         # Clerk/Firebase helpers
+│   └── validation.ts   # Form validation
+│
+├── public/             # Static assets (icons, logos, manifest.json)
+│
+├── styles/             # Global styles (Tailwind or CSS modules)
+│
+├── prisma/             # Database schema if Prisma is used
+│
+├── tests/              # Unit & integration tests
+│
+├── .env                # Environment variables (API keys, DB URIs)
+├── package.json
+├── tsconfig.json
+└── README.md
