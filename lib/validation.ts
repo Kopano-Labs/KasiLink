@@ -1,52 +1,129 @@
-// lib/validation.ts — lightweight validation, no external deps
+// lib/validation.ts
+// Shared validation + sanitisation utilities for KasiLink API routes
 
-export type ValidationResult = { valid: boolean; errors: Record<string, string> };
-
-export function sanitize(text: string): string {
-  return text.replace(/<[^>]*>/g, "").replace(/[<>'"]/g, "").trim();
+// ----------------------------------------------------------------
+// Sanitise — strip HTML tags and trim whitespace
+// Used before storing user-supplied text to prevent XSS in rendered output
+// ----------------------------------------------------------------
+export function sanitize(input: unknown): string {
+  if (typeof input !== "string") return "";
+  return input
+    .replace(/<[^>]*>/g, "") // strip HTML tags
+    .replace(/&[a-z]+;/gi, " ") // strip HTML entities
+    .trim()
+    .slice(0, 500); // hard cap — matches Application.message maxlength
 }
 
-export function validateGig(data: Record<string, unknown>): ValidationResult {
+// ----------------------------------------------------------------
+// validateApplication
+// Called in POST /api/applications before hitting the DB
+// ----------------------------------------------------------------
+export interface ApplicationPayload {
+  gigId?: unknown;
+  message?: unknown;
+}
+
+export interface ValidationResult {
+  valid: boolean;
+  errors: Record<string, string>;
+}
+
+export function validateApplication(
+  body: ApplicationPayload,
+): ValidationResult {
   const errors: Record<string, string> = {};
 
-  if (!data.title || typeof data.title !== "string" || data.title.trim().length < 5)
-    errors.title = "Title must be at least 5 characters";
-  else if (data.title.trim().length > 120)
-    errors.title = "Title must be under 120 characters";
+  // gigId
+  if (!body.gigId || typeof body.gigId !== "string" || !body.gigId.trim()) {
+    errors.gigId = "gigId is required";
+  }
 
-  if (!data.description || typeof data.description !== "string" || data.description.trim().length < 10)
-    errors.description = "Description must be at least 10 characters";
-  else if (data.description.trim().length > 1000)
-    errors.description = "Description must be under 1000 characters";
-
-  const validCategories = ["car_wash","cleaning","tutoring","repairs","delivery",
-    "handyman","solar","retail","construction","healthcare","logistics","other"];
-  if (!data.category || !validCategories.includes(data.category as string))
-    errors.category = "Please select a valid category";
-
-  if (!data.payDisplay || typeof data.payDisplay !== "string" || !data.payDisplay.trim())
-    errors.payDisplay = "Pay description is required (e.g. R150/day or Negotiable)";
-
-  if (!data.location || typeof data.location !== "object")
-    errors.location = "Location is required";
+  // message
+  if (!body.message || typeof body.message !== "string") {
+    errors.message = "A cover message is required";
+  } else {
+    const cleaned = sanitize(body.message);
+    if (cleaned.length < 10) {
+      errors.message = "Message must be at least 10 characters";
+    }
+    if (cleaned.length > 500) {
+      errors.message = "Message must be 500 characters or fewer";
+    }
+  }
 
   return { valid: Object.keys(errors).length === 0, errors };
 }
 
-export function validateApplication(data: Record<string, unknown>): ValidationResult {
-  const errors: Record<string, string> = {};
-
-  if (!data.gigId || typeof data.gigId !== "string")
-    errors.gigId = "Gig ID is required";
-
-  if (!data.message || typeof data.message !== "string" || data.message.trim().length < 10)
-    errors.message = "Please write at least 10 characters in your message";
-  else if (data.message.trim().length > 500)
-    errors.message = "Message must be under 500 characters";
-
-  return { valid: Object.keys(errors).length === 0, errors };
+// ----------------------------------------------------------------
+// validateGig (used when you add server-side validation to POST /api/gigs)
+// ----------------------------------------------------------------
+export interface GigPayload {
+  title?: unknown;
+  description?: unknown;
+  category?: unknown;
+  payDisplay?: unknown;
+  location?: { coordinates?: unknown };
 }
 
-export function validateSAPhone(phone: string): boolean {
-  return /^\+27[6-8][0-9]{8}$/.test(phone.replace(/\s/g, ""));
+const VALID_CATEGORIES = [
+  "car_wash",
+  "cleaning",
+  "tutoring",
+  "repairs",
+  "delivery",
+  "handyman",
+  "solar",
+  "retail",
+  "construction",
+  "healthcare",
+  "logistics",
+  "other",
+] as const;
+
+export function validateGig(body: GigPayload): ValidationResult {
+  const errors: Record<string, string> = {};
+
+  if (!body.title || typeof body.title !== "string" || !body.title.trim()) {
+    errors.title = "Title is required";
+  } else if (body.title.trim().length > 120) {
+    errors.title = "Title must be 120 characters or fewer";
+  }
+
+  if (
+    !body.description ||
+    typeof body.description !== "string" ||
+    !body.description.trim()
+  ) {
+    errors.description = "Description is required";
+  } else if (body.description.trim().length > 1000) {
+    errors.description = "Description must be 1000 characters or fewer";
+  }
+
+  if (
+    !body.category ||
+    !VALID_CATEGORIES.includes(
+      body.category as (typeof VALID_CATEGORIES)[number],
+    )
+  ) {
+    errors.category = `Category must be one of: ${VALID_CATEGORIES.join(", ")}`;
+  }
+
+  if (
+    !body.payDisplay ||
+    typeof body.payDisplay !== "string" ||
+    !body.payDisplay.trim()
+  ) {
+    errors.payDisplay =
+      "Pay display is required (e.g. 'R150/hr' or 'Negotiable')";
+  }
+
+  if (
+    !body.location?.coordinates ||
+    !Array.isArray(body.location.coordinates) ||
+    body.location.coordinates.length !== 2
+  ) {
+    errors.location = "location.coordinates must be [longitude, latitude]";
+  }
+
+  return { valid: Object.keys(errors).length === 0, errors };
 }
