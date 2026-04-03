@@ -67,7 +67,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" data-theme="dark" suppressHydrationWarning>
-        <body>
+        <body className="bg-background text-on-background font-body antialiased">
           <ThemeProvider>
             <Navbar />
             <main className="page-content">{children}</main>

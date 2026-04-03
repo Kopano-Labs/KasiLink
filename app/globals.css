@@ -5,7 +5,9 @@
    - Ubuntu Pulse:    primary #f1e259 (kasi yellow)
    ============================================================ */
 
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ---------- Base font ---------- */
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap");
