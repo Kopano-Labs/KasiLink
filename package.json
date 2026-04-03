@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^7.0.7",
     "mongodb": "^7.1.1",
+    "mongoose": "^9.3.3",
     "next": "16.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
