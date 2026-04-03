@@ -8,7 +8,12 @@ import connectDB from "@/lib/db";
 import User from "@/lib/models/User";
 import mongoose from "mongoose";
 
-type RouteContext = { params: Promise<{ id: string }> };
+// The context for dynamic routes in Next.js App Router
+type RouteContext = {
+  params: {
+    id: string;
+  };
+};
 
 // Fields safe to return publicly (exclude phone from public view)
 const PUBLIC_PROJECTION = {
@@ -32,9 +37,9 @@ const ALLOWED_UPDATE_FIELDS = [
 // GET — public profile
 // Accepts either MongoDB ObjectId or Clerk user ID as [id]
 // ----------------------------------------------------------------
-export async function GET(_req: NextRequest, ctx: RouteContext) {
+export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
-    const { id } = await ctx.params;
+    const { id } = params;
     await connectDB();
 
     const user = mongoose.Types.ObjectId.isValid(id)
@@ -59,14 +64,14 @@ export async function GET(_req: NextRequest, ctx: RouteContext) {
 // PATCH — update own profile
 // Users can only edit their own record (matched by clerkId)
 // ----------------------------------------------------------------
-export async function PATCH(req: NextRequest, ctx: RouteContext) {
+export async function PATCH(req: NextRequest, { params }: RouteContext) {
   try {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
     }
 
-    const { id } = await ctx.params;
+    const { id } = params;
     await connectDB();
 
     // Load user — support lookup by ObjectId or clerkId
@@ -84,22 +89,24 @@ export async function PATCH(req: NextRequest, ctx: RouteContext) {
     }
 
     const body = await req.json();
+    const updatePayload: { [key: string]: unknown } = {};
 
+    // Build a payload object with only the allowed fields
     for (const field of ALLOWED_UPDATE_FIELDS) {
       if (body[field] !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (user as any)[field] = body[field];
+        updatePayload[field] = body[field];
       }
     }
 
     // Validate location coordinates if provided
-    if (body.location?.coordinates) {
-      const coords = body.location.coordinates;
+    if (updatePayload.location) {
+      const location = updatePayload.location as { coordinates?: unknown };
+      const coords = location.coordinates;
       if (
-        !Array.isArray(coords) ||
-        coords.length !== 2 ||
-        typeof coords[0] !== "number" ||
-        typeof coords[1] !== "number"
+        coords &&
+        (!Array.isArray(coords) ||
+          coords.length !== 2 ||
+          !coords.every((c) => typeof c === "number"))
       ) {
         return NextResponse.json(
           { error: "location.coordinates must be [longitude, latitude]" },
@@ -108,6 +115,8 @@ export async function PATCH(req: NextRequest, ctx: RouteContext) {
       }
     }
 
+    // Apply updates using Mongoose's .set() for better change tracking
+    user.set(updatePayload);
     user.lastSeen = new Date();
     await user.save();
 
