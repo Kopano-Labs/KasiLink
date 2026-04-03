@@ -1,5 +1,6 @@
 // GET  /api/applications — list applications (seeker's own or provider's gig)
 // POST /api/applications — apply to a gig
+// Scaffolded successfully per KasiLink Implementation Plan
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
@@ -13,15 +14,15 @@ import mongoose from "mongoose";
 export async function GET(req: NextRequest) {
   try {
     const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
 
     await connectDB();
     const { searchParams } = req.nextUrl;
     const role = searchParams.get("role") ?? "seeker"; // "seeker" | "provider"
 
-    const filter = role === "provider"
-      ? { providerId: userId }
-      : { seekerId: userId };
+    const filter =
+      role === "provider" ? { providerId: userId } : { seekerId: userId };
 
     const applications = await Application.find(filter)
       .sort({ createdAt: -1 })
@@ -31,14 +32,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ applications });
   } catch (err) {
     console.error("[GET /api/applications]", err);
-    return NextResponse.json({ error: "Failed to fetch applications" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch applications" },
+      { status: 500 },
+    );
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
     const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
 
     const body = await req.json();
     const { valid, errors } = validateApplication(body);
@@ -52,18 +57,28 @@ export async function POST(req: NextRequest) {
 
     // Load gig
     const gig = await Gig.findById(body.gigId);
-    if (!gig) return NextResponse.json({ error: "Gig not found" }, { status: 404 });
+    if (!gig)
+      return NextResponse.json({ error: "Gig not found" }, { status: 404 });
     if (gig.status !== "open") {
-      return NextResponse.json({ error: "This gig is no longer accepting applications" }, { status: 409 });
+      return NextResponse.json(
+        { error: "This gig is no longer accepting applications" },
+        { status: 409 },
+      );
     }
     if (gig.providerId === userId) {
-      return NextResponse.json({ error: "You cannot apply to your own gig" }, { status: 409 });
+      return NextResponse.json(
+        { error: "You cannot apply to your own gig" },
+        { status: 409 },
+      );
     }
 
     // Load seeker
     const seeker = await User.findOne({ clerkId: userId });
     if (!seeker) {
-      return NextResponse.json({ error: "Complete your profile before applying" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Complete your profile before applying" },
+        { status: 404 },
+      );
     }
 
     // Create application (unique index prevents duplicates)
@@ -85,10 +100,21 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ application }, { status: 201 });
   } catch (err: unknown) {
     // Duplicate key = already applied
-    if (err && typeof err === "object" && "code" in err && (err as { code: number }).code === 11000) {
-      return NextResponse.json({ error: "You have already applied to this gig" }, { status: 409 });
+    if (
+      err &&
+      typeof err === "object" &&
+      "code" in err &&
+      (err as { code: number }).code === 11000
+    ) {
+      return NextResponse.json(
+        { error: "You have already applied to this gig" },
+        { status: 409 },
+      );
     }
     console.error("[POST /api/applications]", err);
-    return NextResponse.json({ error: "Failed to submit application" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to submit application" },
+      { status: 500 },
+    );
   }
 }
