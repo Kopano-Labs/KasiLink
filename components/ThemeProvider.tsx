@@ -58,14 +58,9 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="btn btn-ghost btn-sm"
+      className="btn btn-ghost btn-sm p-2 text-[1.1rem] leading-none"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
       title={`Switch to ${theme === "dark" ? "Ubuntu Pulse" : "dark"} mode`}
-      style={{
-        padding: "var(--space-2)",
-        fontSize: "1.1rem",
-        lineHeight: 1,
-      }}
     >
       {theme === "dark" ? "☀️" : "🌙"}
     </button>

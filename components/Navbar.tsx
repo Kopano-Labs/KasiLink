@@ -144,78 +144,28 @@ export default function Navbar() {
   return (
     <>
       <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: "var(--z-sticky)",
-          background: "var(--nav-bg)",
-          borderBottom: `1px solid ${scrolled ? "var(--nav-border)" : "transparent"}`,
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
-          transition:
-            "border-color var(--transition-base), box-shadow var(--transition-base)",
-          boxShadow: scrolled ? "0 1px 16px rgba(0,0,0,0.2)" : "none",
-        }}
+        className={`fixed top-0 left-0 right-0 z-[200] bg-background/90 backdrop-blur-md border-b transition-all duration-250 ${
+          scrolled
+            ? "border-outline-variant/30 shadow-sm"
+            : "border-transparent"
+        }`}
       >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            height: "3.75rem",
-            gap: "var(--space-6)",
-          }}
-        >
+        <div className="gap-6 container flex h-[3.75rem] items-center">
           {/* Logo */}
           <Link
             href="/"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-2)",
-              textDecoration: "none",
-              flexShrink: 0,
-            }}
+            className="gap-2 flex shrink-0 items-center no-underline"
           >
-            <span
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: "var(--radius-lg)",
-                background: "var(--primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "var(--primary-text)",
-                flexShrink: 0,
-              }}
-            >
+            <span className="w-8 h-8 rounded-lg bg-primary text-on-primary flex shrink-0 items-center justify-center">
               <ZapIcon />
             </span>
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "var(--font-size-lg)",
-                color: "var(--text-primary)",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Kasi<span style={{ color: "var(--primary)" }}>Link</span>
+            <span className="font-bold text-lg text-on-background tracking-tight">
+              Kasi<span className="text-primary">Link</span>
             </span>
           </Link>
 
           {/* Desktop nav links */}
-          <div
-            className="hide-mobile"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-1)",
-              flex: 1,
-            }}
-          >
+          <div className="md:flex gap-1 hidden flex-1 items-center">
             {navLinks.map(({ href, label }) => {
               const active =
                 pathname === href ||
@@ -224,21 +174,11 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
-                    padding: "var(--space-2) var(--space-3)",
-                    borderRadius: "var(--radius-lg)",
-                    fontSize: "var(--font-size-sm)",
-                    fontWeight: active ? 500 : 400,
-                    color: active ? "var(--primary)" : "var(--text-secondary)",
-                    background: active
-                      ? "var(--primary-subtle)"
-                      : "transparent",
-                    textDecoration: "none",
-                    transition: "all var(--transition-fast)",
-                  }}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${
+                    active
+                      ? "font-medium text-primary bg-primary-container"
+                      : "font-normal text-on-surface-variant hover:bg-surface-variant"
+                  }`}
                 >
                   {label}
                 </Link>
@@ -247,20 +187,12 @@ export default function Navbar() {
           </div>
 
           {/* Right side actions */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-3)",
-              marginLeft: "auto",
-            }}
-          >
+          <div className="gap-3 ml-auto flex items-center">
             {/* Post gig CTA (signed in only) */}
             {isLoaded && isSignedIn && (
               <Link
                 href="/gigs/new"
-                className="btn btn-primary btn-sm hide-mobile"
-                style={{ gap: "var(--space-1)" }}
+                className="btn btn-primary btn-sm md:flex gap-1 hidden"
               >
                 <PlusIcon />
                 Post Gig
@@ -285,11 +217,10 @@ export default function Navbar() {
 
             {/* Mobile menu toggle */}
             <button
-              className="btn btn-ghost btn-sm hide-desktop"
+              className="btn btn-ghost btn-sm md:hidden p-2"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
-              style={{ padding: "var(--space-2)" }}
             >
               {mobileOpen ? <XIcon /> : <MenuIcon />}
             </button>
@@ -298,16 +229,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div
-            style={{
-              borderTop: "1px solid var(--border-subtle)",
-              background: "var(--bg-secondary)",
-              padding: "var(--space-4)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "var(--space-2)",
-            }}
-          >
+          <div className="border-outline-variant/30 bg-surface-container-low p-4 gap-2 flex flex-col border-t">
             {navLinks.map(({ href, label, icon: Icon }) => {
               const active =
                 pathname === href ||
@@ -316,21 +238,11 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    padding: "var(--space-3) var(--space-4)",
-                    borderRadius: "var(--radius-lg)",
-                    fontSize: "var(--font-size-base)",
-                    fontWeight: active ? 500 : 400,
-                    color: active ? "var(--primary)" : "var(--text-primary)",
-                    background: active
-                      ? "var(--primary-subtle)"
-                      : "transparent",
-                    textDecoration: "none",
-                    transition: "background var(--transition-fast)",
-                  }}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base transition-colors ${
+                    active
+                      ? "font-medium text-primary bg-primary-container"
+                      : "font-normal text-on-background hover:bg-primary-subtle"
+                  }`}
                 >
                   <Icon />
                   {label}
@@ -341,11 +253,7 @@ export default function Navbar() {
             {isLoaded && isSignedIn && (
               <Link
                 href="/gigs/new"
-                className="btn btn-primary"
-                style={{
-                  marginTop: "var(--space-2)",
-                  justifyContent: "center",
-                }}
+                className="btn btn-primary mt-2 justify-center"
               >
                 <PlusIcon />
                 Post a Gig
@@ -354,10 +262,7 @@ export default function Navbar() {
 
             {isLoaded && !isSignedIn && (
               <SignInButton mode="modal">
-                <button
-                  className="btn btn-primary btn-full"
-                  style={{ marginTop: "var(--space-2)" }}
-                >
+                <button className="btn btn-primary mt-2 w-full">
                   Sign In to KasiLink
                 </button>
               </SignInButton>

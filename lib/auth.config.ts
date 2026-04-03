@@ -5,7 +5,7 @@
 export const SA_PHONE_PREFIX = "+27";
 
 // Clerk appearance config — used in SignIn/SignUp components
-// Matches both dark and light KasiLink themes
+// Matches both dark and light KasiLink themes (Tailwind config)
 export const clerkAppearance = {
   variables: {
     // Dark theme defaults (overridden by data-theme="light")

@@ -199,3 +199,4 @@ const Gig: Model<IGig> =
   mongoose.models.Gig ?? mongoose.model<IGig>("Gig", GigSchema);
 
 export default Gig;
+// End of Gig Schema

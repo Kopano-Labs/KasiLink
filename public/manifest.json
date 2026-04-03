@@ -4,8 +4,8 @@
   "description": "Find local gigs and services in your kasi",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000f1e",
-  "theme_color": "#a5dbff",
+  "background_color": "#fff5e4",
+  "theme_color": "#f1e259",
   "orientation": "portrait",
   "icons": [
     {

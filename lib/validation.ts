@@ -2,9 +2,12 @@
 // Shared validation + sanitisation utilities for KasiLink API routes
 
 // ----------------------------------------------------------------
-// Sanitise — strip HTML tags and trim whitespace
-// Used before storing user-supplied text to prevent XSS in rendered output
+// Sanitization Utilities
 // ----------------------------------------------------------------
+/**
+ * Sanitise — strip HTML tags and trim whitespace
+ * Used before storing user-supplied text to prevent XSS in rendered output
+ */
 export function sanitize(input: unknown): string {
   if (typeof input !== "string") return "";
   return input

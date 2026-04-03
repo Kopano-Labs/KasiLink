@@ -28,69 +28,24 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer
-      style={{
-        borderTop: "1px solid var(--border-subtle)",
-        background: "var(--bg-secondary)",
-        padding: "var(--space-10) 0 var(--space-6)",
-        marginTop: "auto",
-      }}
-    >
+    <footer className="border-outline-variant/30 bg-surface-container-low pt-10 pb-6 mt-auto border-t">
       <div className="container">
         {/* Top row */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "var(--space-8)",
-            marginBottom: "var(--space-8)",
-          }}
-        >
+        <div className="gap-8 mb-8 grid grid-cols-1">
           {/* Brand */}
           <div>
             <Link
               href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "var(--space-2)",
-                textDecoration: "none",
-                marginBottom: "var(--space-3)",
-              }}
+              className="gap-2 mb-3 inline-flex items-center no-underline"
             >
-              <span
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: "var(--radius-md)",
-                  background: "var(--primary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "var(--primary-text)",
-                }}
-              >
+              <span className="w-7 h-7 rounded-md bg-primary text-on-primary flex items-center justify-center">
                 <ZapIcon />
               </span>
-              <span
-                style={{
-                  fontWeight: 700,
-                  fontSize: "var(--font-size-lg)",
-                  color: "var(--text-primary)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                Kasi<span style={{ color: "var(--primary)" }}>Link</span>
+              <span className="font-bold text-lg text-on-background tracking-tight">
+                Kasi<span className="text-primary">Link</span>
               </span>
             </Link>
-            <p
-              style={{
-                fontSize: "var(--font-size-sm)",
-                color: "var(--text-secondary)",
-                maxWidth: "28rem",
-                lineHeight: 1.65,
-              }}
-            >
+            <p className="text-sm text-on-surface-variant max-w-[28rem] leading-[1.65]">
               Connecting township job seekers with nearby gigs and
               opportunities. Built for Gauteng, powered by community.
             </p>
@@ -98,35 +53,15 @@ export default function Footer() {
 
           {/* Links */}
           <nav>
-            <p
-              style={{
-                fontSize: "var(--font-size-xs)",
-                fontWeight: 500,
-                color: "var(--text-tertiary)",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                marginBottom: "var(--space-3)",
-              }}
-            >
+            <p className="text-xs font-medium text-outline tracking-wider mb-3 uppercase">
               Platform
             </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "var(--space-2)",
-              }}
-            >
+            <div className="gap-2 flex flex-col">
               {footerLinks.map(({ label, href }) => (
                 <Link
                   key={href}
                   href={href}
-                  style={{
-                    fontSize: "var(--font-size-sm)",
-                    color: "var(--text-secondary)",
-                    textDecoration: "none",
-                    transition: "color var(--transition-fast)",
-                  }}
+                  className="text-sm text-on-surface-variant hover:text-primary no-underline transition-colors"
                 >
                   {label}
                 </Link>
@@ -136,35 +71,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div
-          style={{
-            borderTop: "1px solid var(--border-subtle)",
-            paddingTop: "var(--space-5)",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "var(--space-3)",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "var(--font-size-xs)",
-              color: "var(--text-tertiary)",
-            }}
-          >
+        <div className="border-outline-variant/30 pt-5 gap-3 flex flex-wrap items-center justify-between border-t">
+          <p className="text-xs text-outline">
             © {year} KasiLink. Made in Gauteng 🇿🇦
           </p>
-          <div style={{ display: "flex", gap: "var(--space-4)" }}>
+          <div className="gap-4 flex">
             {legalLinks.map(({ label, href }) => (
               <Link
                 key={href}
                 href={href}
-                style={{
-                  fontSize: "var(--font-size-xs)",
-                  color: "var(--text-tertiary)",
-                  textDecoration: "none",
-                }}
+                className="text-xs text-outline hover:text-primary no-underline"
               >
                 {label}
               </Link>

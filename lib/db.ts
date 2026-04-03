@@ -13,6 +13,7 @@ if (!MONGODB_URI) {
   );
 }
 
+// Strict type check for global cache
 // Global cache to prevent multiple connections in dev hot-reload
 interface MongooseCache {
   conn: mongoose.Connection | null;
