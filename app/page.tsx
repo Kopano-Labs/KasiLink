@@ -1,137 +1,184 @@
-import { SignIn } from "@clerk/nextjs";
-import type { Metadata } from "next";
+import Link from "next/link";
+import connectDB from "@/lib/db";
+import Gig from "@/lib/models/Gig";
 
-export const metadata: Metadata = {
-  title: "Sign In",
-  description: "Sign in to KasiLink with your South African phone number.",
-};
+export const dynamic = "force-dynamic";
 
-export default function SignInPage() {
+async function getRecentGigs() {
+  try {
+    await connectDB();
+    const gigs = await Gig.find({ status: "open" })
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .lean();
+    return gigs;
+  } catch {
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const gigs = await getRecentGigs();
+
   return (
-    <div
-      style={{
-        minHeight: "100dvh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "var(--space-6) var(--space-4)",
-        background: "var(--bg-primary)",
-      }}
-    >
-      {/* Tagline above form */}
-      <div
-        style={{
-          textAlign: "center",
-          marginBottom: "var(--space-8)",
-          maxWidth: "26rem",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "var(--font-size-sm)",
-            color: "var(--text-tertiary)",
-            letterSpacing: "0.06em",
+    <div style={{ paddingBottom: "var(--space-12)" }}>
+
+      {/* Hero */}
+      <section style={{
+        background: "linear-gradient(135deg, var(--bg-secondary) 0%, var(--surface-1) 100%)",
+        borderBottom: "1px solid var(--border-subtle)",
+        padding: "var(--space-12) 0",
+      }}>
+        <div className="container" style={{ textAlign: "center", maxWidth: 640 }}>
+          <span style={{
+            display: "inline-block", marginBottom: "var(--space-4)",
+            padding: "4px 14px", borderRadius: "var(--radius-full)",
+            background: "var(--primary-subtle)", color: "var(--primary)",
+            fontSize: "var(--font-size-xs)", fontWeight: 600, letterSpacing: "0.06em",
             textTransform: "uppercase",
-            fontWeight: 500,
-            marginBottom: "var(--space-2)",
-          }}
-        >
-          Gauteng&apos;s Township Platform
-        </p>
-        <h1
-          style={{
-            fontSize: "var(--font-size-3xl)",
-            fontWeight: 700,
-            letterSpacing: "-0.03em",
-            color: "var(--text-primary)",
-            marginBottom: "var(--space-3)",
-          }}
-        >
-          Welcome back
-        </h1>
-        <p
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: "var(--font-size-sm)",
-          }}
-        >
-          Use your SA phone number (+27) to sign in — no email needed.
-        </p>
+          }}>
+            Gauteng&apos;s Township Platform
+          </span>
+          <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", letterSpacing: "-0.03em", marginBottom: "var(--space-4)" }}>
+            Local gigs.<br />
+            <span style={{ color: "var(--primary)" }}>Near you.</span> Right now.
+          </h1>
+          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-size-lg)", marginBottom: "var(--space-8)", lineHeight: 1.6 }}>
+            57% youth unemployment. KasiLink connects job seekers with nearby gigs — no CV, no commute, no queues.
+          </p>
+          <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/marketplace" className="btn btn-primary btn-lg">
+              Find Gigs Near Me
+            </Link>
+            <Link href="/gigs/new" className="btn btn-secondary btn-lg">
+              Post a Gig
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats bar */}
+      <section style={{ borderBottom: "1px solid var(--border-subtle)", background: "var(--bg-secondary)" }}>
+        <div className="container">
+          <div style={{ display: "flex", justifyContent: "center", gap: "var(--space-10)", padding: "var(--space-5) 0", flexWrap: "wrap" }}>
+            {[
+              { value: "31.4%", label: "SA Unemployment" },
+              { value: "57%", label: "Youth Without Work" },
+              { value: "5km", label: "Average Gig Distance" },
+              { value: "0", label: "CV Required" },
+            ].map(({ value, label }) => (
+              <div key={label} style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "var(--font-size-2xl)", fontWeight: 700, color: "var(--primary)" }}>{value}</div>
+                <div style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)", marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Load-shedding notice */}
+      <div className="container" style={{ paddingTop: "var(--space-6)" }}>
+        <div style={{
+          padding: "var(--space-3) var(--space-4)",
+          borderRadius: "var(--radius-lg)",
+          background: "var(--primary-subtle)",
+          border: "1px solid var(--primary)",
+          display: "flex", alignItems: "center", gap: "var(--space-3)",
+          fontSize: "var(--font-size-sm)",
+        }}>
+          <span>⚡</span>
+          <span style={{ color: "var(--text-primary)" }}>
+            <strong>Load-shedding aware</strong> — gig providers can flag LS schedules so you plan around outages.
+          </span>
+        </div>
       </div>
 
-      {/* Clerk SignIn — phone-first is configured in Clerk dashboard */}
-      <SignIn
-        routing="hash"
-        signUpUrl="/sign-up"
-        forceRedirectUrl="/"
-        fallbackRedirectUrl="/"
-        appearance={{
-          elements: {
-            rootBox: { width: "100%", maxWidth: "400px" },
-            card: {
-              width: "100%",
-              background: "var(--card-bg)",
-              border: "1px solid var(--card-border)",
-              borderRadius: "var(--radius-2xl)",
-              boxShadow: "var(--card-shadow)",
-              padding: "var(--space-8)",
-            },
-            headerTitle: {
-              display: "none", // we have our own header above
-            },
-            headerSubtitle: {
-              display: "none",
-            },
-            socialButtonsBlockButton: {
-              background: "var(--bg-tertiary)",
-              border: "1px solid var(--border-default)",
-              borderRadius: "var(--radius-lg)",
-              color: "var(--text-primary)",
-            },
-            formButtonPrimary: {
-              background: "var(--primary)",
-              color: "var(--primary-text)",
-              borderRadius: "var(--radius-lg)",
-              fontFamily: "var(--font-body)",
-              fontWeight: "500",
-              height: "3rem",
-            },
-            formFieldInput: {
-              background: "var(--input-bg)",
-              border: "1px solid var(--input-border)",
-              borderRadius: "var(--radius-lg)",
-              color: "var(--input-text)",
-              fontFamily: "var(--font-body)",
-              height: "3rem",
-            },
-            formFieldLabel: {
-              color: "var(--text-secondary)",
-              fontFamily: "var(--font-body)",
-              fontSize: "0.875rem",
-            },
-            identityPreviewText: {
-              color: "var(--text-primary)",
-            },
-            footerActionLink: {
-              color: "var(--primary)",
-            },
-          },
-        }}
-      />
+      {/* Recent Gigs */}
+      <section className="container" style={{ paddingTop: "var(--space-10)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "var(--space-6)" }}>
+          <h2>Latest Gigs</h2>
+          <Link href="/marketplace" style={{ fontSize: "var(--font-size-sm)", color: "var(--primary)" }}>
+            See all →
+          </Link>
+        </div>
 
-      {/* Help text */}
-      <p
-        style={{
-          marginTop: "var(--space-6)",
-          fontSize: "var(--font-size-xs)",
-          color: "var(--text-tertiary)",
-          textAlign: "center",
-          maxWidth: "22rem",
-        }}
-      >
-        No smartphone? Visit a KasiLink community centre for assisted sign-up.
-      </p>
+        {gigs.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "var(--space-12) 0", color: "var(--text-secondary)" }}>
+            <p style={{ marginBottom: "var(--space-4)" }}>No gigs yet — be the first to post one.</p>
+            <Link href="/gigs/new" className="btn btn-primary">Post a Gig</Link>
+          </div>
+        ) : (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "var(--space-4)" }}>
+            {gigs.map((gig) => (
+              <Link key={String(gig._id)} href={`/gigs/${gig._id}`} style={{ textDecoration: "none" }}>
+                <div className="kasi-card" style={{ cursor: "pointer", height: "100%" }}>
+                  {gig.isUrgent && (
+                    <span className="badge badge-danger" style={{ marginBottom: "var(--space-2)", display: "inline-block" }}>
+                      Urgent
+                    </span>
+                  )}
+                  <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+                    <span className="badge badge-primary">{gig.category.replace("_", " ")}</span>
+                    {gig.isProviderVerified && <span className="badge badge-success">✓</span>}
+                  </div>
+                  <h3 style={{ fontSize: "var(--font-size-base)", marginBottom: 6 }}>{gig.title}</h3>
+                  <p style={{
+                    fontSize: "var(--font-size-sm)", color: "var(--text-secondary)",
+                    overflow: "hidden", display: "-webkit-box",
+                    WebkitLineClamp: 2, WebkitBoxOrient: "vertical", marginBottom: 12,
+                  }}>
+                    {gig.description}
+                  </p>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ fontWeight: 700, color: "var(--primary)" }}>{gig.payDisplay}</span>
+                    <span style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)" }}>
+                      📍 {gig.location.suburb}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* How it works */}
+      <section className="container" style={{ paddingTop: "var(--space-12)" }}>
+        <h2 style={{ textAlign: "center", marginBottom: "var(--space-8)" }}>How KasiLink Works</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "var(--space-5)" }}>
+          {[
+            { icon: "📱", step: "1", title: "Sign up with your phone", desc: "No email needed. Just your SA number (+27)." },
+            { icon: "📍", step: "2", title: "Find gigs near you", desc: "Browse by category or let us show nearby opportunities." },
+            { icon: "💬", step: "3", title: "Chat & coordinate", desc: "Message providers directly. No middleman." },
+            { icon: "✅", step: "4", title: "Get paid", desc: "Complete the gig and build your verified reputation." },
+          ].map(({ icon, step, title, desc }) => (
+            <div key={step} className="kasi-card" style={{ textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", marginBottom: "var(--space-3)" }}>{icon}</div>
+              <div style={{ fontSize: "var(--font-size-xs)", color: "var(--primary)", fontWeight: 600, marginBottom: "var(--space-2)" }}>
+                STEP {step}
+              </div>
+              <h3 style={{ fontSize: "var(--font-size-base)", marginBottom: "var(--space-2)" }}>{title}</h3>
+              <p style={{ fontSize: "var(--font-size-sm)", color: "var(--text-secondary)" }}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{
+        background: "var(--primary-subtle)", borderTop: "1px solid var(--border-subtle)",
+        marginTop: "var(--space-12)",
+      }}>
+        <div className="container" style={{ textAlign: "center", padding: "var(--space-12) 0" }}>
+          <h2 style={{ marginBottom: "var(--space-4)" }}>Ready to start?</h2>
+          <p style={{ color: "var(--text-secondary)", marginBottom: "var(--space-6)" }}>
+            Join thousands of Gauteng residents finding work in their neighbourhood.
+          </p>
+          <Link href="/sign-in" className="btn btn-primary btn-lg">
+            Get Started — It&apos;s Free
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

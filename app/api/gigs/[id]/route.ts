@@ -52,8 +52,10 @@ export async function PUT(req: NextRequest, ctx: RouteContext) {
       "startDate","endDate","isFlexible","requirements","slots",
       "isUrgent","expiresAt","status","loadshedding"];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const gigAny = gig as any;
     for (const key of allowed) {
-      if (body[key] !== undefined) (gig as Record<string, unknown>)[key] = body[key];
+      if (body[key] !== undefined) gigAny[key] = body[key];
     }
     await gig.save();
 

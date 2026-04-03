@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -120,8 +120,8 @@ function GigCard({ gig }: { gig: Gig }) {
   );
 }
 
-// ── Page ───────────────────────────────────────────────────────────
-export default function MarketplacePage() {
+// ── Inner page (uses useSearchParams — must be inside Suspense) ────
+function MarketplaceInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -285,5 +285,22 @@ export default function MarketplacePage() {
         </div>
       )}
     </div>
+  );
+}
+
+// ── Shell with Suspense (required for useSearchParams in Next.js) ──
+export default function MarketplacePage() {
+  return (
+    <Suspense fallback={
+      <div className="container" style={{ paddingTop: "var(--space-8)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "var(--space-4)" }}>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="kasi-card skeleton" style={{ height: 180 }} />
+          ))}
+        </div>
+      </div>
+    }>
+      <MarketplaceInner />
+    </Suspense>
   );
 }
