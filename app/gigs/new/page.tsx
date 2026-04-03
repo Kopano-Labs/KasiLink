@@ -135,7 +135,7 @@ export default function PostGigPage() {
   }
 
   return (
-    <div className="container max-w-screen-sm pt-8 pb-12">
+    <div className="max-w-screen-sm pt-8 pb-12 container">
       <h1 className="mb-2 font-headline text-3xl font-bold">Post a Gig</h1>
       <p className="text-on-surface-variant text-sm mb-8">
         Find someone in your neighbourhood fast.
@@ -145,7 +145,7 @@ export default function PostGigPage() {
         <div className="alert alert-danger mb-5">{errors.general}</div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="gap-5 flex flex-col">
         {/* Title */}
         <div className="form-group">
           <label className="label" htmlFor="title">
@@ -271,8 +271,8 @@ export default function PostGigPage() {
         </div>
 
         {/* Flags */}
-        <div className="flex gap-5 flex-wrap">
-          <label className="flex items-center gap-2 cursor-pointer">
+        <div className="gap-5 flex flex-wrap">
+          <label className="gap-2 flex cursor-pointer items-center">
             <input
               type="checkbox"
               checked={form.isUrgent}
@@ -282,7 +282,7 @@ export default function PostGigPage() {
               🔥 Urgent — needed ASAP
             </span>
           </label>
-          <label className="flex items-center gap-2 cursor-pointer">
+          <label className="gap-2 flex cursor-pointer items-center">
             <input
               type="checkbox"
               checked={form.isFlexible}
