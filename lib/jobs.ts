@@ -1,22 +1,21 @@
-// lib/jobs.ts
-import clientPromise from "@/lib/db";
+// lib/jobs.ts — legacy helper, delegates to Mongoose Gig model
+import connectDB from "@/lib/db";
+import Gig from "@/lib/models/Gig";
 
 export async function fetchJobs() {
-  const client = await clientPromise;
-  const db = client.db("kasilink");
-  const jobs = await db
-    .collection("jobs")
-    .find({})
-    .sort({ postedAt: -1 })
-    .toArray();
+  await connectDB();
+  const gigs = await Gig.find({ status: "open" })
+    .sort({ createdAt: -1 })
+    .limit(20)
+    .lean();
 
-  return jobs.map((job) => ({
-    _id: job._id,
-    title: job.title,
-    description: job.description,
-    category: job.category,
-    location: job.location,
-    postedAt: job.postedAt,
-    pay: job.pay,
+  return gigs.map((g) => ({
+    _id: g._id,
+    title: g.title,
+    description: g.description,
+    category: g.category,
+    location: g.location,
+    postedAt: g.createdAt,
+    pay: g.payDisplay,
   }));
 }
