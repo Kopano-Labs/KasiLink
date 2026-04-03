@@ -120,7 +120,7 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
     user.lastSeen = new Date();
     await user.save();
 
-    // Return without sensitive fields
+    // Return without sensitive fields (TypeScript-safe fix)
     const { clerkId: _clerkId, __v, ...safe } = user.toObject();
 
     return NextResponse.json({ user: safe });
