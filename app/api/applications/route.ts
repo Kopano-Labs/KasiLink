@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     const { valid, errors } = validateApplication(body);
     if (!valid) return NextResponse.json({ errors }, { status: 422 });
 
-    if (!mongoose.Types.ObjectId.isValid(body.gigId)) {
+    if (!mongoose.Types.ObjectId.isValid(body.gigId as string)) {
       return NextResponse.json({ error: "Invalid gig ID" }, { status: 400 });
     }
 

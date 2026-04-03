@@ -1,3 +1,5 @@
+// ALERT: This file was accidentally created in the lib/models directory!
+// Please move this file to: c:\Users\rkhol\kasi-link\app\forum\page.tsx
 "use client";
 
 import { useState } from "react";

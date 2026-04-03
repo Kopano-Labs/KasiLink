@@ -1,3 +1,5 @@
+// ALERT: This file was accidentally created in the root directory!
+// Please move this file to: c:\Users\rkhol\kasi-link\app\applications\page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
