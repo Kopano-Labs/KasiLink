@@ -296,7 +296,6 @@ export default function PostGigPage() {
 
         <button
           type="submit"
-          className="btn btn-primary btn-lg"
           disabled={submitting}
           className="btn btn-primary btn-lg mt-3"
         >
