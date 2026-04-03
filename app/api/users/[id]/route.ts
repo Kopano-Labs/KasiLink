@@ -112,9 +112,7 @@ export async function PATCH(req: NextRequest, ctx: RouteContext) {
     await user.save();
 
     // Return without sensitive fields
-    const safe = user.toObject();
-    delete safe.clerkId;
-    delete safe.__v;
+    const { clerkId: _clerkId, __v, ...safe } = user.toObject();
 
     return NextResponse.json({ user: safe });
   } catch (err) {
