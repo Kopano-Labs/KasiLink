@@ -1,6 +1,7 @@
 import Link from "next/link";
 import connectDB from "@/lib/db";
 import Gig from "@/lib/models/Gig";
+import LoadSheddingWidget from "@/components/LoadSheddingWidget";
 
 export const dynamic = "force-dynamic";
 
@@ -79,13 +80,7 @@ export default async function HomePage() {
 
       {/* Load-shedding notice */}
       <div className="container pt-6">
-        <div className="px-4 py-3 rounded-lg bg-primary-container border border-primary flex items-center gap-3 text-sm text-on-primary-container">
-          <span>⚡</span>
-          <span>
-            <strong>Load-shedding aware</strong> — gig providers can flag LS
-            schedules so you plan around outages.
-          </span>
-        </div>
+        <LoadSheddingWidget />
       </div>
 
       {/* Recent Gigs */}
