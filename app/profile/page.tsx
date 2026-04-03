@@ -22,10 +22,16 @@ interface Gig {
 }
 
 const STATUS_COLOURS: Record<string, string> = {
-  open: "badge-success", assigned: "badge-primary", in_progress: "badge-primary",
-  completed: "badge-success", cancelled: "badge-danger",
-  pending: "badge-secondary", accepted: "badge-success",
-  rejected: "badge-danger", withdrawn: "badge-danger", shortlisted: "badge-primary",
+  open: "badge-success",
+  assigned: "badge-primary",
+  in_progress: "badge-primary",
+  completed: "badge-success",
+  cancelled: "badge-danger",
+  pending: "badge-secondary",
+  accepted: "badge-success",
+  rejected: "badge-danger",
+  withdrawn: "badge-danger",
+  shortlisted: "badge-primary",
 };
 
 export default function ProfilePage() {
@@ -44,63 +50,84 @@ export default function ProfilePage() {
     Promise.all([
       fetch("/api/applications?role=seeker").then((r) => r.json()),
       fetch("/api/gigs?providerId=me&limit=20").then((r) => r.json()),
-    ]).then(([appData, gigData]) => {
-      setApplications(appData.applications ?? []);
-      setPostedGigs(gigData.gigs ?? []);
-    }).finally(() => setLoading(false));
+    ])
+      .then(([appData, gigData]) => {
+        setApplications(appData.applications ?? []);
+        setPostedGigs(gigData.gigs ?? []);
+      })
+      .finally(() => setLoading(false));
   }, [isSignedIn]);
 
   if (!isLoaded || !isSignedIn) return null;
 
   return (
-    <div className="container" style={{ paddingTop: "var(--space-8)", paddingBottom: "var(--space-12)" }}>
-
+    <div className="container pt-8 pb-12">
       {/* Profile header */}
-      <div className="kasi-card" style={{ display: "flex", gap: "var(--space-5)", alignItems: "center", marginBottom: "var(--space-8)", flexWrap: "wrap" }}>
+      <div className="kasi-card flex gap-5 items-center mb-8 flex-wrap">
         {user.imageUrl && (
-          <img src={user.imageUrl} alt={user.fullName ?? "Avatar"}
-            style={{ width: 72, height: 72, borderRadius: "var(--radius-full)", objectFit: "cover" }} />
+          <img
+            src={user.imageUrl}
+            alt={user.fullName ?? "Avatar"}
+            className="w-[72px] h-[72px] rounded-full object-cover"
+          />
         )}
-        <div style={{ flex: 1 }}>
-          <h1 style={{ marginBottom: 4 }}>{user.fullName ?? user.username ?? "Your Profile"}</h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-size-sm)" }}>
-            {user.primaryPhoneNumber?.phoneNumber ?? user.primaryEmailAddress?.emailAddress ?? ""}
+        <div className="flex-1">
+          <h1 className="mb-1">
+            {user.fullName ?? user.username ?? "Your Profile"}
+          </h1>
+          <p className="text-on-surface-variant text-sm">
+            {user.primaryPhoneNumber?.phoneNumber ??
+              user.primaryEmailAddress?.emailAddress ??
+              ""}
           </p>
-          <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-3)", flexWrap: "wrap" }}>
+          <div className="flex gap-2 mt-3 flex-wrap">
             <span className="badge badge-primary">KasiLink Member</span>
           </div>
         </div>
-        <Link href="/gigs/new" className="btn btn-primary">+ Post a Gig</Link>
+        <Link href="/gigs/new" className="btn btn-primary">
+          + Post a Gig
+        </Link>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: "var(--space-10)", color: "var(--text-secondary)" }}>
+        <div className="text-center p-10 text-on-surface-variant">
           Loading your activity…
         </div>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "var(--space-8)" }}>
-
+        <div className="grid grid-cols-1 gap-8">
           {/* My Applications */}
           <section>
-            <h2 style={{ marginBottom: "var(--space-4)" }}>My Applications ({applications.length})</h2>
+            <h2 className="mb-4 font-headline text-xl">
+              My Applications ({applications.length})
+            </h2>
             {applications.length === 0 ? (
-              <div className="kasi-card" style={{ textAlign: "center", color: "var(--text-secondary)" }}>
-                <p style={{ marginBottom: "var(--space-4)" }}>No applications yet.</p>
-                <Link href="/marketplace" className="btn btn-primary">Browse Gigs</Link>
+              <div className="kasi-card text-center text-on-surface-variant">
+                <p className="mb-4">No applications yet.</p>
+                <Link href="/marketplace" className="btn btn-primary">
+                  Browse Gigs
+                </Link>
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div className="flex flex-col gap-3">
                 {applications.map((app) => (
-                  <div key={app._id} className="kasi-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "var(--space-3)" }}>
+                  <div
+                    key={app._id}
+                    className="kasi-card flex justify-between items-center flex-wrap gap-3"
+                  >
                     <div>
-                      <Link href={`/gigs/${app.gigId}`} style={{ fontWeight: 600, color: "var(--text-primary)" }}>
+                      <Link
+                        href={`/gigs/${app.gigId}`}
+                        className="font-semibold text-on-background hover:underline"
+                      >
                         {app.gigTitle}
                       </Link>
-                      <p style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)", marginTop: 2 }}>
+                      <p className="text-xs text-outline mt-0.5">
                         Applied {new Date(app.createdAt).toLocaleDateString()}
                       </p>
                     </div>
-                    <span className={`badge ${STATUS_COLOURS[app.status] ?? "badge-secondary"}`}>
+                    <span
+                      className={`badge ${STATUS_COLOURS[app.status] ?? "badge-secondary"}`}
+                    >
                       {app.status}
                     </span>
                   </div>
@@ -111,25 +138,39 @@ export default function ProfilePage() {
 
           {/* My Posted Gigs */}
           <section>
-            <h2 style={{ marginBottom: "var(--space-4)" }}>My Posted Gigs ({postedGigs.length})</h2>
+            <h2 className="mb-4 font-headline text-xl">
+              My Posted Gigs ({postedGigs.length})
+            </h2>
             {postedGigs.length === 0 ? (
-              <div className="kasi-card" style={{ textAlign: "center", color: "var(--text-secondary)" }}>
-                <p style={{ marginBottom: "var(--space-4)" }}>You haven&apos;t posted any gigs yet.</p>
-                <Link href="/gigs/new" className="btn btn-primary">Post a Gig</Link>
+              <div className="kasi-card text-center text-on-surface-variant">
+                <p className="mb-4">You haven&apos;t posted any gigs yet.</p>
+                <Link href="/gigs/new" className="btn btn-primary">
+                  Post a Gig
+                </Link>
               </div>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div className="flex flex-col gap-3">
                 {postedGigs.map((gig) => (
-                  <div key={gig._id} className="kasi-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "var(--space-3)" }}>
+                  <div
+                    key={gig._id}
+                    className="kasi-card flex justify-between items-center flex-wrap gap-3"
+                  >
                     <div>
-                      <Link href={`/gigs/${gig._id}`} style={{ fontWeight: 600, color: "var(--text-primary)" }}>
+                      <Link
+                        href={`/gigs/${gig._id}`}
+                        className="font-semibold text-on-background hover:underline"
+                      >
                         {gig.title}
                       </Link>
-                      <p style={{ fontSize: "var(--font-size-xs)", color: "var(--text-tertiary)", marginTop: 2 }}>
-                        {gig.applicationCount} applicant{gig.applicationCount !== 1 ? "s" : ""} · Posted {new Date(gig.createdAt).toLocaleDateString()}
+                      <p className="text-xs text-outline mt-0.5">
+                        {gig.applicationCount} applicant
+                        {gig.applicationCount !== 1 ? "s" : ""} · Posted{" "}
+                        {new Date(gig.createdAt).toLocaleDateString()}
                       </p>
                     </div>
-                    <span className={`badge ${STATUS_COLOURS[gig.status] ?? "badge-secondary"}`}>
+                    <span
+                      className={`badge ${STATUS_COLOURS[gig.status] ?? "badge-secondary"}`}
+                    >
                       {gig.status}
                     </span>
                   </div>
@@ -137,7 +178,6 @@ export default function ProfilePage() {
               </div>
             )}
           </section>
-
         </div>
       )}
     </div>

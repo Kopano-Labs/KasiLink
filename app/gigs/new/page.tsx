@@ -20,9 +20,23 @@ const CATEGORIES = [
 ];
 
 const SUBURBS = [
-  "Soweto","Alexandra","Tembisa","Katlehong","Diepsloot","Ivory Park",
-  "Orange Farm","Soshanguve","Mamelodi","Thokoza","Vosloorus","Sebokeng",
-  "Johannesburg CBD","Sandton","Randburg","Roodepoort","Pretoria",
+  "Soweto",
+  "Alexandra",
+  "Tembisa",
+  "Katlehong",
+  "Diepsloot",
+  "Ivory Park",
+  "Orange Farm",
+  "Soshanguve",
+  "Mamelodi",
+  "Thokoza",
+  "Vosloorus",
+  "Sebokeng",
+  "Johannesburg CBD",
+  "Sandton",
+  "Randburg",
+  "Roodepoort",
+  "Pretoria",
 ];
 
 export default function PostGigPage() {
@@ -30,9 +44,16 @@ export default function PostGigPage() {
   const { isLoaded, isSignedIn } = useUser();
 
   const [form, setForm] = useState({
-    title: "", description: "", category: "",
-    suburb: "", payDisplay: "", payType: "negotiable",
-    payAmount: "", slots: "1", isUrgent: false, isFlexible: true,
+    title: "",
+    description: "",
+    category: "",
+    suburb: "",
+    payDisplay: "",
+    payType: "negotiable",
+    payAmount: "",
+    slots: "1",
+    isUrgent: false,
+    isFlexible: true,
     requirements: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -54,10 +75,12 @@ export default function PostGigPage() {
     // Client-side validation
     const errs: Record<string, string> = {};
     if (form.title.trim().length < 5) errs.title = "At least 5 characters";
-    if (form.description.trim().length < 10) errs.description = "At least 10 characters";
+    if (form.description.trim().length < 10)
+      errs.description = "At least 10 characters";
     if (!form.category) errs.category = "Select a category";
     if (!form.suburb) errs.suburb = "Select your suburb";
-    if (!form.payDisplay.trim()) errs.payDisplay = "Describe the pay (e.g. R150/day)";
+    if (!form.payDisplay.trim())
+      errs.payDisplay = "Describe the pay (e.g. R150/day)";
 
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
@@ -80,7 +103,10 @@ export default function PostGigPage() {
           isUrgent: form.isUrgent,
           isFlexible: form.isFlexible,
           requirements: form.requirements
-            ? form.requirements.split(",").map((r) => r.trim()).filter(Boolean)
+            ? form.requirements
+                .split(",")
+                .map((r) => r.trim())
+                .filter(Boolean)
             : [],
           location: {
             type: "Point",
@@ -93,7 +119,9 @@ export default function PostGigPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        setErrors(data.errors ?? { general: data.error ?? "Failed to post gig" });
+        setErrors(
+          data.errors ?? { general: data.error ?? "Failed to post gig" },
+        );
         return;
       }
 
@@ -107,116 +135,171 @@ export default function PostGigPage() {
   }
 
   return (
-    <div className="container" style={{ maxWidth: 640, paddingTop: "var(--space-8)", paddingBottom: "var(--space-12)" }}>
-      <h1 style={{ marginBottom: "var(--space-2)" }}>Post a Gig</h1>
-      <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-size-sm)", marginBottom: "var(--space-8)" }}>
-    <div className="max-w-screen-sm pt-8 pb-12 container">
+    <div className="container max-w-screen-sm pt-8 pb-12">
       <h1 className="mb-2 font-headline text-3xl font-bold">Post a Gig</h1>
       <p className="text-on-surface-variant text-sm mb-8">
         Find someone in your neighbourhood fast.
       </p>
 
       {errors.general && (
-        <div className="alert alert-danger" style={{ marginBottom: "var(--space-5)" }}>
-        <div className="alert alert-danger mb-5">
-          {errors.general}
-        </div>
+        <div className="alert alert-danger mb-5">{errors.general}</div>
       )}
 
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
-      <form onSubmit={handleSubmit} className="gap-5 flex flex-col">
-
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {/* Title */}
         <div className="form-group">
-          <label className="label" htmlFor="title">Gig Title *</label>
-          <input id="title" className={`input ${errors.title ? "input-error" : ""}`}
-          <input id="title" className={`kasi-input ${errors.title ? "border-error" : ""}`}
+          <label className="label" htmlFor="title">
+            Gig Title *
+          </label>
+          <input
+            id="title"
+            className={`kasi-input ${errors.title ? "border-error" : ""}`}
             placeholder="e.g. Car wash needed in Soweto"
-            value={form.title} onChange={(e) => set("title", e.target.value)} />
+            value={form.title}
+            onChange={(e) => set("title", e.target.value)}
+          />
           {errors.title && <span className="error-text">{errors.title}</span>}
         </div>
 
         {/* Category */}
         <div className="form-group">
-          <label className="label" htmlFor="category">Category *</label>
-          <select id="category" className={`input ${errors.category ? "input-error" : ""}`}
-          <select id="category" className={`kasi-input ${errors.category ? "border-error" : ""}`}
-            value={form.category} onChange={(e) => set("category", e.target.value)}>
+          <label className="label" htmlFor="category">
+            Category *
+          </label>
+          <select
+            id="category"
+            className={`kasi-input ${errors.category ? "border-error" : ""}`}
+            value={form.category}
+            onChange={(e) => set("category", e.target.value)}
+          >
             <option value="">Select a category…</option>
-            {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+            {CATEGORIES.map((c) => (
+              <option key={c.value} value={c.value}>
+                {c.label}
+              </option>
+            ))}
           </select>
-          {errors.category && <span className="error-text">{errors.category}</span>}
+          {errors.category && (
+            <span className="error-text">{errors.category}</span>
+          )}
         </div>
 
         {/* Description */}
         <div className="form-group">
-          <label className="label" htmlFor="description">Description *</label>
-          <textarea id="description" className={`input ${errors.description ? "input-error" : ""}`}
-          <textarea id="description" className={`kasi-input ${errors.description ? "border-error" : ""}`}
-            rows={4} placeholder="What needs to be done? Any specific requirements?"
-            value={form.description} onChange={(e) => set("description", e.target.value)} />
-          {errors.description && <span className="error-text">{errors.description}</span>}
+          <label className="label" htmlFor="description">
+            Description *
+          </label>
+          <textarea
+            id="description"
+            className={`kasi-input ${errors.description ? "border-error" : ""}`}
+            rows={4}
+            placeholder="What needs to be done? Any specific requirements?"
+            value={form.description}
+            onChange={(e) => set("description", e.target.value)}
+          />
+          {errors.description && (
+            <span className="error-text">{errors.description}</span>
+          )}
         </div>
 
         {/* Location */}
         <div className="form-group">
-          <label className="label" htmlFor="suburb">Suburb / Township *</label>
-          <select id="suburb" className={`input ${errors.suburb ? "input-error" : ""}`}
-          <select id="suburb" className={`kasi-input ${errors.suburb ? "border-error" : ""}`}
-            value={form.suburb} onChange={(e) => set("suburb", e.target.value)}>
+          <label className="label" htmlFor="suburb">
+            Suburb / Township *
+          </label>
+          <select
+            id="suburb"
+            className={`kasi-input ${errors.suburb ? "border-error" : ""}`}
+            value={form.suburb}
+            onChange={(e) => set("suburb", e.target.value)}
+          >
             <option value="">Select suburb…</option>
-            {SUBURBS.map((s) => <option key={s} value={s}>{s}</option>)}
+            {SUBURBS.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
           </select>
           {errors.suburb && <span className="error-text">{errors.suburb}</span>}
         </div>
 
         {/* Pay */}
         <div className="form-group">
-          <label className="label" htmlFor="payDisplay">Pay *</label>
-          <input id="payDisplay" className={`input ${errors.payDisplay ? "input-error" : ""}`}
-          <input id="payDisplay" className={`kasi-input ${errors.payDisplay ? "border-error" : ""}`}
+          <label className="label" htmlFor="payDisplay">
+            Pay *
+          </label>
+          <input
+            id="payDisplay"
+            className={`kasi-input ${errors.payDisplay ? "border-error" : ""}`}
             placeholder="e.g. R150/day, R80/car, Negotiable"
-            value={form.payDisplay} onChange={(e) => set("payDisplay", e.target.value)} />
-          {errors.payDisplay && <span className="error-text">{errors.payDisplay}</span>}
+            value={form.payDisplay}
+            onChange={(e) => set("payDisplay", e.target.value)}
+          />
+          {errors.payDisplay && (
+            <span className="error-text">{errors.payDisplay}</span>
+          )}
         </div>
 
         {/* Slots */}
         <div className="form-group">
-          <label className="label" htmlFor="slots">Number of people needed</label>
-          <input id="slots" type="number" min={1} max={20} className="input"
-          <input id="slots" type="number" min={1} max={20} className="kasi-input"
-            value={form.slots} onChange={(e) => set("slots", e.target.value)} />
+          <label className="label" htmlFor="slots">
+            Number of people needed
+          </label>
+          <input
+            id="slots"
+            type="number"
+            min={1}
+            max={20}
+            className="kasi-input"
+            value={form.slots}
+            onChange={(e) => set("slots", e.target.value)}
+          />
         </div>
 
         {/* Requirements */}
         <div className="form-group">
-          <label className="label" htmlFor="requirements">Requirements (optional, comma-separated)</label>
-          <input id="requirements" className="input"
-          <input id="requirements" className="kasi-input"
+          <label className="label" htmlFor="requirements">
+            Requirements (optional, comma-separated)
+          </label>
+          <input
+            id="requirements"
+            className="kasi-input"
             placeholder="e.g. own transport, experience preferred"
-            value={form.requirements} onChange={(e) => set("requirements", e.target.value)} />
+            value={form.requirements}
+            onChange={(e) => set("requirements", e.target.value)}
+          />
         </div>
 
         {/* Flags */}
-        <div style={{ display: "flex", gap: "var(--space-5)", flexWrap: "wrap" }}>
-          <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", cursor: "pointer" }}>
-        <div className="gap-5 flex flex-wrap">
-          <label className="gap-2 flex cursor-pointer items-center">
-            <input type="checkbox" checked={form.isUrgent} onChange={(e) => set("isUrgent", e.target.checked)} />
-            <span style={{ fontSize: "var(--font-size-sm)" }}>🔥 Urgent — needed ASAP</span>
-            <span className="text-sm text-on-surface-variant">🔥 Urgent — needed ASAP</span>
+        <div className="flex gap-5 flex-wrap">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={form.isUrgent}
+              onChange={(e) => set("isUrgent", e.target.checked)}
+            />
+            <span className="text-sm text-on-surface-variant">
+              🔥 Urgent — needed ASAP
+            </span>
           </label>
-          <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", cursor: "pointer" }}>
-          <label className="gap-2 flex cursor-pointer items-center">
-            <input type="checkbox" checked={form.isFlexible} onChange={(e) => set("isFlexible", e.target.checked)} />
-            <span style={{ fontSize: "var(--font-size-sm)" }}>🕐 Flexible timing</span>
-            <span className="text-sm text-on-surface-variant">🕐 Flexible timing</span>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={form.isFlexible}
+              onChange={(e) => set("isFlexible", e.target.checked)}
+            />
+            <span className="text-sm text-on-surface-variant">
+              🕐 Flexible timing
+            </span>
           </label>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-lg" disabled={submitting}
-          style={{ marginTop: "var(--space-3)" }}>
-          className="btn btn-primary btn-lg mt-3">
+        <button
+          type="submit"
+          className="btn btn-primary btn-lg"
+          disabled={submitting}
+          className="btn btn-primary btn-lg mt-3"
+        >
           {submitting ? "Posting…" : "Post Gig"}
         </button>
       </form>
