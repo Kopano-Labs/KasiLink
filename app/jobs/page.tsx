@@ -1,6 +1,5 @@
-// app/jobs/page.tsx
 import { Metadata } from "next";
-import { fetchJobs } from "@/Structure/jobs"; // Structure folder defines this
+import { fetchJobs } from "@/lib/jobs";
 import JobCard from "@/components/JobCard";
 
 export const metadata: Metadata = {
@@ -8,8 +7,9 @@ export const metadata: Metadata = {
   description: "Browse local gigs and services instantly.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function JobsPage() {
-  // Use the Structure-defined data access layer
   const jobs = await fetchJobs();
 
   return (
@@ -25,7 +25,7 @@ export default async function JobsPage() {
           {jobs.map((job) => (
             <JobCard
               key={job._id.toString()}
-              {...job} // Structure folder defines JobCard props
+              {...job}
             />
           ))}
         </div>

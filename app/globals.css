@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
+/* ========================================
+   KasiLink Design System
+   Dark Theme (default) + Ubuntu Pulse Light
+   ======================================== */
+
+/* --- Dark Theme (Default) --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000f1e;
+  --foreground: #d4e8ff;
+  --surface: #001526;
+  --surface-container: #002139;
+  --surface-container-high: #002843;
+  --on-surface: #d4e8ff;
+  --on-surface-variant: #8ba4bd;
+  --primary: #a5dbff;
+  --primary-dim: #75c1ee;
+  --primary-container: #83cffd;
+  --on-primary-container: #004561;
+  --secondary: #ffabef;
+  --secondary-container: #4a0047;
+  --on-secondary-container: #ffe3f7;
+  --tertiary: #ffe3f7;
+  --tertiary-container: #ffcef4;
+  --error: #ff716c;
+  --error-container: rgba(255, 113, 108, 0.15);
+  --on-error-container: #ff716c;
+  --outline: #577899;
+  --outline-variant: rgba(87, 120, 153, 0.3);
+  --whatsapp: #25D366;
+  --topbar: #1e293b;
 }
 
+/* --- Light Theme (Ubuntu Pulse) --- */
+.light {
+  --background: #fffef5;
+  --foreground: #1a1a00;
+  --surface: #f5f3e0;
+  --surface-container: #ebe8d0;
+  --surface-container-high: #e0ddc5;
+  --on-surface: #1a1a00;
+  --on-surface-variant: #5c5a40;
+  --primary: #f1e259;
+  --primary-dim: #ffd415;
+  --primary-container: #fff176;
+  --on-primary-container: #3a3800;
+  --secondary: #d1a10a;
+  --secondary-container: #f5e6b8;
+  --on-secondary-container: #4a3600;
+  --tertiary: #adac00;
+  --tertiary-container: #e0df80;
+  --error: #ba1a1a;
+  --error-container: rgba(186, 26, 26, 0.1);
+  --on-error-container: #ba1a1a;
+  --outline: #807040;
+  --outline-variant: rgba(128, 112, 64, 0.3);
+  --whatsapp: #25D366;
+  --topbar: #f5f3e0;
+}
+
+/* --- Tailwind v4 Theme Mapping --- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-container: var(--surface-container);
+  --color-surface-high: var(--surface-container-high);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-primary: var(--primary);
+  --color-primary-dim: var(--primary-dim);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-whatsapp: var(--whatsapp);
+  --color-topbar: var(--topbar);
+
+  --font-headline: 'Source Serif 4', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-label: 'Lexend', sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* --- Base Styles --- */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Utility Classes --- */
+.glass-panel {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 15, 30, 0.8);
+}
+
+.light .glass-panel {
+  background: rgba(255, 254, 245, 0.85);
+}
+
+.message-shadow {
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
+.grid-pattern {
+  background-image: radial-gradient(circle, var(--outline) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* --- Animations --- */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
 }

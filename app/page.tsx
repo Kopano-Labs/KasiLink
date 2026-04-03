@@ -1,6 +1,5 @@
-// app/jobs/page.tsx
 import { Metadata } from "next";
-import { fetchJobs } from "@/lib/jobs"; // Implementation lives in lib/, guided by Structure
+import { fetchJobs } from "@/lib/jobs";
 import JobCard from "@/components/JobCard";
 
 export const metadata: Metadata = {
@@ -8,8 +7,9 @@ export const metadata: Metadata = {
   description: "Browse local gigs and services instantly.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function JobsPage() {
-  // Pull jobs from MongoDB via lib/jobs.ts
   const jobs = await fetchJobs();
 
   return (
