@@ -122,7 +122,7 @@ export default function PricingPage() {
   return (
     <main>
       <h1>Choose your KasiLink plan</h1>
-      <PricingTable />
+      <**PricingTable** />
     </main>
   );
 }
