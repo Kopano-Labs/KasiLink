@@ -10,10 +10,8 @@ import mongoose from "mongoose";
 
 // The context for dynamic routes in Next.js App Router
 type RouteContext = {
-  params: {
   params: Promise<{
     id: string;
-  };
   }>;
 };
 
@@ -41,7 +39,6 @@ const ALLOWED_UPDATE_FIELDS = [
 // ----------------------------------------------------------------
 export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
-    const { id } = params;
     const { id } = await params;
     await connectDB();
 
@@ -74,7 +71,6 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
       return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
     }
 
-    const { id } = params;
     const { id } = await params;
     await connectDB();
 
