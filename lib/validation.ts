@@ -141,16 +141,50 @@ export interface MessagePayload {
 
 export function validateMessage(body: MessagePayload): ValidationResult {
   const errors: Record<string, string> = {};
-  
+
   if (!body.conversationId || typeof body.conversationId !== "string") {
     errors.conversationId = "conversationId is required";
   }
-  
+
   if (!body.text || typeof body.text !== "string" || !body.text.trim()) {
     errors.text = "Message text is required";
   } else if (body.text.trim().length > 1000) {
     errors.text = "Message must be 1000 characters or fewer";
   }
-  
+
+  return { valid: Object.keys(errors).length === 0, errors };
+}
+
+// ----------------------------------------------------------------
+// validateForumPost (used for Task H2 Community Forum)
+// ----------------------------------------------------------------
+export interface ForumPostPayload {
+  title?: unknown;
+  content?: unknown;
+  category?: unknown;
+}
+
+export function validateForumPost(body: ForumPostPayload): ValidationResult {
+  const errors: Record<string, string> = {};
+
+  if (!body.title || typeof body.title !== "string" || !body.title.trim())
+    errors.title = "Title is required";
+  if (!body.content || typeof body.content !== "string" || !body.content.trim())
+    errors.content = "Content is required";
+
+  const validCategories = [
+    "general",
+    "safety",
+    "load-shedding",
+    "success_stories",
+  ];
+  if (
+    !body.category ||
+    typeof body.category !== "string" ||
+    !validCategories.includes(body.category)
+  ) {
+    errors.category = "Invalid category selected";
+  }
+
   return { valid: Object.keys(errors).length === 0, errors };
 }
