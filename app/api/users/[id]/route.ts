@@ -11,8 +11,10 @@ import mongoose from "mongoose";
 // The context for dynamic routes in Next.js App Router
 type RouteContext = {
   params: {
+  params: Promise<{
     id: string;
   };
+  }>;
 };
 
 // Fields safe to return publicly (exclude phone from public view)
@@ -40,6 +42,7 @@ const ALLOWED_UPDATE_FIELDS = [
 export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
     const { id } = params;
+    const { id } = await params;
     await connectDB();
 
     const user = mongoose.Types.ObjectId.isValid(id)
@@ -72,6 +75,7 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
     }
 
     const { id } = params;
+    const { id } = await params;
     await connectDB();
 
     // Load user — support lookup by ObjectId or clerkId
