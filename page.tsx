@@ -1,2 +1,7 @@
-// ALERT: This file was accidentally created in the root directory!
-// Please safely delete this file. It is breaking your build compilation!
+export default function ForumPage() {
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen p-8">
+      <h1 className="text-3xl font-bold">Forum</h1>
+    </main>
+  );
+}
