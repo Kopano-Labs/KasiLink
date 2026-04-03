@@ -110,21 +110,27 @@ export default function PostGigPage() {
     <div className="container" style={{ maxWidth: 640, paddingTop: "var(--space-8)", paddingBottom: "var(--space-12)" }}>
       <h1 style={{ marginBottom: "var(--space-2)" }}>Post a Gig</h1>
       <p style={{ color: "var(--text-secondary)", fontSize: "var(--font-size-sm)", marginBottom: "var(--space-8)" }}>
+    <div className="max-w-screen-sm pt-8 pb-12 container">
+      <h1 className="mb-2 font-headline text-3xl font-bold">Post a Gig</h1>
+      <p className="text-on-surface-variant text-sm mb-8">
         Find someone in your neighbourhood fast.
       </p>
 
       {errors.general && (
         <div className="alert alert-danger" style={{ marginBottom: "var(--space-5)" }}>
+        <div className="alert alert-danger mb-5">
           {errors.general}
         </div>
       )}
 
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+      <form onSubmit={handleSubmit} className="gap-5 flex flex-col">
 
         {/* Title */}
         <div className="form-group">
           <label className="label" htmlFor="title">Gig Title *</label>
           <input id="title" className={`input ${errors.title ? "input-error" : ""}`}
+          <input id="title" className={`kasi-input ${errors.title ? "border-error" : ""}`}
             placeholder="e.g. Car wash needed in Soweto"
             value={form.title} onChange={(e) => set("title", e.target.value)} />
           {errors.title && <span className="error-text">{errors.title}</span>}
@@ -134,6 +140,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="category">Category *</label>
           <select id="category" className={`input ${errors.category ? "input-error" : ""}`}
+          <select id="category" className={`kasi-input ${errors.category ? "border-error" : ""}`}
             value={form.category} onChange={(e) => set("category", e.target.value)}>
             <option value="">Select a category…</option>
             {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
@@ -145,6 +152,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="description">Description *</label>
           <textarea id="description" className={`input ${errors.description ? "input-error" : ""}`}
+          <textarea id="description" className={`kasi-input ${errors.description ? "border-error" : ""}`}
             rows={4} placeholder="What needs to be done? Any specific requirements?"
             value={form.description} onChange={(e) => set("description", e.target.value)} />
           {errors.description && <span className="error-text">{errors.description}</span>}
@@ -154,6 +162,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="suburb">Suburb / Township *</label>
           <select id="suburb" className={`input ${errors.suburb ? "input-error" : ""}`}
+          <select id="suburb" className={`kasi-input ${errors.suburb ? "border-error" : ""}`}
             value={form.suburb} onChange={(e) => set("suburb", e.target.value)}>
             <option value="">Select suburb…</option>
             {SUBURBS.map((s) => <option key={s} value={s}>{s}</option>)}
@@ -165,6 +174,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="payDisplay">Pay *</label>
           <input id="payDisplay" className={`input ${errors.payDisplay ? "input-error" : ""}`}
+          <input id="payDisplay" className={`kasi-input ${errors.payDisplay ? "border-error" : ""}`}
             placeholder="e.g. R150/day, R80/car, Negotiable"
             value={form.payDisplay} onChange={(e) => set("payDisplay", e.target.value)} />
           {errors.payDisplay && <span className="error-text">{errors.payDisplay}</span>}
@@ -174,6 +184,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="slots">Number of people needed</label>
           <input id="slots" type="number" min={1} max={20} className="input"
+          <input id="slots" type="number" min={1} max={20} className="kasi-input"
             value={form.slots} onChange={(e) => set("slots", e.target.value)} />
         </div>
 
@@ -181,6 +192,7 @@ export default function PostGigPage() {
         <div className="form-group">
           <label className="label" htmlFor="requirements">Requirements (optional, comma-separated)</label>
           <input id="requirements" className="input"
+          <input id="requirements" className="kasi-input"
             placeholder="e.g. own transport, experience preferred"
             value={form.requirements} onChange={(e) => set("requirements", e.target.value)} />
         </div>
@@ -188,17 +200,23 @@ export default function PostGigPage() {
         {/* Flags */}
         <div style={{ display: "flex", gap: "var(--space-5)", flexWrap: "wrap" }}>
           <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", cursor: "pointer" }}>
+        <div className="gap-5 flex flex-wrap">
+          <label className="gap-2 flex cursor-pointer items-center">
             <input type="checkbox" checked={form.isUrgent} onChange={(e) => set("isUrgent", e.target.checked)} />
             <span style={{ fontSize: "var(--font-size-sm)" }}>🔥 Urgent — needed ASAP</span>
+            <span className="text-sm text-on-surface-variant">🔥 Urgent — needed ASAP</span>
           </label>
           <label style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", cursor: "pointer" }}>
+          <label className="gap-2 flex cursor-pointer items-center">
             <input type="checkbox" checked={form.isFlexible} onChange={(e) => set("isFlexible", e.target.checked)} />
             <span style={{ fontSize: "var(--font-size-sm)" }}>🕐 Flexible timing</span>
+            <span className="text-sm text-on-surface-variant">🕐 Flexible timing</span>
           </label>
         </div>
 
         <button type="submit" className="btn btn-primary btn-lg" disabled={submitting}
           style={{ marginTop: "var(--space-3)" }}>
+          className="btn btn-primary btn-lg mt-3">
           {submitting ? "Posting…" : "Post Gig"}
         </button>
       </form>
