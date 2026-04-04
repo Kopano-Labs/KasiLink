@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
@@ -68,6 +69,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" data-theme="dark" suppressHydrationWarning>
         <body className="bg-background text-on-background font-body antialiased">
+          <GoogleAnalytics />
           <ThemeProvider>
             <Navbar />
             <main className="page-content">{children}</main>
