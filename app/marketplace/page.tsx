@@ -37,6 +37,9 @@ const CATEGORIES = [
   { value: "other", label: "Other" },
 ];
 
+const CITY_OPTIONS = ["", "Johannesburg", "Cape Town"];
+const RADIUS_OPTIONS = ["5", "10", "25", "50"];
+
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const mins = Math.floor(diff / 60000);
@@ -122,6 +125,9 @@ function MarketplaceInner() {
 
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [category, setCategory] = useState(searchParams.get("category") ?? "");
+  const [suburb, setSuburb] = useState(searchParams.get("suburb") ?? "");
+  const [city, setCity] = useState(searchParams.get("city") ?? "");
+  const [radius, setRadius] = useState(searchParams.get("radius") ?? "10");
   const [userCoords, setUserCoords] = useState<{
     lat: number;
     lng: number;
@@ -148,6 +154,9 @@ function MarketplaceInner() {
       const params = new URLSearchParams();
       if (query) params.set("q", query);
       if (category) params.set("category", category);
+      if (suburb) params.set("suburb", suburb);
+      if (city) params.set("city", city);
+      if (radius) params.set("radius", radius);
       if (userCoords) {
         params.set("lat", String(userCoords.lat));
         params.set("lng", String(userCoords.lng));
@@ -165,17 +174,26 @@ function MarketplaceInner() {
     } finally {
       setLoading(false);
     }
-  }, [query, category, userCoords, page]);
+  }, [query, category, suburb, city, radius, userCoords, page]);
 
   useEffect(() => {
     fetchGigs();
   }, [fetchGigs]);
 
   // Sync URL params
-  const applyFilter = (newQ: string, newCat: string) => {
+  const applyFilter = (
+    newQ: string,
+    newCat: string,
+    newSuburb: string,
+    newCity: string,
+    newRadius: string,
+  ) => {
     const params = new URLSearchParams();
     if (newQ) params.set("q", newQ);
     if (newCat) params.set("category", newCat);
+    if (newSuburb) params.set("suburb", newSuburb);
+    if (newCity) params.set("city", newCity);
+    if (newRadius) params.set("radius", newRadius);
     router.replace(`/marketplace?${params.toString()}`, { scroll: false });
     setPage(1);
   };
@@ -184,13 +202,13 @@ function MarketplaceInner() {
     <div className="container pt-8 pb-12">
       <div className="mb-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
         <div>
-        <h1 className="mb-2 font-headline text-3xl font-bold">
-          Find your next hustle
-        </h1>
-        <p className="text-on-surface-variant text-sm">
-          {userCoords ? "Showing gigs near you" : "Gigs in South Africa"} ·{" "}
-          {total} available
-        </p>
+          <h1 className="mb-2 font-headline text-3xl font-bold">
+            Find your next hustle
+          </h1>
+          <p className="text-on-surface-variant text-sm">
+            {userCoords ? "Showing gigs near you" : "Gigs in South Africa"} ·{" "}
+            {total} available
+          </p>
         </div>
         <div className="kasi-card bg-surface-container-low min-w-[260px]">
           <p className="text-xs uppercase tracking-wider text-outline mb-1">
@@ -211,15 +229,56 @@ function MarketplaceInner() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") applyFilter(query, category);
+            if (e.key === "Enter")
+              applyFilter(query, category, suburb, city, radius);
           }}
         />
         <button
           className="btn btn-primary"
-          onClick={() => applyFilter(query, category)}
+          onClick={() => applyFilter(query, category, suburb, city, radius)}
         >
           Search
         </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr_0.7fr] gap-3 mb-5">
+        <input
+          type="text"
+          className="kasi-input"
+          placeholder="Filter by suburb or township"
+          value={suburb}
+          onChange={(e) => setSuburb(e.target.value)}
+          onBlur={() => applyFilter(query, category, suburb, city, radius)}
+        />
+        <select
+          className="kasi-input"
+          value={city}
+          onChange={(e) => {
+            setCity(e.target.value);
+            applyFilter(query, category, suburb, e.target.value, radius);
+          }}
+        >
+          <option value="">All cities</option>
+          {CITY_OPTIONS.filter(Boolean).map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <select
+          className="kasi-input"
+          value={radius}
+          onChange={(e) => {
+            setRadius(e.target.value);
+            applyFilter(query, category, suburb, city, e.target.value);
+          }}
+        >
+          {RADIUS_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {option} km radius
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Category chips */}
@@ -229,7 +288,7 @@ function MarketplaceInner() {
             key={cat.value}
             onClick={() => {
               setCategory(cat.value);
-              applyFilter(query, cat.value);
+              applyFilter(query, cat.value, suburb, city, radius);
             }}
             className={`shrink-0 px-4 py-1.5 rounded-full text-sm cursor-pointer whitespace-nowrap transition-all border ${
               category === cat.value
@@ -267,6 +326,16 @@ function MarketplaceInner() {
             Verified providers and reviews are visible before you engage.
           </p>
         </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        {suburb && (
+          <span className="badge badge-secondary">Suburb: {suburb}</span>
+        )}
+        {city && <span className="badge badge-secondary">City: {city}</span>}
+        {userCoords && (
+          <span className="badge badge-primary">Nearby within {radius} km</span>
+        )}
       </div>
 
       {/* Gig grid */}

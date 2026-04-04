@@ -142,3 +142,17 @@ Changes recorded:
 - Re-established canonical ownership for `api/users/[id]`, `api/notifications`, `verified/[id]`, and `water-outages`.
 - Realigned home, marketplace, profile, navbar, footer, and utility surfaces toward the Structure roadmap.
 - Preserved `/jobs` only as a redirect to `/marketplace` to avoid duplicate marketplace ownership.
+
+### 2026-04-04 - High Priority Marketplace Pass
+
+Author:
+- Codex / GPT-5
+
+Signature:
+- `Codex-Structure-Alignment-v1`
+
+Changes recorded:
+- Upgraded `/api/gigs` to support `providerId`, `suburb`, `city`, and `radius` filtering.
+- Added server-side distance calculation for marketplace results when coordinates are available.
+- Fixed profile dependence on `providerId=me` by supporting that query on the gigs API.
+- Upgraded marketplace filtering to expose suburb, city, and radius controls consistent with H6 `Location-Based Filtering (Geo)`.

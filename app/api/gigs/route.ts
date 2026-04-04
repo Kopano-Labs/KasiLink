@@ -7,12 +7,15 @@ import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/db";
 import Gig from "@/lib/models/Gig";
 import User from "@/lib/models/User";
+import { distanceKm } from "@/lib/geo";
 
 // ----------------------------------------------------------------
 // GET — list gigs with optional filters
 // Query params:
 //   lat, lng, radius (km) — proximity filter
 //   category             — gig category
+//   suburb, city         — text location filters
+//   providerId           — poster filter, supports "me" for signed-in provider
 //   status               — default "open"
 //   q                    — text search
 //   page, limit          — pagination
@@ -26,7 +29,10 @@ export async function GET(req: NextRequest) {
     const lng = parseFloat(searchParams.get("lng") ?? "");
     const radius = parseFloat(searchParams.get("radius") ?? "10"); // km
     const category = searchParams.get("category");
-    const status = searchParams.get("status") ?? "open";
+    const suburb = searchParams.get("suburb")?.trim();
+    const city = searchParams.get("city")?.trim();
+    const providerIdParam = searchParams.get("providerId");
+    const status = searchParams.get("status");
     const q = searchParams.get("q");
     const page = Math.max(1, parseInt(searchParams.get("page") ?? "1"));
     const limit = Math.min(50, parseInt(searchParams.get("limit") ?? "20"));
@@ -34,9 +40,35 @@ export async function GET(req: NextRequest) {
 
     // Build filter
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const filter: Record<string, any> = { status };
+    const filter: Record<string, any> = {};
+
+    if (status) {
+      filter.status = status;
+    } else if (!providerIdParam) {
+      filter.status = "open";
+    }
 
     if (category) filter.category = category;
+
+    if (suburb) {
+      filter["location.suburb"] = new RegExp(`^${suburb}$`, "i");
+    }
+
+    if (city) {
+      filter["location.city"] = new RegExp(`^${city}$`, "i");
+    }
+
+    if (providerIdParam) {
+      if (providerIdParam === "me") {
+        const { userId } = await auth();
+        if (!userId) {
+          return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
+        }
+        filter.providerId = userId;
+      } else {
+        filter.providerId = providerIdParam;
+      }
+    }
 
     // Geo-proximity with bounds checking (requires 2dsphere index)
     if (
@@ -76,8 +108,25 @@ export async function GET(req: NextRequest) {
       Gig.countDocuments(filter),
     ]);
 
+    const gigsWithDistance = gigs.map((gig) => {
+      if (
+        !isNaN(lat) &&
+        !isNaN(lng) &&
+        Array.isArray(gig.location?.coordinates) &&
+        gig.location.coordinates.length === 2
+      ) {
+        const [gigLng, gigLat] = gig.location.coordinates;
+        return {
+          ...gig,
+          distance: distanceKm(lat, lng, gigLat, gigLng),
+        };
+      }
+
+      return gig;
+    });
+
     return NextResponse.json({
-      gigs,
+      gigs: gigsWithDistance,
       pagination: {
         page,
         limit,
