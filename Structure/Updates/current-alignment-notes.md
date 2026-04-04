@@ -171,3 +171,16 @@ Changes recorded:
 - Connected USSD gig lookup to real open gigs in MongoDB.
 - Connected USSD application flow to real `Application`, `Gig`, `User`, and `Notification` records when the caller phone matches a registered KasiLink profile.
 - Added verified-provider and my-applications USSD branches as higher-value flow extensions.
+
+### 2026-04-04 - USSD Hardening Pass
+
+Author:
+- Codex / GPT-5
+
+Signature:
+- `Codex-Structure-Alignment-v1`
+
+Changes recorded:
+- Escaped suburb input before building the `/api/ussd` MongoDB regex query to prevent regex injection and malformed-search regressions.
+- Added basic request guards for missing caller phone numbers and empty suburb/township input.
+- Preserved the stateless Africa's Talking flow and canonical ownership of `/api/ussd` at `app/api/ussd/route.ts`.

@@ -29,12 +29,16 @@ function normalizeSegments(text: string) {
     .filter(Boolean);
 }
 
+function escapeRegex(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 async function findOpenGigsBySuburb(suburb: string) {
   await connectDB();
 
   return Gig.find({
     status: "open",
-    "location.suburb": new RegExp(suburb, "i"),
+    "location.suburb": new RegExp(escapeRegex(suburb), "i"),
     $or: [
       { expiresAt: { $exists: false } },
       { expiresAt: null },
@@ -148,9 +152,13 @@ async function fetchVerifiedProviders() {
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    const phoneNumber = String(formData.get("phoneNumber") ?? "");
+    const phoneNumber = String(formData.get("phoneNumber") ?? "").trim();
     const text = String(formData.get("text") ?? "");
     const segments = normalizeSegments(text);
+
+    if (!phoneNumber) {
+      return end("Phone number missing. Please dial again from your mobile line.");
+    }
 
     if (segments.length === 0) {
       return con(
@@ -172,7 +180,11 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      const suburb = segments[1];
+      const suburb = sanitize(segments[1]).slice(0, 60);
+      if (!suburb) {
+        return end("Enter a valid suburb or township name and try again.");
+      }
+
       const gigs = await findOpenGigsBySuburb(suburb);
 
       if (segments.length === 2) {
