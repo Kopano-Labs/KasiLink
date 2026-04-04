@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 interface Provider {
@@ -13,19 +13,35 @@ interface Provider {
   verified?: boolean;
 }
 
+const PAGE_SIZE = 8;
+
 export default function VerifiedProvidersPage() {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetch("/api/users?verified=true")
+    const controller = new AbortController();
+    fetch(`/api/users?verified=true&page=${page}&limit=${PAGE_SIZE}`, {
+      signal: controller.signal,
+    })
       .then((res) => res.json())
-      .then((data) => setProviders(data.providers || []))
-      .catch((err) => console.error("Failed to fetch verified providers", err))
+      .then((data) => {
+        setProviders(data.providers || []);
+        setHasMore(Boolean(data.hasMore));
+      })
+      .catch((err) => {
+        if (err.name !== "AbortError") {
+          console.error("Failed to fetch verified providers", err);
+        }
+      })
       .finally(() => setLoading(false));
-  }, []);
+
+    return () => controller.abort();
+  }, [page]);
 
   const categories = ["All", ...new Set(providers.map((p) => p.category))];
   const visibleProviders = providers.filter((provider) => {
@@ -38,22 +54,42 @@ export default function VerifiedProvidersPage() {
     return matchesQuery && matchesCategory;
   });
 
+  const metrics = useMemo(
+    () => [
+      { label: "Page", value: page },
+      { label: "Showing", value: visibleProviders.length },
+      { label: "Trust", value: "Live" },
+    ],
+    [page, visibleProviders.length],
+  );
+
   return (
-    <div className="container pt-8 pb-12 max-w-4xl mx-auto">
+    <div className="container mx-auto max-w-4xl pt-8 pb-12">
       <div className="mb-8 text-center">
-        <span className="inline-block mb-3 px-3 py-1 rounded-full bg-success-container text-success font-semibold text-xs tracking-wider uppercase">
+        <span className="mb-3 inline-block rounded-full bg-success-container px-3 py-1 text-xs font-semibold uppercase tracking-wider text-success">
           Trust & Safety
         </span>
-        <h1 className="font-headline text-3xl md:text-4xl font-bold mb-3">
+        <h1 className="mb-3 font-headline text-3xl font-bold md:text-4xl">
           Verified Providers
         </h1>
-        <p className="text-on-surface-variant text-base max-w-xl mx-auto">
+        <p className="mx-auto max-w-xl text-base text-on-surface-variant">
           Book with confidence. These KasiLink providers have been vetted and
           consistently deliver high-quality gigs to the community.
         </p>
       </div>
 
-      <div className="flex gap-3 mb-8 max-w-xl mx-auto">
+      <section className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        {metrics.map((metric) => (
+          <article key={metric.label} className="kasi-card text-center">
+            <div className="text-xs uppercase tracking-wider text-outline">
+              {metric.label}
+            </div>
+            <div className="mt-2 text-2xl font-bold">{metric.value}</div>
+          </article>
+        ))}
+      </section>
+
+      <div className="mx-auto mb-8 flex max-w-xl gap-3">
         <input
           type="search"
           className="kasi-input flex-1"
@@ -63,7 +99,11 @@ export default function VerifiedProvidersPage() {
         />
         <button
           className="btn btn-primary px-6"
-          onClick={() => setActiveCategory("All")}
+          onClick={() => {
+            setQuery("");
+            setActiveCategory("All");
+            setPage(1);
+          }}
         >
           Reset
         </button>
@@ -73,11 +113,12 @@ export default function VerifiedProvidersPage() {
         {categories.map((category) => (
           <button
             key={category}
-            onClick={() => setActiveCategory(category)}
+            onClick={() => {
+              setActiveCategory(category);
+              setPage(1);
+            }}
             className={`badge transition-colors ${
-              activeCategory === category
-                ? "badge-primary"
-                : "badge-secondary"
+              activeCategory === category ? "badge-primary" : "badge-secondary"
             }`}
           >
             {category}
@@ -86,35 +127,32 @@ export default function VerifiedProvidersPage() {
       </div>
 
       {loading ? (
-        <div className="text-center py-12 text-on-surface-variant">
+        <div className="py-12 text-center text-on-surface-variant">
           Loading verified providers...
-          <div className="mt-3 text-xs text-outline">
-            Fetching live trust signals from the user directory.
-          </div>
         </div>
       ) : visibleProviders.length === 0 ? (
-        <div className="kasi-card text-center text-on-surface-variant py-12">
+        <div className="kasi-card py-12 text-center text-on-surface-variant">
           <p>No verified providers found for this filter.</p>
           <p className="mt-2 text-xs text-outline">
             Try a broader search or switch back to All.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {visibleProviders.map((provider) => (
             <div
               key={provider.clerkId}
-              className="kasi-card flex flex-col hover:border-primary transition-colors"
+              className="kasi-card flex flex-col transition-colors hover:border-primary"
             >
-              <div className="flex justify-between items-start mb-3">
+              <div className="mb-3 flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-container text-lg font-bold text-primary">
                     {provider.displayName.charAt(0)}
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg leading-tight flex items-center gap-1">
-                      {provider.displayName}{" "}
-                      <span className="text-success text-sm" title="Verified">
+                    <h3 className="flex items-center gap-1 text-lg font-bold leading-tight">
+                      {provider.displayName}
+                      <span className="text-sm text-success" title="Verified">
                         ✓
                       </span>
                     </h3>
@@ -127,9 +165,9 @@ export default function VerifiedProvidersPage() {
                   {provider.category}
                 </span>
               </div>
-              <div className="flex items-center gap-2 mb-4">
+              <div className="mb-4 flex items-center gap-2">
                 <span className="text-warning">★</span>
-                <span className="font-bold text-sm">
+                <span className="text-sm font-bold">
                   {provider.rating.toFixed(1)}
                 </span>
                 <span className="text-xs text-outline">
@@ -137,7 +175,7 @@ export default function VerifiedProvidersPage() {
                 </span>
                 <span className="badge badge-success ml-auto">Verified</span>
               </div>
-              <div className="mt-auto pt-3 border-t border-outline-variant/30 flex gap-2">
+              <div className="mt-auto flex gap-2 border-t border-outline-variant/30 pt-3">
                 <Link
                   href={`/verified/${provider.clerkId}`}
                   className="btn btn-outline btn-sm flex-1 text-center"
@@ -155,6 +193,24 @@ export default function VerifiedProvidersPage() {
           ))}
         </div>
       )}
+
+      <div className="mt-8 flex items-center justify-between gap-3">
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => setPage((current) => Math.max(current - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <span className="text-xs text-outline">Page {page}</span>
+        <button
+          className="btn btn-outline btn-sm"
+          onClick={() => setPage((current) => current + 1)}
+          disabled={!hasMore}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }

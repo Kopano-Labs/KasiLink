@@ -7,9 +7,19 @@ export async function GET(req: NextRequest) {
     await connectDB();
     const { searchParams } = req.nextUrl;
     const isVerified = searchParams.get("verified") === "true";
+    const page = Math.max(Number(searchParams.get("page") ?? 1) || 1, 1);
+    const limit = Math.min(Math.max(Number(searchParams.get("limit") ?? 12) || 12, 1), 24);
+    const skip = (page - 1) * limit;
 
     const filter = isVerified ? { isVerified: true } : {};
-    const users = await User.find(filter).sort({ createdAt: -1 }).limit(50).lean();
+    const [users, total] = await Promise.all([
+      User.find(filter)
+        .sort({ "rating.average": -1, "rating.count": -1, createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      User.countDocuments(filter),
+    ]);
 
     // Map to expected Provider interface format
     const providers = users.map((u) => ({
@@ -24,7 +34,13 @@ export async function GET(req: NextRequest) {
       verified: u.isVerified,
     }));
 
-    return NextResponse.json({ providers });
+    return NextResponse.json({
+      providers,
+      page,
+      limit,
+      total,
+      hasMore: skip + providers.length < total,
+    });
   } catch (err) {
     console.error("[GET /api/users]", err);
     return NextResponse.json(

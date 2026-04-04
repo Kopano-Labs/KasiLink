@@ -16,7 +16,10 @@ export async function GET(req: NextRequest) {
     const category = searchParams.get("category");
     const q = searchParams.get("q");
     const page = Math.max(Number(searchParams.get("page") ?? 1) || 1, 1);
-    const limit = Math.min(Math.max(Number(searchParams.get("limit") ?? 20) || 20, 1), 50);
+    const limit = Math.min(
+      Math.max(Number(searchParams.get("limit") ?? 20) || 20, 1),
+      50,
+    );
     const skip = (page - 1) * limit;
 
     const filter: Record<string, unknown> = {};
@@ -27,7 +30,11 @@ export async function GET(req: NextRequest) {
     }
 
     const [posts, total] = await Promise.all([
-      ForumPost.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      ForumPost.find(filter)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
       ForumPost.countDocuments(filter),
     ]);
 
@@ -67,9 +74,25 @@ export async function POST(req: NextRequest) {
     const author = await User.findOne({ clerkId: userId });
     const authorName = author?.displayName || "Anonymous";
 
+    const sanitizedTitle = sanitize(body.title);
+    const sanitizedContent = sanitize(body.content);
+
+    if (sanitizedTitle.length > 150) {
+      return NextResponse.json(
+        { error: "Title must be 150 characters or fewer" },
+        { status: 400 },
+      );
+    }
+    if (sanitizedContent.length > 2000) {
+      return NextResponse.json(
+        { error: "Content must be 2000 characters or fewer" },
+        { status: 400 },
+      );
+    }
+
     const post = await ForumPost.create({
-      title: sanitize(body.title).slice(0, 150),
-      content: sanitize(body.content).slice(0, 2000),
+      title: sanitizedTitle,
+      content: sanitizedContent,
       authorId: userId,
       authorName,
       category: body.category,

@@ -7,6 +7,7 @@ export interface IForumPost extends Document {
   authorName: string;
   category: "general" | "safety" | "load-shedding" | "success_stories";
   upvotes: number;
+  flags: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,6 +24,7 @@ const ForumPostSchema = new Schema<IForumPost>(
       default: "general",
     },
     upvotes: { type: Number, default: 0 },
+    flags: { type: Number, default: 0 },
   },
   { timestamps: true },
 );
