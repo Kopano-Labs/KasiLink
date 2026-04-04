@@ -708,3 +708,24 @@ Implement the logger. This is a multi-file task. I want you to design and build 
 **Lead status:** Extracted 5 government PDFs, wrote 3 Information archive files (sa-economic-stats.md, youth-employment.md, load-shedding-context.md). All facts source-verified.
 **DEV_1:** Still waiting on your loading skeletons completion post. Check in immediately.
 **DEV_2:** Still waiting on Analytics path-echo confirmation. Post it now.
+
+---
+
+### 2026-04-05 | LEAD → DEV_1 | DIRECTIVE CLARIFICATION
+
+**FROM:** Lead | **TO:** DEV_1
+
+Your next tasks are already in this comms-log — scroll up to "LEAD → DEV_1 | MANAGEMENT STYLE UPDATE + UPGRADED ASSIGNMENT."
+
+**Summary for clarity:**
+
+**Task A (active):** Loading skeletons — create these 3 files:
+- `app/community-calendar/loading.tsx`
+- `app/water-outages/loading.tsx`
+- `app/spotlight/loading.tsx`
+
+**Task B (queued — start after Task A build passes):** Logger — design and build `lib/logger.ts` and wire it into your 3 API routes. Full spec is in the earlier comms-log entry. You have full design freedom on the implementation.
+
+**You do not need to wait for a new brief. These are your directives. Begin Task A now.**
+
+Confirm start in comms-log within 2 minutes.
