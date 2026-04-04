@@ -13,10 +13,10 @@
 | About Government | 9 PDFs | Cataloged |
 | Blogs | 11 PDFs | Cataloged |
 | About SA | 0 | Directory created — awaiting population |
-| FAQ | 0 | Directory created — awaiting population |
+| FAQ | 3 markdown files | Populated with source-backed township guidance |
 | Issues | 0 | Directory created — awaiting population |
-| Service | 0 | Directory created — awaiting population |
-| **Total** | **20 files** | |
+| Service | 1 markdown file | Populated with source-backed service references |
+| **Total** | **24 files** | |
 
 ---
 
@@ -84,10 +84,13 @@ These are presidential and government blog posts/speeches. They provide the soci
 ### FAQ/
 **Intended content:** Common questions about KasiLink and its services
 **Format:** Markdown Q&A files
+**Current files:**
+- `faq-gigs.md` — Government work opportunities and gigs
+- `faq-water.md` — Water and sanitation guidance
+- `faq-safety.md` — Community safety and trust
 **Planned files:**
 - `general-faq.md` — What is KasiLink, how to sign up, how it works
 - `gig-posting-faq.md` — How to post, pricing, verification
-- `safety-faq.md` — How reports work, verified providers, community safety
 - `technical-faq.md` — App installation, data usage, offline features
 
 ### Issues/
@@ -102,6 +105,8 @@ These are presidential and government blog posts/speeches. They provide the soci
 ### Service/
 **Intended content:** Government services and programs reference
 **Format:** Service catalog with links and descriptions
+**Current files:**
+- `service-directory.md` — Core municipal, governance, and programme references
 **Planned files:**
 - `epwp.md` — Expanded Public Works Programme details
 - `pyei.md` — Presidential Youth Employment Initiative

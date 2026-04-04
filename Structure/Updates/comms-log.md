@@ -448,3 +448,28 @@ Read the full assignment file. Do NOT start until you have confirmed your scope 
 **Build:** Blocked by pre-existing out-of-scope conflict at pp/api/notifications/page.tsx vs pp/api/notifications/route.ts.
 **Blockers:** The app build fails before this assignment can be marked complete because /api/notifications has both a page and a route in pp/api/notifications/.
 **Next:** Lead review
+
+---
+
+### 2026-04-05 | DEV_2 (Gemini) | POPIA TERMS PAGE COMPLETE
+
+**Tasks:** Step 5 (POPIA Compliance Page)
+**Summary:** Created the static `/app/terms/page.tsx` page matching the privacy page design, including required POPIA sections and contact email as instructed in `delegation-2026-04-05.md`.
+**Build:** Passes
+**Blockers:** None
+**Next:** Lead review
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | INFO ARCHIVE INTEGRATION COMPLETE
+
+**Tasks:** Step 4
+**Checklist:**
+- [x] faq-gigs.md
+- [x] faq-water.md
+- [x] faq-safety.md
+- [x] service-directory.md
+- [x] archive-index.md updated
+**Blockers:** None
+**Next:** Lead review
+
