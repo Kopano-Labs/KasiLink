@@ -10,11 +10,14 @@ interface Provider {
   rating: number;
   reviewCount: number;
   location: string;
+  verified?: boolean;
 }
 
 export default function VerifiedProvidersPage() {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     fetch("/api/users?verified=true")
@@ -23,6 +26,17 @@ export default function VerifiedProvidersPage() {
       .catch((err) => console.error("Failed to fetch verified providers", err))
       .finally(() => setLoading(false));
   }, []);
+
+  const categories = ["All", ...new Set(providers.map((p) => p.category))];
+  const visibleProviders = providers.filter((provider) => {
+    const matchesQuery =
+      !query ||
+      provider.displayName.toLowerCase().includes(query.toLowerCase()) ||
+      provider.category.toLowerCase().includes(query.toLowerCase());
+    const matchesCategory =
+      activeCategory === "All" || provider.category === activeCategory;
+    return matchesQuery && matchesCategory;
+  });
 
   return (
     <div className="container pt-8 pb-12 max-w-4xl mx-auto">
@@ -43,22 +57,51 @@ export default function VerifiedProvidersPage() {
         <input
           type="search"
           className="kasi-input flex-1"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="Search by name or category..."
         />
-        <button className="btn btn-primary px-6">Search</button>
+        <button
+          className="btn btn-primary px-6"
+          onClick={() => setActiveCategory("All")}
+        >
+          Reset
+        </button>
+      </div>
+
+      <div className="mb-8 flex flex-wrap justify-center gap-2">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`badge transition-colors ${
+              activeCategory === category
+                ? "badge-primary"
+                : "badge-secondary"
+            }`}
+          >
+            {category}
+          </button>
+        ))}
       </div>
 
       {loading ? (
         <div className="text-center py-12 text-on-surface-variant">
           Loading verified providers...
+          <div className="mt-3 text-xs text-outline">
+            Fetching live trust signals from the user directory.
+          </div>
         </div>
-      ) : providers.length === 0 ? (
+      ) : visibleProviders.length === 0 ? (
         <div className="kasi-card text-center text-on-surface-variant py-12">
-          <p>No verified providers found.</p>
+          <p>No verified providers found for this filter.</p>
+          <p className="mt-2 text-xs text-outline">
+            Try a broader search or switch back to All.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {providers.map((provider) => (
+          {visibleProviders.map((provider) => (
             <div
               key={provider.clerkId}
               className="kasi-card flex flex-col hover:border-primary transition-colors"
@@ -92,6 +135,7 @@ export default function VerifiedProvidersPage() {
                 <span className="text-xs text-outline">
                   ({provider.reviewCount} reviews)
                 </span>
+                <span className="badge badge-success ml-auto">Verified</span>
               </div>
               <div className="mt-auto pt-3 border-t border-outline-variant/30 flex gap-2">
                 <Link

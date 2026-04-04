@@ -17,6 +17,8 @@ interface ProviderProfile {
   category: string;
   rating: number;
   reviewCount: number;
+  verified?: boolean;
+  verifiedAt?: string | null;
   location: string;
   about: string;
 }
@@ -84,21 +86,28 @@ export default function VerifiedProviderProfilePage({
             {provider.displayName.charAt(0)}
           </div>
           <div className="flex-1">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
               <h1 className="font-headline text-3xl font-bold">
                 {provider.displayName}
               </h1>
-              <span className="badge badge-success shrink-0">Verified</span>
+              <span className="badge badge-success shrink-0">
+                {provider.verified === false ? "Unverified" : "Verified"}
+              </span>
             </div>
             <p className="text-on-surface-variant text-base mb-3">
               {provider.category} · {provider.location}
             </p>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-warning text-lg">★</span>
               <span className="font-bold">{provider.rating.toFixed(1)}</span>
               <span className="text-sm text-outline">
                 ({provider.reviewCount} community reviews)
               </span>
+              {provider.verifiedAt && (
+                <span className="text-xs text-outline">
+                  Verified {new Date(provider.verifiedAt).toLocaleDateString()}
+                </span>
+              )}
             </div>
             <div className="flex gap-3">
               <Link href="/chat" className="btn btn-primary">
@@ -117,6 +126,12 @@ export default function VerifiedProviderProfilePage({
       <h2 className="font-headline text-2xl font-bold mb-4">
         Community Reviews
       </h2>
+      <div className="kasi-card mb-4">
+        <p className="text-sm text-on-surface-variant">
+          Reviews are tied to real gigs and roll into the provider&apos;s trust
+          summary after each submission.
+        </p>
+      </div>
       {reviews.length === 0 ? (
         <div className="kasi-card text-center text-on-surface-variant py-8">
           No reviews available yet.

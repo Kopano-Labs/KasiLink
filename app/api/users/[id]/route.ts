@@ -22,6 +22,8 @@ export async function GET(
       category: user.categories?.[0] || "General",
       rating: user.rating?.average ?? 0,
       reviewCount: user.rating?.count ?? 0,
+      verified: user.isVerified,
+      verifiedAt: user.verifiedAt ?? null,
       location: user.location?.suburb
         ? `${user.location.suburb}, ${user.location.city}`
         : "South Africa",

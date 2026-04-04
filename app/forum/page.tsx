@@ -18,6 +18,12 @@ const discussionTopics = [
   },
 ];
 
+const trustGuidelines = [
+  "Confirm pay, timing, and location before meeting.",
+  "Use verified profiles when you can, especially for first-time jobs.",
+  "Report suspicious listings or unsafe behavior through the community flow.",
+];
+
 export default function ForumPage() {
   return (
     <div className="container pt-8 pb-12 max-w-5xl mx-auto">
@@ -45,6 +51,30 @@ export default function ForumPage() {
         ))}
       </section>
 
+      <section className="kasi-card mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h2 className="font-headline text-xl font-bold mb-2">
+              Community trust rules
+            </h2>
+            <p className="text-sm text-on-surface-variant">
+              Simple checks that keep local work exchanges safer and reduce
+              avoidable disputes.
+            </p>
+          </div>
+          <Link href="/verified" className="btn btn-outline">
+            Browse verified providers
+          </Link>
+        </div>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+          {trustGuidelines.map((item) => (
+            <div key={item} className="rounded-xl bg-surface-container-low p-4">
+              <p className="text-sm text-on-surface-variant">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="kasi-card text-center">
         <h2 className="font-headline text-2xl font-bold mb-3">
           Forum features are being prepared
@@ -60,6 +90,9 @@ export default function ForumPage() {
           </Link>
           <Link href="/verified" className="btn btn-outline">
             View Verified Providers
+          </Link>
+          <Link href="/water-outages" className="btn btn-outline">
+            Utility Alerts
           </Link>
         </div>
       </section>
