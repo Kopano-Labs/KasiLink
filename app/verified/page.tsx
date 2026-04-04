@@ -17,36 +17,11 @@ export default function VerifiedProvidersPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Placeholder for fetching verified providers dynamically.
-    setTimeout(() => {
-      setProviders([
-        {
-          clerkId: "1",
-          displayName: "Sipho's Plumbing",
-          category: "repairs",
-          rating: 4.8,
-          reviewCount: 12,
-          location: "Soweto",
-        },
-        {
-          clerkId: "2",
-          displayName: "Thandi Cleans",
-          category: "cleaning",
-          rating: 5.0,
-          reviewCount: 34,
-          location: "Tembisa",
-        },
-        {
-          clerkId: "3",
-          displayName: "Kagiso Tutors",
-          category: "tutoring",
-          rating: 4.9,
-          reviewCount: 8,
-          location: "Alexandra",
-        },
-      ]);
-      setLoading(false);
-    }, 1000);
+    fetch("/api/users?verified=true")
+      .then((res) => res.json())
+      .then((data) => setProviders(data.providers || []))
+      .catch((err) => console.error("Failed to fetch verified providers", err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -119,9 +94,12 @@ export default function VerifiedProvidersPage() {
                 </span>
               </div>
               <div className="mt-auto pt-3 border-t border-outline-variant/30 flex gap-2">
-                <button className="btn btn-outline btn-sm flex-1">
+                <Link
+                  href={`/verified/${provider.clerkId}`}
+                  className="btn btn-outline btn-sm flex-1 text-center"
+                >
                   View Profile
-                </button>
+                </Link>
                 <Link
                   href="/chat"
                   className="btn btn-primary btn-sm flex-1 text-center"

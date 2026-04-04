@@ -38,8 +38,15 @@ export async function GET(req: NextRequest) {
 
     if (category) filter.category = category;
 
-    // Geo-proximity (requires 2dsphere index)
-    if (!isNaN(lat) && !isNaN(lng)) {
+    // Geo-proximity with bounds checking (requires 2dsphere index)
+    if (
+      !isNaN(lat) &&
+      !isNaN(lng) &&
+      lat >= -90 &&
+      lat <= 90 &&
+      lng >= -180 &&
+      lng <= 180
+    ) {
       filter.location = {
         $near: {
           $geometry: { type: "Point", coordinates: [lng, lat] },
