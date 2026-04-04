@@ -1,42 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/db";
-import Notification from "@/lib/models/Notification";
+import User from "@/lib/models/User";
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
-    const { userId } = await auth();
-    if (!userId)
-      return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
-
+    const { id } = await params;
     await connectDB();
-    const notifications = await Notification.find({ userId })
-      .sort({ createdAt: -1 })
-      .limit(30)
+    const user = await User.findOne({ clerkId: id })
       .lean();
 
-    return NextResponse.json({ notifications });
-  } catch (err) {
-    console.error("[GET /api/notifications]", err);
-    return NextResponse.json(
-      { error: "Failed to fetch notifications" },
-      { status: 500 },
-    );
-  }
-}
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
 
-export async function PATCH(req: NextRequest) {
-  try {
-    const { userId } = await auth();
-    if (!userId)
-      return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
-    await connectDB();
-    await Notification.updateMany({ userId, isRead: false }, { isRead: true });
-    return NextResponse.json({ success: true });
+    const provider = {
+      clerkId: user.clerkId,
+      displayName: user.displayName,
+      category: user.categories?.[0] || "General",
+      rating: user.rating?.average ?? 0,
+      reviewCount: user.rating?.count ?? 0,
+      location: user.location?.suburb
+        ? `${user.location.suburb}, ${user.location.city}`
+        : "South Africa",
+      about: user.bio || "No provider bio available yet.",
+    };
+
+    return NextResponse.json({ provider });
   } catch (err) {
-    console.error("[PATCH /api/notifications]", err);
+    console.error("[GET /api/users/[id]]", err);
     return NextResponse.json(
-      { error: "Failed to update notifications" },
+      { error: "Failed to fetch user" },
       { status: 500 },
     );
   }

@@ -75,7 +75,7 @@ export default function WaterOutagePage() {
           onClick={() => setShowForm(!showForm)}
           className="btn btn-danger"
         >
-          {showForm ? "Cancel" : "🚨 Report Dry Tap"}
+          {showForm ? "Cancel" : "Report Dry Tap"}
         </button>
       </div>
 
@@ -126,10 +126,10 @@ export default function WaterOutagePage() {
             <div className="flex items-start gap-4">
               <div className="text-3xl shrink-0 mt-1">
                 {outage.status === "dry"
-                  ? "🚰"
+                  ? "Dry"
                   : outage.status === "low_pressure"
-                    ? "💧"
-                    : "✅"}
+                    ? "Low"
+                    : "OK"}
               </div>
               <div>
                 <h3 className="font-bold text-lg text-on-background">
@@ -161,7 +161,7 @@ export default function WaterOutagePage() {
             {outage.status !== "restored" && (
               <div className="flex items-center gap-2 md:self-end bg-surface-variant px-3 py-2 rounded-lg shrink-0">
                 <span className="text-sm font-bold text-danger">
-                  ⚠️ {outage.reports}
+                  {outage.reports}
                 </span>
                 <span className="text-xs text-on-surface-variant">reports</span>
               </div>
