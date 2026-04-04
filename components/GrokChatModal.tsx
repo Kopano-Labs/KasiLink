@@ -1,13 +1,14 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
 
 export default function GrokChatModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const { messages, sendMessage, status, setMessages } = useChat({
-    api: "/api/grok",
+    transport: new DefaultChatTransport({ api: "/api/grok" }),
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -20,7 +21,7 @@ export default function GrokChatModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim() || isLoading) return;
-    sendMessage({ role: "user", content: inputValue });
+    sendMessage({ text: inputValue });
     setInputValue("");
   };
 

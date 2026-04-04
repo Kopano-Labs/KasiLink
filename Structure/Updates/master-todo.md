@@ -1,20 +1,46 @@
 # KasiLink Master TODO — Next 10 Steps
 
-> **Created:** 2026-04-04 14:30 | **Author:** Lead (Claude Opus 4.6)
-> **Status:** MVP Feature-Complete. Now entering Hardening + Launch Prep phase.
-> **Live:** kasilink.com (Vercel) | **Build:** 45 routes, clean | **Branch:** main
+> **Created:** 2026-04-04 14:30 | **Last updated:** 2026-04-05 | **Author:** Lead
+> **Status:** Build fixed after Grok AI integration. Entering Hardening + Launch Prep phase.
+> **Live:** kasilink.com (Vercel) | **Build:** 42 routes, PASSING | **Branch:** main
 
 ---
 
-## Where We Are Right Now
+## STEP STATUS TRACKER (2026-04-05)
+
+| Step | Description | Status | Owner |
+|------|-------------|--------|-------|
+| 1 | Vercel Env & Domain Hardening | ✅ DONE — MongoDB fixed, Vercel redeployed | Lead + Owner |
+| 2 | Production Smoke Test | ⏳ PENDING — after current build deploys | Lead + Owner |
+| 3 | Content Seeding | ✅ DONE — 10 gigs, 5 forum posts, 3 events, 2 alerts seeded | Lead |
+| 4 | Information Archive Integration | ✅ DONE — faq-gigs, faq-water, faq-safety, service-directory created by DEV_1 | DEV_1 |
+| 5 | POPIA Compliance & Terms Page | 🔴 NOT DONE — /terms missing (DEV_2 failed, assigned to DEV_1 now) | DEV_1 |
+| 6 | Mobile Optimization & PWA Polish | ⏳ PENDING | Lead + DEV_1 |
+| 6b | Grok AI Integration | ✅ DONE — xAI Grok-4 chat widget live on homepage | Lead |
+| 7 | Orch System Foundation | 🔄 IN PROGRESS — Blueprint written (orch-blueprint.md) | Lead |
+| 8 | App Store Preparation | ⏳ PENDING | Lead + Owner |
+| 9 | Analytics & Monitoring | ⏳ PENDING | Lead |
+| 10 | Test Suite & CI/CD | ⏳ PENDING | Lead + DEV_1 |
+
+**BLOCKING OWNER ACTIONS:**
+- [ ] Add `KasiLinkAI_XAI_API_KEY` to Vercel env vars (Grok won't work in prod without it)
+- [ ] Switch Clerk to production keys (pk_live_ / sk_live_)
+- [ ] Add Google OAuth redirect URI to Google Cloud Console
+
+---
+
+## Where We Are Right Now (2026-04-05 update)
 
 **Phase 1 (Foundation) — DONE.** Auth, DB, models, nav, design tokens, PWA.
 **Phase 2 (Core Marketplace) — DONE.** Gig CRUD, posting, marketplace, home feed, profiles.
 **Phase 3 (Engagement) — DONE.** Chat, forum, load-shedding, applications, themes, geo, verified providers, notifications.
 **Phase 4 (Community + Differentiation) — DONE.** Calendar, water alerts, incidents, utility schedule, tutoring, business spotlight, chat skins, community status, water reports, privacy policy.
-**Phase 5 (Deployment) — DONE.** Vercel live, 45 routes, production build passing.
+**Phase 5 (Deployment) — DONE.** Vercel live, 42 routes, production build passing.
+**Phase 6 (AI Integration) — DONE.** Grok AI chat widget (xAI Grok-4) live on homepage.
 
-**What's NOT done:** Environment variable verification on Vercel, custom domain DNS config, test suite, logger, app store prep, content seeding, real user testing, mobile optimization audit, POPIA compliance review, orch system.
+**What's NOT done:** `/terms` page, Clerk prod keys, KasiLinkAI_XAI_API_KEY in Vercel, test suite, logger, app store prep, real user testing, mobile optimization audit, orch system.
+
+---
 
 ---
 

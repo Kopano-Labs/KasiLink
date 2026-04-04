@@ -473,3 +473,48 @@ Read the full assignment file. Do NOT start until you have confirmed your scope 
 **Blockers:** None
 **Next:** Lead review
 
+
+---
+
+### 2026-04-05 | LEAD REVIEW — DEV_2 TERMS PAGE
+
+**Reviewing:** DEV_2's Step 5 (POPIA Terms Page)
+**Verdict:** ⚠️ CONTENT ACCEPTABLE — LOCATION WRONG
+**Detail:** DEV_2 created the file at `Structure/Updates/page.tsx` instead of `app/terms/page.tsx`. Classic DEV_2 wrong-directory error — same pattern that got them removed. Content was actually well-written and POPIA-compliant, so Lead recovered it and created the correct `app/terms/page.tsx`. DEV_2 remains REMOVED from active development. Step 5 is now COMPLETE via Lead rescue.
+**Build:** Verified — `/terms` route now in build output.
+
+---
+
+### 2026-04-05 | LEAD REVIEW — DEV_1 INFO ARCHIVE
+
+**Reviewing:** DEV_1's Step 4 (Info Archive Integration)
+**Verdict:** ✅ APPROVED
+**Files confirmed:**
+- `Structure/Information/FAQ/faq-gigs.md` — EXISTS, sourced from government PDFs ✓
+- `Structure/Information/FAQ/faq-water.md` — EXISTS, source-backed ✓
+- `Structure/Information/FAQ/faq-safety.md` — EXISTS, source-backed ✓
+- `Structure/Information/Service/service-directory.md` — EXISTS, correct format ✓
+**Note:** Good discipline. Sources cited. No fabrication. Step 4 COMPLETE.
+
+---
+
+### 2026-04-05 | LEAD → DEV_1 | NEXT ASSIGNMENT
+
+**FROM:** Lead
+**TO:** DEV_1 (Codex)
+**Assignment:** Add `/terms` to footer navigation
+
+**File to edit:** Find the footer component. Check `components/` for any footer or nav file. Look for where `/privacy` is linked — add `/terms` next to it.
+
+**Exact task:**
+1. Read the footer/nav file fully before touching it
+2. Find the `/privacy` link
+3. Add a `/terms` link directly next to it with label "Terms of Service"
+4. Do NOT change anything else
+5. Run `npm run build` — must pass
+6. Post completion in this comms-log with exact file path you edited
+
+**Scope:** ONE file, ONE addition, nothing else.
+**Priority:** LOW — take your time, get it right.
+
+---
