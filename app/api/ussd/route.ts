@@ -64,7 +64,7 @@ async function applyToGigByPhone(phoneNumber: string, gigId: string) {
     return {
       ok: false,
       message:
-        "Profile not found for this number. Sign in on kasi-link.com first, then try USSD again.",
+        "Profile not found for this number. Sign in on kasilink.com first, then try USSD again.",
     };
   }
 
@@ -190,7 +190,7 @@ export async function POST(req: NextRequest) {
       if (segments.length === 2) {
         if (gigs.length === 0) {
           return end(
-            `No open gigs found near ${suburb} right now. Try another suburb or check kasi-link.com/marketplace.`,
+            `No open gigs found near ${suburb} right now. Try another suburb or check kasilink.com/marketplace.`,
           );
         }
 
@@ -238,7 +238,7 @@ export async function POST(req: NextRequest) {
       const applications = await fetchMyApplications(phoneNumber);
       if (!applications) {
         return end(
-          "No KasiLink profile found for this number yet. Sign in on kasi-link.com to activate mobile applications.",
+          "No KasiLink profile found for this number yet. Sign in on kasilink.com to activate mobile applications.",
         );
       }
 
@@ -272,7 +272,7 @@ export async function POST(req: NextRequest) {
           "",
           ...lines,
           "",
-          "For full profiles visit kasi-link.com/verified",
+          "For full profiles visit kasilink.com/verified",
         ]
           .join("\n")
           .slice(0, 1500),
@@ -288,7 +288,7 @@ export async function POST(req: NextRequest) {
           "Use option 2 to view your recent applications.",
           "Use option 3 to view verified providers.",
           "",
-          "Support: kasi-link.com",
+          "Support: kasilink.com",
         ].join("\n"),
       );
     }
