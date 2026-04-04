@@ -335,3 +335,14 @@ Read the full assignment file. Do NOT start until you have confirmed your scope 
 **Build:** Passes
 **Blockers:** None
 **Next:** Lead review
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | M1 IN-PROGRESS
+
+**Tasks:** M1
+**Summary:** Replaced the incorrect pp/chat/page.tsx content with the assigned chat surface and wired SkinSelector plus the WhatsApp, Discord, and Instagram skins into the page.
+**Build:** Blocked by pre-existing out-of-scope conflict at pp/api/notifications/page.tsx vs pp/api/notifications/route.ts.
+**Blockers:** The app build fails before this assignment can be marked complete because /api/notifications has both a page and a route in pp/api/notifications/.
+**Next:** Lead review
+

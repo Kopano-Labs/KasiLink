@@ -1,91 +1,242 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import SkinSelector, { type SkinId } from "@/components/chat-skins/SkinSelector";
+import WhatsAppSkin from "@/components/chat-skins/WhatsAppSkin";
+import DiscordSkin from "@/components/chat-skins/DiscordSkin";
+import InstagramSkin from "@/components/chat-skins/InstagramSkin";
 
-export default function MyWaterReportsPage() {
+interface Conversation {
+  _id: string;
+  gigId: string;
+  gigTitle: string;
+  lastMessageAt: string;
+  lastMessageText?: string;
+  participants: string[];
+}
+
+const SKIN_LABELS: Record<SkinId, string> = {
+  default: "Default",
+  whatsapp: "WhatsApp",
+  discord: "Discord",
+  instagram: "Instagram",
+};
+
+export default function ChatPage() {
   const { user, isSignedIn, isLoaded } = useUser();
   const router = useRouter();
-  const [reports, setReports] = useState<any[]>([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [activeConversationId, setActiveConversationId] = useState("");
+  const [activeSkin, setActiveSkin] = useState<SkinId>("default");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isLoaded && !isSignedIn) router.push("/sign-in");
+    if (isLoaded && !isSignedIn) {
+      router.push("/sign-in");
+    }
   }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
-    if (!isSignedIn || !user) return;
-    fetch(`/api/water-alerts`)
-      .then((res) => res.json())
-      .then((data) => {
-        const myReports = (data.alerts || []).filter(
-          (a: any) => a.reporterId === user.id,
-        );
-        setReports(myReports);
-      })
-      .finally(() => setLoading(false));
-  }, [isSignedIn, user]);
+    if (!isSignedIn) return;
 
-  if (!isLoaded || !isSignedIn) return null;
+    let cancelled = false;
+
+    const fetchConversations = async () => {
+      try {
+        const res = await fetch("/api/chat");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (cancelled) return;
+        const nextConversations = (data.conversations ?? []) as Conversation[];
+        setConversations(nextConversations);
+        if (!activeConversationId && nextConversations.length > 0) {
+          setActiveConversationId(nextConversations[0]._id);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchConversations();
+    const interval = setInterval(fetchConversations, 5000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [isSignedIn, activeConversationId]);
+
+  const activeConversation = useMemo(
+    () =>
+      conversations.find(
+        (conversation) => conversation._id === activeConversationId,
+      ) ?? null,
+    [conversations, activeConversationId],
+  );
+
+  const skinContent = useMemo(() => {
+    if (!activeConversation) return null;
+
+    if (activeSkin === "whatsapp") {
+      return (
+        <WhatsAppSkin
+          conversationId={activeConversation._id}
+          gigTitle={activeConversation.gigTitle}
+        />
+      );
+    }
+
+    if (activeSkin === "discord") {
+      return (
+        <DiscordSkin
+          conversationId={activeConversation._id}
+          gigTitle={activeConversation.gigTitle}
+        />
+      );
+    }
+
+    if (activeSkin === "instagram") {
+      return (
+        <InstagramSkin
+          conversationId={activeConversation._id}
+          gigTitle={activeConversation.gigTitle}
+        />
+      );
+    }
+
+    return null;
+  }, [activeConversation, activeSkin]);
+
+  if (!isLoaded || !isSignedIn) {
+    return null;
+  }
 
   return (
-    <div className="container max-w-screen-md pt-8 pb-12">
-      <h1 className="font-headline text-3xl font-bold mb-2">
-        My Water Reports
-      </h1>
-      <p className="text-on-surface-variant text-sm mb-8">
-        Outages you have reported to the community.
-      </p>
-      {loading ? (
-        <div className="py-10 text-center text-on-surface-variant">
-          Loading reports...
+    <div className="container mx-auto max-w-6xl px-4 py-8">
+      <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p className="mb-2 inline-flex rounded-full bg-primary-container px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            Chat
+          </p>
+          <h1 className="font-headline text-3xl font-bold">In-App Messaging</h1>
+          <p className="max-w-2xl text-sm text-on-surface-variant">
+            Switch between community chat skins while keeping the default KasiLink
+            experience intact.
+          </p>
         </div>
-      ) : reports.length === 0 ? (
-        <div className="kasi-card text-center py-10 text-on-surface-variant">
-          <p className="mb-4">You haven&apos;t reported any outages yet.</p>
-          <Link href="/water-outages" className="btn btn-primary">
-            Report an Outage
-          </Link>
+        <div className="text-sm text-on-surface-variant">
+          Signed in as {user?.firstName || user?.username || "member"}
         </div>
-      ) : (
-        <div className="grid gap-4">
-          {reports.map((report) => (
-            <div
-              key={report._id}
-              className={`kasi-card border-l-4 ${report.resolved ? "border-success" : "border-warning"} flex justify-between`}
-            >
-              <div className="flex flex-col">
-                <h3 className="font-bold text-lg">{report.title}</h3>
-                <p className="text-sm text-on-surface-variant line-clamp-2 mt-1">
-                  {report.description}
-                </p>
-                <div className="mt-3 text-xs text-outline flex gap-2">
-                  <span>📍 {report.suburb}</span>
-                  <span>·</span>
-                  <span>{new Date(report.createdAt).toLocaleDateString()}</span>
+      </div>
+
+      <div className="mb-6">
+        <SkinSelector activeSkin={activeSkin} onSkinChange={setActiveSkin} />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+        <aside className="kasi-card h-fit">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold">Conversations</h2>
+            <p className="text-sm text-on-surface-variant">
+              Recent gig conversations and community follow-ups.
+            </p>
+          </div>
+
+          {loading ? (
+            <p className="py-8 text-center text-sm text-on-surface-variant">
+              Loading conversations...
+            </p>
+          ) : conversations.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-outline-variant p-6 text-center">
+              <p className="text-sm text-on-surface-variant">
+                No conversations yet.
+              </p>
+              <p className="mt-2 text-xs text-outline">
+                Start a chat from a gig detail page.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {conversations.map((conversation) => {
+                const isActive = conversation._id === activeConversationId;
+                return (
+                  <button
+                    key={conversation._id}
+                    onClick={() => setActiveConversationId(conversation._id)}
+                    className={`w-full rounded-xl border px-4 py-3 text-left transition ${
+                      isActive
+                        ? "border-primary bg-primary-container/30"
+                        : "border-outline-variant bg-surface hover:border-primary/50"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="font-semibold">{conversation.gigTitle}</p>
+                        <p className="mt-1 line-clamp-1 text-xs text-on-surface-variant">
+                          {conversation.lastMessageText || "No messages yet"}
+                        </p>
+                      </div>
+                      <span className="text-[10px] uppercase tracking-wider text-outline">
+                        {new Date(conversation.lastMessageAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </aside>
+
+        <section className="space-y-4">
+          {activeConversation ? (
+            <>
+              <div className="kasi-card border border-outline-variant/60">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-outline">
+                      Active skin
+                    </p>
+                    <h2 className="text-xl font-bold">
+                      {SKIN_LABELS[activeSkin]} on {activeConversation.gigTitle}
+                    </h2>
+                  </div>
+                  <p className="text-sm text-on-surface-variant">
+                    Conversation ID: {activeConversation._id}
+                  </p>
                 </div>
               </div>
-              <div className="flex flex-col items-end gap-3">
-                <span
-                  className={`badge ${report.resolved ? "badge-success" : "badge-warning"}`}
-                >
-                  {report.resolved ? "Resolved" : "Active"}
-                </span>
-                <button
-                  className="btn btn-outline btn-sm text-xs mt-auto"
-                  onClick={() =>
-                    alert("Contact the community to mark this resolved.")
-                  }
-                >
-                  Mark as Resolved
-                </button>
+
+              {activeSkin === "default" ? (
+                <div className="kasi-card min-h-[70vh]">
+                  <div className="mb-4 border-b border-outline-variant pb-4">
+                    <p className="text-sm text-outline">Default chat view</p>
+                    <h3 className="text-lg font-bold">{activeConversation.gigTitle}</h3>
+                  </div>
+                  <p className="text-sm text-on-surface-variant">
+                    The themed chat skins are available above. Select WhatsApp,
+                    Discord, or Instagram to render the alternate layout for this
+                    conversation.
+                  </p>
+                </div>
+              ) : (
+                skinContent
+              )}
+            </>
+          ) : (
+            <div className="kasi-card min-h-[70vh] flex items-center justify-center text-center">
+              <div>
+                <h2 className="text-xl font-bold">No conversation selected</h2>
+                <p className="mt-2 text-sm text-on-surface-variant">
+                  Pick a conversation from the list to open the chat skins.
+                </p>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          )}
+        </section>
+      </div>
     </div>
   );
 }
