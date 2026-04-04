@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 export default function AgentOrchestrationFlow() {
   return (
@@ -37,11 +37,13 @@ export default function AgentOrchestrationFlow() {
               API
             </a>
           </div>
-          <div className="bg-surface-container-highest border-primary-container h-10 w-10 overflow-hidden rounded-full border-2">
-            <img
+          <div className="bg-surface-container-highest border-primary-container relative h-10 w-10 overflow-hidden rounded-full border-2">
+            <Image
               alt="User profile"
               data-alt="minimalist 3d avatar of a professional developer with glasses and yellow hoodie clean background"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN6bkpAC3dcbP4riAyZ2XmROjA8rr_t-t_c4wMxRF_p1YITGOTdaL0zWLa1ETSMdFrhbWmHE0TuFrNtpm5VwsFlX1Li0YKkg-yLopUf946KLdWaer6D6azwtkS3y0Yo8ZtaCwY-sRs6wgiyh2-M_td3Svb1XKdcqQUeYERRQ4H4DPnD3lQyDfZcl4Psp-HVNUrLkDqC4jGlyap4YiACu6r002gXjnl1cLMWKJ3BUfEaDZer_CToouy289xzypcnZhzLXt9Pxjq92WB"
+              fill
+              className="object-cover"
             />
           </div>
         </div>

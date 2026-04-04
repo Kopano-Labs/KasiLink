@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import connectDB from "@/lib/db";
 import Notification from "@/lib/models/Notification";
@@ -26,7 +26,7 @@ export async function GET() {
   }
 }
 
-export async function PATCH(_req: NextRequest) {
+export async function PATCH() {
   try {
     const { userId } = await auth();
     if (!userId) {

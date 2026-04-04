@@ -21,15 +21,16 @@ const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("kasi-theme") as Theme | null) ?? "dark";
+  });
 
-  // Load persisted preference
+  // Sync the current theme to the document root.
   useEffect(() => {
-    const stored = localStorage.getItem("kasi-theme") as Theme | null;
-    const preferred: Theme = stored ?? "dark";
-    setTheme(preferred);
-    document.documentElement.setAttribute("data-theme", preferred);
-  }, []);
+    localStorage.setItem("kasi-theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((current) => {

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -64,31 +65,34 @@ export default function ProfilePage() {
     <div className="container pt-8 pb-12">
       <div className="grid grid-cols-1 xl:grid-cols-[1.25fr_0.75fr] gap-8">
         <div>
-      <div className="kasi-card flex gap-5 items-center mb-8 flex-wrap">
-        {user.imageUrl && (
-          <img
-            src={user.imageUrl}
-            alt={user.fullName ?? "Avatar"}
-            className="w-[72px] h-[72px] rounded-full object-cover"
-          />
-        )}
-        <div className="flex-1">
-          <h1 className="mb-1">
-            {user.fullName ?? user.username ?? "Your Profile"}
-          </h1>
-          <p className="text-on-surface-variant text-sm">
-            {user.primaryPhoneNumber?.phoneNumber ??
-              user.primaryEmailAddress?.emailAddress ??
-              ""}
-          </p>
-          <div className="flex gap-2 mt-3 flex-wrap">
-            <span className="badge badge-primary">KasiLink Member</span>
+          <div className="kasi-card mb-8 flex flex-wrap items-center gap-5">
+            {user.imageUrl && (
+              <div className="relative h-[72px] w-[72px] overflow-hidden rounded-full">
+                <Image
+                  src={user.imageUrl}
+                  alt={user.fullName ?? "Avatar"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+            <div className="flex-1">
+              <h1 className="mb-1">
+                {user.fullName ?? user.username ?? "Your Profile"}
+              </h1>
+              <p className="text-on-surface-variant text-sm">
+                {user.primaryPhoneNumber?.phoneNumber ??
+                  user.primaryEmailAddress?.emailAddress ??
+                  ""}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="badge badge-primary">KasiLink Member</span>
+              </div>
+            </div>
+            <Link href="/gigs/new" className="btn btn-primary">
+              + Post a Gig
+            </Link>
           </div>
-        </div>
-        <Link href="/gigs/new" className="btn btn-primary">
-          + Post a Gig
-        </Link>
-      </div>
 
       {loading ? (
         <div className="text-center p-10 text-on-surface-variant">

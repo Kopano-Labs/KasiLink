@@ -1,19 +1,23 @@
 # Current Alignment Notes
 
 Purpose:
+
 - Preserve the current file and route decisions made during the deploy-stabilization and Structure-alignment passes.
 - Prevent future AI edits from reintroducing misplaced `page.tsx` / `route.ts` files or conflicting route ownership.
 
 Reference frame:
+
 - `Structure/Updates/Implementation.md`
 - `Structure/Updates/kasilink Struture.txt`
 
 ## Authorship
 
 Primary alignment pass author:
+
 - Codex / GPT-5
 
 Signature:
+
 - `Codex-Structure-Alignment-v1`
 
 Use this signature in future update notes when extending the same alignment direction.
@@ -132,12 +136,15 @@ When adding features from the Structure roadmap:
 ### 2026-04-04
 
 Author:
+
 - Codex / GPT-5
 
 Signature:
+
 - `Codex-Structure-Alignment-v1`
 
 Changes recorded:
+
 - Removed misplaced special files that were causing route and build conflicts.
 - Re-established canonical ownership for `api/users/[id]`, `api/notifications`, `verified/[id]`, and `water-outages`.
 - Realigned home, marketplace, profile, navbar, footer, and utility surfaces toward the Structure roadmap.
@@ -146,12 +153,15 @@ Changes recorded:
 ### 2026-04-04 - High Priority Marketplace Pass
 
 Author:
+
 - Codex / GPT-5
 
 Signature:
+
 - `Codex-Structure-Alignment-v1`
 
 Changes recorded:
+
 - Upgraded `/api/gigs` to support `providerId`, `suburb`, `city`, and `radius` filtering.
 - Added server-side distance calculation for marketplace results when coordinates are available.
 - Fixed profile dependence on `providerId=me` by supporting that query on the gigs API.
@@ -160,12 +170,15 @@ Changes recorded:
 ### 2026-04-04 - USSD Redesign Pass
 
 Author:
+
 - Codex / GPT-5
 
 Signature:
+
 - `Codex-Structure-Alignment-v1`
 
 Changes recorded:
+
 - Rebuilt `/api/ussd` as a stateless Africa's Talking-compatible flow for Vercel/serverless use.
 - Removed in-memory session dependence from the USSD route.
 - Connected USSD gig lookup to real open gigs in MongoDB.
@@ -175,12 +188,93 @@ Changes recorded:
 ### 2026-04-04 - USSD Hardening Pass
 
 Author:
+
 - Codex / GPT-5
 
 Signature:
+
 - `Codex-Structure-Alignment-v1`
 
 Changes recorded:
+
 - Escaped suburb input before building the `/api/ussd` MongoDB regex query to prevent regex injection and malformed-search regressions.
 - Added basic request guards for missing caller phone numbers and empty suburb/township input.
 - Preserved the stateless Africa's Talking flow and canonical ownership of `/api/ussd` at `app/api/ussd/route.ts`.
+
+### 2026-04-04 - USSD Route Cleanup
+
+Author:
+
+- Codex / GPT-5
+
+Signature:
+
+- `Codex-Structure-Alignment-v1`
+
+Changes recorded:
+
+- Removed the stale typo route at `app/api/used/route.ts` so `/api/ussd` remains the only canonical USSD endpoint.
+- Eliminated placeholder menu behavior that could conflict with real USSD testing and deployment.
+
+### 2026-04-05 - Validation & Security Pass
+
+Author:
+
+- Codex / GPT-5
+
+Signature:
+
+- `Codex-Structure-Alignment-v1`
+
+Changes recorded:
+
+- Consolidated and reviewed `lib/validation.ts` to enforce strict character limits and HTML sanitization across `Application`, `Gig`, `Message`, and `ForumPost` payloads.
+- Verified that input sanitization completely aligns with the citrea \Structure and MVP architecture boundaries.
+
+### 2026-04-05 - Second in Command Audit
+
+Author:
+
+- Gemini Code Assist (Second in Command)
+
+Signature:
+
+- `Gemini-Structure-Alignment-v1`
+
+Changes recorded:
+
+- Conducted non-conflicting scope verification.
+- Deferred code edits to Codex (Lead).
+- No conflicts detected with open edits.
+
+### 2026-04-05 - 10-File Audit & Codex Handoff
+
+Author:
+
+- Gemini Code Assist (Second in Command)
+
+Signature:
+
+- `Gemini-Structure-Alignment-v1`
+
+Changes recorded:
+
+- Audited 10 core structural files for routing and alignment compliance per user request.
+- Communicated with Codex (Lead) to proceed with implementing feature logic across these files.
+- No conflicts detected with open edits. All code level edits safely deferred to Codex.
+
+### 2026-04-05 - Secondary Systems & Config Audit
+
+Author:
+
+- Gemini Code Assist (Second in Command)
+
+Signature:
+
+- `Gemini-Structure-Alignment-v1`
+
+Changes recorded:
+
+- Audited supplementary systems including billing plans and environment integration notes.
+- Verified that the config structures do not conflict with the primary routing or Next.js App Router rules.
+- Cleared path for Codex (Lead) to safely integrate Stripe/Clerk billing and advanced analytics.

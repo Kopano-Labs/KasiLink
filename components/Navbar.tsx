@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeProvider";
 
 // Icons as inline SVG to avoid extra deps
@@ -182,12 +182,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false);
-    setShowNotifs(false);
-  }, [pathname]);
-
   // Fetch notifications
   useEffect(() => {
     if (!isLoaded || !isSignedIn) return;
@@ -250,6 +244,10 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setShowNotifs(false);
+                  }}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all ${
                     active
                       ? "font-medium text-primary bg-primary-container"
@@ -282,9 +280,9 @@ export default function Navbar() {
               (isSignedIn ? (
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                  <button
-                    onClick={handleToggleNotifs}
-                    className="btn btn-ghost btn-sm p-2 relative text-on-surface-variant hover:text-on-surface"
+                    <button
+                      onClick={handleToggleNotifs}
+                      className="btn btn-ghost btn-sm p-2 relative text-on-surface-variant hover:text-on-surface"
                       aria-label="Notifications"
                     >
                       <BellIcon />
@@ -308,6 +306,7 @@ export default function Navbar() {
                             <Link
                               key={n._id}
                               href={n.link || "#"}
+                              onClick={() => setShowNotifs(false)}
                               className="px-4 py-3 hover:bg-surface-variant/50 transition-colors flex flex-col gap-1 border-b border-outline-variant/10 last:border-0"
                             >
                               <span className="text-sm font-bold text-on-background leading-tight">
@@ -385,6 +384,7 @@ export default function Navbar() {
             {isLoaded && isSignedIn && (
               <Link
                 href="/gigs/new"
+                onClick={() => setMobileOpen(false)}
                 className="btn btn-primary mt-2 justify-center"
               >
                 <PlusIcon />
