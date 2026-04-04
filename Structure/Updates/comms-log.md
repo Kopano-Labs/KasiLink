@@ -518,3 +518,139 @@ Read the full assignment file. Do NOT start until you have confirmed your scope 
 **Priority:** LOW — take your time, get it right.
 
 ---
+
+---
+
+### 2026-04-05 | LEAD CHECK-IN | 45-SEC PROTOCOL
+
+**Status:** Lead just committed orch-blueprint and dev-education updates (context-bleed + 45-sec rule now documented).
+**DEV_1:** Are you working on the footer nav update (add /terms link)? Post your progress here immediately.
+**DEV_2:** Remain on standby. Scope revoked. Do not touch any files.
+**Next Lead task:** Wait for DEV_1 confirmation, then run smoke test on Vercel deploy.
+---
+
+### 2026-04-05 | DEV_1 (Codex) | TERMS PAGE COMPLETE
+
+**Tasks:** Step 3
+**Checklist:**
+- [x] `app/terms/page.tsx` created
+- [x] No `use client` directive
+- [x] 11 terms sections present
+- [x] Links to `/privacy` work
+- [x] Contact email is `kasilink.rsa@gmail.com`
+- [x] Matches the privacy page layout/style
+- [x] `npm run build` passes
+**Blockers:** None
+**Next:** Lead review
+
+---
+
+### 2026-04-05 | LEAD REVIEW — DEV_1 TERMS + FOOTER
+
+**Reviewing:** DEV_1's Step 3 (Terms page) + footer link
+**Verdict:** ✅ APPROVED — `/terms` confirmed in Footer.tsx:36. Build passes.
+**Note:** Owner also polished the terms page design (icon sections, headline). Final version committed. Both contributions accepted.
+
+---
+
+### 2026-04-05 | LEAD → DEV_1 | NEXT ASSIGNMENT — LOADING SKELETONS
+
+**FROM:** Lead
+**TO:** DEV_1 (Codex)
+**Priority:** Step 6 — Mobile Optimization
+
+Add loading skeleton components to the 3 pages you own so they don't flash blank on slow connections (township users on 3G).
+
+**Target files (read each FULLY before editing):**
+1. `app/community-calendar/page.tsx` — add a `loading.tsx` file at `app/community-calendar/loading.tsx`
+2. `app/water-outages/page.tsx` — add `app/water-outages/loading.tsx`
+3. `app/spotlight/page.tsx` — add `app/spotlight/loading.tsx`
+
+**What each loading.tsx must contain:**
+- No `"use client"` needed — these are Server Component skeletons
+- A grid of 3-6 grey placeholder cards that match the shape of the real page cards
+- Use Tailwind: `animate-pulse bg-surface-container-high rounded-xl h-24 w-full`
+- No imports from other components — keep it self-contained
+
+**Example structure:**
+```tsx
+export default function Loading() {
+  return (
+    <div className="container pt-8">
+      <div className="h-8 w-48 bg-surface-container-high rounded animate-pulse mb-6" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="kasi-card animate-pulse">
+            <div className="h-4 w-3/4 bg-surface-container-high rounded mb-3" />
+            <div className="h-3 w-full bg-surface-container-high rounded mb-2" />
+            <div className="h-3 w-2/3 bg-surface-container-high rounded" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+**DEV_1 checklist:**
+- [ ] `app/community-calendar/loading.tsx` created with content
+- [ ] `app/water-outages/loading.tsx` created with content
+- [ ] `app/spotlight/loading.tsx` created with content
+- [ ] `npm run build` passes
+- [ ] Post completion here with file paths confirmed
+
+**DONE WHEN:** 3 new files at exact paths above, build passes, each file >10 lines.
+
+---
+
+### 2026-04-05 | LEAD → DEV_2 | REINSTATED — NEW ASSIGNMENT PROTOCOL
+
+**FROM:** Lead
+**TO:** DEV_2 (Gemini)
+**Status:** REINSTATED. Previous bench revoked by Owner directive.
+
+**What changed:**
+Your code quality is not the problem. The context-bleed is a fixable process issue, not a talent issue. Going forward, every assignment to you will start with the EXACT target path in bold. You confirm the path before writing anything. Lead verifies location via git status before accepting completion. That's the fix.
+
+**NEW PROTOCOL — mandatory for every DEV_2 file write:**
+1. Before writing any file, post: "WRITING TO: [full absolute path]" in your comms-log entry
+2. Write the file
+3. Confirm: "CONFIRMED at [path] — git status shows [filename] at [path]"
+4. Never infer the directory from context — always use the path stated in the assignment
+
+---
+
+### 2026-04-05 | LEAD → DEV_2 | ASSIGNMENT — VERCEL ANALYTICS COMPONENT
+
+**FROM:** Lead
+**TO:** DEV_2 (Gemini)
+
+Add Vercel Analytics to the app layout so we get page view tracking in production.
+
+**EXACT TARGET FILE:**
+```
+app/layout.tsx
+```
+**EXACT IMPORT TO ADD:**
+```tsx
+import { Analytics } from "@vercel/analytics/react";
+```
+**EXACT COMPONENT TO ADD** — place it as the last child inside the outermost `<body>` or root wrapper element, before the closing tag:
+```tsx
+<Analytics />
+```
+**Do NOT:**
+- Change anything else in layout.tsx
+- Add new imports beyond Analytics
+- Touch any other file
+
+**Before you write anything, post:**
+> "WRITING TO: app/layout.tsx — confirmed against assignment"
+
+**DEV_2 checklist:**
+- [ ] Post path confirmation before editing
+- [ ] `@vercel/analytics` is already in node_modules — no npm install needed
+- [ ] `<Analytics />` added to layout.tsx
+- [ ] Nothing else changed
+- [ ] `npm run build` passes
+- [ ] Post completion with git diff summary
