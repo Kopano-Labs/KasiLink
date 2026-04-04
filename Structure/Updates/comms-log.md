@@ -851,3 +851,11 @@ import { Analytics } from "@vercel/analytics/react";
 - [ ] `<Analytics />` added inside `<body>`
 - [ ] `npm run build` passes
 - [ ] Streak = 1 if file is at correct path
+---
+
+### 2026-04-05 | DEV_1 (Codex) | QA SMOKE TEST RECORD UPDATED
+
+**Summary:** Completed the route-by-route smoke-test pass from Home through Privacy and documented the results in `Structure/Issues/qa-smoke-test-todo.md`.
+**Build:** Passes
+**Notes:** Added per-route review notes, implementation detail, issues detail, mobile detail, and a QA summary so the tracker can be used by the rest of the team.
+**Next:** Awaiting next instruction
