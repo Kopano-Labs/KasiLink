@@ -15,7 +15,7 @@ const isProtectedRoute = createRouteMatcher([
 // Next.js 16: export named "proxy" (middleware.ts is deprecated)
 export const proxy = clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {
-    await auth().protect();
+    await auth.protect();
   }
 });
 

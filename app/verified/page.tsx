@@ -64,7 +64,6 @@ export default function VerifiedProvidersPage() {
         </p>
       </div>
 
-      {/* Search & Filter - MVP Layout */}
       <div className="flex gap-3 mb-8 max-w-xl mx-auto">
         <input
           type="search"
@@ -124,7 +123,7 @@ export default function VerifiedProvidersPage() {
                   View Profile
                 </button>
                 <Link
-                  href={`/chat`}
+                  href="/chat"
                   className="btn btn-primary btn-sm flex-1 text-center"
                 >
                   Message
