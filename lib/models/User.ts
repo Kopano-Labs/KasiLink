@@ -28,6 +28,7 @@ export interface IUser extends Document {
   completedGigs: number;
   isActive: boolean;
   lastSeen: Date;
+  pushSubscription?: string; // JSON-serialized browser PushSubscription — set by H8
   createdAt: Date;
   updatedAt: Date;
 }
@@ -94,6 +95,7 @@ const UserSchema = new Schema<IUser>(
     completedGigs: { type: Number, default: 0 },
     isActive: { type: Boolean, default: true },
     lastSeen: { type: Date, default: Date.now },
+    pushSubscription: { type: String, default: null }, // H8 — browser push
   },
   {
     timestamps: true,

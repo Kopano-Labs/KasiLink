@@ -59,9 +59,26 @@ Related documents:
 | `/api/webhooks/clerk` | `app/api/webhooks/clerk/route.ts` | DONE |
 | `/api/chat` | `app/api/chat/route.ts` | DONE |
 | `/api/messages` | `app/api/messages/route.ts` | DONE |
-| `/api/load-shedding` | `app/api/load-shedding/route.ts` | NOT CREATED — assigned to DEV_1 |
-| `/api/incidents` | `app/api/incidents/route.ts` | NOT CREATED — assigned to DEV_2 |
-| `/incidents` | `app/incidents/page.tsx` | NOT CREATED — assigned to DEV_2 |
+| `/api/load-shedding` | `app/api/load-shedding/route.ts` | DEV_1 in progress |
+| `/api/incidents` | `app/api/incidents/route.ts` | DEV_2 in progress |
+| `/api/community-calendar` | `app/api/community-calendar/route.ts` | DEV_1 queued |
+| `/api/water-alerts` | `app/api/water-alerts/route.ts` | DEV_1 queued |
+| `/api/spotlight` | `app/api/spotlight/route.ts` | DEV_1 queued |
+| `/api/utility-schedule` | `app/api/utility-schedule/route.ts` | DEV_2 queued |
+| `/api/community-status` | `app/api/community-status/route.ts` | DEV_2 queued |
+
+### Pages
+
+| Route | File | Status |
+|-------|------|--------|
+| `/incidents` | `app/incidents/page.tsx` | DEV_2 in progress |
+| `/incidents/new` | `app/incidents/new/page.tsx` | DEV_2 in progress |
+| `/community-calendar` | `app/community-calendar/page.tsx` | DEV_1 queued |
+| `/water-outages` | `app/water-outages/page.tsx` | DEV_1 in progress (H3 + M3 update) |
+| `/spotlight` | `app/spotlight/page.tsx` | DEV_1 queued |
+| `/utility-schedule` | `app/utility-schedule/page.tsx` | DEV_2 queued |
+| `/community-status` | `app/community-status/page.tsx` | DEV_2 queued |
+| `/my-water-reports` | `app/my-water-reports/page.tsx` | DEV_2 queued |
 
 ---
 
@@ -74,7 +91,9 @@ Related documents:
 
 ## Files Intentionally Removed (Treat Reappearance as Regression)
 
-`page.tsx`, `route.ts`, `app/api/gigs/page.tsx`, `app/api/users/[id]/page.tsx`, `lib/page.tsx`, `lib/route.ts`, `lib/models/page.tsx`, `lib/models/route.ts`
+`page.tsx`, `route.ts`, `app/api/gigs/page.tsx`, `app/api/users/[id]/page.tsx`, `lib/page.tsx`, `lib/route.ts`, `lib/models/page.tsx`, `lib/models/route.ts`, `app/api/notifications/page.tsx`, `Structure/Updates/route.ts`
+
+**Pattern:** Any `page.tsx` inside `app/api/**` is always wrong. Any code file (`.ts`, `.tsx`) inside `Structure/` is always wrong.
 
 ---
 

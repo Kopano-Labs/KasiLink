@@ -8,13 +8,21 @@ export default function LoadSheddingWidget() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock fetching real Eskom/EskomSePush API data
     const fetchStage = async () => {
       setLoading(true);
-      setTimeout(() => {
-        setStage(2); // Using Stage 2 as a placeholder
+      try {
+        const res = await fetch("/api/load-shedding");
+        if (res.ok) {
+          const data = await res.json();
+          setStage(typeof data.stage === "number" ? data.stage : 0);
+        } else {
+          setStage(0);
+        }
+      } catch {
+        setStage(0);
+      } finally {
         setLoading(false);
-      }, 1500);
+      }
     };
     fetchStage();
   }, []);

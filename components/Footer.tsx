@@ -12,12 +12,23 @@ const ZapIcon = () => (
   </svg>
 );
 
-const footerLinks = [
+const platformLinks = [
   { label: "Find Gigs", href: "/marketplace" },
   { label: "Post a Gig", href: "/gigs/new" },
-  { label: "Community", href: "/forum" },
   { label: "Verified Providers", href: "/verified" },
+  { label: "Messages", href: "/chat" },
+];
+
+const communityLinks = [
+  { label: "Community Forum", href: "/forum" },
+  { label: "Incidents", href: "/incidents" },
   { label: "Water Alerts", href: "/water-outages" },
+  { label: "Community Calendar", href: "/community-calendar" },
+  { label: "Utility Schedule", href: "/utility-schedule" },
+  { label: "Business Spotlight", href: "/spotlight" },
+  { label: "Find a Tutor", href: "/tutoring" },
+  { label: "Community Status", href: "/community-status" },
+  { label: "My Water Reports", href: "/my-water-reports" },
 ];
 
 const legalLinks = [
@@ -56,7 +67,7 @@ export default function Footer() {
               Platform
             </p>
             <div className="gap-2 flex flex-col">
-              {footerLinks.map(({ label, href }) => (
+              {platformLinks.map(({ label, href }) => (
                 <Link
                   key={href}
                   href={href}
@@ -68,16 +79,22 @@ export default function Footer() {
             </div>
           </nav>
 
-          <div>
+          <nav>
             <p className="text-xs font-medium text-outline tracking-wider mb-3 uppercase">
-              Focus Areas
+              Community
             </p>
-            <div className="gap-2 flex flex-col text-sm text-on-surface-variant">
-              <span>Nearby gigs and rapid hiring</span>
-              <span>Verified provider trust layer</span>
-              <span>Community and utility awareness</span>
+            <div className="gap-2 flex flex-col">
+              {communityLinks.map(({ label, href }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="text-sm text-on-surface-variant hover:text-primary no-underline transition-colors"
+                >
+                  {label}
+                </Link>
+              ))}
             </div>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom row */}

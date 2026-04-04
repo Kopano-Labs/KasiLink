@@ -32,26 +32,35 @@
 |----|------|-------|--------|-------|
 | H1 | In-App Chat (Basic) | DEV_2 (Gemini) | DONE | Models, API, UI complete. Stray Structure/Updates/route.ts removed by Lead. |
 | H2 | Community Forum | — | DONE | Live threads, pagination, posting, trust guidance |
-| H3 | Load-Shedding Widget (Real Data) | DEV_1 (Codex) | NOT-STARTED | See assignments/dev1-load-shedding.md |
+| H3 | Load-Shedding Widget (Real Data) | DEV_1 (Codex) | DONE | Approved by Lead. Proxy route, widget, water-outages banner. |
 | H4 | Gig Application Workflow | — | DONE | Apply, review, assign flow complete |
 | H5 | Dark/Light Mode Toggle | — | DONE | ThemeProvider working |
 | H6 | Location-Based Filtering (Geo) | — | DONE | Haversine + MongoDB geospatial |
 | H7 | Verified Provider System | — | DONE | Directory, profiles, badges, live ratings |
-| H8 | Notification Delivery | DEV_2 (Gemini) | NOT-STARTED | See assignments/dev2-notifications-incidents.md |
+| H8 | Notification Delivery | Lead (recovered) | DONE | DEV_2 overwrote notifications route with incidents code. Lead restored GET/PATCH/POST. |
 
 ---
 
-## Medium (Differentiation)
+## Medium (Differentiation) — Source: Structure/Design/
 
-| ID | Task | Owner | Status | Notes |
-|----|------|-------|--------|-------|
-| M1 | Chameleon Chat Skins | — | DEFERRED | After H1 chat is built |
-| M2 | Community Calendar | — | NOT-STARTED | Mockup in Structure/features/ |
-| M3 | Water Outage Alerts | — | PARTIAL | Page exists, no real data |
-| M4 | Incident Reporting | DEV_2 (Gemini) | NOT-STARTED | Bundled with H8 — see assignments/dev2-notifications-incidents.md |
-| M5 | Utility Schedule Tracker | — | NOT-STARTED | |
-| M6 | Tutoring Interface | — | NOT-STARTED | Mockup in Structure/tutoring/ |
-| M7 | Agent Orchestration (AI) | — | DEFERRED | Post-launch, AgentOrchestrationFlow.tsx is UI mockup only |
+| ID | Task | Owner | Status | Design Mockup | Notes |
+|----|------|-------|--------|---------------|-------|
+| M1 | Chameleon Chat Skins (Premium) | DEV_1 + Lead | DONE | `Structure/Design/chat/stitch/` | DEV_1 built 3 skins (wrong dir, Lead moved). Lead built SkinSelector. |
+| M2 | Community Calendar | DEV_1 (Codex) | DONE | `Structure/Design/features/stitch/community_calendar/` | Approved by Lead. |
+| M3 | Water Outage Alert Details | DEV_1 (Codex) | DONE | `Structure/Design/features/stitch/water_outage_alert_details/` | Approved by Lead. Bundled with M2. |
+| M4 | Incident Reporting | Lead (recovered) | DONE | — | DEV_2 failed. Lead created all files. |
+| M5 | Utility Schedule Tracker | Lead | DONE | `Structure/Design/sub-features/stitch/stitch/utility_schedule/` | API + bento-style UI. 43 routes. |
+| M6 | Tutoring Interface | Lead | DONE | `Structure/Design/tutoring/` | API, list, detail, create form. 42 routes. |
+| M7 | Agent Orchestration (AI) | — | DEFERRED | `Structure/Design/backend-Framework/stitch/agent_orchestration_flow/` | Post-launch |
+
+## Structure Features Not Yet in Task Board
+
+| ID | Task | Owner | Status | Design Mockup | Notes |
+|----|------|-------|--------|---------------|-------|
+| S1 | Community Status Page | Lead | DONE | `Structure/Design/sub-features/stitch/stitch/community_status/` | DEV_2 removed. Lead will build. |
+| S2 | Local Business Spotlight | DEV_1 (Codex) | DONE | `Structure/Design/features/stitch/local_business_spotlight/` | Approved by Lead. |
+| S3 | My Water Reports | Lead | DONE | `Structure/Design/features/stitch/my_water_reports/` | DEV_2 removed. Lead will build. |
+| S4 | Privacy Policy Page | Lead | DONE | `Structure/Design/features/stitch/privacy_policy_ubuntu_pulse/` | Built by Lead. `/privacy` live. |
 
 ---
 
@@ -72,6 +81,6 @@
 
 | Role | Assigned Tasks | File Scope |
 |------|---------------|------------|
-| **Lead (Claude Opus)** | Architecture, reviews, shared infra | All shared infra + any unassigned files |
-| **DEV_1 (Codex)** | H3 | `app/api/load-shedding/route.ts`, `components/LoadSheddingWidget.tsx`, `app/water-outages/page.tsx` |
-| **DEV_2 (Gemini)** | H8, M4 | `app/api/notifications/route.ts`, `app/api/incidents/route.ts`, `app/incidents/page.tsx`, `app/incidents/new/page.tsx` |
+| **Lead (Claude Opus)** | Architecture, reviews, shared infra, M1, M5, M6, S1, S3, S4 | All shared infra + DEV_2's forfeited scope |
+| **DEV_1 (Codex)** | H3, M2, M3, S2 — all DONE | Awaiting next assignment from Lead |
+| **DEV_2 (Gemini)** | REMOVED from active dev | 3 consecutive assignment failures. Empty files, build breaks, false reports. |

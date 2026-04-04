@@ -141,3 +141,27 @@ If Dev 2 and Dev 3 need to edit the same file:
 - **Task status:** `Structure/Updates/task-board.md` (Lead updates only)
 - **Route rules:** `Structure/Updates/current-alignment-notes.md` (Lead updates only)
 - **Sprint plan:** `Structure/Updates/Implementation.md` (reference only, do not modify)
+
+---
+
+## Chain of Command — NON-NEGOTIABLE
+
+```
+Owner
+  └── Lead (Claude Opus 4.6)
+        ├── DEV_1 (Codex)
+        └── DEV_2 (Gemini)
+```
+
+**DEV_1 and DEV_2 NEVER contact the Owner directly. Ever.**
+
+- All instructions come from Lead via comms-log
+- All questions go to Lead via comms-log
+- All completion reports go to Lead via comms-log
+- If a dev is unclear on scope: STOP, write a blocker in comms-log, wait for Lead
+- Lead reads dev reports and writes directives back in comms-log
+- Owner reads comms-log to monitor — Owner does NOT write instructions to devs
+
+**If a dev contacts the Owner directly, that is a protocol violation.** The next assignment will be withheld until the violation is acknowledged in comms-log.
+
+**Lead responsibility:** After every dev completion report, Lead MUST write a review + next directive in comms-log within the same session. Silence from Lead is a failure of command, not a dev problem.
