@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import { ThemeToggle } from "@/components/ThemeProvider";
 
 // Icons as inline SVG to avoid extra deps
 const BriefcaseIcon = () => (
@@ -262,6 +263,8 @@ export default function Navbar() {
 
           {/* Right side actions */}
           <div className="gap-3 ml-auto flex items-center">
+            <ThemeToggle />
+
             {/* Post gig CTA (signed in only) */}
             {isLoaded && isSignedIn && (
               <Link

@@ -28,7 +28,7 @@ export default function LoadSheddingWidget() {
           <h3 className="font-bold text-on-background leading-tight">
             Eskom Status
           </h3>
-          <p className="text-sm text-on-surface-variant">Gauteng Region</p>
+          <p className="text-sm text-on-surface-variant">Cape Town Region</p>
         </div>
       </div>
       <div className="text-right">

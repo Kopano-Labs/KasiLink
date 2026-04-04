@@ -33,7 +33,7 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-surface-variant to-background border-b border-outline-variant/30 py-12">
         <div className="container text-center max-w-screen-sm mx-auto">
           <span className="inline-block mb-4 px-3 py-1 rounded-full bg-primary-container text-primary text-xs font-semibold tracking-wider uppercase">
-            Gauteng&apos;s Township Platform
+            South Africa&apos;s Township Platform
           </span>
           <h1 className="text-4xl md:text-5xl tracking-tight mb-4 font-headline font-black">
             Local gigs.
@@ -198,7 +198,7 @@ export default async function HomePage() {
             Ready to start?
           </h2>
           <p className="text-on-surface-variant mb-6">
-            Join thousands of Gauteng residents finding work in their
+            Join thousands of South Africans finding work in their
             neighbourhood.
           </p>
           <Link href="/sign-in" className="btn btn-primary btn-lg">
