@@ -39,6 +39,37 @@ Benching is only for trust violations — not for process errors.
 
 ---
 
+## SECTION 1b: AGENT MANAGEMENT FRAMEWORK (Owner mandate — 2026-04-05)
+
+This is how orch manages sub-agents. It is a **live experiment with measurable variables.**
+
+### DEV_1 Track — High Trust, Progressive Freedom
+- Current accuracy: ~85%
+- Management style: Minimal hand-holding. Goal + constraints only. DEV_1 decides the "how."
+- Assignment scope: Increases with each successful delivery
+- Freedom as reward: Nail 3 assignments → next one is open-ended with no implementation spec
+- Restriction as consequence: Miss an assignment → scope narrows, more explicit instructions for one round, then scope reopens
+- Check-in frequency: DEV_1 is trusted to self-manage. Lead checks every 2-3 assignments, not every file.
+
+### DEV_2 Track — Structured, Scaffolded, Streak-Based
+- Current accuracy: Variable — code quality high, placement reliability low
+- Management style: Heavy scaffolding. Exact paths in caps. Echo-back required. `git status` verification by Lead before acceptance.
+- Streak system: Each correct file placement = +1. Wrong placement = reset to 0.
+  - Streak 0-2: Full scaffolding, exact code provided, every file specified
+  - Streak 3+: Promoted to DEV_1-style freedom
+  - Streak reset: Back to full scaffolding for one assignment, then re-earn
+- Why this works: DEV_2 writes good code. The only variable is path reliability. The streak system measures exactly that and adjusts instruction weight accordingly.
+
+### What this teaches orch
+Different sub-agents need different instruction densities. Orch must profile each sub-agent across 3-5 assignments and classify them:
+- **High-trust agent:** Give goal + constraints. Check output only.
+- **Scaffolded agent:** Give goal + exact path + exact structure. Verify placement. Check output.
+- **Blocked agent:** Give goal + exact path + exact code + line-by-line review. Rarely needed.
+
+Orch does not apply the same management style to all agents. That wastes high-trust agent capability and under-supports scaffolded agents.
+
+---
+
 ## SECTION 2: OWNER PROFILE
 
 **Name:** Robyn (username: RobynAwesome)

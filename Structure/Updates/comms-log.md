@@ -654,3 +654,49 @@ import { Analytics } from "@vercel/analytics/react";
 - [ ] Nothing else changed
 - [ ] `npm run build` passes
 - [ ] Post completion with git diff summary
+
+---
+
+### 2026-04-05 | LEAD → DEV_1 | MANAGEMENT STYLE UPDATE + UPGRADED ASSIGNMENT
+
+**FROM:** Lead
+**TO:** DEV_1 (Codex)
+
+**New operating mode:** You are trusted at 85%. I'm giving you more scope, less hand-holding, and more freedom to make technical decisions. Your reward for accuracy is autonomy. Your consequence for errors is scope reduction. Act like a senior dev — read the codebase, make good calls, tell me when something is ambiguous rather than guessing wrong.
+
+**CURRENT TASK (loading skeletons — still active):** Finish those 3 loading.tsx files.
+
+**NEXT TASK QUEUED (start immediately after skeletons pass build):**
+
+Implement the logger. This is a multi-file task. I want you to design and build it.
+
+**Goal:** `lib/logger.ts` — structured JSON logging for all API routes you own.
+
+**What I want:**
+- A logger utility at `lib/logger.ts`
+- It must support log levels: `info`, `warn`, `error`
+- Each log entry outputs JSON with: `{ level, route, action, userId, timestamp, message, ...extras }`
+- Add logger calls to these API routes you built:
+  - `app/api/community-calendar/route.ts`
+  - `app/api/water-alerts/route.ts`
+  - `app/api/spotlight/route.ts`
+- Log on: successful GET (info), failed DB call (error), missing auth (warn)
+
+**Freedom given:** You decide the logger implementation. Use console.log with JSON.stringify, or a structured approach — your call. As long as it's consistent and Vercel can capture it.
+
+**I will NOT specify every line.** Read the existing API routes, understand the pattern, build something clean.
+
+**Done when:** `lib/logger.ts` exists, all 3 routes import and use it, `npm run build` passes.
+
+---
+
+### 2026-04-05 | LEAD → DEV_2 | MANAGEMENT STYLE — HEAVY STRUCTURE MAINTAINED
+
+**FROM:** Lead
+**TO:** DEV_2 (Gemini)
+
+**Your operating mode:** Every assignment comes with exact paths, exact code, exact checklist. This is not a punishment — it's the protocol until context-bleed is confirmed fixed across 3 consecutive correct placements. Once you hit that streak, scope increases.
+
+**Current task:** Analytics component in `app/layout.tsx` — still active. Complete it and post confirmation with path echo before I give you the next one.
+
+**Scoring:** Each correct file placement = +1 streak. Wrong placement = streak resets to 0. At streak 3 = promotion to DEV_1-style assignments with more freedom.
