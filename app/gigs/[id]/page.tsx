@@ -13,6 +13,7 @@ interface Gig {
   payDisplay: string;
   isProviderVerified: boolean;
   providerName: string;
+  providerId: string;
   isUrgent: boolean;
   slots: number;
   applicationCount: number;
@@ -31,6 +32,12 @@ export default function GigDetailsPage({
   const [applying, setApplying] = useState(false);
   const [message, setMessage] = useState("");
   const [appStatus, setAppStatus] = useState<string | null>(null);
+
+  // Review States
+  const [rating, setRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
+  const [submittingReview, setSubmittingReview] = useState(false);
+  const [reviewStatus, setReviewStatus] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/gigs/${id}/view`)
@@ -58,6 +65,35 @@ export default function GigDetailsPage({
       setAppStatus("Network error occurred.");
     } finally {
       setApplying(false);
+    }
+  }
+
+  async function handleReviewSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!isSignedIn || !gig) return;
+    setSubmittingReview(true);
+    try {
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          gigId: id,
+          providerId: gig.providerId,
+          rating,
+          comment: reviewComment,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setReviewStatus("Success! Your review has been posted.");
+        setReviewComment("");
+      } else {
+        setReviewStatus(data.error || "Failed to submit review.");
+      }
+    } catch {
+      setReviewStatus("Network error occurred.");
+    } finally {
+      setSubmittingReview(false);
     }
   }
 
@@ -146,6 +182,50 @@ export default function GigDetailsPage({
               disabled={applying}
             >
               {applying ? "Submitting..." : "Submit Application"}
+            </button>
+          </form>
+        )}
+
+        {isLoaded && isSignedIn && (
+          <form
+            onSubmit={handleReviewSubmit}
+            className="border-t border-outline-variant/30 pt-6 mt-8"
+          >
+            <h3 className="font-bold mb-3">Rate this Provider</h3>
+            {reviewStatus && (
+              <div
+                className={`alert mb-3 ${reviewStatus.includes("Success") ? "badge-success text-success-container" : "alert-danger"}`}
+              >
+                {reviewStatus}
+              </div>
+            )}
+            <div className="flex items-center gap-3 mb-3">
+              <label className="text-sm font-medium">Rating:</label>
+              <select
+                className="kasi-input py-1 px-3 w-auto"
+                value={rating}
+                onChange={(e) => setRating(Number(e.target.value))}
+              >
+                {[5, 4, 3, 2, 1].map((num) => (
+                  <option key={num} value={num}>
+                    {num} Stars
+                  </option>
+                ))}
+              </select>
+            </div>
+            <textarea
+              className="kasi-input mb-3"
+              rows={2}
+              placeholder="How was your experience?"
+              value={reviewComment}
+              onChange={(e) => setReviewComment(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="btn btn-outline w-full"
+              disabled={submittingReview}
+            >
+              {submittingReview ? "Submitting..." : "Submit Review"}
             </button>
           </form>
         )}
