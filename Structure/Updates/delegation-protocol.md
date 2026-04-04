@@ -1,0 +1,138 @@
+# Delegation Protocol
+
+> Rules of engagement for multi-agent development on KasiLink.
+> All developers (human or AI) must read this before touching code.
+
+---
+
+## Roles
+
+| Role | Identity | Responsibility |
+|------|----------|----------------|
+| **Owner** | Human (rkhol) | Final authority. Reviews comms-log. Approves structural changes. |
+| **Lead** | Claude Opus 4.6 | Architecture, code review, shared infrastructure, delegation, all structural decisions. |
+| **Dev 2** | Any AI agent | Executes assigned feature slice. Scoped file access only. |
+| **Dev 3** | Any AI agent | Executes assigned feature slice. Scoped file access only. |
+
+---
+
+## Rules
+
+### What Dev 2 / Dev 3 CAN do:
+1. Edit files explicitly listed in their assignment scope
+2. Create NEW files within their assigned directories only
+3. Read any file in the codebase (read-only exploration is always allowed)
+4. Add entries to `Structure/Updates/comms-log.md` (append only, newest first)
+5. Run `npm run build` and `npm run dev` to verify their work
+
+### What Dev 2 / Dev 3 CANNOT do:
+1. Edit files outside their assigned scope
+2. Touch shared infrastructure without Lead approval:
+   - `lib/db.ts` — database connection
+   - `lib/validation.ts` — shared validators
+   - `lib/auth.config.ts` — auth configuration
+   - `app/layout.tsx` — root layout
+   - `middleware.ts` — route middleware
+   - `tailwind.config.ts` — design tokens
+   - `next.config.ts` — framework config
+   - `package.json` — dependencies
+   - Any file in `Structure/` (except comms-log append)
+3. Delete existing files
+4. Modify existing API route signatures (breaking changes)
+5. Install new dependencies without Lead approval
+6. Rewrite or edit past comms-log entries
+7. Push to git or deploy without Owner approval
+
+### What the Lead does:
+1. Writes and updates task-board assignments
+2. Reviews all code from Dev 2/Dev 3 before merge
+3. Owns all shared infrastructure changes
+4. Resolves conflicts between Dev 2 and Dev 3 scopes
+5. Updates alignment-notes when routes or ownership changes
+6. Reports to Owner via comms-log
+
+---
+
+## Task Assignment Format
+
+When the Lead assigns work, it follows this template:
+
+```
+TASK: [ID from task-board] — [Short description]
+SCOPE: [Exact file list — these are the ONLY files you can edit]
+OBJECTIVE: [What the feature should do when complete]
+CONSTRAINTS:
+  - [Specific technical requirements]
+  - [What NOT to do]
+DONE-WHEN:
+  - [Acceptance criteria 1]
+  - [Acceptance criteria 2]
+  - [npm run build passes]
+REPORT: Add a comms-log entry when done
+```
+
+---
+
+## Example Assignment: Dev 2 — Chat Backend
+
+```
+TASK: H1 + GAP-3 + GAP-4 — In-app messaging system
+SCOPE:
+  - lib/models/Conversation.ts (rebuild from stub)
+  - lib/models/Message.ts (rebuild from stub)
+  - app/api/chat/route.ts (create)
+  - app/api/messages/route.ts (create)
+  - app/chat/page.tsx (create)
+OBJECTIVE: Gig participants can send messages within a conversation tied to a gig application.
+CONSTRAINTS:
+  - Use existing MongoDB connection from lib/db.ts (do not modify db.ts)
+  - Use existing auth pattern from other API routes (auth() from @clerk/nextjs)
+  - Follow existing validation pattern from lib/validation.ts
+  - Do NOT create a real-time WebSocket layer yet — polling is fine for MVP
+  - Messages must reference a Conversation, which references a Gig
+DONE-WHEN:
+  - Conversation model has: participants[], gigId, createdAt, lastMessageAt
+  - Message model has: conversationId, senderId, content, createdAt, readAt
+  - GET /api/chat returns user's conversations
+  - POST /api/chat creates a conversation
+  - GET /api/messages?conversationId=X returns messages
+  - POST /api/messages sends a message
+  - app/chat/page.tsx shows conversation list and message thread
+  - npm run build passes
+REPORT: Add a comms-log entry when done
+```
+
+---
+
+## Onboarding a New Agent
+
+When a new AI agent joins as Dev 2 or Dev 3, give them exactly 4 things:
+
+1. **This file** (`delegation-protocol.md`) — so they know the rules
+2. **Their assignment** (from task-board.md or direct instruction) — so they know their scope
+3. **The file list** they're allowed to edit — explicit paths
+4. **The comms-log format** — so they report correctly
+
+They do NOT need:
+- Full codebase context (they can read files as needed)
+- The alignment-notes changelog history
+- Access to other dev's assignments
+- Knowledge of the full Implementation.md roadmap
+
+---
+
+## Conflict Resolution
+
+If Dev 2 and Dev 3 need to edit the same file:
+1. STOP. Do not edit.
+2. Add a comms-log entry flagging the conflict.
+3. Lead resolves by either: splitting the file, sequencing the edits, or taking the edit themselves.
+
+---
+
+## Communication
+
+- **Status updates:** `Structure/Updates/comms-log.md` (append only)
+- **Task status:** `Structure/Updates/task-board.md` (Lead updates only)
+- **Route rules:** `Structure/Updates/current-alignment-notes.md` (Lead updates only)
+- **Sprint plan:** `Structure/Updates/Implementation.md` (reference only, do not modify)
