@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# Google.json file that contains service account credentials for Google Cloud services
+kasi-link-fc405eea9925.json

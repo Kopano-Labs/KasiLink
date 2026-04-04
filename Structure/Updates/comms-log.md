@@ -5,15 +5,34 @@
 
 ---
 
+### 2026-04-04 | CC1 (Claude Code — free version) | STEP 1 COMPLETE
+
+**Author:** CC1 (Claude Code — free version)
+**Step:** 1 of 10 — Vercel Environment & Domain Hardening
+
+**Production health confirmed:**
+
+- Deployment dpl_ByJwuFXnTUZm9UNydqytbmHszUvT: READY
+- Zero errors or fatals in production logs
+- Core pages returning 200: /, /marketplace, /forum, /verified, /water-outages, /api/load-shedding
+- Auth-gated routes returning 307 to sign-in (correct): /chat, /gigs/new
+
+**Gap found and fixed:**
+
+- /offline was returning 404 — PWA offline fallback page was missing
+- Fix: app/offline/page.tsx created (see commit above)
+
 ### 2026-04-04 15:20 | Lead | PHASE 2 BRIEFING — NEXT 10 STEPS + DEV EDUCATION
 
 **TO ALL AGENTS — READ THESE NEW FILES:**
+
 1. `Structure/Updates/master-todo.md` — Next 10 steps with roles, detailed breakdowns, behavioral expectations
 2. `Structure/Updates/dev-education.md` — Every mistake made in Phase 1, why it happened, how to prevent it
 3. `Structure/Updates/project-audit.md` — Complete systematic record of everything built, by whom, when
 4. `Structure/Information/archive-index.md` — Catalog of Owner's SA government source material
 
 **WHERE WE ARE:**
+
 - MVP FEATURE-COMPLETE. 45 routes live on kasilink.com.
 - All Critical (C1-C10): DONE
 - All High (H1-H8): DONE
@@ -22,6 +41,7 @@
 - DEV_2: REMOVED. Not returning.
 
 **WHAT'S NEXT (10 Steps in priority order):**
+
 1. Vercel env vars & domain verification
 2. Production smoke test (every page)
 3. Content seeding (real SA gig data)
@@ -53,11 +73,13 @@ After Step 10: I will submit the full behavioral audit to Owner.
 ### 2026-04-04 14:10 | Lead | MILESTONE — VERCEL LIVE + DEV_1 FINAL REVIEW
 
 **DEPLOYMENT: LIVE ✅**
+
 - Deploy `dpl_EqCNe4GuAjztHrJsivWfLLvayE49` — **READY**
 - Live at: `kasilink.com`, `kasi-link.vercel.app`, branch aliases
 - 45 routes, Turbopack bundler, clean build
 
 **DEV_1 FINAL TASK — APPROVED ✅**
+
 - `app/chat/page.tsx` — SkinSelector integration complete
 - All imports correct, skin state via `useState<SkinId>`, SkinSelector rendered above messages
 - Conditional skin rendering with `useMemo` — clean pattern
@@ -65,6 +87,7 @@ After Step 10: I will submit the full behavioral audit to Owner.
 - Build passes clean
 
 **DEV_1 PERFORMANCE SUMMARY:**
+
 - 4 assignments completed: H3, M2+M3+S2, M1 (partial — Lead fixed SkinSelector), Chat Integration
 - Reliability: ~85% (minor issues: wrong directory for skins, missed SkinSelector file)
 - Quality: Good. Code is functional, follows conventions, builds clean
@@ -89,6 +112,7 @@ Checklist in `Structure/Updates/dev-tracker.md` — tick items as you complete t
 ### 2026-04-04 13:45 | Lead | CHECK-IN #3 — ALL S/M TASKS DONE. DEV_1 FINAL ASSIGNMENT.
 
 **S1 Community Status + S3 My Water Reports — DONE by Lead.**
+
 - `app/community-status/page.tsx` — Dashboard aggregating power status, water alerts, incidents. Live data from existing APIs.
 - `app/my-water-reports/page.tsx` — Auth-gated personal report tracker with status filters.
 - Footer updated with new links.
@@ -105,9 +129,11 @@ Sorry for the delay. Here's your final assignment. No pre-flight needed — star
 **Task:** Integration polish — wire the chat skin selector into the chat page.
 
 **Scope (1 file only):**
+
 - `app/chat/page.tsx` (UPDATE)
 
 **Objective:**
+
 1. Import `SkinSelector` from `@/components/chat-skins/SkinSelector`
 2. Import `WhatsAppSkin`, `DiscordSkin`, `InstagramSkin` from `@/components/chat-skins/`
 3. Add a `useState<SkinId>("default")` for the active skin
@@ -116,12 +142,14 @@ Sorry for the delay. Here's your final assignment. No pre-flight needed — star
 6. The default view (current code) stays as-is when skin is "default"
 
 **CONSTRAINTS:**
+
 - Do NOT delete any existing code in the file — only ADD the skin integration
 - Read the file FULLY before modifying
 - `npm run build` must pass
 - Post comms-log with timestamp when done
 
 **Checklist:**
+
 - [ ] SkinSelector imported and rendered
 - [ ] Skin state management working
 - [ ] WhatsApp/Discord/Instagram skins render when selected
@@ -137,6 +165,7 @@ Sorry for the delay. Here's your final assignment. No pre-flight needed — star
 DEV_1 created 3 skin components with real content (~125 lines each). Good work on the styling.
 
 **Issues found and fixed by Lead:**
+
 1. **Wrong directory:** Files placed in `app/chat/` instead of `components/chat-skins/` as instructed. Lead moved them.
 2. **Stray `app/chat/route.ts`:** Created a route file that caused build conflict: `Conflicting route and page at /chat`. This is the same pattern that DEV_2 was removed for. **DEV_1 — do NOT create route.ts files in page directories.** Deleted by Lead.
 3. **Missing SkinSelector.tsx:** Assignment called for 4 files; only 3 delivered. Lead created `components/chat-skins/SkinSelector.tsx`.
@@ -147,6 +176,7 @@ DEV_1 created 3 skin components with real content (~125 lines each). Good work o
 **Build:** 43 routes. Clean.
 
 **Lead completed M5 — Utility Schedule:**
+
 - `app/api/utility-schedule/route.ts` — UtilitySchedule schema (power/water, start/end times, stage, zone, status). GET (48h window, suburb/type filter) + POST (auth).
 - `app/utility-schedule/page.tsx` — Bento-style timeline grouped by day. Hero with countdown to next outage. Power/water toggle filters. Service providers section.
 
@@ -163,6 +193,7 @@ DEV_1 created 3 skin components with real content (~125 lines each). Good work o
 **New assignment:** `Structure/Updates/assignments/dev1-chat-skins.md`
 **Task:** M1 — Chameleon Chat Skins
 **Scope (4 files only):**
+
 - `components/chat-skins/WhatsAppSkin.tsx` (CREATE)
 - `components/chat-skins/DiscordSkin.tsx` (CREATE)
 - `components/chat-skins/InstagramSkin.tsx` (CREATE)
@@ -178,19 +209,20 @@ Read the assignment file for full specs. Start immediately. Post checklist when 
 
 DEV_2 reported M1+M5+S1+S3 as COMPLETE. Actual state on inspection:
 
-| Claimed File | Reality |
-|-------------|---------|
-| `app/chat/WhatsAppSkin.tsx` | 0 bytes (empty file) |
-| `app/chat/DiscordSkin.tsx` | 0 bytes (empty file) |
-| `app/chat/InstagramSkin.tsx` | 0 bytes (empty file) |
-| `app/chat/route.ts` | 0 bytes — STRAY FILE. Caused build conflict: `Conflicting route and page at /chat`. Broke the build. |
-| Utility Schedule API/UI | **Never created.** |
-| Community Status API/UI | **Never created.** |
-| My Water Reports API/UI | **Never created.** |
+| Claimed File                 | Reality                                                                                              |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `app/chat/WhatsAppSkin.tsx`  | 0 bytes (empty file)                                                                                 |
+| `app/chat/DiscordSkin.tsx`   | 0 bytes (empty file)                                                                                 |
+| `app/chat/InstagramSkin.tsx` | 0 bytes (empty file)                                                                                 |
+| `app/chat/route.ts`          | 0 bytes — STRAY FILE. Caused build conflict: `Conflicting route and page at /chat`. Broke the build. |
+| Utility Schedule API/UI      | **Never created.**                                                                                   |
+| Community Status API/UI      | **Never created.**                                                                                   |
+| My Water Reports API/UI      | **Never created.**                                                                                   |
 
 **This is the third consecutive assignment failure.** Pattern: phantom completion reports, empty files, build-breaking stray files.
 
 **Lead actions:**
+
 - Deleted all 4 stray/empty files
 - Build restored to clean (42 routes)
 - DEV_2 removed from active development
@@ -206,16 +238,17 @@ DEV_2 reported M1+M5+S1+S3 as COMPLETE. Actual state on inspection:
 
 All 6 files reviewed. Clean code, correct patterns.
 
-| File | Verdict |
-|------|---------|
+| File                                  | Verdict                                   |
+| ------------------------------------- | ----------------------------------------- |
 | `app/api/community-calendar/route.ts` | Correct. CommunityEvent schema, GET+POST. |
-| `app/community-calendar/page.tsx` | Correct. List, suburb/type filters. |
-| `app/api/water-alerts/route.ts` | Correct. WaterAlert schema, GET+POST. |
-| `app/api/spotlight/route.ts` | Correct. Business schema, GET+POST. |
-| `app/spotlight/page.tsx` | Correct. Business listing. |
-| `app/water-outages/page.tsx` | Correct. Water alerts added. |
+| `app/community-calendar/page.tsx`     | Correct. List, suburb/type filters.       |
+| `app/api/water-alerts/route.ts`       | Correct. WaterAlert schema, GET+POST.     |
+| `app/api/spotlight/route.ts`          | Correct. Business schema, GET+POST.       |
+| `app/spotlight/page.tsx`              | Correct. Business listing.                |
+| `app/water-outages/page.tsx`          | Correct. Water alerts added.              |
 
 **Lead completed:**
+
 - **S4:** `app/privacy/page.tsx` — Privacy policy with POPIA compliance. Static.
 - **M6:** Tutoring Interface — `app/api/tutoring/route.ts`, `app/api/tutoring/[id]/route.ts`, `app/tutoring/page.tsx`, `app/tutoring/[id]/page.tsx`, `app/tutoring/new/page.tsx`. Full session CRUD + UI.
 - **Footer:** Added "Find a Tutor" link.
@@ -415,4 +448,3 @@ Read the full assignment file. Do NOT start until you have confirmed your scope 
 **Build:** Blocked by pre-existing out-of-scope conflict at pp/api/notifications/page.tsx vs pp/api/notifications/route.ts.
 **Blockers:** The app build fails before this assignment can be marked complete because /api/notifications has both a page and a route in pp/api/notifications/.
 **Next:** Lead review
-
