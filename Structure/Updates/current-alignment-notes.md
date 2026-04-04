@@ -156,3 +156,18 @@ Changes recorded:
 - Added server-side distance calculation for marketplace results when coordinates are available.
 - Fixed profile dependence on `providerId=me` by supporting that query on the gigs API.
 - Upgraded marketplace filtering to expose suburb, city, and radius controls consistent with H6 `Location-Based Filtering (Geo)`.
+
+### 2026-04-04 - USSD Redesign Pass
+
+Author:
+- Codex / GPT-5
+
+Signature:
+- `Codex-Structure-Alignment-v1`
+
+Changes recorded:
+- Rebuilt `/api/ussd` as a stateless Africa's Talking-compatible flow for Vercel/serverless use.
+- Removed in-memory session dependence from the USSD route.
+- Connected USSD gig lookup to real open gigs in MongoDB.
+- Connected USSD application flow to real `Application`, `Gig`, `User`, and `Notification` records when the caller phone matches a registered KasiLink profile.
+- Added verified-provider and my-applications USSD branches as higher-value flow extensions.

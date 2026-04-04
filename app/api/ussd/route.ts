@@ -1,98 +1,289 @@
-// app/api/ussd/route.ts
-// OPTIMIZED & FAST USSD Gig Search Flow for KasiLink
-
 import { NextRequest } from "next/server";
+import connectDB from "@/lib/db";
+import Gig from "@/lib/models/Gig";
+import Application from "@/lib/models/Application";
+import User from "@/lib/models/User";
+import Notification from "@/lib/models/Notification";
+import { formatSAPhone, isValidSAPhone } from "@/lib/auth.config";
+import { sanitize } from "@/lib/validation";
 
-const sessions = new Map<string, any>();
+function con(message: string) {
+  return new Response(`CON ${message}`, {
+    status: 200,
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
+}
+
+function end(message: string) {
+  return new Response(`END ${message}`, {
+    status: 200,
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
+}
+
+function normalizeSegments(text: string) {
+  if (!text.trim()) return [];
+  return text
+    .split("*")
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+}
+
+async function findOpenGigsBySuburb(suburb: string) {
+  await connectDB();
+
+  return Gig.find({
+    status: "open",
+    "location.suburb": new RegExp(suburb, "i"),
+    $or: [
+      { expiresAt: { $exists: false } },
+      { expiresAt: null },
+      { expiresAt: { $gt: new Date() } },
+    ],
+  })
+    .sort({ isUrgent: -1, isProviderVerified: -1, createdAt: -1 })
+    .limit(5)
+    .lean();
+}
+
+async function findSeekerByPhone(phoneNumber: string) {
+  const normalized = formatSAPhone(phoneNumber);
+  if (!isValidSAPhone(normalized)) return null;
+
+  await connectDB();
+  return User.findOne({ phone: normalized, isActive: true });
+}
+
+async function applyToGigByPhone(phoneNumber: string, gigId: string) {
+  const seeker = await findSeekerByPhone(phoneNumber);
+  if (!seeker) {
+    return {
+      ok: false,
+      message:
+        "Profile not found for this number. Sign in on kasi-link.com first, then try USSD again.",
+    };
+  }
+
+  const gig = await Gig.findById(gigId);
+  if (!gig || gig.status !== "open") {
+    return {
+      ok: false,
+      message: "This gig is no longer available.",
+    };
+  }
+
+  if (gig.providerId === seeker.clerkId) {
+    return {
+      ok: false,
+      message: "You cannot apply to your own gig.",
+    };
+  }
+
+  try {
+    await Application.create({
+      gigId: gig._id,
+      gigTitle: gig.title,
+      seekerId: seeker.clerkId,
+      seekerName: seeker.displayName,
+      seekerPhone: seeker.phone,
+      providerId: gig.providerId,
+      providerName: gig.providerName,
+      message: sanitize("Applied via KasiLink USSD"),
+      status: "pending",
+    });
+
+    await Gig.findByIdAndUpdate(gig._id, { $inc: { applicationCount: 1 } });
+    await Notification.create({
+      userId: gig.providerId,
+      type: "application",
+      title: "New USSD application received",
+      message: `${seeker.displayName} applied to your gig: ${gig.title}`,
+      link: `/gigs/${gig._id}`,
+    });
+
+    return {
+      ok: true,
+      message: `Application sent for ${gig.title}. The provider will be notified.`,
+    };
+  } catch (err: unknown) {
+    if (
+      err &&
+      typeof err === "object" &&
+      "code" in err &&
+      (err as { code: number }).code === 11000
+    ) {
+      return {
+        ok: false,
+        message: "You already applied to this gig.",
+      };
+    }
+
+    console.error("[POST /api/ussd apply]", err);
+    return {
+      ok: false,
+      message: "Application failed. Please try again later.",
+    };
+  }
+}
+
+async function fetchMyApplications(phoneNumber: string) {
+  const seeker = await findSeekerByPhone(phoneNumber);
+  if (!seeker) return null;
+
+  await connectDB();
+  return Application.find({ seekerId: seeker.clerkId })
+    .sort({ createdAt: -1 })
+    .limit(5)
+    .lean();
+}
+
+async function fetchVerifiedProviders() {
+  await connectDB();
+  return User.find({ isVerified: true, isActive: true })
+    .sort({ "rating.average": -1, createdAt: -1 })
+    .limit(5)
+    .lean();
+}
 
 export async function POST(req: NextRequest) {
-  const formData = await req.formData();
-  const sessionId = formData.get("sessionId") as string;
-  const text = (formData.get("text") as string) || "";
+  try {
+    const formData = await req.formData();
+    const phoneNumber = String(formData.get("phoneNumber") ?? "");
+    const text = String(formData.get("text") ?? "");
+    const segments = normalizeSegments(text);
 
-  let response = "";
-  let session = sessions.get(sessionId) || { step: "main" };
+    if (segments.length === 0) {
+      return con(
+        [
+          "Welcome to KasiLink",
+          "",
+          "1. Find gigs near me",
+          "2. My applications",
+          "3. Verified providers",
+          "4. Help",
+        ].join("\n"),
+      );
+    }
 
-  // ==================== MAIN MENU ====================
-  if (text === "" || text === "0") {
-    response = `CON Welcome to KasiLink!\n\n1. Find gigs near me\n2. Post a gig (Retailers)\n3. My profile & applications\n4. Wallet balance\n5. Help & Support`;
-    session.step = "main";
+    if (segments[0] === "1") {
+      if (segments.length === 1) {
+        return con(
+          "Enter your suburb or township\nExample: Soweto, Tembisa, Alexandra",
+        );
+      }
+
+      const suburb = segments[1];
+      const gigs = await findOpenGigsBySuburb(suburb);
+
+      if (segments.length === 2) {
+        if (gigs.length === 0) {
+          return end(
+            `No open gigs found near ${suburb} right now. Try another suburb or check kasi-link.com/marketplace.`,
+          );
+        }
+
+        const lines = gigs.map(
+          (gig, index) =>
+            `${index + 1}. ${gig.title.slice(0, 28)} - ${gig.payDisplay}`,
+        );
+
+        return con(
+          [`Gigs near ${suburb}`, "", ...lines, "", "Choose a gig number"]
+            .join("\n")
+            .slice(0, 1500),
+        );
+      }
+
+      const selectedIndex = Number(segments[2]) - 1;
+      const selectedGig = gigs[selectedIndex];
+
+      if (!selectedGig) {
+        return end("Invalid gig selection. Start again and choose a valid number.");
+      }
+
+      if (segments.length === 3) {
+        return con(
+          [
+            `${selectedGig.title}`,
+            `${selectedGig.location.suburb}, ${selectedGig.location.city}`,
+            `${selectedGig.payDisplay}`,
+            "",
+            "1. Apply now",
+            "2. Exit",
+          ].join("\n"),
+        );
+      }
+
+      if (segments[3] === "1") {
+        const result = await applyToGigByPhone(phoneNumber, String(selectedGig._id));
+        return end(result.message);
+      }
+
+      return end("Session closed.");
+    }
+
+    if (segments[0] === "2") {
+      const applications = await fetchMyApplications(phoneNumber);
+      if (!applications) {
+        return end(
+          "No KasiLink profile found for this number yet. Sign in on kasi-link.com to activate mobile applications.",
+        );
+      }
+
+      if (applications.length === 0) {
+        return end("You have no applications yet.");
+      }
+
+      const lines = applications.map(
+        (application, index) =>
+          `${index + 1}. ${application.gigTitle.slice(0, 24)} - ${application.status}`,
+      );
+
+      return end(["My applications", "", ...lines].join("\n").slice(0, 1500));
+    }
+
+    if (segments[0] === "3") {
+      const providers = await fetchVerifiedProviders();
+      if (providers.length === 0) {
+        return end("No verified providers are available right now.");
+      }
+
+      const lines = providers.map((provider, index) => {
+        const category = provider.categories?.[0] || "General";
+        const suburb = provider.location?.suburb || "South Africa";
+        return `${index + 1}. ${provider.displayName.slice(0, 20)} - ${category} - ${suburb}`;
+      });
+
+      return end(
+        [
+          "Verified providers",
+          "",
+          ...lines,
+          "",
+          "For full profiles visit kasi-link.com/verified",
+        ]
+          .join("\n")
+          .slice(0, 1500),
+      );
+    }
+
+    if (segments[0] === "4") {
+      return end(
+        [
+          "KasiLink Help",
+          "",
+          "Use option 1 to search nearby gigs.",
+          "Use option 2 to view your recent applications.",
+          "Use option 3 to view verified providers.",
+          "",
+          "Support: kasi-link.com",
+        ].join("\n"),
+      );
+    }
+
+    return end("Invalid option. Dial again and choose 1 to 4.");
+  } catch (err) {
+    console.error("[POST /api/ussd]", err);
+    return end("Service unavailable right now. Please try again later.");
   }
-
-  // ==================== 1. FIND GIGS ====================
-  else if (text === "1" && session.step === "main") {
-    response = `CON Enter your suburb/area:\n(e.g. Soweto, Tembisa, Alexandra, Diepsloot, Orlando)`;
-    session.step = "waiting_for_suburb";
-  }
-
-  // User enters suburb → show high-demand gigs
-  else if (session.step === "waiting_for_suburb") {
-    const suburb = text.trim() || "your area";
-
-    response = `CON Gigs near ${suburb} (High demand today):\n\n1. Shelf packer - Shoprite - R180/day\n2. Delivery rider - Checkers - R220/day\n3. Site labourer - Construction - R200/day\n4. Community cleaner - R150/day\n5. Care assistant - Clinic - R170/day\n\nReply number to apply\n6. See more gigs\n0. Back to menu`;
-
-    session.step = "showing_gigs";
-    session.suburb = suburb;
-  }
-
-  // User selects a gig to apply
-  else if (
-    session.step === "showing_gigs" &&
-    ["1", "2", "3", "4", "5"].includes(text)
-  ) {
-    const gigList = [
-      "Shelf packer - Shoprite - R180/day",
-      "Delivery rider - Checkers - R220/day",
-      "Site labourer - Construction - R200/day",
-      "Community cleaner - R150/day",
-      "Care assistant - Clinic - R170/day",
-    ];
-    const selectedGig = gigList[parseInt(text) - 1];
-
-    response = `CON Apply for:\n${selectedGig}\n\nReply YES to confirm application\nOr 0 to go back`;
-    session.step = "confirm_apply";
-    session.selectedGig = selectedGig;
-  }
-
-  // Confirm application
-  else if (session.step === "confirm_apply" && text.toUpperCase() === "YES") {
-    response = `CON ✅ Application sent for ${session.selectedGig}!\n\nYou will be notified if accepted.\n\nKasiLink Plus (R79/mo) gives you priority matching & instant alerts.\n\n1. Find more gigs\n0. Main menu`;
-    session.step = "main";
-  }
-
-  // See more gigs
-  else if (session.step === "showing_gigs" && text === "6") {
-    response = `CON More gigs near ${session.suburb}:\n\n1. Bike courier - Uber Eats - R250/day\n2. Handyman - Repairs - R190/day\n3. Tutor - After school - R160/day\n4. Security guard - R210/day\n\nReply number to apply\n0. Back to menu`;
-    session.step = "showing_more_gigs";
-  }
-
-  // Apply from "more gigs"
-  else if (
-    session.step === "showing_more_gigs" &&
-    ["1", "2", "3", "4"].includes(text)
-  ) {
-    const moreGigs = [
-      "Bike courier - Uber Eats - R250/day",
-      "Handyman - Repairs - R190/day",
-      "Tutor - After school - R160/day",
-      "Security guard - R210/day",
-    ];
-    const selected = moreGigs[parseInt(text) - 1];
-
-    response = `CON Apply for:\n${selected}\n\nReply YES to confirm\nOr 0 to go back`;
-    session.step = "confirm_apply";
-    session.selectedGig = selected;
-  }
-
-  // Fallback
-  else {
-    response = `CON Invalid option.\n\nReply 1-5 or 0 for main menu`;
-  }
-
-  sessions.set(sessionId, session);
-
-  return new Response(response, {
-    status: 200,
-    headers: { "Content-Type": "text/plain" },
-  });
 }
