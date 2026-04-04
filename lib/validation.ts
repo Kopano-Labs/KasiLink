@@ -186,5 +186,9 @@ export function validateForumPost(body: ForumPostPayload): ValidationResult {
     errors.category = "Invalid category selected";
   }
 
+  if (typeof body.content === "string" && sanitize(body.content).length > 2000) {
+    errors.content = "Content must be 2000 characters or fewer";
+  }
+
   return { valid: Object.keys(errors).length === 0, errors };
 }

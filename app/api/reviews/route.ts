@@ -102,6 +102,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (typeof comment === "string" && comment.length > 500) {
+      return NextResponse.json(
+        { error: "Review comment must be 500 characters or fewer" },
+        { status: 400 },
+      );
+    }
+
     await connectDB();
     const seeker = await User.findOne({ clerkId: userId });
     if (!seeker) {

@@ -20,6 +20,8 @@ const trustGuidelines = [
   "Report suspicious listings or unsafe behavior through the community flow.",
 ];
 
+const PAGE_SIZE = 10;
+
 export default function ForumPage() {
   const { isLoaded, isSignedIn } = useUser();
   const [posts, setPosts] = useState<ForumPost[]>([]);
@@ -29,14 +31,38 @@ export default function ForumPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState<ForumPost["category"]>("general");
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    fetch("/api/forum")
+    const controller = new AbortController();
+    setLoading(true);
+    setError("");
+
+    const params = new URLSearchParams({
+      page: String(page),
+      limit: String(PAGE_SIZE),
+    });
+    if (search.trim()) params.set("q", search.trim());
+    if (activeCategory !== "all") params.set("category", activeCategory);
+
+    fetch(`/api/forum?${params.toString()}`, { signal: controller.signal })
       .then((res) => res.json())
-      .then((data) => setPosts(data.posts || []))
-      .catch(() => setError("Failed to load forum threads."))
+      .then((data) => {
+        setPosts(data.posts || []);
+        setHasMore(Boolean(data.hasMore));
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("Failed to load forum threads.");
+        }
+      })
       .finally(() => setLoading(false));
-  }, []);
+
+    return () => controller.abort();
+  }, [page, search, activeCategory]);
 
   const stats = useMemo(
     () => [
@@ -68,10 +94,11 @@ export default function ForumPage() {
         return;
       }
 
-      setPosts((current) => [data.post, ...current]);
+      setPosts((current) => [data.post, ...current].slice(0, PAGE_SIZE));
       setTitle("");
       setContent("");
       setCategory("general");
+      setPage(1);
     } catch {
       setError("Network error occurred.");
     } finally {
@@ -129,6 +156,36 @@ export default function ForumPage() {
         </div>
       </section>
 
+      <section className="mb-8 grid grid-cols-1 gap-3 md:grid-cols-[1fr_auto_auto]">
+        <input
+          className="kasi-input"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search threads by title or content"
+        />
+        <select
+          className="kasi-input"
+          value={activeCategory}
+          onChange={(e) => setActiveCategory(e.target.value)}
+        >
+          <option value="all">All categories</option>
+          <option value="general">General</option>
+          <option value="safety">Safety</option>
+          <option value="load-shedding">Load-shedding</option>
+          <option value="success_stories">Success stories</option>
+        </select>
+        <button
+          className="btn btn-outline"
+          onClick={() => {
+            setSearch("");
+            setActiveCategory("all");
+            setPage(1);
+          }}
+        >
+          Reset
+        </button>
+      </section>
+
       <section className="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="kasi-card">
           <h2 className="mb-4 font-headline text-2xl font-bold">
@@ -170,7 +227,11 @@ export default function ForumPage() {
                 <option value="load-shedding">Load-shedding</option>
                 <option value="success_stories">Success stories</option>
               </select>
-              <button type="submit" className="btn btn-primary" disabled={submitting}>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={submitting}
+              >
                 {submitting ? "Posting..." : "Post thread"}
               </button>
             </form>
@@ -218,6 +279,24 @@ export default function ForumPage() {
               </article>
             ))
           )}
+
+          <div className="flex items-center justify-between gap-3">
+            <button
+              className="btn btn-outline btn-sm"
+              onClick={() => setPage((current) => Math.max(current - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <span className="text-xs text-outline">Page {page}</span>
+            <button
+              className="btn btn-outline btn-sm"
+              onClick={() => setPage((current) => current + 1)}
+              disabled={!hasMore}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </section>
     </div>

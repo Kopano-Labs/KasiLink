@@ -15,10 +15,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
     const category = searchParams.get("category");
     const q = searchParams.get("q");
-    const limit = Math.min(
-      Number(searchParams.get("limit") ?? 20) || 20,
-      50,
-    );
+    const page = Math.max(Number(searchParams.get("page") ?? 1) || 1, 1);
+    const limit = Math.min(Math.max(Number(searchParams.get("limit") ?? 20) || 20, 1), 50);
+    const skip = (page - 1) * limit;
 
     const filter: Record<string, unknown> = {};
     if (category && category !== "all") filter.category = category;
@@ -27,12 +26,18 @@ export async function GET(req: NextRequest) {
       filter.$or = [{ title: needle }, { content: needle }];
     }
 
-    const posts = await ForumPost.find(filter)
-      .sort({ createdAt: -1 })
-      .limit(limit)
-      .lean();
+    const [posts, total] = await Promise.all([
+      ForumPost.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      ForumPost.countDocuments(filter),
+    ]);
 
-    return NextResponse.json({ posts });
+    return NextResponse.json({
+      posts,
+      page,
+      limit,
+      total,
+      hasMore: skip + posts.length < total,
+    });
   } catch (err) {
     console.error("[GET /api/forum]", err);
     return NextResponse.json(
@@ -68,6 +73,7 @@ export async function POST(req: NextRequest) {
       authorId: userId,
       authorName,
       category: body.category,
+      upvotes: 0,
     });
 
     return NextResponse.json({ post }, { status: 201 });
