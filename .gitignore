@@ -45,3 +45,4 @@ next-env.d.ts
 
 # Google.json file that contains service account credentials for Google Cloud services
 kasi-link-fc405eea9925.json
+.env*.local

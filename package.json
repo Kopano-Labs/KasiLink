@@ -1,6 +1,7 @@
 {
   "name": "kasi-link",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,10 +10,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/xai": "^3.0.77",
     "@clerk/nextjs": "^7.0.7",
+    "ai": "^6.0.146",
     "mongodb": "^7.1.1",
     "mongoose": "^9.3.3",
     "next": "16.2.1",
+    "openai": "^6.33.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "svix": "^1.90.0"
