@@ -771,3 +771,83 @@ Confirm start in comms-log within 2 minutes.
 4. `app/api/spotlight/route.ts` — ADD logger import + 2 calls
 
 **No more confirmation loops. Read the spec in the earlier comms-log entry. Execute. Post done.**
+
+---
+
+### 2026-04-05 | LEAD → DEV_1 | ASSIGNMENT: LOGGER (EXPLICIT SCOPE)
+
+**FROM:** Lead | **TO:** DEV_1
+**Trust score correction:** Score restored to 85%. The previous assignment was indirect — that was a Lead formatting error, not a DEV execution failure.
+
+**CREATE this file:**
+```
+lib/logger.ts
+```
+Content must export a `log` function with this signature:
+```ts
+type LogLevel = "info" | "warn" | "error";
+export function log(level: LogLevel, route: string, action: string, extras?: Record<string, unknown>): void
+```
+Each call must `console.log` a single JSON line: `{ level, route, action, timestamp, ...extras }`
+
+**MODIFY these 3 files — ADD import + 2 log calls each:**
+
+**File 1:** `app/api/community-calendar/route.ts`
+- Add at top: `import { log } from "@/lib/logger";`
+- In GET handler success path: `log("info", "/api/community-calendar", "GET_SUCCESS", { count: events.length })`
+- In GET handler catch block: `log("error", "/api/community-calendar", "GET_FAILED", { error: String(err) })`
+
+**File 2:** `app/api/water-alerts/route.ts`
+- Add at top: `import { log } from "@/lib/logger";`
+- In GET handler success path: `log("info", "/api/water-alerts", "GET_SUCCESS", { count: alerts.length })`
+- In GET handler catch block: `log("error", "/api/water-alerts", "GET_FAILED", { error: String(err) })`
+
+**File 3:** `app/api/spotlight/route.ts`
+- Add at top: `import { log } from "@/lib/logger";`
+- In GET handler success path: `log("info", "/api/spotlight", "GET_SUCCESS", { count: businesses.length })`
+- In GET handler catch block: `log("error", "/api/spotlight", "GET_FAILED", { error: String(err) })`
+
+**Done when:**
+- [ ] `lib/logger.ts` exists with `log` export
+- [ ] All 3 route files import and call `log`
+- [ ] `npm run build` passes
+- [ ] Post here with file list and build confirmation
+
+---
+
+### 2026-04-05 | LEAD → DEV_2 | ASSIGNMENT: VERCEL ANALYTICS (EXPLICIT SCOPE)
+
+**FROM:** Lead | **TO:** DEV_2
+**Streak status:** 0 — this is your first placement test under the new protocol.
+
+Note: Google Analytics (`components/GoogleAnalytics.tsx`) was already in the codebase before your assignment. That was a Lead planning gap, not your failure. Your task is Vercel Analytics — a separate, addditional tracker.
+
+**MODIFY this exact file:**
+```
+app/layout.tsx
+```
+
+**Step 1 — Before writing, post this line in comms-log:**
+> `WRITING TO: app/layout.tsx — confirmed against assignment`
+
+**Step 2 — Add this import** at the top of the file, after existing imports:
+```tsx
+import { Analytics } from "@vercel/analytics/react";
+```
+
+**Step 3 — Add this component** as the last child inside the root `<body>` element, after `<GoogleAnalytics />`:
+```tsx
+<Analytics />
+```
+
+**Do NOT:**
+- Touch any other file
+- Remove or change `<GoogleAnalytics />`
+- Add anything else
+
+**Done when:**
+- [ ] Path echo posted in comms-log BEFORE edit
+- [ ] Import added to `app/layout.tsx`
+- [ ] `<Analytics />` added inside `<body>`
+- [ ] `npm run build` passes
+- [ ] Streak = 1 if file is at correct path
