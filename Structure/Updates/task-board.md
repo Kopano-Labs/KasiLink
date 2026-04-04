@@ -45,7 +45,7 @@
 
 | ID | Task | Owner | Status | Design Mockup | Notes |
 |----|------|-------|--------|---------------|-------|
-| M1 | Chameleon Chat Skins (Premium) | DEV_1 + Lead | DONE | `Structure/Design/chat/stitch/` | DEV_1 built 3 skins (wrong dir, Lead moved). Lead built SkinSelector. |
+| M1 | Chameleon Chat Skins (Premium) | DEV_1 + Lead | DONE | `Structure/Design/chat/stitch/` | DEV_1 built 3 skins + integrated into chat page. Lead built SkinSelector. |
 | M2 | Community Calendar | DEV_1 (Codex) | DONE | `Structure/Design/features/stitch/community_calendar/` | Approved by Lead. |
 | M3 | Water Outage Alert Details | DEV_1 (Codex) | DONE | `Structure/Design/features/stitch/water_outage_alert_details/` | Approved by Lead. Bundled with M2. |
 | M4 | Incident Reporting | Lead (recovered) | DONE | — | DEV_2 failed. Lead created all files. |

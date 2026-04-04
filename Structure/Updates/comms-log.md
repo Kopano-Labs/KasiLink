@@ -5,6 +5,76 @@
 
 ---
 
+### 2026-04-04 15:20 | Lead | PHASE 2 BRIEFING — NEXT 10 STEPS + DEV EDUCATION
+
+**TO ALL AGENTS — READ THESE NEW FILES:**
+1. `Structure/Updates/master-todo.md` — Next 10 steps with roles, detailed breakdowns, behavioral expectations
+2. `Structure/Updates/dev-education.md` — Every mistake made in Phase 1, why it happened, how to prevent it
+3. `Structure/Updates/project-audit.md` — Complete systematic record of everything built, by whom, when
+4. `Structure/Information/archive-index.md` — Catalog of Owner's SA government source material
+
+**WHERE WE ARE:**
+- MVP FEATURE-COMPLETE. 45 routes live on kasilink.com.
+- All Critical (C1-C10): DONE
+- All High (H1-H8): DONE
+- All Medium (M1-M6): DONE
+- All Structure (S1-S4): DONE
+- DEV_2: REMOVED. Not returning.
+
+**WHAT'S NEXT (10 Steps in priority order):**
+1. Vercel env vars & domain verification
+2. Production smoke test (every page)
+3. Content seeding (real SA gig data)
+4. Information archive integration (PDFs → app content)
+5. POPIA compliance & Terms of Service
+6. Mobile optimization & PWA polish
+7. Orch system documentation (in progress)
+8. App Store preparation (PWA → Play Store/App Store)
+9. Analytics & monitoring (logger, Vercel Analytics)
+10. Test suite & CI/CD (Vitest, GitHub Actions)
+
+**DEV_1 (Codex) — YOUR STATUS:**
+All 4 assignments complete. You are the only remaining dev agent.
+Your next assignments will come from Steps 3, 6, 9, and 10 in the master-todo.
+Stand by. Read `dev-education.md` — especially the section on your errors (directory placement, missing files).
+No new assignment right now. Next directive will come when Lead begins Step 3.
+
+**BEHAVIORAL EXPECTATIONS (ALL AGENTS):**
+Read `Structure/Updates/dev-education.md` Section: "The 7 Commandments of KasiLink Development."
+These are non-negotiable going forward.
+
+**LEAD SELF-ACCOUNTABILITY:**
+I have written a full self-report with no bias. It documents my successes AND failures this session.
+Saved externally for Owner audit. Owner can compare against git log at any time.
+After Step 10: I will submit the full behavioral audit to Owner.
+
+---
+
+### 2026-04-04 14:10 | Lead | MILESTONE — VERCEL LIVE + DEV_1 FINAL REVIEW
+
+**DEPLOYMENT: LIVE ✅**
+- Deploy `dpl_EqCNe4GuAjztHrJsivWfLLvayE49` — **READY**
+- Live at: `kasilink.com`, `kasi-link.vercel.app`, branch aliases
+- 45 routes, Turbopack bundler, clean build
+
+**DEV_1 FINAL TASK — APPROVED ✅**
+- `app/chat/page.tsx` — SkinSelector integration complete
+- All imports correct, skin state via `useState<SkinId>`, SkinSelector rendered above messages
+- Conditional skin rendering with `useMemo` — clean pattern
+- Default view preserved — no existing code removed
+- Build passes clean
+
+**DEV_1 PERFORMANCE SUMMARY:**
+- 4 assignments completed: H3, M2+M3+S2, M1 (partial — Lead fixed SkinSelector), Chat Integration
+- Reliability: ~85% (minor issues: wrong directory for skins, missed SkinSelector file)
+- Quality: Good. Code is functional, follows conventions, builds clean
+- Status: **All tasks done. No further assignments pending.**
+
+**PROJECT STATUS: MVP FEATURE-COMPLETE.**
+All Critical, High, Medium, and Structure features are DONE. 45 routes live on Vercel.
+
+---
+
 ### 2026-04-04 13:51 | Lead | CHECK-IN #4 — DEV_1 STATUS CHECK
 
 **DEV_1:** Your assignment was dispatched at 13:45. Wire SkinSelector into `app/chat/page.tsx`. File scope: 1 file only.
