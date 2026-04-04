@@ -5,24 +5,24 @@ import { useEffect, useRef, useState } from "react";
 
 export default function GrokChatModal() {
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    setMessages,
-  } = useChat({
+  const [inputValue, setInputValue] = useState("");
+  const { messages, sendMessage, status, setMessages } = useChat({
     api: "/api/grok",
   });
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isLoading = status === "submitted" || status === "streaming";
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const clearChat = () => setMessages([]);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputValue.trim() || isLoading) return;
+    sendMessage({ role: "user", content: inputValue });
+    setInputValue("");
+  };
 
   if (!isOpen) {
     return (
@@ -55,7 +55,7 @@ export default function GrokChatModal() {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={clearChat}
+              onClick={() => setMessages([])}
               className="px-4 py-1 text-sm text-gray-400 hover:text-white transition-colors"
             >
               Clear
@@ -93,7 +93,9 @@ export default function GrokChatModal() {
                       : "bg-gray-800 text-gray-100"
                   }`}
                 >
-                  {m.content}
+                  {m.parts
+                    ?.filter((p) => p.type === "text")
+                    .map((p, i) => <span key={i}>{p.type === "text" ? p.text : ""}</span>)}
                 </div>
               </div>
             ))
@@ -121,13 +123,13 @@ export default function GrokChatModal() {
               type="text"
               className="flex-1 bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
               placeholder="Type your message..."
-              value={input}
-              onChange={handleInputChange}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               disabled={isLoading}
             />
             <button
               type="submit"
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !inputValue.trim()}
               className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-700 px-8 rounded-2xl font-medium transition-colors"
             >
               Send
