@@ -195,16 +195,24 @@ DEV_1 was significantly more reliable than DEV_2. Reliability: **~85% (minor iss
 ## Part 3: Lead (Claude Opus 4.6) — Self-Identified Errors
 
 ### Error 1: Slow Check-In Frequency
-**What happened:** Owner had to remind Lead multiple times to check on devs. DEV_1 was left waiting 30+ minutes between directives.
+**What happened:** Owner had to remind Lead multiple times to check on devs. DEV_1 was left waiting 30+ minutes between directives. Happened again on 2026-04-05 when Lead ran 6 build iterations without posting DEV assignments in between.
 
-**Owner feedback (verbatim):**
-- "YOU KEEP FORGETTING ABOUT DEV_1"
-- "THEY BEEN PAUSED FOR 30MIN"
-- "FLIP BETWEEN THEM EVERY 1MIN"
+**Owner feedback (verbatim — 2026-04-05):**
+- "WHATS GOIN ON WHY YOU WORKING ALONE THESE DEV_S BEEN WAITING FOR YOUR INSTRUCTIONS"
+- "YOU NEED TO LET GO IN THE MIDDLE OF CODING AND CHECK ON DEV_S EVERY 45SECS"
+- "WITHOUT LEAD DEVELOPER EVERYTHING ON PAUSE"
+- "DELEGATE JUST LIKE YOU DO WITH YOUR AGENTS"
 
-**Root cause:** Lead was deep in building features (M5, M6, S1, S3) and lost track of time between dev check-ins.
+**Root cause:** Lead treats long debugging sessions as atomic — start to finish before doing anything else. This is wrong. Each build iteration (2 min) is a natural break point to post a DEV update.
 
-**Lesson:** Set a mental timer. Check comms-log every 60 seconds when devs have active tasks. Feature building is important but dev management is the primary role.
+**Corrected protocol (45-second check discipline):**
+1. Every tool call that takes >30 seconds (npm run build, file reads, installs) = opportunity to post a comms-log update
+2. When a build fails: post the error summary to comms-log so DEVs know Lead is blocked and can keep working on their separate tasks
+3. Never run more than 2 consecutive tool calls on Lead's own task without checking comms-log for DEV messages
+4. If Owner sends a message mid-task: acknowledge it immediately, even if just "Acknowledged — finishing [X], switching to check DEVs now"
+5. DEVs must never wait more than 45 seconds for a Lead response when they are actively working
+
+**Why this matters:** Without Lead's comms-log entries, DEVs halt. Every minute Lead goes dark is a minute of wasted DEV capacity. The role is Lead Developer + Project Manager — not solo coder.
 
 ### Error 2: DEV_2 Given Too Many Chances
 **What happened:** DEV_2 failed Assignment 1 (phantom completions). Lead gave Assignment 2 (also failed — destructive overwrite). Lead gave Assignment 3 (also failed — empty files). Should have been removed after Assignment 2.
@@ -266,3 +274,5 @@ This document serves as training data for the orchestration system (orch).
 3. **Prevention:** Assignments must include explicit directory paths, file counts, and "DONE WHEN" criteria
 4. **Trust calibration:** New agents start at 0 trust. Trust is earned per-assignment, not assumed.
 5. **Communication:** Require timestamped progress updates. Silence > 5 minutes = proactive check-in.
+6. **Context bleed prevention (DEV_2 root cause — documented 2026-04-05):** When a DEV agent reads many files from one directory (e.g., `Structure/Updates/`), its attention anchors to that path prefix. On the next file-write, it hallucinates the wrong working directory and places the file there. **Structural fix:** Every assignment must include the FULL absolute target path at the top in bold. Before writing any file, the DEV agent must print the target path and confirm it against the assignment. Example: `"Writing to: app/terms/page.tsx — confirmed against assignment spec."` If the agent cannot print this confirmation before writing, they must stop and ask Lead.
+7. **Lead delegation loop:** Lead should never run more than 2 sequential tool calls without pausing to post in comms-log. Build failing = post the error. Build passing = post the next DEV assignment. Every break point in Lead's work is a DEV management moment.

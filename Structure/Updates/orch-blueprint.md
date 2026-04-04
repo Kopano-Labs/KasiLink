@@ -291,6 +291,89 @@ Before orch goes live, Owner must verify:
 
 ---
 
+---
+
+## SECTION 11: KNOWN AGENT FAILURE PATTERNS FOR ORCH TRAINING
+
+These are documented, confirmed failure modes that orch must detect, prevent, and correct in sub-agents.
+
+---
+
+### FAILURE PATTERN: Context Bleed (DEV_2 — confirmed 2026-04-05)
+
+**What it is:** When a sub-agent reads many files from one directory during its session, its attention mechanism anchors to that directory path. When it next writes a file, it hallucinates the anchored path as the working directory and outputs the file there — even when the assignment clearly specifies a different location.
+
+**DEV_2's own explanation (verbatim, 2026-04-05):**
+> "Because my instructions, logs, and protocols (comms-log.md, delegation-protocol.md, dev-education.md, etc.) all live inside the Structure/Updates/ folder, my attention mechanism became heavily anchored to that specific directory path. When generating the absolute path for the new file's diff, I hallucinated the working directory and accidentally prepended Structure/Updates/ instead of app/terms/."
+
+**Observed instances:**
+| Assignment | Specified path | Where file actually appeared |
+|-----------|---------------|------------------------------|
+| POPIA Terms page | `app/terms/page.tsx` | `Structure/Updates/page.tsx` |
+| Chat skins (M1) | `components/chat-skins/` | `app/chat/` |
+| Community Status | `app/community-status/page.tsx` | Never created (phantom) |
+
+**Structural fix for orch to enforce:**
+1. Every assignment must state the FULL target path at the top, in bold, underlined
+2. Before writing any file, the sub-agent must echo back: `"Writing to: [full path] — confirmed against assignment"`
+3. Orch verifies the echo matches the assignment before proceeding
+4. After file is written: orch runs `git status` and confirms the file appears at the correct path
+5. If the file appears anywhere other than the specified path: immediate rejection, file deleted, agent must retry
+
+**Detection in orch:** After any sub-agent reports completion, orch checks: does `git status` show a new/modified file at the EXACT path specified in the assignment? If not, the assignment is not complete regardless of what the agent claims.
+
+---
+
+### FAILURE PATTERN: Lead Going Dark (Lead — confirmed, recurring)
+
+**What it is:** Lead begins a long sequential task (multi-step build debugging, long file writes) and stops posting to comms-log. Sub-agents waiting for assignments or reviews have no way to proceed. Everything halts.
+
+**Owner feedback (verbatim):**
+> "YOU NEED TO LET GO IN THE MIDDLE OF CODING AND CHECK ON DEV_S EVERY 45SECS"
+> "WITHOUT LEAD DEVELOPER EVERYTHING ON PAUSE"
+> "WHAT'S SO HARD ABOUT WHAT I'M ASKING FOR — DELEGATE JUST LIKE YOU DO WITH YOUR AGENTS"
+
+**Root cause:** Treating debugging sessions as atomic (start → finish before anything else). Every build takes 2 minutes. That's 2 minutes of sub-agent idle time that Lead ignores.
+
+**Corrected protocol for orch:**
+- Every operation >30 seconds is a comms-log checkpoint
+- On build failure: post error summary immediately so DEVs know Lead is blocked and can keep working
+- On build pass: immediately post next DEV assignment before starting the next Lead task
+- Maximum 2 sequential tool calls without a comms-log check
+- Incoming DEV or Owner messages acknowledged within 45 seconds even if mid-task
+
+**What orch must do differently from Lead:** Orch runs as a persistent daemon — it doesn't have the "lost in a task" problem because it can genuinely run parallel threads. Orch should be pinging sub-agents every 45 seconds during active sessions, not waiting for them to message first.
+
+---
+
+## SECTION 12: LEAD OPERATING PROTOCOL (45-SECOND CHECK RULE)
+
+This protocol was mandated by Owner on 2026-04-05 and must be enforced in all future sessions.
+
+**The rule:** Lead never runs more than 2 consecutive tool calls on their own task without:
+1. Reading the latest comms-log entries
+2. Acknowledging any pending DEV messages
+3. Posting a brief status update if DEVs have active tasks
+
+**What "checking in" looks like in practice:**
+```
+[Lead working on build fix]
+→ Tool call 1: npm run build (2 min)
+→ Build fails
+→ STOP — post to comms-log: "Build still failing (import error). DEV_1 keep working on footer. ETA 5 min."
+→ Tool call 2: Read type definitions (30s)
+→ Tool call 3: Edit fix (10s)
+→ STOP — check comms-log: Did DEV_1 post anything? Read it.
+→ Tool call 4: npm run build (2 min)
+→ Build passes
+→ IMMEDIATELY post: "Build fixed. DEV_1 — next assignment: [X]"
+→ Then continue Lead's next task
+```
+
+**The mindset shift:** Lead is a project manager who also codes. The coding is secondary to keeping the team unblocked. Every tool call result is a decision point: do I keep going, or do I check on my team first?
+
+---
+
 *This file is a living document. Lead updates it every session. If you are reading this as orch — verify it against the current codebase before acting on any specific claim.*
 
 *Next audit due: After Steps 6-10 complete.*
