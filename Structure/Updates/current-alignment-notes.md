@@ -40,7 +40,7 @@ Related documents:
 | `/verified` | `app/verified/page.tsx` | DONE |
 | `/verified/[id]` | `app/verified/[id]/page.tsx` | DONE |
 | `/water-outages` | `app/water-outages/page.tsx` | DONE |
-| `/chat` | `app/chat/page.tsx` | NOT CREATED — assigned to Dev 2 |
+| `/chat` | `app/chat/page.tsx` | DONE |
 
 ### API Routes
 
@@ -57,8 +57,11 @@ Related documents:
 | `/api/forum` | `app/api/forum/route.ts` | DONE |
 | `/api/ussd` | `app/api/ussd/route.ts` | DONE |
 | `/api/webhooks/clerk` | `app/api/webhooks/clerk/route.ts` | DONE |
-| `/api/chat` | `app/api/chat/route.ts` | NOT CREATED — assigned to Dev 2 |
-| `/api/messages` | `app/api/messages/route.ts` | NOT CREATED — assigned to Dev 2 |
+| `/api/chat` | `app/api/chat/route.ts` | DONE |
+| `/api/messages` | `app/api/messages/route.ts` | DONE |
+| `/api/load-shedding` | `app/api/load-shedding/route.ts` | NOT CREATED — assigned to DEV_1 |
+| `/api/incidents` | `app/api/incidents/route.ts` | NOT CREATED — assigned to DEV_2 |
+| `/incidents` | `app/incidents/page.tsx` | NOT CREATED — assigned to DEV_2 |
 
 ---
 

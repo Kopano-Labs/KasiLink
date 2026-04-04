@@ -30,14 +30,14 @@
 
 | ID | Task | Owner | Status | Notes |
 |----|------|-------|--------|-------|
-| H1 | In-App Chat (Basic) | Dev 2 | NOT-STARTED | Models are stubs. Need full Conversation + Message + UI |
+| H1 | In-App Chat (Basic) | DEV_2 (Gemini) | DONE | Models, API, UI complete. Stray Structure/Updates/route.ts removed by Lead. |
 | H2 | Community Forum | — | DONE | Live threads, pagination, posting, trust guidance |
-| H3 | Load-Shedding Widget (Real Data) | Dev 3 | NOT-STARTED | Component exists, needs real API data source |
+| H3 | Load-Shedding Widget (Real Data) | DEV_1 (Codex) | NOT-STARTED | See assignments/dev1-load-shedding.md |
 | H4 | Gig Application Workflow | — | DONE | Apply, review, assign flow complete |
 | H5 | Dark/Light Mode Toggle | — | DONE | ThemeProvider working |
 | H6 | Location-Based Filtering (Geo) | — | DONE | Haversine + MongoDB geospatial |
 | H7 | Verified Provider System | — | DONE | Directory, profiles, badges, live ratings |
-| H8 | Notification Delivery | Dev 3 | NOT-STARTED | Model + API exist, no push/browser notification delivery |
+| H8 | Notification Delivery | DEV_2 (Gemini) | NOT-STARTED | See assignments/dev2-notifications-incidents.md |
 
 ---
 
@@ -48,7 +48,7 @@
 | M1 | Chameleon Chat Skins | — | DEFERRED | After H1 chat is built |
 | M2 | Community Calendar | — | NOT-STARTED | Mockup in Structure/features/ |
 | M3 | Water Outage Alerts | — | PARTIAL | Page exists, no real data |
-| M4 | Incident Reporting | — | NOT-STARTED | Mockup in Structure/sub-features/ |
+| M4 | Incident Reporting | DEV_2 (Gemini) | NOT-STARTED | Bundled with H8 — see assignments/dev2-notifications-incidents.md |
 | M5 | Utility Schedule Tracker | — | NOT-STARTED | |
 | M6 | Tutoring Interface | — | NOT-STARTED | Mockup in Structure/tutoring/ |
 | M7 | Agent Orchestration (AI) | — | DEFERRED | Post-launch, AgentOrchestrationFlow.tsx is UI mockup only |
@@ -72,6 +72,6 @@
 
 | Role | Assigned Tasks | File Scope |
 |------|---------------|------------|
-| **Lead** | C10, GAP-1, architecture reviews, code control | All shared infra + any unassigned files |
-| **Dev 2** | H1, GAP-3, GAP-4 | `lib/models/Conversation.ts`, `lib/models/Message.ts`, `app/api/chat/route.ts`, `app/api/messages/route.ts`, `app/chat/page.tsx` |
-| **Dev 3** | H3, H8 | `components/LoadSheddingWidget.tsx`, `app/api/notifications/route.ts`, `app/water-outages/page.tsx` |
+| **Lead (Claude Opus)** | Architecture, reviews, shared infra | All shared infra + any unassigned files |
+| **DEV_1 (Codex)** | H3 | `app/api/load-shedding/route.ts`, `components/LoadSheddingWidget.tsx`, `app/water-outages/page.tsx` |
+| **DEV_2 (Gemini)** | H8, M4 | `app/api/notifications/route.ts`, `app/api/incidents/route.ts`, `app/incidents/page.tsx`, `app/incidents/new/page.tsx` |
