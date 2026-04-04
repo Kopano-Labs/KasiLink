@@ -1,0 +1,44 @@
+{
+  "name": "KasiLink — Township Gigs & Opportunities",
+  "short_name": "KasiLink",
+  "description": "Find nearby gigs and connect with job seekers in your township.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#4595c0",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-ZA",
+  "categories": ["productivity", "business", "social"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Browse Gigs",
+      "short_name": "Marketplace",
+      "description": "Find gigs near you",
+      "url": "/marketplace",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Post a Gig",
+      "short_name": "Post Gig",
+      "description": "Post a new gig opportunity",
+      "url": "/gigs/new",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

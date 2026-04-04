@@ -118,11 +118,11 @@ function ForumInner() {
       setNewCategory("general");
       setPage(1);
       fetchPosts();
-    } catch (err: any) {
-      setPostError(err.message);
-    } finally {
-      setIsPosting(false);
-    }
+      } catch (err: unknown) {
+        setPostError(err instanceof Error ? err.message : "Failed to create post");
+      } finally {
+        setIsPosting(false);
+      }
   };
 
   return (

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ServiceWorkerRegistration from "@/components/ServiceWorkerRegistration";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -71,6 +72,7 @@ export default function RootLayout({
         <body className="bg-background text-on-background font-body antialiased">
           <GoogleAnalytics />
           <ThemeProvider>
+            <ServiceWorkerRegistration />
             <Navbar />
             <main className="page-content">{children}</main>
             <Footer />

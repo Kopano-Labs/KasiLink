@@ -7,18 +7,19 @@
 
 ## Roles
 
-| Role | Identity | Responsibility |
-|------|----------|----------------|
-| **Owner** | Human (rkhol) | Final authority. Reviews comms-log. Approves structural changes. |
-| **Lead** | Claude Opus 4.6 | Architecture, code review, shared infrastructure, delegation, all structural decisions. |
-| **Dev 2** | Any AI agent | Executes assigned feature slice. Scoped file access only. |
-| **Dev 3** | Any AI agent | Executes assigned feature slice. Scoped file access only. |
+| Role      | Identity        | Responsibility                                                                          |
+| --------- | --------------- | --------------------------------------------------------------------------------------- |
+| **Owner** | Human (rkhol)   | Final authority. Reviews comms-log. Approves structural changes.                        |
+| **Lead**  | Claude Opus 4.6 | Architecture, code review, shared infrastructure, delegation, all structural decisions. |
+| **Dev 2** | Any AI agent    | Executes assigned feature slice. Scoped file access only.                               |
+| **Dev 3** | Any AI agent    | Executes assigned feature slice. Scoped file access only.                               |
 
 ---
 
 ## Rules
 
 ### What Dev 2 / Dev 3 CAN do:
+
 1. Edit files explicitly listed in their assignment scope
 2. Create NEW files within their assigned directories only
 3. Read any file in the codebase (read-only exploration is always allowed)
@@ -26,6 +27,7 @@
 5. Run `npm run build` and `npm run dev` to verify their work
 
 ### What Dev 2 / Dev 3 CANNOT do:
+
 1. Edit files outside their assigned scope
 2. Touch shared infrastructure without Lead approval:
    - `lib/db.ts` — database connection
@@ -44,6 +46,7 @@
 7. Push to git or deploy without Owner approval
 
 ### What the Lead does:
+
 1. Writes and updates task-board assignments
 2. Reviews all code from Dev 2/Dev 3 before merge
 3. Owns all shared infrastructure changes
@@ -114,6 +117,7 @@ When a new AI agent joins as Dev 2 or Dev 3, give them exactly 4 things:
 4. **The comms-log format** — so they report correctly
 
 They do NOT need:
+
 - Full codebase context (they can read files as needed)
 - The alignment-notes changelog history
 - Access to other dev's assignments
@@ -124,6 +128,7 @@ They do NOT need:
 ## Conflict Resolution
 
 If Dev 2 and Dev 3 need to edit the same file:
+
 1. STOP. Do not edit.
 2. Add a comms-log entry flagging the conflict.
 3. Lead resolves by either: splitting the file, sequencing the edits, or taking the edit themselves.
