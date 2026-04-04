@@ -132,6 +132,31 @@ const ZapIcon = () => (
   </svg>
 );
 
+const BellIcon = () => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+  </svg>
+);
+
+interface AppNotification {
+  _id: string;
+  title: string;
+  message: string;
+  link?: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
 const navLinks = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/marketplace", label: "Find Gigs", icon: BriefcaseIcon },
@@ -144,6 +169,9 @@ export default function Navbar() {
   const { isSignedIn, isLoaded } = useUser();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   // Scroll shadow effect
   useEffect(() => {
@@ -155,7 +183,37 @@ export default function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
+    setShowNotifs(false);
   }, [pathname]);
+
+  // Fetch notifications
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn) return;
+    fetch("/api/notifications")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.notifications) {
+          setNotifications(data.notifications);
+          setUnreadCount(
+            data.notifications.filter((n: AppNotification) => !n.isRead).length,
+          );
+        }
+      });
+  }, [isLoaded, isSignedIn]);
+
+  const handleToggleNotifs = async () => {
+    const newState = !showNotifs;
+    setShowNotifs(newState);
+    if (newState && unreadCount > 0) {
+      setUnreadCount(0);
+      try {
+        await fetch("/api/notifications", { method: "PATCH" });
+        setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+      } catch (err) {
+        console.error("Failed to mark notifications as read", err);
+      }
+    }
+  };
 
   return (
     <>
@@ -218,13 +276,59 @@ export default function Navbar() {
             {/* Auth */}
             {isLoaded &&
               (isSignedIn ? (
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: { width: 34, height: 34 },
-                    },
-                  }}
-                />
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <button
+                      onClick={handleToggleNotifs}
+                      className="btn btn-ghost btn-sm p-2 relative text-on-surface-variant hover:text-on-surface"
+                      aria-label="Notifications"
+                    >
+                      <BellIcon />
+                      {unreadCount > 0 && (
+                        <span className="absolute top-1 right-1.5 w-2 h-2 bg-danger rounded-full border border-background"></span>
+                      )}
+                    </button>
+
+                    {/* Notifications Dropdown */}
+                    {showNotifs && (
+                      <div className="absolute right-0 mt-2 w-72 max-h-[400px] overflow-y-auto bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-lg z-50 flex flex-col py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="px-4 py-2 border-b border-outline-variant/30 mb-1">
+                          <h3 className="font-bold text-sm">Notifications</h3>
+                        </div>
+                        {notifications.length === 0 ? (
+                          <div className="px-4 py-6 text-center text-sm text-on-surface-variant">
+                            No new notifications.
+                          </div>
+                        ) : (
+                          notifications.map((n) => (
+                            <Link
+                              key={n._id}
+                              href={n.link || "#"}
+                              className="px-4 py-3 hover:bg-surface-variant/50 transition-colors flex flex-col gap-1 border-b border-outline-variant/10 last:border-0"
+                            >
+                              <span className="text-sm font-bold text-on-background leading-tight">
+                                {n.title}
+                              </span>
+                              <span className="text-xs text-on-surface-variant leading-snug">
+                                {n.message}
+                              </span>
+                              <span className="text-[10px] text-outline mt-1">
+                                {new Date(n.createdAt).toLocaleDateString()}
+                              </span>
+                            </Link>
+                          ))
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: { width: 34, height: 34 },
+                      },
+                    }}
+                  />
+                </div>
               ) : (
                 <SignInButton mode="modal">
                   <button className="btn btn-primary btn-sm">Sign In</button>

@@ -48,6 +48,7 @@ export default function Footer() {
             <p className="text-sm text-on-surface-variant max-w-[28rem] leading-[1.65]">
               Connecting township job seekers with nearby gigs and
               opportunities. Built for Gauteng, powered by community.
+              opportunities. Built for South Africa, powered by community.
             </p>
           </div>
 
@@ -73,7 +74,8 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="border-outline-variant/30 pt-5 gap-3 flex flex-wrap items-center justify-between border-t">
           <p className="text-xs text-outline">
-            © {year} KasiLink. Made in Gauteng 🇿🇦
+            © {year} KasiLink. Made in Gauteng 🇿🇦 © {year} KasiLink. Made in
+            South Africa 🇿🇦
           </p>
           <div className="gap-4 flex">
             {legalLinks.map(({ label, href }) => (

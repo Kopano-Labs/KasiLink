@@ -189,7 +189,8 @@ function MarketplaceInner() {
         </h1>
         <p className="text-on-surface-variant text-sm">
           {userCoords ? "Showing gigs near you" : "Gigs in Gauteng"} · {total}{" "}
-          available
+          {userCoords ? "Showing gigs near you" : "Gigs in South Africa"} ·{" "}
+          {total} available
         </p>
       </div>
 

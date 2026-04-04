@@ -8,6 +8,7 @@ import connectDB from "@/lib/db";
 import Application from "@/lib/models/Application";
 import Gig from "@/lib/models/Gig";
 import User from "@/lib/models/User";
+import Notification from "@/lib/models/Notification";
 import { validateApplication, sanitize } from "@/lib/validation";
 import mongoose from "mongoose";
 
@@ -96,6 +97,15 @@ export async function POST(req: NextRequest) {
 
     // Increment application count
     await Gig.findByIdAndUpdate(gig._id, { $inc: { applicationCount: 1 } });
+
+    // Create a Notification for the Gig Provider
+    await Notification.create({
+      userId: gig.providerId,
+      type: "application",
+      title: "New Application received",
+      message: `${seeker.displayName} applied to your gig: ${gig.title}`,
+      link: `/gigs/${gig._id}`,
+    });
 
     return NextResponse.json({ application }, { status: 201 });
   } catch (err: unknown) {

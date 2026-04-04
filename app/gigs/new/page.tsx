@@ -20,6 +20,15 @@ const CATEGORIES = [
 ];
 
 const SUBURBS = [
+  "Khayelitsha",
+  "Mitchells Plain",
+  "Gugulethu",
+  "Langa",
+  "Nyanga",
+  "Philippi",
+  "Delft",
+  "Mfuleni",
+  "Crossroads",
   "Soweto",
   "Alexandra",
   "Tembisa",
@@ -32,6 +41,8 @@ const SUBURBS = [
   "Thokoza",
   "Vosloorus",
   "Sebokeng",
+  "Cape Town CBD",
+  "Bellville",
   "Johannesburg CBD",
   "Sandton",
   "Randburg",
@@ -111,8 +122,10 @@ export default function PostGigPage() {
           location: {
             type: "Point",
             coordinates: [28.0473, -26.2041], // default Joburg; real app uses Geocoding API
+            coordinates: [18.4232, -33.9249], // default Cape Town; real app uses Geocoding API
             suburb: form.suburb,
             city: "Johannesburg",
+            city: "Cape Town",
           },
         }),
       });

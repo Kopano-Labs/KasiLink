@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   },
   description:
     "Connecting unemployed youth and job seekers in Gauteng townships with nearby gigs — car washes, tutoring, cleaning, repairs, deliveries, handyman work.",
+    "Connecting unemployed youth and job seekers in South African townships (especially Cape Town) with nearby gigs — car washes, tutoring, cleaning, repairs, deliveries, handyman work.",
   keywords: [
     "kasilink",
     "township jobs",
@@ -31,11 +32,13 @@ export const metadata: Metadata = {
     title: "KasiLink — Township Gigs & Opportunities",
     description:
       "Find nearby gigs and connect with job seekers in your township. Gauteng's community-first job platform.",
+      "Find nearby gigs and connect with job seekers in your township. South Africa's community-first job platform.",
   },
   twitter: {
     card: "summary_large_image",
     title: "KasiLink",
     description: "Township gigs and opportunities in Gauteng.",
+    description: "Township gigs and opportunities in South Africa.",
   },
   manifest: "/manifest.json",
   appleWebApp: {
