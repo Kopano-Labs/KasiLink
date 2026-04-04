@@ -26,6 +26,29 @@ async function getRecentGigs() {
 
 export default async function HomePage() {
   const gigs = await getRecentGigs();
+  const signals = [
+    {
+      title: "Utility-aware job search",
+      description:
+        "Track load-shedding and outages so workers and providers can plan around disruptions.",
+      href: "/water-outages",
+      cta: "View utility alerts",
+    },
+    {
+      title: "Trusted local providers",
+      description:
+        "Verified profiles and community reviews reduce risk before anyone accepts a job or booking.",
+      href: "/verified",
+      cta: "Browse verified providers",
+    },
+    {
+      title: "Neighbourhood coordination",
+      description:
+        "Forum updates help communities share safety notes, local demand, and service disruptions.",
+      href: "/forum",
+      cta: "Open community board",
+    },
+  ];
 
   return (
     <div className="pb-12">
@@ -41,8 +64,9 @@ export default async function HomePage() {
             <span className="text-primary">Near you.</span> Right now.
           </h1>
           <p className="text-on-surface-variant text-lg mb-8 leading-relaxed">
-            57% youth unemployment. KasiLink connects job seekers with nearby
-            gigs — no CV, no commute, no queues.
+            KasiLink is a township-first work network built around proximity,
+            trust, and real-time local conditions. Find work, post urgent jobs,
+            and coordinate without the usual distance and admin overhead.
           </p>
           <div className="flex gap-3 justify-center flex-wrap">
             <Link href="/marketplace" className="btn btn-primary btn-lg">
@@ -82,6 +106,24 @@ export default async function HomePage() {
       <div className="container pt-6">
         <LoadSheddingWidget />
       </div>
+
+      <section className="container pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {signals.map((signal) => (
+            <div key={signal.title} className="kasi-card flex flex-col">
+              <h2 className="font-headline text-xl font-bold mb-2">
+                {signal.title}
+              </h2>
+              <p className="text-sm text-on-surface-variant mb-4">
+                {signal.description}
+              </p>
+              <Link href={signal.href} className="text-sm text-primary mt-auto">
+                {signal.cta} →
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Recent Gigs */}
       <section className="container pt-10">
@@ -144,11 +186,23 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* How it works */}
       <section className="container pt-12">
-        <h2 className="text-center mb-8 font-headline font-bold text-2xl">
+        <div className="flex justify-between items-end mb-8 flex-wrap gap-3">
+          <div>
+            <h2 className="font-headline font-bold text-2xl">
+              Core Marketplace Loop
+            </h2>
+            <p className="text-sm text-on-surface-variant mt-1">
+              Structure priority: gig posting, browse, apply, verify, coordinate.
+            </p>
+          </div>
+          <Link href="/profile" className="text-sm text-primary hover:underline">
+            Open my dashboard
+          </Link>
+        </div>
+        <h3 className="text-center mb-8 font-headline font-bold text-2xl">
           How KasiLink Works
-        </h2>
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
           {[
             {

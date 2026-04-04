@@ -62,7 +62,8 @@ export default function ProfilePage() {
 
   return (
     <div className="container pt-8 pb-12">
-      {/* Profile header */}
+      <div className="grid grid-cols-1 xl:grid-cols-[1.25fr_0.75fr] gap-8">
+        <div>
       <div className="kasi-card flex gap-5 items-center mb-8 flex-wrap">
         {user.imageUrl && (
           <img
@@ -180,6 +181,56 @@ export default function ProfilePage() {
           </section>
         </div>
       )}
+        </div>
+
+        <aside className="flex flex-col gap-4">
+          <div className="kasi-card bg-surface-container-low">
+            <p className="text-xs uppercase tracking-wider text-outline mb-2">
+              Dashboard Focus
+            </p>
+            <h2 className="font-headline text-xl font-bold mb-2">
+              Work, applications, and trust signals
+            </h2>
+            <p className="text-sm text-on-surface-variant">
+              This page tracks the two-sided marketplace loop from the Structure
+              plan: apply for work, post gigs, and manage activity from one place.
+            </p>
+          </div>
+
+          <div className="kasi-card">
+            <h3 className="font-bold mb-3">Quick Actions</h3>
+            <div className="flex flex-col gap-2">
+              <Link href="/marketplace" className="btn btn-outline">
+                Browse Marketplace
+              </Link>
+              <Link href="/verified" className="btn btn-outline">
+                Review Providers
+              </Link>
+              <Link href="/forum" className="btn btn-outline">
+                Open Community Board
+              </Link>
+            </div>
+          </div>
+
+          <div className="kasi-card">
+            <h3 className="font-bold mb-3">Status Snapshot</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-surface-container-low p-3">
+                <div className="text-xs text-outline mb-1">Applications</div>
+                <div className="text-2xl font-headline font-bold">
+                  {applications.length}
+                </div>
+              </div>
+              <div className="rounded-xl bg-surface-container-low p-3">
+                <div className="text-xs text-outline mb-1">Posted gigs</div>
+                <div className="text-2xl font-headline font-bold">
+                  {postedGigs.length}
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }

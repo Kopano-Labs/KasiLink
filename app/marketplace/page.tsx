@@ -182,8 +182,8 @@ function MarketplaceInner() {
 
   return (
     <div className="container pt-8 pb-12">
-      {/* Header */}
-      <div className="mb-8">
+      <div className="mb-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <div>
         <h1 className="mb-2 font-headline text-3xl font-bold">
           Find your next hustle
         </h1>
@@ -191,6 +191,15 @@ function MarketplaceInner() {
           {userCoords ? "Showing gigs near you" : "Gigs in South Africa"} ·{" "}
           {total} available
         </p>
+        </div>
+        <div className="kasi-card bg-surface-container-low min-w-[260px]">
+          <p className="text-xs uppercase tracking-wider text-outline mb-1">
+            Marketplace Goals
+          </p>
+          <p className="text-sm text-on-surface-variant">
+            Browse by category, react to urgent work, and keep travel distance low.
+          </p>
+        </div>
       </div>
 
       {/* Search bar */}
@@ -231,6 +240,33 @@ function MarketplaceInner() {
             {cat.label}
           </button>
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+        <div className="kasi-card bg-surface-container-low">
+          <p className="text-xs uppercase tracking-wider text-outline mb-1">
+            Search
+          </p>
+          <p className="text-sm text-on-surface-variant">
+            Search by work type, suburb, or employer signal.
+          </p>
+        </div>
+        <div className="kasi-card bg-surface-container-low">
+          <p className="text-xs uppercase tracking-wider text-outline mb-1">
+            Distance
+          </p>
+          <p className="text-sm text-on-surface-variant">
+            Prioritize jobs that reduce transport cost and time.
+          </p>
+        </div>
+        <div className="kasi-card bg-surface-container-low">
+          <p className="text-xs uppercase tracking-wider text-outline mb-1">
+            Trust
+          </p>
+          <p className="text-sm text-on-surface-variant">
+            Verified providers and reviews are visible before you engage.
+          </p>
+        </div>
       </div>
 
       {/* Gig grid */}

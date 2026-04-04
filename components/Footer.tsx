@@ -17,6 +17,7 @@ const footerLinks = [
   { label: "Post a Gig", href: "/gigs/new" },
   { label: "Community", href: "/forum" },
   { label: "Verified Providers", href: "/verified" },
+  { label: "Water Alerts", href: "/water-outages" },
 ];
 
 const legalLinks = [
@@ -31,8 +32,7 @@ export default function Footer() {
     <footer className="border-outline-variant/30 bg-surface-container-low pt-10 pb-6 mt-auto border-t">
       <div className="container">
         {/* Top row */}
-        <div className="gap-8 mb-8 grid grid-cols-1">
-          {/* Brand */}
+        <div className="gap-8 mb-8 grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Link
               href="/"
@@ -51,7 +51,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
           <nav>
             <p className="text-xs font-medium text-outline tracking-wider mb-3 uppercase">
               Platform
@@ -68,6 +67,17 @@ export default function Footer() {
               ))}
             </div>
           </nav>
+
+          <div>
+            <p className="text-xs font-medium text-outline tracking-wider mb-3 uppercase">
+              Focus Areas
+            </p>
+            <div className="gap-2 flex flex-col text-sm text-on-surface-variant">
+              <span>Nearby gigs and rapid hiring</span>
+              <span>Verified provider trust layer</span>
+              <span>Community and utility awareness</span>
+            </div>
+          </div>
         </div>
 
         {/* Bottom row */}

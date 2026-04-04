@@ -162,6 +162,7 @@ const navLinks = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/marketplace", label: "Find Gigs", icon: BriefcaseIcon },
   { href: "/forum", label: "Community", icon: UsersIcon },
+  { href: "/verified", label: "Verified", icon: UsersIcon },
   { href: "/chat", label: "Messages", icon: MessageIcon },
 ];
 
@@ -281,9 +282,9 @@ export default function Navbar() {
               (isSignedIn ? (
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <button
-                      onClick={handleToggleNotifs}
-                      className="btn btn-ghost btn-sm p-2 relative text-on-surface-variant hover:text-on-surface"
+                  <button
+                    onClick={handleToggleNotifs}
+                    className="btn btn-ghost btn-sm p-2 relative text-on-surface-variant hover:text-on-surface"
                       aria-label="Notifications"
                     >
                       <BellIcon />
@@ -321,6 +322,14 @@ export default function Navbar() {
                             </Link>
                           ))
                         )}
+                        <div className="px-3 pt-2 border-t border-outline-variant/20">
+                          <Link
+                            href="/profile"
+                            className="text-xs text-primary hover:underline"
+                          >
+                            Open activity dashboard
+                          </Link>
+                        </div>
                       </div>
                     )}
                   </div>
