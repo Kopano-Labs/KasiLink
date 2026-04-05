@@ -37,6 +37,7 @@ status: active
 - [Design/index.md](Design/index.md) - mockups, screenshots, and design references for implementation.
 - [Details/index.md](Details/index.md) - supporting reference material and clarifications.
 - [Issues/index.md](Issues/index.md) - smoke tests, QA issues, and follow-up tracking.
+- [Obsidian/index.md](Obsidian/index.md) - second-brain vault layout and templates.
 
 ## Color Filters
 
@@ -58,3 +59,4 @@ Use these tags when deciding where a file belongs:
 - `Billing` - pricing, plans, plan gating, payment architecture.
 - `Compliance` - POPIA, privacy, legal, or policy material.
 - `Operations` - logging, monitoring, deployment, or system processes.
+- `Obsidian` - local second-brain sync and note templates.

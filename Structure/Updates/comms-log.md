@@ -957,3 +957,11 @@ import { Analytics } from "@vercel/analytics/react";
 **Summary:** Added `Structure/index.md` plus folder-level `index.md` guides for Design, Details, Information, and Issues so the whole `Structure/` tree has a readable entry point, folder purpose, fit rules, and color-coded filters.
 **Updated files:** `Structure/index.md`, `Structure/Design/index.md`, `Structure/Details/index.md`, `Structure/Information/index.md`, `Structure/Issues/index.md`, `Structure/Updates/index.md`, `Structure/Updates/current-alignment-notes.md`
 **Next:** Continue pruning or merging any remaining duplicate or stale documents inside `Structure/Updates`
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | OBSIDIAN VAULT SCAFFOLD
+
+**Summary:** Added `Structure/Obsidian/index.md` and starter templates so the repo can be mirrored into an Obsidian second brain with a clean folder layout, note types, and sync rules.
+**Updated files:** `Structure/Obsidian/index.md`, `Structure/Obsidian/Templates/daily-note.md`, `Structure/Obsidian/Templates/project-note.md`, `Structure/Obsidian/Templates/decision-note.md`, `Structure/index.md`
+**Next:** When Obsidian is installed, mirror the repo structure into the vault and start linking mission, roadmap, and decisions there
