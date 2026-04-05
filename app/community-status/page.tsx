@@ -94,6 +94,9 @@ export default function CommunityStatusPage() {
         <div className="md:col-span-4 kasi-card bg-primary/5 flex flex-col justify-between">
           <div>
             <h3 className="text-xl font-bold mt-2">Quick Stats</h3>
+            <p className="mt-1 text-[11px] uppercase tracking-wider text-outline">
+              Source: live utility and incident feeds
+            </p>
             <div className="mt-4 space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-on-surface-variant">Active Incidents</span>

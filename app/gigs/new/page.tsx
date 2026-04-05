@@ -71,6 +71,9 @@ export default function PostGigPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
+  const fieldClass = (name: keyof typeof form) =>
+    `kasi-input ${errors[name] ? "border-error" : ""}`;
+
   if (isLoaded && !isSignedIn) {
     router.push("/sign-in");
     return null;
@@ -165,12 +168,14 @@ export default function PostGigPage() {
           </label>
           <input
             id="title"
-            className={`kasi-input ${errors.title ? "border-error" : ""}`}
+            className={fieldClass("title")}
             placeholder="e.g. Car wash needed in Soweto"
             value={form.title}
             onChange={(e) => set("title", e.target.value)}
           />
-          {errors.title && <span className="error-text">{errors.title}</span>}
+          {errors.title && (
+            <span className="error-text mt-1 block">{errors.title}</span>
+          )}
         </div>
 
         {/* Category */}
@@ -180,7 +185,7 @@ export default function PostGigPage() {
           </label>
           <select
             id="category"
-            className={`kasi-input ${errors.category ? "border-error" : ""}`}
+            className={fieldClass("category")}
             value={form.category}
             onChange={(e) => set("category", e.target.value)}
           >
@@ -192,7 +197,7 @@ export default function PostGigPage() {
             ))}
           </select>
           {errors.category && (
-            <span className="error-text">{errors.category}</span>
+            <span className="error-text mt-1 block">{errors.category}</span>
           )}
         </div>
 
@@ -203,14 +208,14 @@ export default function PostGigPage() {
           </label>
           <textarea
             id="description"
-            className={`kasi-input ${errors.description ? "border-error" : ""}`}
+            className={fieldClass("description")}
             rows={4}
             placeholder="What needs to be done? Any specific requirements?"
             value={form.description}
             onChange={(e) => set("description", e.target.value)}
           />
           {errors.description && (
-            <span className="error-text">{errors.description}</span>
+            <span className="error-text mt-1 block">{errors.description}</span>
           )}
         </div>
 
@@ -221,7 +226,7 @@ export default function PostGigPage() {
           </label>
           <select
             id="suburb"
-            className={`kasi-input ${errors.suburb ? "border-error" : ""}`}
+            className={fieldClass("suburb")}
             value={form.suburb}
             onChange={(e) => set("suburb", e.target.value)}
           >
@@ -232,7 +237,9 @@ export default function PostGigPage() {
               </option>
             ))}
           </select>
-          {errors.suburb && <span className="error-text">{errors.suburb}</span>}
+          {errors.suburb && (
+            <span className="error-text mt-1 block">{errors.suburb}</span>
+          )}
         </div>
 
         {/* Pay */}
@@ -242,13 +249,13 @@ export default function PostGigPage() {
           </label>
           <input
             id="payDisplay"
-            className={`kasi-input ${errors.payDisplay ? "border-error" : ""}`}
+            className={fieldClass("payDisplay")}
             placeholder="e.g. R150/day, R80/car, Negotiable"
             value={form.payDisplay}
             onChange={(e) => set("payDisplay", e.target.value)}
           />
           {errors.payDisplay && (
-            <span className="error-text">{errors.payDisplay}</span>
+            <span className="error-text mt-1 block">{errors.payDisplay}</span>
           )}
         </div>
 
