@@ -888,3 +888,11 @@ import { Analytics } from "@vercel/analytics/react";
 **Summary:** Reworked `Structure/Updates/next-improvements.md` into a compact audit format with quoted callouts and tick-box items so completed cleanup and open follow-up work are easier to scan.
 **Updated file:** `Structure/Updates/next-improvements.md`
 **Next:** Continue remaining open items when assigned
+---
+
+### 2026-04-05 | DEV_1 (Codex) | IMPROVEMENTS FINISHED
+
+**Summary:** Finished the remaining safe improvement items: added field-level validation feedback to gig posting and a live-feed source label to community status. Updated `Structure/Updates/next-improvements.md` so it now shows the completed set and leaves only the profile/chat component split as an open structural follow-up.
+**Build:** Passes
+**Updated files:** `app/gigs/new/page.tsx`, `app/community-status/page.tsx`, `Structure/Updates/next-improvements.md`
+**Next:** Structural split of profile/chat can be tackled later if assigned
