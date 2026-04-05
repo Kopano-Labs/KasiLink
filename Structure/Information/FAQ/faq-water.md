@@ -1,3 +1,18 @@
+---
+title: faq-water
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Water and Sanitation - KasiLink Info
 > Source: `civic-services.pdf`, `local-government.pdf`, `water-and-sanitation.pdf` | Relevant to: Water alerts, utility schedule, community status
 

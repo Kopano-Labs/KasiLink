@@ -1,5 +1,3 @@
-# KasiLink Billing Plan
-
 ---
 title: KasiLink Billing Plan
 created: 2026-04-05
@@ -19,6 +17,8 @@ audience:
   - devs
 status: active
 ---
+
+# KasiLink Billing Plan
 
 > Canonical billing reference for user plans, gating, and subscription logic.
 > Last updated: 2026-04-05

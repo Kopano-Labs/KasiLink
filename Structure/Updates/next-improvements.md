@@ -1,5 +1,3 @@
-# Next Improvements
-
 ---
 title: Next Improvements
 created: 2026-04-05
@@ -16,6 +14,8 @@ audience:
   - devs
 status: active
 ---
+
+# Next Improvements
 
 > **Author:** Codex
 > **Created:** 2026-04-05 01:45

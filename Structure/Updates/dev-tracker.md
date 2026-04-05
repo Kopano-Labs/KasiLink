@@ -1,5 +1,3 @@
-# Dev Activity Tracker
-
 ---
 title: Dev Activity Tracker
 created: 2026-04-04
@@ -17,6 +15,8 @@ audience:
   - owner
 status: active
 ---
+
+# Dev Activity Tracker
 
 > **Color Code:** 🟢 Done | 🟡 In Progress | 🔴 Blocked/Failed | ⚪ Not Started | 🔵 Lead Action
 > **Rule:** Every check-in gets a timestamp. Devs tick off their checklist items here. Lead updates on every review.

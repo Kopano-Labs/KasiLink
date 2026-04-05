@@ -1,3 +1,18 @@
+---
+title: delegation-2026-04-05-DEV_S
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # KasiLink — DEV_S Delegation Brief
 > **Date:** 2026-04-05 | **Session author:** Lead (Claude Sonnet 4.6)
 > **For:** All DEV agents (DEV_1, DEV_2 if reintroduced, future agents)

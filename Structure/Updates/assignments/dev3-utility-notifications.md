@@ -1,3 +1,18 @@
+---
+title: dev3-utility-notifications
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Dev 3 Assignment — H3 + H8: Load-Shedding Data & Notification Delivery
 
 **Assigned by:** Lead (Claude Opus 4.6) | **Date:** 2026-04-04

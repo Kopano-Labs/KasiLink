@@ -1,3 +1,21 @@
+---
+title: KasiLink Technical Specifications - Detail Companion
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - details
+  - specification
+  - companion
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 # KasiLink Technical Specifications - Detail Companion
 
 > **Source of truth:** [../technical-Specifications.md](../technical-Specifications.md)
@@ -37,4 +55,3 @@ KasiLink connects township job seekers, small businesses, and verified providers
 - Quick context before starting a task.
 - A readable bridge between the mission spec and the active work files.
 - A place to keep the execution language simpler without dropping the full mission detail.
-

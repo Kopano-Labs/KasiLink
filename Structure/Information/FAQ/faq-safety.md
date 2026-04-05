@@ -1,3 +1,18 @@
+---
+title: faq-safety
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Safety and Community - KasiLink Info
 > Source: `government-programmes_projects-and-campaigns.pdf`, `social-cluster.pdf`, `local-government.pdf`, `the-Presidency.pdf` | Relevant to: Community status, incidents, verified providers, forum
 

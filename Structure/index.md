@@ -1,5 +1,3 @@
-# KasiLink Structure Map
-
 ---
 title: KasiLink Structure Map
 created: 2026-04-05
@@ -21,6 +19,8 @@ audience:
   - reviewers
 status: active
 ---
+
+# KasiLink Structure Map
 
 > Start here when you need to understand how the project is organized.
 > This folder is the control plane for product intent, planning, reference material, and design evidence.

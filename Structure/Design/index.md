@@ -1,3 +1,22 @@
+---
+title: KasiLink Design Library
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - design
+  - ui
+  - themes
+  - mockups
+  - motion
+priority: high
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 # KasiLink Design Library
 
 > Visual references, interaction concepts, and implementation guides for the UI layer.
@@ -44,4 +63,3 @@
 - `Flow` - step-by-step user journeys.
 - `Architecture` - backend or orchestration diagrams.
 - `Archive` - saved design evidence or explanatory notes.
-

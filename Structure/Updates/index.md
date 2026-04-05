@@ -1,5 +1,3 @@
-# KasiLink Updates Control Center
-
 ---
 title: KasiLink Updates Control Center
 created: 2026-04-05
@@ -19,6 +17,8 @@ audience:
   - owner
 status: active
 ---
+
+# KasiLink Updates Control Center
 
 > **Purpose:** Single entry point for the planning, status, and coordination files that keep the project aligned with [Structure/technical-Specifications.md](../technical-Specifications.md).
 > **Rule:** Nothing in `Structure/Updates/` is the product spec. These files exist to keep execution aligned with the mission.

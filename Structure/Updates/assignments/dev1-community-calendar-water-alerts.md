@@ -1,3 +1,18 @@
+---
+title: dev1-community-calendar-water-alerts
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # DEV_1 (Codex) — QUEUED Assignment: M2 + M3 Community Calendar & Water Alert Details
 
 **Assigned by:** Lead (Claude Opus 4.6) | **Date:** 2026-04-05

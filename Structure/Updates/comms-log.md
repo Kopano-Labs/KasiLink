@@ -1,5 +1,3 @@
-# Comms Log
-
 ---
 title: Comms Log
 created: 2026-04-04
@@ -17,6 +15,8 @@ audience:
   - owner
 status: active
 ---
+
+# Comms Log
 
 > Single source of truth for dev status updates. Owner reads this to know what's happening.
 > **Rules:** Newest first. Append only. No editing past entries. Use the format below.

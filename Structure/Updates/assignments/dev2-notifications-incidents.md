@@ -1,3 +1,18 @@
+---
+title: dev2-notifications-incidents
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # DEV_2 (Gemini) — Assignment: H8 + M4 Notification Push + Incident Reporting
 
 **Assigned by:** Lead (Claude Opus 4.6) | **Date:** 2026-04-05

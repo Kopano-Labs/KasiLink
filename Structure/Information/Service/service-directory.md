@@ -1,3 +1,18 @@
+---
+title: service-directory
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Service Directory - KasiLink Info
 > Source: `cooperative-Governance-and-Traditional-Affairs.pdf`, `the-Presidency.pdf`, `local-government.pdf`, `civic-services.pdf` | Relevant to: Community status, water alerts, utility schedule, incidents
 

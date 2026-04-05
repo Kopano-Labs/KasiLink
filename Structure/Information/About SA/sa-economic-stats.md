@@ -1,3 +1,18 @@
+---
+title: sa-economic-stats
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # South Africa — Verified Economic Statistics
 > **Sources:** `south-Africas-economic-progress-in-2025.pdf` (Kenny Morolong, 19 Dec 2025), `budget-accelerate-our-economic-and-social-recovery.pdf` (02 March 2026), `public-works.pdf`
 > **Owner mandate:** Zero fabrication. Every number in this file traces to a named government source.

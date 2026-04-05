@@ -1,3 +1,22 @@
+---
+title: KasiLink Information Library
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - information
+  - reference
+  - source
+  - faq
+  - archive
+priority: high
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 # KasiLink Information Library
 
 > Source-backed content for the app, including FAQs, services, government material, and issue context.
@@ -38,4 +57,3 @@
 - [FAQ/](FAQ/) - user question content.
 - [Issues/](Issues/) - issue and pain-point notes.
 - [Service/](Service/) - service directory content.
-

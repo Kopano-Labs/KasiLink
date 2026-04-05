@@ -1,3 +1,18 @@
+---
+title: qa-smoke-test-todo
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # QA Smoke Test TODO
 
 > **Author:** Codex

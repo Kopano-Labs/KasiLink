@@ -1,3 +1,18 @@
+---
+title: orch-blueprint
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # KasiLink Orch Blueprint
 > **Created:** 2026-04-05 | **Author:** Lead (Claude Sonnet 4.6)
 > **Purpose:** Complete documentation for building orch — the autonomous AI orchestration system that replicates Lead exactly.

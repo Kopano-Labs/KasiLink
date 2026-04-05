@@ -1,3 +1,18 @@
+---
+title: load-shedding-context
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Load-Shedding & Energy — Verified Context
 > **Source:** `eskoms-progress-shows-the-value-of-partnership.pdf` (President Cyril Ramaphosa, 06 October 2025)
 > **Owner mandate:** Zero fabrication. Every number traces to this presidential statement.

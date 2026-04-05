@@ -1,3 +1,18 @@
+---
+title: youth-employment
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # South Africa — Youth Employment & Skills
 > **Source:** `world-Youth-Skills-Day_Empowering-Youth-Through-Skills-Development.pdf` (Andrea Naicker, 16 July 2025)
 > **Owner mandate:** Zero fabrication. Every number traces to this named government source.

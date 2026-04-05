@@ -1,3 +1,18 @@
+---
+title: delegation-2026-04-05
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # KasiLink Delegation Brief — 2026-04-05
 > Lead handoff. Token conservation mode. Devs operate independently for ~1hr.
 

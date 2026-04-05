@@ -1,3 +1,18 @@
+---
+title: dev1-chat-skins
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # DEV_1 (Codex) — Assignment: M1 Chameleon Chat Skins
 
 **Assigned by:** Lead (Claude Opus 4.6) | **Date:** 2026-04-04

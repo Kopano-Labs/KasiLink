@@ -1,3 +1,22 @@
+---
+title: KasiLink Issues
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - issues
+  - qa
+  - bugs
+  - regressions
+  - smoke-test
+priority: high
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 # KasiLink Issues
 
 > QA, smoke-test notes, bug tracking, and follow-up planning for the project.
@@ -30,4 +49,3 @@
 - `Auth` - sign-in or protected route issue.
 - `Data` - missing or stale information.
 - `Layout` - overflow, spacing, or responsive breakage.
-

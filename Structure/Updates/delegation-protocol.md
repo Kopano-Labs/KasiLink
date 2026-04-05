@@ -1,5 +1,3 @@
-# Delegation Protocol
-
 ---
 title: Delegation Protocol
 created: 2026-04-04
@@ -18,6 +16,8 @@ audience:
   - owner
 status: active
 ---
+
+# Delegation Protocol
 
 > Rules of engagement for multi-agent development on KasiLink.
 > All developers (human or AI) must read this before touching code.

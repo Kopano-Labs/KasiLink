@@ -1,3 +1,18 @@
+---
+title: faq-gigs
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Jobs and Gigs - KasiLink Info
 > Source: `public-works.pdf`, `government-programmes_projects-and-campaigns.pdf`, `the-Presidency.pdf` | Relevant to: Gig categories, home feed, about page
 

@@ -1,5 +1,3 @@
-# KasiLink Master TODO — Next 10 Steps
-
 ---
 title: KasiLink Master TODO
 created: 2026-04-04
@@ -19,6 +17,8 @@ audience:
   - owner
 status: active
 ---
+
+# KasiLink Master TODO — Next 10 Steps
 
 > **Created:** 2026-04-04 14:30 | **Last updated:** 2026-04-05 | **Author:** Lead
 > **Status:** Build fixed after Grok AI integration. Entering Hardening + Launch Prep phase.

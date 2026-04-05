@@ -1,3 +1,18 @@
+---
+title: DESIGN
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - structure
+  - reference
+priority: low
+audience:
+  - lead
+  - devs
+status: active
+---
+
 # Design System Document
 
 This document outlines the core visual characteristics of our design system.

@@ -1,5 +1,3 @@
-# Current Alignment Notes
-
 ---
 title: Current Alignment Notes
 created: 2026-04-04
@@ -18,6 +16,8 @@ audience:
   - owner
 status: active
 ---
+
+# Current Alignment Notes
 
 > Canonical mission alignment, file ownership, and structure rules for KasiLink.
 > **Lead Developer:** Claude Opus 4.6 | **Effective:** 2026-04-04
