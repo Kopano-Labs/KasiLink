@@ -84,3 +84,7 @@
 | **Lead (Claude Opus)** | Architecture, reviews, shared infra, M1, M5, M6, S1, S3, S4 | All shared infra + DEV_2's forfeited scope |
 | **DEV_1 (Codex)** | H3, M2, M3, S2 — all DONE | Awaiting next assignment from Lead |
 | **DEV_2 (Gemini)** | REMOVED from active dev | 3 consecutive assignment failures. Empty files, build breaks, false reports. |
+
+## Workflow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)

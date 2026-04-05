@@ -137,10 +137,14 @@ If Dev 2 and Dev 3 need to edit the same file:
 
 ## Communication
 
-- **Status updates:** `Structure/Updates/comms-log.md` (append only)
-- **Task status:** `Structure/Updates/task-board.md` (Lead updates only)
-- **Route rules:** `Structure/Updates/current-alignment-notes.md` (Lead updates only)
-- **Sprint plan:** `Structure/Updates/Implementation.md` (reference only, do not modify)
+- **Status updates:** [comms-log.md](comms-log.md) (append only)
+- **Task status:** [task-board.md](task-board.md) (Lead updates only)
+- **Route rules:** [current-alignment-notes.md](current-alignment-notes.md) (Lead updates only)
+- **Sprint plan:** [master-todo.md](master-todo.md) (reference only, do not modify)
+
+## Workflow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
 
 ---
 

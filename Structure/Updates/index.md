@@ -14,6 +14,10 @@
 7. [dev-tracker.md](dev-tracker.md) - per-agent progress history
 8. [next-improvements.md](next-improvements.md) - completed follow-up work and open structural items
 
+## Workflow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+
 ## Consolidation Notes
 
 - Keep history in place. Do not delete old planning files just because a newer summary exists.
@@ -22,11 +26,10 @@
 
 ## Canonical Sources
 
-- Mission and product direction: `Structure/technical-Specifications.md`
-- Active roadmap: `Structure/Updates/master-todo.md`
-- Route ownership and file placement: `Structure/Updates/current-alignment-notes.md`
-- Live coordination: `Structure/Updates/comms-log.md`
-- Live assignments: `Structure/Updates/task-board.md`
-- Detailed agent progress: `Structure/Updates/dev-tracker.md`
-- Cleanup follow-ups: `Structure/Updates/next-improvements.md`
-
+- Mission and product direction: [technical-Specifications.md](../technical-Specifications.md)
+- Active roadmap: [master-todo.md](master-todo.md)
+- Route ownership and file placement: [current-alignment-notes.md](current-alignment-notes.md)
+- Live coordination: [comms-log.md](comms-log.md)
+- Live assignments: [task-board.md](task-board.md)
+- Detailed agent progress: [dev-tracker.md](dev-tracker.md)
+- Cleanup follow-ups: [next-improvements.md](next-improvements.md)

@@ -3,6 +3,10 @@
 > **Color Code:** 🟢 Done | 🟡 In Progress | 🔴 Blocked/Failed | ⚪ Not Started | 🔵 Lead Action
 > **Rule:** Every check-in gets a timestamp. Devs tick off their checklist items here. Lead updates on every review.
 
+## Reading Flow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+
 ---
 
 ## DEV_1 (Codex) — ALL ASSIGNMENTS COMPLETE ✅

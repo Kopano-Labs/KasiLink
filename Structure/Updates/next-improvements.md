@@ -6,6 +6,10 @@
 > **Source:** `Structure/Issues/qa-smoke-test-todo.md`
 > **Purpose:** Compact audit of the next cleanup and product-improvement work after the smoke-test sweep.
 
+## Reading Flow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+
 ## Audit
 
 ### [x] `/forum` <span style="color:#16a34a">[done]</span>

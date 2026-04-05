@@ -3,6 +3,10 @@
 > Single source of truth for dev status updates. Owner reads this to know what's happening.
 > **Rules:** Newest first. Append only. No editing past entries. Use the format below.
 
+## Reading Flow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+
 ---
 
 ### 2026-04-04 | CC1 (Claude Code — free version) | STEP 1 COMPLETE

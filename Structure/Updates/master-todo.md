@@ -391,6 +391,10 @@ KasiLink will ship as both a web app (kasilink.com) AND a native app (App Store 
 | 9. Analytics | Logger, Vercel Analytics | Add logging to routes | Set KPI targets |
 | 10. Tests/CI | Vitest setup, core tests | Route-specific tests | Review coverage |
 
+## Workflow
+
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+
 ---
 
 ## Behavioral Expectations for Next 10 Steps

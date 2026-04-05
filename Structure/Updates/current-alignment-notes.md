@@ -5,13 +5,14 @@
 > **Mission anchor:** [Structure/technical-Specifications.md](../technical-Specifications.md)
 
 Related documents:
-- `Structure/Updates/master-todo.md` — Priority roadmap and step ownership
-- `Structure/Updates/index.md` — Single navigation layer for the Updates folder
-- `Structure/Updates/task-board.md` — Current assignments and status
-- `Structure/Updates/delegation-protocol.md` — Multi-agent rules of engagement
-- `Structure/Updates/comms-log.md` — Status updates and Lead decisions
-- `Structure/Updates/dev-tracker.md` — Dev-level progress ledger
-- `Structure/Updates/next-improvements.md` — Completed follow-ups and remaining structural work
+- [technical-Specifications.md](../technical-Specifications.md) — mission and product intent
+- [index.md](index.md) — single navigation layer for the Updates folder
+- [master-todo.md](master-todo.md) — priority roadmap and step ownership
+- [task-board.md](task-board.md) — current assignments and status
+- [delegation-protocol.md](delegation-protocol.md) — multi-agent rules of engagement
+- [comms-log.md](comms-log.md) — status updates and Lead decisions
+- [dev-tracker.md](dev-tracker.md) — dev-level progress ledger
+- [next-improvements.md](next-improvements.md) — completed follow-ups and remaining structural work
 
 ---
 
@@ -141,3 +142,7 @@ Before adding or moving files:
 3. Verify the route does not already belong to a `route.ts` or `page.tsx` in the same segment.
 4. Read `delegation-protocol.md` — if you are Dev 2/3, you may only edit files in your assigned scope.
 5. Add status updates to `comms-log.md`, not to this file.
+
+## Reading Flow
+
+`index.md` -> `technical-Specifications.md` -> `master-todo.md` -> `delegation-protocol.md` -> `current-alignment-notes.md` -> `task-board.md` -> `comms-log.md` -> `dev-tracker.md` -> `next-improvements.md`
