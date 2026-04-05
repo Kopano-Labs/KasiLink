@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 interface Schedule {
   _id: string;
@@ -50,12 +50,12 @@ export default function UtilitySchedulePage() {
   const [loading, setLoading] = useState(true);
   const [suburb, setSuburb] = useState("");
   const [type, setType] = useState("");
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     const params = new URLSearchParams();
     if (suburb) params.set("suburb", suburb);
     if (type) params.set("type", type);
-    setLoading(true);
     fetch(`/api/utility-schedule?${params.toString()}`)
       .then((r) => r.json())
       .then((d) => setSchedules(d.schedules ?? []))
@@ -63,16 +63,26 @@ export default function UtilitySchedulePage() {
       .finally(() => setLoading(false));
   }, [suburb, type]);
 
-  // Group by day
-  const grouped: Record<string, Schedule[]> = {};
-  for (const s of schedules) {
-    const day = formatDay(s.startTime);
-    if (!grouped[day]) grouped[day] = [];
-    grouped[day].push(s);
-  }
+  useEffect(() => {
+    const tick = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(tick);
+  }, []);
 
-  // Find next upcoming outage
-  const next = schedules.find((s) => new Date(s.startTime).getTime() > Date.now());
+  const grouped = useMemo(() => {
+    const nextGroups: Record<string, Schedule[]> = {};
+    for (const s of schedules) {
+      const day = formatDay(s.startTime);
+      if (!nextGroups[day]) nextGroups[day] = [];
+      nextGroups[day].push(s);
+    }
+    return nextGroups;
+  }, [schedules]);
+
+  const next = useMemo(
+    () =>
+      schedules.find((s) => new Date(s.startTime).getTime() > now) ?? null,
+    [schedules, now],
+  );
 
   return (
     <div className="container max-w-screen-lg pt-8 pb-12">

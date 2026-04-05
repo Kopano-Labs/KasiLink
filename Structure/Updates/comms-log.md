@@ -859,3 +859,25 @@ import { Analytics } from "@vercel/analytics/react";
 **Build:** Passes
 **Notes:** Added per-route review notes, implementation detail, issues detail, mobile detail, and a QA summary so the tracker can be used by the rest of the team.
 **Next:** Awaiting next instruction
+---
+
+### 2026-04-05 | DEV_1 (Codex) | NEXT IMPROVEMENTS STARTED
+
+**Summary:** Added a prioritized "Next Improvements" section to `Structure/Issues/qa-smoke-test-todo.md` and started the first cleanup item by fixing the forum submit-handler indentation.
+**Build:** Passes
+**Next:** Continue through the improvement list in order
+---
+
+### 2026-04-05 | DEV_1 (Codex) | NEXT IMPROVEMENTS MOVED
+
+**Summary:** Moved the improvement plan out of `Structure/Issues/qa-smoke-test-todo.md` and into `Structure/Updates/next-improvements.md` so the QA file stays focused on verification while the follow-up plan lives with the other planning docs.
+**Files updated:** `Structure/Issues/qa-smoke-test-todo.md`, `Structure/Updates/next-improvements.md`
+**Next:** Continue from the prioritized improvement list in Updates
+---
+
+### 2026-04-05 | DEV_1 (Codex) | IMPROVEMENTS COMPLETED
+
+**Summary:** Completed the next-improvements pass: tightened forum submission validation, removed render-time date dependency from utility schedule, wired live water-alert counts into community status, extracted gig city inference into a helper, and added clearer marketplace empty-state guidance.
+**Build:** Passes
+**Updated files:** `app/forum/page.tsx`, `app/utility-schedule/page.tsx`, `app/community-status/page.tsx`, `app/gigs/new/page.tsx`, `app/marketplace/page.tsx`, `Structure/Updates/next-improvements.md`
+**Next:** Remaining later-stage cleanup is splitting cramped chat/profile pages into smaller components

@@ -349,6 +349,9 @@ function MarketplaceInner() {
         <div className="text-center py-12 text-on-surface-variant">
           <p className="text-xl mb-3">😕 No gigs found</p>
           <p>Try a different category or search term</p>
+          <p className="mt-2 text-xs text-outline">
+            If this keeps happening, loosen the suburb or radius filter first.
+          </p>
           <Link href="/gigs/new" className="btn btn-primary mt-5">
             Post the first gig
           </Link>

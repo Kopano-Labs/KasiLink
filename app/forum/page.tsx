@@ -96,6 +96,16 @@ function ForumInner() {
       return;
     }
 
+    if (newTitle.trim().length < 5) {
+      setPostError("Title must be at least 5 characters.");
+      return;
+    }
+
+    if (newContent.trim().length < 20) {
+      setPostError("Message must be at least 20 characters.");
+      return;
+    }
+
     setIsPosting(true);
     try {
       const res = await fetch("/api/forum", {
@@ -118,11 +128,13 @@ function ForumInner() {
       setNewCategory("general");
       setPage(1);
       fetchPosts();
-      } catch (err: unknown) {
-        setPostError(err instanceof Error ? err.message : "Failed to create post");
-      } finally {
-        setIsPosting(false);
-      }
+    } catch (err: unknown) {
+      setPostError(
+        err instanceof Error ? err.message : "Failed to create post",
+      );
+    } finally {
+      setIsPosting(false);
+    }
   };
 
   return (

@@ -40,6 +40,17 @@ const SUBURB_COORDS: Record<string, [number, number]> = {
 
 const SUBURBS = Object.keys(SUBURB_COORDS);
 
+function inferCity(suburb: string) {
+  if (
+    suburb.includes("Cape Town") ||
+    ["Khayelitsha", "Mitchells Plain", "Gugulethu", "Langa", "Nyanga", "Philippi", "Delft", "Mfuleni", "Crossroads", "Bellville"].includes(suburb)
+  ) {
+    return "Cape Town";
+  }
+
+  return "Johannesburg";
+}
+
 export default function PostGigPage() {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useUser();
@@ -113,7 +124,7 @@ export default function PostGigPage() {
             type: "Point",
             coordinates: SUBURB_COORDS[form.suburb] ?? [28.0473, -26.2041],
             suburb: form.suburb,
-            city: form.suburb.includes("Cape Town") || ["Khayelitsha","Mitchells Plain","Gugulethu","Langa","Nyanga","Philippi","Delft","Mfuleni","Crossroads","Bellville"].includes(form.suburb) ? "Cape Town" : "Johannesburg",
+            city: inferCity(form.suburb),
           },
         }),
       });

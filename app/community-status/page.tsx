@@ -18,15 +18,16 @@ export default function CommunityStatusPage() {
   useEffect(() => {
     async function load() {
       try {
-        const [lsRes, incRes] = await Promise.all([
+        const [lsRes, incRes, waterRes] = await Promise.all([
           fetch("/api/load-shedding").then((r) => r.json()).catch(() => null),
           fetch("/api/incidents?limit=1").then((r) => r.json()).catch(() => null),
+          fetch("/api/water-alerts?limit=1").then((r) => r.json()).catch(() => null),
         ]);
 
         setData({
           powerStage: lsRes?.stage ?? 0,
           powerStatus: lsRes?.status ?? "Status unavailable",
-          waterAlerts: 0,
+          waterAlerts: waterRes?.total ?? waterRes?.alerts?.length ?? 0,
           activeIncidents: incRes?.total ?? 0,
           lastUpdated: new Date().toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit" }),
         });
