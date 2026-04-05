@@ -13,10 +13,12 @@
 6. [comms-log.md](comms-log.md) - chronological status and decisions
 7. [dev-tracker.md](dev-tracker.md) - per-agent progress history
 8. [next-improvements.md](next-improvements.md) - completed follow-up work and open structural items
+9. [billing-plan.md](billing-plan.md) - canonical user billing plan and pricing
+10. [reference-notes.md](reference-notes.md) - consolidated legacy planning, environment, and archive context
 
 ## Workflow
 
-[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md)
+[index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [billing-plan.md](billing-plan.md) -> [delegation-protocol.md](delegation-protocol.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md) -> [reference-notes.md](reference-notes.md)
 
 ## Consolidation Notes
 
@@ -28,8 +30,10 @@
 
 - Mission and product direction: [technical-Specifications.md](../technical-Specifications.md)
 - Active roadmap: [master-todo.md](master-todo.md)
+- Billing plan: [billing-plan.md](billing-plan.md)
 - Route ownership and file placement: [current-alignment-notes.md](current-alignment-notes.md)
 - Live coordination: [comms-log.md](comms-log.md)
 - Live assignments: [task-board.md](task-board.md)
 - Detailed agent progress: [dev-tracker.md](dev-tracker.md)
 - Cleanup follow-ups: [next-improvements.md](next-improvements.md)
+- Consolidated legacy notes: [reference-notes.md](reference-notes.md)

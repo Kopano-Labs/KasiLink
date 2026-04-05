@@ -8,6 +8,7 @@ Related documents:
 - [technical-Specifications.md](../technical-Specifications.md) — mission and product intent
 - [index.md](index.md) — single navigation layer for the Updates folder
 - [master-todo.md](master-todo.md) — priority roadmap and step ownership
+- [billing-plan.md](billing-plan.md) — billing and plan structure
 - [task-board.md](task-board.md) — current assignments and status
 - [delegation-protocol.md](delegation-protocol.md) — multi-agent rules of engagement
 - [comms-log.md](comms-log.md) — status updates and Lead decisions
@@ -145,4 +146,4 @@ Before adding or moving files:
 
 ## Reading Flow
 
-`index.md` -> `technical-Specifications.md` -> `master-todo.md` -> `delegation-protocol.md` -> `current-alignment-notes.md` -> `task-board.md` -> `comms-log.md` -> `dev-tracker.md` -> `next-improvements.md`
+`index.md` -> `technical-Specifications.md` -> `master-todo.md` -> `billing-plan.md` -> `delegation-protocol.md` -> `current-alignment-notes.md` -> `task-board.md` -> `comms-log.md` -> `dev-tracker.md` -> `next-improvements.md` -> `reference-notes.md`
