@@ -1,5 +1,24 @@
 # Delegation Protocol
 
+---
+title: Delegation Protocol
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - delegation
+  - workflow
+  - rules
+  - agents
+  - communication
+priority: critical
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 > Rules of engagement for multi-agent development on KasiLink.
 > All developers (human or AI) must read this before touching code.
 

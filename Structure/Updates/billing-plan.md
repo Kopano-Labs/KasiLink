@@ -1,5 +1,25 @@
 # KasiLink Billing Plan
 
+---
+title: KasiLink Billing Plan
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - billing
+  - pricing
+  - payments
+  - subscriptions
+  - security
+  - commerce
+priority: critical
+audience:
+  - lead
+  - owner
+  - devs
+status: active
+---
+
 > Canonical billing reference for user plans, gating, and subscription logic.
 > Last updated: 2026-04-05
 
@@ -74,18 +94,58 @@ export function PremiumFeature() {
 
 ## Billing Integration Notes
 
-- Clerk uses Stripe under the hood.
-- Planned routes:
-  - `app/api/billing/create-checkout/route.ts`
-  - `app/api/billing/create-portal/route.ts`
-  - `app/api/webhooks/stripe/route.ts`
-- Webhooks should sync `user.publicMetadata.plan`.
+KasiLink should not assume Stripe as the primary South Africa billing rail.
+Stripe’s public availability docs show South Africa only in an extended-network context, while Paystack and Yoco explicitly support South African merchants and payment channels. The billing layer should therefore be built as a provider-agnostic orchestration layer that can plug into whichever processor is actually approved for the business setup.
+
+### Recommended architecture
+
+- Build a local `lib/payments/` abstraction for checkout, subscription, portal, webhook handling, and plan sync.
+- Keep the provider adapter isolated so Stripe, Paystack, Yoco, or another SA-approved provider can be swapped without rewriting the app.
+- Store plan state in Clerk metadata, but never trust the client to set plan entitlements.
+- Use signed webhooks to confirm payment completion before enabling paid features.
+- Prefer hosted checkout or hosted payment pages over raw card handling inside KasiLink.
+- Treat payment failures, retries, refunds, and subscription cancellation as first-class flows.
+
+### Planned routes
+
+- `app/api/billing/create-checkout/route.ts`
+- `app/api/billing/create-portal/route.ts`
+- `app/api/billing/webhook/route.ts`
+
+### Webhook responsibilities
+
+- Verify signature before accepting the event.
+- Map payment intent / subscription state to `user.publicMetadata.plan`.
+- Idempotently ignore duplicate webhook deliveries.
+- Log success and failure through the shared logger.
+
+### Security baseline
+
+- Keep card data off KasiLink servers wherever possible.
+- Require HTTPS, signature verification, idempotency keys, and server-side entitlement checks.
+- Rate-limit billing endpoints.
+- Record audit events for plan changes, cancellations, and failed payments.
+- Add CSRF protection for any browser-initiated billing action that touches authenticated state.
+
+### Provider notes
+
+- Stripe: useful only if the account structure and regional availability are confirmed for the business.
+- Paystack: explicitly supports South Africa and local payment channels.
+- Yoco: South Africa-focused merchant tooling and card processing.
+
+### What not to do
+
+- Do not hard-code Stripe as the only option.
+- Do not process raw card data in KasiLink.
+- Do not trust client-side plan flags.
+- Do not wire billing directly into user-facing UI without a server-side verification step.
 
 ## Required Env Vars
 
 ```env
-STRIPE_SECRET_KEY=sk_...
-STRIPE_WEBHOOK_SECRET=whsec_...
+PAYMENTS_PROVIDER=paystack|yoco|stripe
+PAYMENTS_SECRET_KEY=...
+PAYMENTS_WEBHOOK_SECRET=...
 NEXT_PUBLIC_URL=https://kasilink.co.za
 ```
 
@@ -99,4 +159,3 @@ NEXT_PUBLIC_URL=https://kasilink.co.za
 ## Workflow
 
 [index.md](index.md) -> [technical-Specifications.md](../technical-Specifications.md) -> [master-todo.md](master-todo.md) -> [billing-plan.md](billing-plan.md) -> [current-alignment-notes.md](current-alignment-notes.md) -> [task-board.md](task-board.md) -> [comms-log.md](comms-log.md) -> [dev-tracker.md](dev-tracker.md) -> [next-improvements.md](next-improvements.md) -> [reference-notes.md](reference-notes.md)
-

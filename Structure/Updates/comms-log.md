@@ -1,5 +1,23 @@
 # Comms Log
 
+---
+title: Comms Log
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - communication
+  - status
+  - decisions
+  - history
+priority: critical
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 > Single source of truth for dev status updates. Owner reads this to know what's happening.
 > **Rules:** Newest first. Append only. No editing past entries. Use the format below.
 
@@ -923,3 +941,19 @@ import { Analytics } from "@vercel/analytics/react";
 **Summary:** Aligned the updates layer to the mission spec, added a compact `Structure/Updates/index.md` control center, and created `Structure/Details/technical-Specifications.md` as a companion execution spec so the planning docs have a clearer hierarchy.
 **Updated files:** `Structure/Updates/current-alignment-notes.md`, `Structure/Updates/master-todo.md`, `Structure/Updates/index.md`, `Structure/Details/technical-Specifications.md`
 **Next:** Continue using the Updates index as the entry point for planning docs
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | BILLING PLAN RE-ENGINEERED
+
+**Summary:** Updated `Structure/Updates/billing-plan.md` so KasiLink no longer assumes Stripe as the primary South Africa payment rail. The plan now calls for a provider-agnostic billing orchestration layer, hosted checkout, signed webhooks, idempotent entitlement sync, and server-side security controls.
+**Updated file:** `Structure/Updates/billing-plan.md`
+**Next:** Implement a South Africa-compatible payment adapter when the billing work is scheduled
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | STRUCTURE MAPS ADDED
+
+**Summary:** Added `Structure/index.md` plus folder-level `index.md` guides for Design, Details, Information, and Issues so the whole `Structure/` tree has a readable entry point, folder purpose, fit rules, and color-coded filters.
+**Updated files:** `Structure/index.md`, `Structure/Design/index.md`, `Structure/Details/index.md`, `Structure/Information/index.md`, `Structure/Issues/index.md`, `Structure/Updates/index.md`, `Structure/Updates/current-alignment-notes.md`
+**Next:** Continue pruning or merging any remaining duplicate or stale documents inside `Structure/Updates`

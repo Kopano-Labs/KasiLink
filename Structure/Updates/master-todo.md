@@ -1,5 +1,25 @@
 # KasiLink Master TODO — Next 10 Steps
 
+---
+title: KasiLink Master TODO
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - roadmap
+  - priorities
+  - milestones
+  - launch
+  - planning
+  - assignments
+priority: critical
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 > **Created:** 2026-04-04 14:30 | **Last updated:** 2026-04-05 | **Author:** Lead
 > **Status:** Build fixed after Grok AI integration. Entering Hardening + Launch Prep phase.
 > **Live:** kasilink.com (Vercel) | **Build:** 42 routes, PASSING | **Branch:** main

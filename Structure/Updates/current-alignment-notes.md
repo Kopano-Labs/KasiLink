@@ -1,11 +1,31 @@
 # Current Alignment Notes
 
+---
+title: Current Alignment Notes
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - alignment
+  - file-ownership
+  - routing
+  - mission
+  - structure
+priority: critical
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 > Canonical mission alignment, file ownership, and structure rules for KasiLink.
 > **Lead Developer:** Claude Opus 4.6 | **Effective:** 2026-04-04
 > **Mission anchor:** [Structure/technical-Specifications.md](../technical-Specifications.md)
 
 Related documents:
 - [technical-Specifications.md](../technical-Specifications.md) — mission and product intent
+- [../index.md](../index.md) — structure map for the whole repository
 - [index.md](index.md) — single navigation layer for the Updates folder
 - [master-todo.md](master-todo.md) — priority roadmap and step ownership
 - [billing-plan.md](billing-plan.md) — billing and plan structure
@@ -146,4 +166,4 @@ Before adding or moving files:
 
 ## Reading Flow
 
-`index.md` -> `technical-Specifications.md` -> `master-todo.md` -> `billing-plan.md` -> `delegation-protocol.md` -> `current-alignment-notes.md` -> `task-board.md` -> `comms-log.md` -> `dev-tracker.md` -> `next-improvements.md` -> `reference-notes.md`
+`../index.md` -> `technical-Specifications.md` -> `Updates/index.md` -> `master-todo.md` -> `billing-plan.md` -> `delegation-protocol.md` -> `current-alignment-notes.md` -> `task-board.md` -> `comms-log.md` -> `dev-tracker.md` -> `next-improvements.md` -> `reference-notes.md`

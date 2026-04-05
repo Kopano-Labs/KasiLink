@@ -1,5 +1,22 @@
 # Next Improvements
 
+---
+title: Next Improvements
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - improvements
+  - cleanup
+  - refactor
+  - follow-up
+priority: medium
+audience:
+  - lead
+  - devs
+status: active
+---
+
 > **Author:** Codex
 > **Created:** 2026-04-05 01:45
 > **Updated:** 2026-04-05 02:05

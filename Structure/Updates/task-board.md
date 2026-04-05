@@ -1,5 +1,22 @@
 # Task Board
 
+---
+title: Task Board
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - tasks
+  - assignments
+  - status
+  - tracking
+priority: critical
+audience:
+  - lead
+  - devs
+status: active
+---
+
 > Sprint tracker for KasiLink MVP. Lead updates this. Dev 2/3 reference their assignments here.
 > Status: `DONE` | `IN-PROGRESS` | `NOT-STARTED` | `BLOCKED` | `DEFERRED`
 

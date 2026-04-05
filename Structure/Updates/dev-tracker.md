@@ -1,5 +1,23 @@
 # Dev Activity Tracker
 
+---
+title: Dev Activity Tracker
+created: 2026-04-04
+updated: 2026-04-05
+author: Lead
+tags:
+  - tracker
+  - dev-progress
+  - status
+  - audit
+priority: high
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 > **Color Code:** 🟢 Done | 🟡 In Progress | 🔴 Blocked/Failed | ⚪ Not Started | 🔵 Lead Action
 > **Rule:** Every check-in gets a timestamp. Devs tick off their checklist items here. Lead updates on every review.
 
