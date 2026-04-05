@@ -965,3 +965,12 @@ import { Analytics } from "@vercel/analytics/react";
 **Summary:** Added `Structure/Obsidian/index.md` and starter templates so the repo can be mirrored into an Obsidian second brain with a clean folder layout, note types, and sync rules.
 **Updated files:** `Structure/Obsidian/index.md`, `Structure/Obsidian/Templates/daily-note.md`, `Structure/Obsidian/Templates/project-note.md`, `Structure/Obsidian/Templates/decision-note.md`, `Structure/index.md`
 **Next:** When Obsidian is installed, mirror the repo structure into the vault and start linking mission, roadmap, and decisions there
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | VERCEL BUILD BLOCKER REMOVED
+
+**Summary:** Investigated the Vercel deployment failure and found a stray merge-conflict file at `Structure/Updates/page.tsx`. Removed the file, reran `npm run build`, and confirmed the build now passes again.
+**Removed file:** `Structure/Updates/page.tsx`
+**Verification:** `npm run build` passes
+**Next:** If Vercel still shows a failed deployment, inspect deployment logs for a runtime-only issue
