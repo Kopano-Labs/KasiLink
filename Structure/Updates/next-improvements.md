@@ -2,57 +2,53 @@
 
 > **Author:** Codex
 > **Created:** 2026-04-05 01:45
-> **Updated:** 2026-04-05 01:45
+> **Updated:** 2026-04-05 01:50
 > **Source:** `Structure/Issues/qa-smoke-test-todo.md`
-> **Purpose:** Track the next cleanup and product-improvement steps after the smoke-test sweep.
+> **Purpose:** Compact audit of the next cleanup and product-improvement work after the smoke-test sweep.
 
-## Priority 1: `/forum`
+## Audit
 
-- Fix the `handlePost` indentation and syntax area.
-- Add better validation feedback before posting.
-- Confirm the page still posts and paginates after cleanup.
+### [x] `/forum`
+> Fixed the submit-handler indentation and tightened validation before posting.
 
-## Priority 2: `/utility-schedule`
+- [x] Posts still submit
+- [x] Validation now blocks short title/message input
+- [ ] Add richer validation feedback styling
 
-- Remove the render-time `Date.now()` dependency from `next` selection.
-- Move time-sensitive calculations into effect state or memoized data.
-- Confirm the grouped schedule cards still render correctly.
+### [x] `/utility-schedule`
+> Removed render-time `Date.now()` dependency from next-outage selection.
 
-## Priority 3: `/community-status`
+- [x] Time-sensitive value now updates from state
+- [x] Grouped schedule cards still render
+- [ ] Review if the minute tick should be page-specific or shared
 
-- Replace the hardcoded `waterAlerts: 0` with live data.
-- Keep the dashboard summary aligned with the data source.
+### [x] `/community-status`
+> Replaced static `waterAlerts: 0` with live water-alert counts.
 
-## Priority 4: `/gigs/new`
+- [x] Dashboard now reads live counts
+- [ ] Add a source label for the water-alert count
 
-- Extract suburb/city mapping into a shared helper.
-- Make the location logic easier to maintain.
+### [x] `/gigs/new`
+> Extracted suburb-to-city inference into a helper.
 
-## Priority 5: `/marketplace`
+- [x] Helper centralizes city mapping
+- [ ] Move the suburb list into a shared constant if it grows
 
-- Reduce filter complexity where possible.
-- Add clearer empty-state messaging.
+### [x] `/marketplace`
+> Added clearer empty-state guidance.
 
-## Priority 6: Cramped Pages
+- [x] Empty state now tells users how to loosen filters
+- [ ] Reduce filter density if the UI starts feeling crowded
 
-- Split the profile and chat pages into smaller components later.
-- Keep existing behavior, but reduce maintenance risk.
+### [ ] `/profile` and `/chat`
+> Still open. These pages work, but the JSX is cramped and should be split later.
+
+- [ ] Split list/detail concerns into smaller components
+- [ ] Keep existing behavior intact
+- [ ] Reduce maintenance risk without changing UX
 
 ## Notes
 
-- This list comes directly from the smoke-test route review.
-- The order reflects the highest-value cleanup work first.
-- Update this file as improvements are completed or reprioritized.
-
-## Completed Today
-
-- Forum submit validation tightened.
-- Utility schedule now derives next outage from stable state instead of render-time `Date.now()`.
-- Community status now reads live water-alert counts.
-- Gig posting now uses a shared city helper instead of inline city inference logic.
-- Marketplace empty-state guidance is clearer.
-
-## Still Open
-
-- Split the profile and chat pages into smaller components later.
-- Keep the overall behavior, but reduce maintenance risk where the JSX is still cramped.
+- This file is intentionally compact and reads like an audit log.
+- Completed items stay checked so the team can see what changed.
+- Open items stay unchecked until the follow-up work lands.

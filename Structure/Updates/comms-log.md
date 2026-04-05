@@ -881,3 +881,10 @@ import { Analytics } from "@vercel/analytics/react";
 **Build:** Passes
 **Updated files:** `app/forum/page.tsx`, `app/utility-schedule/page.tsx`, `app/community-status/page.tsx`, `app/gigs/new/page.tsx`, `app/marketplace/page.tsx`, `Structure/Updates/next-improvements.md`
 **Next:** Remaining later-stage cleanup is splitting cramped chat/profile pages into smaller components
+---
+
+### 2026-04-05 | DEV_1 (Codex) | NEXT IMPROVEMENTS COMPACTED
+
+**Summary:** Reworked `Structure/Updates/next-improvements.md` into a compact audit format with quoted callouts and tick-box items so completed cleanup and open follow-up work are easier to scan.
+**Updated file:** `Structure/Updates/next-improvements.md`
+**Next:** Continue remaining open items when assigned
