@@ -1,13 +1,17 @@
 # Current Alignment Notes
 
-> Canonical route ownership and file placement rules for KasiLink.
+> Canonical mission alignment, file ownership, and structure rules for KasiLink.
 > **Lead Developer:** Claude Opus 4.6 | **Effective:** 2026-04-04
+> **Mission anchor:** [Structure/technical-Specifications.md](../technical-Specifications.md)
 
 Related documents:
-- `Structure/Updates/Implementation.md` — Sprint plan and priorities
+- `Structure/Updates/master-todo.md` — Priority roadmap and step ownership
+- `Structure/Updates/index.md` — Single navigation layer for the Updates folder
 - `Structure/Updates/task-board.md` — Current assignments and status
 - `Structure/Updates/delegation-protocol.md` — Multi-agent rules of engagement
-- `Structure/Updates/comms-log.md` — Status updates (replaces changelog)
+- `Structure/Updates/comms-log.md` — Status updates and Lead decisions
+- `Structure/Updates/dev-tracker.md` — Dev-level progress ledger
+- `Structure/Updates/next-improvements.md` — Completed follow-ups and remaining structural work
 
 ---
 
@@ -20,6 +24,7 @@ Related documents:
 5. Do NOT place UI or route handlers under `lib/` or `lib/models/`.
 6. Prefer extending existing aligned routes before creating new parallel ones.
 7. Run `npm run build` after any structural edits.
+8. If a file already exists in `Structure/Updates/`, treat it as coordination or planning only.
 
 ---
 
@@ -41,6 +46,12 @@ Related documents:
 | `/verified/[id]` | `app/verified/[id]/page.tsx` | DONE |
 | `/water-outages` | `app/water-outages/page.tsx` | DONE |
 | `/chat` | `app/chat/page.tsx` | DONE |
+| `/community-calendar` | `app/community-calendar/page.tsx` | DONE |
+| `/spotlight` | `app/spotlight/page.tsx` | DONE |
+| `/community-status` | `app/community-status/page.tsx` | DONE |
+| `/my-water-reports` | `app/my-water-reports/page.tsx` | DONE |
+| `/privacy` | `app/privacy/page.tsx` | DONE |
+| `/terms` | `app/terms/page.tsx` | DONE |
 
 ### API Routes
 
@@ -60,12 +71,14 @@ Related documents:
 | `/api/chat` | `app/api/chat/route.ts` | DONE |
 | `/api/messages` | `app/api/messages/route.ts` | DONE |
 | `/api/load-shedding` | `app/api/load-shedding/route.ts` | DEV_1 in progress |
-| `/api/incidents` | `app/api/incidents/route.ts` | DEV_2 in progress |
-| `/api/community-calendar` | `app/api/community-calendar/route.ts` | DEV_1 queued |
-| `/api/water-alerts` | `app/api/water-alerts/route.ts` | DEV_1 queued |
-| `/api/spotlight` | `app/api/spotlight/route.ts` | DEV_1 queued |
-| `/api/utility-schedule` | `app/api/utility-schedule/route.ts` | DEV_2 queued |
-| `/api/community-status` | `app/api/community-status/route.ts` | DEV_2 queued |
+| `/api/incidents` | `app/api/incidents/route.ts` | DONE |
+| `/api/community-calendar` | `app/api/community-calendar/route.ts` | DONE |
+| `/api/water-alerts` | `app/api/water-alerts/route.ts` | DONE |
+| `/api/spotlight` | `app/api/spotlight/route.ts` | DONE |
+| `/api/utility-schedule` | `app/api/utility-schedule/route.ts` | DONE |
+| `/api/community-status` | `app/api/community-status/route.ts` | DONE |
+| `/api/community-events` | `app/api/community-events/route.ts` | ALIASED / consolidated |
+| `/api/business-spotlight` | `app/api/business-spotlight/route.ts` | ALIASED / consolidated |
 
 ### Pages
 
@@ -73,27 +86,40 @@ Related documents:
 |-------|------|--------|
 | `/incidents` | `app/incidents/page.tsx` | DEV_2 in progress |
 | `/incidents/new` | `app/incidents/new/page.tsx` | DEV_2 in progress |
-| `/community-calendar` | `app/community-calendar/page.tsx` | DEV_1 queued |
-| `/water-outages` | `app/water-outages/page.tsx` | DEV_1 in progress (H3 + M3 update) |
-| `/spotlight` | `app/spotlight/page.tsx` | DEV_1 queued |
-| `/utility-schedule` | `app/utility-schedule/page.tsx` | DEV_2 queued |
-| `/community-status` | `app/community-status/page.tsx` | DEV_2 queued |
-| `/my-water-reports` | `app/my-water-reports/page.tsx` | DEV_2 queued |
+| `/community-calendar` | `app/community-calendar/page.tsx` | DONE |
+| `/water-outages` | `app/water-outages/page.tsx` | DONE |
+| `/spotlight` | `app/spotlight/page.tsx` | DONE |
+| `/utility-schedule` | `app/utility-schedule/page.tsx` | DONE |
+| `/community-status` | `app/community-status/page.tsx` | DONE |
+| `/my-water-reports` | `app/my-water-reports/page.tsx` | DONE |
 
 ---
 
 ## Moves Already Made (Do Not Undo)
 
-- Notifications API moved from `app/api/users/[id]/` to `app/api/notifications/route.ts`
-- Provider detail UI at `app/verified/[id]/page.tsx`, NOT under `app/api/users/[id]/`
-- Water outage UI at `app/water-outages/page.tsx`, NOT at repo root
-- `/jobs` is a compatibility redirect to `/marketplace` — not a second marketplace
+- Notifications API lives at `app/api/notifications/route.ts`
+- Provider detail UI lives at `app/verified/[id]/page.tsx`, not under `app/api/users/[id]/`
+- Water outage UI lives at `app/water-outages/page.tsx`, not at repo root
+- `/jobs` is a compatibility redirect to `/marketplace`, not a second marketplace
 
 ## Files Intentionally Removed (Treat Reappearance as Regression)
 
 `page.tsx`, `route.ts`, `app/api/gigs/page.tsx`, `app/api/users/[id]/page.tsx`, `lib/page.tsx`, `lib/route.ts`, `lib/models/page.tsx`, `lib/models/route.ts`, `app/api/notifications/page.tsx`, `Structure/Updates/route.ts`
 
 **Pattern:** Any `page.tsx` inside `app/api/**` is always wrong. Any code file (`.ts`, `.tsx`) inside `Structure/` is always wrong.
+
+---
+
+## Mission Alignment
+
+The technical specification says KasiLink is a township-first, mobile-first PWA for gigs, trust, community, and utility awareness. That means:
+
+- Community and trust features are not optional extras.
+- Mobile and low-data experience matter as much as marketplace functionality.
+- The `Structure/Information/` archive should feed user-facing content and trust context.
+- The updates layer exists to keep execution aligned, not to become the product itself.
+
+When there is tension between speed and clarity, keep the mission clear and the file ownership strict.
 
 ---
 

@@ -896,3 +896,26 @@ import { Analytics } from "@vercel/analytics/react";
 **Build:** Passes
 **Updated files:** `app/gigs/new/page.tsx`, `app/community-status/page.tsx`, `Structure/Updates/next-improvements.md`
 **Next:** Structural split of profile/chat can be tackled later if assigned
+---
+
+### 2026-04-05 | DEV_1 (Codex) | NEXT IMPROVEMENTS RE-LOADED
+
+**Summary:** Updated `Structure/Updates/next-improvements.md` with color-coded status markers and an open-reason block explaining that the remaining unchecked items are the profile/chat structural split, which is intentionally left open because it is not a one-pass polish change.
+**Updated file:** `Structure/Updates/next-improvements.md`
+**Next:** Continue with the profile/chat split when assigned
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | PROFILE/CHAT SPLIT COMPLETED
+
+**Summary:** Split the remaining profile/chat improvement work into dedicated components and closed the structural follow-up in `Structure/Updates/next-improvements.md`. User explicitly granted access while Lead and DEV_1 were on token drain, so I proceeded with the remaining cleanup scope.
+**Updated files:** `app/profile/page.tsx`, `components/profile/ApplicationsSection.tsx`, `components/profile/PostedGigsSection.tsx`, `Structure/Updates/next-improvements.md`
+**Next:** Build verification and final review
+
+---
+
+### 2026-04-05 | DEV_1 (Codex) | SPEC ALIGNMENT + UPDATES CONSOLIDATION
+
+**Summary:** Aligned the updates layer to the mission spec, added a compact `Structure/Updates/index.md` control center, and created `Structure/Details/technical-Specifications.md` as a companion execution spec so the planning docs have a clearer hierarchy.
+**Updated files:** `Structure/Updates/current-alignment-notes.md`, `Structure/Updates/master-todo.md`, `Structure/Updates/index.md`, `Structure/Details/technical-Specifications.md`
+**Next:** Continue using the Updates index as the entry point for planning docs

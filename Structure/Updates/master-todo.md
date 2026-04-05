@@ -14,12 +14,12 @@
 | 2 | Production Smoke Test | ⏳ PENDING — after current build deploys | Lead + Owner |
 | 3 | Content Seeding | ✅ DONE — 10 gigs, 5 forum posts, 3 events, 2 alerts seeded | Lead |
 | 4 | Information Archive Integration | ✅ DONE — faq-gigs, faq-water, faq-safety, service-directory created by DEV_1 | DEV_1 |
-| 5 | POPIA Compliance & Terms Page | 🔴 NOT DONE — /terms missing (DEV_2 failed, assigned to DEV_1 now) | DEV_1 |
-| 6 | Mobile Optimization & PWA Polish | ⏳ PENDING | Lead + DEV_1 |
+| 5 | POPIA Compliance & Terms Page | ✅ DONE — /terms live and footer linked | DEV_1 |
+| 6 | Mobile Optimization & PWA Polish | 🔄 IN PROGRESS | Lead + DEV_1 |
 | 6b | Grok AI Integration | ✅ DONE — xAI Grok-4 chat widget live on homepage | Lead |
 | 7 | Orch System Foundation | 🔄 IN PROGRESS — Blueprint written (orch-blueprint.md) | Lead |
 | 8 | App Store Preparation | ⏳ PENDING | Lead + Owner |
-| 9 | Analytics & Monitoring | ⏳ PENDING | Lead |
+| 9 | Analytics & Monitoring | 🔄 IN PROGRESS — logger queued | Lead + DEV_1 |
 | 10 | Test Suite & CI/CD | ⏳ PENDING | Lead + DEV_1 |
 
 **BLOCKING OWNER ACTIONS:**
@@ -38,7 +38,7 @@
 **Phase 5 (Deployment) — DONE.** Vercel live, 42 routes, production build passing.
 **Phase 6 (AI Integration) — DONE.** Grok AI chat widget (xAI Grok-4) live on homepage.
 
-**What's NOT done:** `/terms` page, Clerk prod keys, KasiLinkAI_XAI_API_KEY in Vercel, test suite, logger, app store prep, real user testing, mobile optimization audit, orch system.
+**What's NOT done:** Clerk prod keys, KasiLinkAI_XAI_API_KEY in Vercel, test suite, app store prep, real user testing, full mobile audit, orch system.
 
 ---
 
@@ -198,7 +198,7 @@ The Owner has added 15 PDFs to `Structure/Information/`:
   - Information Officer details
   - Cross-border data transfer disclosure (MongoDB Atlas may store data outside SA)
   - Retention periods
-- Create Terms of Service page (`/terms`)
+- Create Terms of Service page (`/terms`) - DONE
 - Add cookie consent banner (if using analytics)
 - Verify Clerk's POPIA compliance for auth data
 - Ensure MongoDB Atlas has SA-region backup option
@@ -328,7 +328,7 @@ KasiLink will ship as both a web app (kasilink.com) AND a native app (App Store 
 - Uptime monitoring:
   - Free tier: UptimeRobot or Better Uptime
   - Monitor: kasilink.com, /api/gigs, /api/chat
-- Implement `lib/logger.ts` (currently empty — GAP-6)
+- Implement `lib/logger.ts`
   - Structured JSON logging for API routes
   - Log levels: info, warn, error
   - Include: route, userId, action, timestamp
