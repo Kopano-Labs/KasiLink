@@ -13,6 +13,7 @@
     "@ai-sdk/xai": "^3.0.77",
     "@clerk/nextjs": "^7.0.7",
     "ai": "^6.0.146",
+    "braintrust": "^2.0.0",
     "mongodb": "^7.1.1",
     "mongoose": "^9.3.3",
     "next": "16.2.1",
@@ -30,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "tailwindcss": "^4",
+    "zod": "^3.25.76",
     "typescript": "^5"
   }
 }
