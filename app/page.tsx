@@ -3,6 +3,7 @@ import connectDB from "@/lib/db";
 import Gig from "@/lib/models/Gig";
 import LoadSheddingWidget from "@/components/LoadSheddingWidget";
 import GrokChatModal from "@/components/GrokChatModal";
+import OrchDashboard from "@/components/ai/OrchDashboard";
 
 export const dynamic = "force-dynamic";
 
@@ -111,6 +112,10 @@ export default async function HomePage() {
       {/* Load-shedding notice */}
       <div className="container pt-6">
         <LoadSheddingWidget />
+      </div>
+
+      <div className="container pt-6">
+        <OrchDashboard />
       </div>
 
       <section className="container pt-8">

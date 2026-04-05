@@ -6,13 +6,6 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define MONGODB_URI in your .env.local file.\n" +
-      "Example: MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/kasilink?retryWrites=true&w=majority",
-  );
-}
-
 // Strict type check for global cache
 // Global cache to prevent multiple connections in dev hot-reload
 interface MongooseCache {
@@ -31,6 +24,13 @@ const cache: MongooseCache = global._mongooseCache ?? {
 global._mongooseCache = cache;
 
 export async function connectDB(): Promise<mongoose.Connection> {
+  if (!MONGODB_URI) {
+    throw new Error(
+      "Please define MONGODB_URI in your .env.local file.\n" +
+        "Example: MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/kasilink?retryWrites=true&w=majority",
+    );
+  }
+
   if (cache.conn) return cache.conn;
 
   if (!cache.promise) {

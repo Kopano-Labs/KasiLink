@@ -11,9 +11,11 @@ export default function LoadSheddingWidget() {
     const fetchStage = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/load-shedding");
-        if (res.ok) {
-          const data = await res.json();
+        const res = await fetch("/api/orch/loadshedding?area_id=default");
+        const fallback = await fetch("/api/load-shedding");
+        const response = res.ok ? res : fallback;
+        const data = await response.json();
+        if (response.ok) {
           setStage(typeof data.stage === "number" ? data.stage : 0);
         } else {
           setStage(0);
