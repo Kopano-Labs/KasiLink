@@ -16,6 +16,25 @@ audience:
 status: active
 ---
 
+---
+title: KasiLink Technical Specifications - Detail Companion
+created: 2026-04-05
+updated: 2026-04-05
+author: Codex
+tags:
+  - details
+  - specification
+  - companion
+  - reference
+  - execution
+priority: low
+audience:
+  - lead
+  - devs
+  - owner
+status: active
+---
+
 # KasiLink Technical Specifications - Detail Companion
 
 > **Source of truth:** [../technical-Specifications.md](../technical-Specifications.md)
@@ -25,13 +44,27 @@ status: active
 
 KasiLink connects township job seekers, small businesses, and verified providers through mobile-first gigs, trust signals, community content, and utility awareness.
 
+## What This Note Is For
+
+- Quick context before starting a task.
+- A readable bridge between the mission spec and the active work files.
+- A simpler execution version of the mission without dropping important detail.
+
 ## Product Pillars
 
-- **Instant local work:** nearby gig discovery, posting, and applications.
-- **Trust and safety:** verified providers, ratings, reporting, and profile context.
-- **Community utility support:** load-shedding, water alerts, incidents, and schedule visibility.
-- **Community identity:** forum, calendar, spotlight, and success stories.
-- **Mobile-first access:** PWA, low-data UI, responsive layout, offline fallback.
+### Critical
+
+- <span style="color:#dc2626">Instant local work</span> - nearby gig discovery, posting, and applications.
+- <span style="color:#dc2626">Trust and safety</span> - verified providers, ratings, reporting, and profile context.
+
+### High
+
+- <span style="color:#ea580c">Community utility support</span> - load-shedding, water alerts, incidents, and schedule visibility.
+- <span style="color:#ea580c">Community identity</span> - forum, calendar, spotlight, and success stories.
+
+### Medium
+
+- <span style="color:#ca8a04">Mobile-first access</span> - PWA, low-data UI, responsive layout, offline fallback.
 
 ## Execution Priorities
 
@@ -50,8 +83,14 @@ KasiLink connects township job seekers, small businesses, and verified providers
 - `Structure/Information/` contains source-backed reference material.
 - `Structure/Updates/` contains planning, coordination, and history.
 
-## What This Companion Is For
+## Fit Rules
 
-- Quick context before starting a task.
-- A readable bridge between the mission spec and the active work files.
-- A place to keep the execution language simpler without dropping the full mission detail.
+- If the note describes what the product is, put it in the mission spec.
+- If the note describes what to do next, put it in Updates.
+- If the note explains a fact source, put it in Information.
+- If the note explains a screen or interaction, put it in Design.
+- If the note explains a bug or regression, put it in Issues.
+
+## Reading Path
+
+`Structure/index.md` -> `Structure/technical-Specifications.md` -> `Structure/Updates/index.md` -> `Structure/Details/technical-Specifications.md`
