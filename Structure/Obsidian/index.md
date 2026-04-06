@@ -1,7 +1,7 @@
 ---
 title: KasiLink Obsidian Vault Guide
 created: 2026-04-05
-updated: 2026-04-05
+updated: 2026-04-06
 author: Codex
 tags:
   - obsidian
@@ -63,6 +63,12 @@ KasiLink Vault/
 - Link each issue note back to the feature or file it affects.
 - Link billing notes to the payment architecture and product rules.
 
+## Priority Mirror Notes
+
+- Mirror resolved high-impact regressions into `05-Issues/` even after the code fix lands.
+- Current example: `Structure/Issues/tailwind-v4-global-css-regression-2026-04-06.md`.
+- Mirror canonical implementation rules from `Structure/Updates/current-alignment-notes.md` when they prevent repeat failures.
+
 ## Tags to Use
 
 - `#mission`
@@ -90,4 +96,3 @@ KasiLink Vault/
 ## Sync Rule
 
 If a note matters to the repo, the repo copy is canonical. Obsidian should mirror it, not replace it.
-

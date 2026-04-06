@@ -1,7 +1,7 @@
 ---
 title: KasiLink Issues
 created: 2026-04-05
-updated: 2026-04-05
+updated: 2026-04-06
 author: Codex
 tags:
   - issues
@@ -49,3 +49,7 @@ status: active
 - `Auth` - sign-in or protected route issue.
 - `Data` - missing or stale information.
 - `Layout` - overflow, spacing, or responsive breakage.
+
+## Current Notes
+
+- [tailwind-v4-global-css-regression-2026-04-06.md](tailwind-v4-global-css-regression-2026-04-06.md) - resolved root cause audit for the unstyled app and Tailwind CSS 4 token migration.

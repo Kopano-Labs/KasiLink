@@ -1,97 +1,153 @@
 /* ============================================================
-   KasiLink Global Styles + Design System Tokens
-   Two themes:
-   - Dark (default):  primary #4595c0 (steel blue)
-   - Ubuntu Pulse:    primary #f1e259 (kasi yellow)
+   KasiLink Global Styles
+   Tailwind v4 — @import "tailwindcss" + @theme token block
+   Two themes (toggled via data-theme on <html>):
+     dark  (default) — steel blue  #4595c0
+     light (Ubuntu Pulse) — kasi yellow #f1e259
    ============================================================ */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* 1. Google Fonts — @import must precede everything else in CSS */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&family=Noto+Serif:wght@400;700&display=swap");
 
-/* ---------- Base font ---------- */
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap");
+/* 2. Tailwind v4 entry */
+@import "tailwindcss";
 
 /* ============================================================
-   CSS Design Tokens
+   @theme — design tokens that Tailwind v4 turns into utilities
+   (text-*, bg-*, border-*, font-*, rounded-*)
+   Dark-mode values are the defaults; light overrides below.
    ============================================================ */
-:root {
+@theme {
+  /* ── Typography ── */
+  --font-headline: "Public Sans", sans-serif;
+  --font-body:     "Public Sans", sans-serif;
+  --font-label:    "Noto Serif", serif;
+
+  /* ── Border radius ── */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Brand colors (dark theme defaults) ── */
+  --color-primary:           #4595c0;
+  --color-on-primary:        #ffffff;
+  --color-primary-container: #1a2d3d;
+  --color-on-primary-container: #a8d4ed;
+
+  --color-secondary:           #cb6bbe;
+  --color-on-secondary:        #ffffff;
+  --color-secondary-container: #3d1f3b;
+
+  --color-tertiary:   #9b8fbe;
+  --color-on-tertiary: #ffffff;
+
+  /* ── Neutral / surface (dark theme defaults) ── */
+  --color-background:         #0d1117;
+  --color-on-background:      #e6edf3;
+
+  --color-surface:                  #161b22;
+  --color-on-surface:               #e6edf3;
+  --color-surface-container-lowest: #0d1117;
+  --color-surface-container-low:    #1a2332;
+  --color-surface-container:        #1f2d3d;
+  --color-surface-container-high:   #243548;
+
+  --color-on-surface-variant: #8b949e;
+  --color-outline:            #6e7681;
+  --color-outline-variant:    #30363d;
+  --color-inverse-surface:    #e6edf3;
+  --color-inverse-on-surface: #0d1117;
+  --color-inverse-primary:    #4595c0;
+
+  /* ── Status / semantic ── */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error:   #ef4444;
+  --color-danger:  #ef4444;
+  --color-info:    #3b82f6;
+
+  /* ── Load-shedding stage colors ── */
+  --color-ls-none:    #22c55e;
+  --color-ls-stage-1: #22c55e;
+  --color-ls-stage-2: #84cc16;
+  --color-ls-stage-3: #f59e0b;
+  --color-ls-stage-4: #f97316;
+  --color-ls-stage-5: #ef4444;
+  --color-ls-stage-6: #dc2626;
+}
+
+/* ============================================================
+   Light / Ubuntu Pulse theme overrides
+   ============================================================ */
+[data-theme="light"] {
+  --color-primary:           #c9ba2e;
+  --color-on-primary:        #1a1a18;
+  --color-primary-container: #fdf6c3;
+  --color-on-primary-container: #5b4400;
+
+  --color-secondary:           #d1a10a;
+  --color-on-secondary:        #1a1a18;
+  --color-secondary-container: #fff3cc;
+
+  --color-tertiary:   #7a7a00;
+  --color-on-tertiary: #ffffff;
+
+  --color-background:    #fafaf8;
+  --color-on-background: #1a1a18;
+
+  --color-surface:                  #ffffff;
+  --color-on-surface:               #1a1a18;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low:    #f7f5f0;
+  --color-surface-container:        #eeeae2;
+  --color-surface-container-high:   #e8e4dc;
+
+  --color-on-surface-variant: #5a5a52;
+  --color-outline:            #8a8a7e;
+  --color-outline-variant:    #d1cfc8;
+  --color-inverse-surface:    #1a1a18;
+  --color-inverse-on-surface: #fafaf8;
+  --color-inverse-primary:    #c9ba2e;
+}
+
+/* ============================================================
+   Runtime CSS custom properties  (card, button, input theming)
+   These feed into .kasi-card, .btn, .kasi-input etc.
+   ============================================================ */
+:root,
+[data-theme="dark"] {
   /* Brand */
-  --kasi-blue: #4595c0;
-  --kasi-blue-light: #6ab0d8;
-  --kasi-blue-dark: #2d6e96;
-  --kasi-yellow: #f1e259;
+  --kasi-blue:         #4595c0;
+  --kasi-blue-light:   #6ab0d8;
+  --kasi-blue-dark:    #2d6e96;
+  --kasi-yellow:       #f1e259;
   --kasi-yellow-light: #f7ed84;
-  --kasi-yellow-dark: #c9ba2e;
+  --kasi-yellow-dark:  #c9ba2e;
 
   /* Status */
   --kasi-success: #22c55e;
   --kasi-warning: #f59e0b;
-  --kasi-danger: #ef4444;
-  --kasi-info: #3b82f6;
+  --kasi-danger:  #ef4444;
+  --kasi-info:    #3b82f6;
 
-  /* Load-shedding stages (SA-specific) */
+  /* Load-shedding */
+  --ls-none:    #22c55e;
   --ls-stage-1: #22c55e;
   --ls-stage-2: #84cc16;
   --ls-stage-3: #f59e0b;
   --ls-stage-4: #f97316;
   --ls-stage-5: #ef4444;
   --ls-stage-6: #dc2626;
-  --ls-none: #22c55e;
 
-  /* Typography */
-  --font-body: "Ubuntu", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "Ubuntu Mono", "Courier New", monospace;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-
-  /* Spacing */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-
-  /* Border radius */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-full: 9999px;
-
-  /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
-
-  /* Z-index scale */
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-modal: 300;
-  --z-toast: 400;
-}
-
-/* ============================================================
-   DARK THEME (default) — primary: #4595c0
-   ============================================================ */
-[data-theme="dark"],
-:root {
   /* Backgrounds */
-  --bg-primary: #0d1117;
+  --bg-primary:   #0d1117;
   --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --bg-elevated: #1c2128;
-  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-tertiary:  #21262d;
+  --bg-elevated:  #1c2128;
+  --bg-overlay:   rgba(0, 0, 0, 0.6);
 
   /* Surfaces */
   --surface-1: #1a2332;
@@ -99,94 +155,108 @@
   --surface-3: #243548;
 
   /* Text */
-  --text-primary: #e6edf3;
+  --text-primary:   #e6edf3;
   --text-secondary: #8b949e;
-  --text-tertiary: #6e7681;
-  --text-inverse: #0d1117;
-  --text-brand: #4595c0;
-  --text-accent: #f1e259;
+  --text-tertiary:  #6e7681;
+  --text-inverse:   #0d1117;
+  --text-brand:     #4595c0;
+  --text-accent:    #f1e259;
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-subtle:  rgba(255, 255, 255, 0.06);
   --border-default: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --border-brand: #4595c0;
+  --border-strong:  rgba(255, 255, 255, 0.2);
+  --border-brand:   #4595c0;
 
-  /* Brand primary (dark mode) */
-  --primary: #4595c0;
-  --primary-hover: #6ab0d8;
+  /* Primary button vars */
+  --primary:        #4595c0;
+  --primary-hover:  #6ab0d8;
   --primary-active: #2d6e96;
   --primary-subtle: rgba(69, 149, 192, 0.12);
-  --primary-text: #ffffff;
+  --primary-text:   #ffffff;
 
   /* Card */
-  --card-bg: #1a2332;
+  --card-bg:     #1a2332;
   --card-border: rgba(255, 255, 255, 0.08);
   --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 
   /* Input */
-  --input-bg: #161b22;
-  --input-border: rgba(255, 255, 255, 0.12);
+  --input-bg:           #161b22;
+  --input-border:       rgba(255, 255, 255, 0.12);
   --input-border-focus: #4595c0;
-  --input-text: #e6edf3;
-  --input-placeholder: #6e7681;
+  --input-text:         #e6edf3;
+  --input-placeholder:  #6e7681;
 
   /* Navbar */
-  --nav-bg: rgba(13, 17, 23, 0.92);
+  --nav-bg:     rgba(13, 17, 23, 0.92);
   --nav-border: rgba(255, 255, 255, 0.08);
+
+  /* Spacing */
+  --space-1: 0.25rem;  --space-2: 0.5rem;   --space-3: 0.75rem;
+  --space-4: 1rem;     --space-5: 1.25rem;  --space-6: 1.5rem;
+  --space-8: 2rem;     --space-10: 2.5rem;  --space-12: 3rem;
+
+  /* Radius */
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;     --radius-2xl: 1.5rem; --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Z-index */
+  --z-dropdown: 100; --z-sticky: 200; --z-modal: 300; --z-toast: 400;
+
+  /* Font */
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", monospace;
+  --font-size-xs: 0.75rem;  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;   --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
 }
 
-/* ============================================================
-   LIGHT / UBUNTU PULSE THEME — primary: #f1e259 (kasi yellow)
-   ============================================================ */
 [data-theme="light"] {
-  /* Backgrounds */
-  --bg-primary: #fafaf8;
+  --bg-primary:   #fafaf8;
   --bg-secondary: #f2f0eb;
-  --bg-tertiary: #e8e4dc;
-  --bg-elevated: #ffffff;
-  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --bg-tertiary:  #e8e4dc;
+  --bg-elevated:  #ffffff;
+  --bg-overlay:   rgba(0, 0, 0, 0.4);
 
-  /* Surfaces */
   --surface-1: #ffffff;
   --surface-2: #f7f5f0;
   --surface-3: #eeeae2;
 
-  /* Text */
-  --text-primary: #1a1a18;
+  --text-primary:   #1a1a18;
   --text-secondary: #5a5a52;
-  --text-tertiary: #8a8a7e;
-  --text-inverse: #ffffff;
-  --text-brand: #7a6b00;
-  --text-accent: #4595c0;
+  --text-tertiary:  #8a8a7e;
+  --text-inverse:   #ffffff;
+  --text-brand:     #7a6b00;
+  --text-accent:    #4595c0;
 
-  /* Borders */
-  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-subtle:  rgba(0, 0, 0, 0.06);
   --border-default: rgba(0, 0, 0, 0.12);
-  --border-strong: rgba(0, 0, 0, 0.22);
-  --border-brand: #f1e259;
+  --border-strong:  rgba(0, 0, 0, 0.22);
+  --border-brand:   #f1e259;
 
-  /* Brand primary (light mode — kasi yellow) */
-  --primary: #f1e259;
-  --primary-hover: #f7ed84;
+  --primary:        #f1e259;
+  --primary-hover:  #f7ed84;
   --primary-active: #c9ba2e;
   --primary-subtle: rgba(241, 226, 89, 0.18);
-  --primary-text: #1a1a18;
+  --primary-text:   #1a1a18;
 
-  /* Card */
-  --card-bg: #ffffff;
+  --card-bg:     #ffffff;
   --card-border: rgba(0, 0, 0, 0.08);
   --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 
-  /* Input */
-  --input-bg: #ffffff;
-  --input-border: rgba(0, 0, 0, 0.14);
+  --input-bg:           #ffffff;
+  --input-border:       rgba(0, 0, 0, 0.14);
   --input-border-focus: #c9ba2e;
-  --input-text: #1a1a18;
-  --input-placeholder: #8a8a7e;
+  --input-text:         #1a1a18;
+  --input-placeholder:  #8a8a7e;
 
-  /* Navbar */
-  --nav-bg: rgba(250, 250, 248, 0.94);
+  --nav-bg:     rgba(250, 250, 248, 0.94);
   --nav-border: rgba(0, 0, 0, 0.08);
 }
 
@@ -224,50 +294,29 @@ body {
 /* ============================================================
    Typography
    ============================================================ */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-primary);
 }
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
 
-h1 {
-  font-size: var(--font-size-3xl);
-}
-h2 {
-  font-size: var(--font-size-2xl);
-}
-h3 {
-  font-size: var(--font-size-xl);
-}
-h4 {
-  font-size: var(--font-size-lg);
-}
-
-p {
-  line-height: 1.65;
-}
+p { line-height: 1.65; }
 
 a {
   color: var(--primary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
-
-a:hover {
-  color: var(--primary-hover);
-}
+a:hover { color: var(--primary-hover); }
 
 /* ============================================================
-   Utility Classes
+   Utility: .kasi-card
    ============================================================ */
-
-/* Cards */
 .kasi-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -278,15 +327,14 @@ a:hover {
     box-shadow var(--transition-base),
     border-color var(--transition-base);
 }
-
 .kasi-card:hover {
   border-color: var(--border-strong);
-  box-shadow:
-    var(--card-shadow),
-    0 0 0 1px var(--primary-subtle);
+  box-shadow: var(--card-shadow), 0 0 0 1px var(--primary-subtle);
 }
 
-/* Buttons */
+/* ============================================================
+   Utility: .btn and variants
+   ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -305,27 +353,31 @@ a:hover {
   user-select: none;
   text-decoration: none;
 }
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn-primary {
   background: var(--primary);
   color: var(--primary-text);
   border-color: var(--primary);
 }
-
 .btn-primary:hover:not(:disabled) {
   background: var(--primary-hover);
   border-color: var(--primary-hover);
 }
-
 .btn-primary:active:not(:disabled) {
   background: var(--primary-active);
   border-color: var(--primary-active);
   transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+  border-color: var(--border-strong);
 }
 
 .btn-outline {
@@ -333,7 +385,6 @@ a:hover {
   color: var(--text-primary);
   border-color: var(--border-default);
 }
-
 .btn-outline:hover:not(:disabled) {
   background: var(--bg-secondary);
   border-color: var(--border-strong);
@@ -344,7 +395,6 @@ a:hover {
   color: var(--text-secondary);
   border-color: transparent;
 }
-
 .btn-ghost:hover:not(:disabled) {
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -355,24 +405,15 @@ a:hover {
   color: white;
   border-color: var(--kasi-danger);
 }
+.btn-danger:hover:not(:disabled) { filter: brightness(1.1); }
 
-.btn-sm {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-xs);
-  border-radius: var(--radius-md);
-}
+.btn-sm  { padding: var(--space-2) var(--space-3); font-size: var(--font-size-xs); border-radius: var(--radius-md); }
+.btn-lg  { padding: var(--space-4) var(--space-8); font-size: var(--font-size-lg); border-radius: var(--radius-xl); }
+.btn-full { width: 100%; }
 
-.btn-lg {
-  padding: var(--space-4) var(--space-8);
-  font-size: var(--font-size-lg);
-  border-radius: var(--radius-xl);
-}
-
-.btn-full {
-  width: 100%;
-}
-
-/* Inputs */
+/* ============================================================
+   Utility: .kasi-input
+   ============================================================ */
 .kasi-input {
   width: 100%;
   padding: var(--space-3) var(--space-4);
@@ -383,44 +424,30 @@ a:hover {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   line-height: 1.5;
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   outline: none;
 }
-
-.kasi-input::placeholder {
-  color: var(--input-placeholder);
-}
-
+.kasi-input::placeholder { color: var(--input-placeholder); }
 .kasi-input:focus {
   border-color: var(--input-border-focus);
   box-shadow: 0 0 0 3px var(--primary-subtle);
 }
+.kasi-input:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.kasi-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Phone input with +27 prefix */
+/* Phone prefix input */
 .phone-input-wrap {
   display: flex;
   align-items: center;
   border: 1px solid var(--input-border);
   border-radius: var(--radius-lg);
   background: var(--input-bg);
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   overflow: hidden;
 }
-
 .phone-input-wrap:focus-within {
   border-color: var(--input-border-focus);
   box-shadow: 0 0 0 3px var(--primary-subtle);
 }
-
 .phone-prefix {
   padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
   color: var(--text-secondary);
@@ -431,7 +458,6 @@ a:hover {
   user-select: none;
   background: var(--bg-secondary);
 }
-
 .phone-input-inner {
   flex: 1;
   padding: var(--space-3) var(--space-4);
@@ -442,12 +468,22 @@ a:hover {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
 }
+.phone-input-inner::placeholder { color: var(--input-placeholder); }
 
-.phone-input-inner::placeholder {
-  color: var(--input-placeholder);
+/* ============================================================
+   Utility: .label
+   ============================================================ */
+.label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
 }
 
-/* Badges */
+/* ============================================================
+   Utility: .badge and variants
+   ============================================================ */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -458,33 +494,17 @@ a:hover {
   font-weight: 500;
   line-height: 1.5;
 }
+.badge-primary   { background: var(--primary-subtle);              color: var(--primary); }
+.badge-secondary { background: rgba(203, 107, 190, 0.15);          color: #cb6bbe; }
+.badge-success   { background: rgba(34, 197, 94, 0.15);            color: var(--kasi-success); }
+.badge-warning   { background: rgba(245, 158, 11, 0.15);           color: var(--kasi-warning); }
+.badge-danger    { background: rgba(239, 68, 68, 0.15);            color: var(--kasi-danger); }
+.badge-info      { background: rgba(59, 130, 246, 0.15);           color: var(--kasi-info); }
+.badge-verified  { background: rgba(69, 149, 192, 0.15);           color: #4595c0; }
 
-.badge-primary {
-  background: var(--primary-subtle);
-  color: var(--primary);
-}
-.badge-success {
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--kasi-success);
-}
-.badge-warning {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--kasi-warning);
-}
-.badge-danger {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--kasi-danger);
-}
-.badge-info {
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--kasi-info);
-}
-.badge-verified {
-  background: rgba(69, 149, 192, 0.15);
-  color: #4595c0;
-}
+[data-theme="light"] .badge-secondary { background: rgba(209, 161, 10, 0.15); color: #d1a10a; }
 
-/* Load-shedding stage badge */
+/* Load-shedding stage badges */
 .ls-badge {
   display: inline-flex;
   align-items: center;
@@ -495,38 +515,16 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.02em;
 }
-
-.ls-none {
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--ls-none);
-}
-.ls-stage-1 {
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--ls-stage-1);
-}
-.ls-stage-2 {
-  background: rgba(132, 204, 22, 0.15);
-  color: var(--ls-stage-2);
-}
-.ls-stage-3 {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--ls-stage-3);
-}
-.ls-stage-4 {
-  background: rgba(249, 115, 22, 0.15);
-  color: var(--ls-stage-4);
-}
-.ls-stage-5 {
-  background: rgba(239, 68, 68, 0.15);
-  color: var(--ls-stage-5);
-}
-.ls-stage-6 {
-  background: rgba(220, 38, 38, 0.15);
-  color: var(--ls-stage-6);
-}
+.ls-none    { background: rgba(34, 197, 94, 0.15);  color: var(--ls-none); }
+.ls-stage-1 { background: rgba(34, 197, 94, 0.15);  color: var(--ls-stage-1); }
+.ls-stage-2 { background: rgba(132, 204, 22, 0.15); color: var(--ls-stage-2); }
+.ls-stage-3 { background: rgba(245, 158, 11, 0.15); color: var(--ls-stage-3); }
+.ls-stage-4 { background: rgba(249, 115, 22, 0.15); color: var(--ls-stage-4); }
+.ls-stage-5 { background: rgba(239, 68, 68, 0.15);  color: var(--ls-stage-5); }
+.ls-stage-6 { background: rgba(220, 38, 38, 0.15);  color: var(--ls-stage-6); }
 
 /* ============================================================
-   Gig Category Pill
+   Utility: category pill
    ============================================================ */
 .category-pill {
   display: inline-flex;
@@ -542,7 +540,6 @@ a:hover {
   cursor: pointer;
   transition: all var(--transition-fast);
 }
-
 .category-pill:hover,
 .category-pill.active {
   background: var(--primary-subtle);
@@ -551,7 +548,7 @@ a:hover {
 }
 
 /* ============================================================
-   Layout Helpers
+   Layout helpers
    ============================================================ */
 .container {
   width: 100%;
@@ -559,14 +556,12 @@ a:hover {
   margin: 0 auto;
   padding: 0 var(--space-4);
 }
-
 .container-sm {
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
   padding: 0 var(--space-4);
 }
-
 .page-content {
   padding-top: 4.5rem; /* navbar height */
   min-height: 100dvh;
@@ -575,16 +570,9 @@ a:hover {
 /* ============================================================
    Scrollbar (dark theme)
    ============================================================ */
-[data-theme="dark"] ::-webkit-scrollbar {
-  width: 6px;
-}
-[data-theme="dark"] ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-[data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: var(--radius-full);
-}
+[data-theme="dark"] ::-webkit-scrollbar          { width: 6px; }
+[data-theme="dark"] ::-webkit-scrollbar-track    { background: var(--bg-secondary); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb    { background: var(--border-strong); border-radius: var(--radius-full); }
 
 /* ============================================================
    Focus visible (accessibility)
@@ -598,15 +586,9 @@ a:hover {
    Skeleton loading
    ============================================================ */
 @keyframes skeleton-pulse {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
 }
-
 .skeleton {
   background: var(--bg-tertiary);
   border-radius: var(--radius-md);
@@ -617,91 +599,43 @@ a:hover {
    Animations
    ============================================================ */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-.animate-fade-in {
-  animation: fade-in var(--transition-slow) both;
-}
-.animate-slide-up {
-  animation: slide-up var(--transition-slow) both;
-}
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
+.animate-fade-in  { animation: fade-in  var(--transition-slow) both; }
+.animate-slide-up { animation: slide-up var(--transition-slow) both; }
+.animate-spin     { animation: spin 1s linear infinite; }
 
 /* Staggered children */
-.stagger > *:nth-child(1) {
-  animation-delay: 0ms;
-}
-.stagger > *:nth-child(2) {
-  animation-delay: 60ms;
-}
-.stagger > *:nth-child(3) {
-  animation-delay: 120ms;
-}
-.stagger > *:nth-child(4) {
-  animation-delay: 180ms;
-}
-.stagger > *:nth-child(5) {
-  animation-delay: 240ms;
-}
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
 
 /* ============================================================
-   Mobile-first responsive helpers
+   Mobile responsive helpers
    ============================================================ */
 @media (max-width: 640px) {
-  .hide-mobile {
-    display: none !important;
-  }
-  .container {
-    padding: 0 var(--space-4);
-  }
-  h1 {
-    font-size: var(--font-size-2xl);
-  }
-  h2 {
-    font-size: var(--font-size-xl);
-  }
+  .hide-mobile { display: none !important; }
+  .container   { padding: 0 var(--space-4); }
+  h1 { font-size: var(--font-size-2xl); }
+  h2 { font-size: var(--font-size-xl); }
 }
-
 @media (min-width: 641px) {
-  .hide-desktop {
-    display: none !important;
-  }
+  .hide-desktop { display: none !important; }
 }
 
 /* ============================================================
    PWA safe areas (notched phones)
    ============================================================ */
-.safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.safe-top {
-  padding-top: env(safe-area-inset-top);
-}
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-top    { padding-top:    env(safe-area-inset-top); }

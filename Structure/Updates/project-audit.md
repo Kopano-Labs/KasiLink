@@ -1,7 +1,7 @@
 ---
 title: project-audit
 created: 2026-04-05
-updated: 2026-04-05
+updated: 2026-04-06
 author: Codex
 tags:
   - structure
@@ -148,7 +148,19 @@ status: active
 | `jobs.ts` | Complete | Job-related utility functions |
 | `logger.ts` | **Empty** (GAP-6) | Placeholder for structured logging |
 
-### 3f. PWA Files
+### 3f. Styling System (current as of 2026-04-06)
+
+| Item | Current source of truth | Audit note |
+|------|-------------------------|------------|
+| Global stylesheet import | `app/layout.tsx` -> `import "./globals.css"` | Correct. The old `@/styles/globals.css` target was empty and caused a fully unstyled app. |
+| Tailwind entrypoint | `app/globals.css` -> `@import "tailwindcss";` | Correct for Tailwind CSS 4. The old `@tailwind base/components/utilities` directives were v3 syntax. |
+| Theme tokens | `app/globals.css` -> `@theme { ... }` | Correct for Tailwind CSS 4. Custom utilities are generated from CSS theme tokens now. |
+| `tailwind.config.ts` role | Editor/reference only | No longer authoritative for color tokens in Tailwind CSS 4. |
+| Theme override model | Dark defaults + `[data-theme="light"]` overrides | Matches live Ubuntu Pulse implementation. |
+| Custom utility classes restored | `.badge-secondary`, `.btn-secondary`, `.label` | Added after regression audit because routes depended on them. |
+| Semantic token coverage | `success`, `warning`, `danger` | Added so semantic utility classes resolve consistently. |
+
+### 3g. PWA Files
 
 | File | Status | Builder |
 |------|--------|---------|
@@ -274,6 +286,9 @@ status: active
 | 2026-04-04 | 14:10 | Lead reviews + approves DEV_1 final task. Build: 45 routes, clean. |
 | 2026-04-04 | 14:10 | Vercel deploy READY — kasilink.com LIVE |
 | 2026-04-04 | 14:30 | Lead creates master-todo, dev-education, project-audit |
+| 2026-04-06 | — | Styling regression audit completed: wrong global CSS import, Tailwind v3 directives, and Tailwind v4 token misplacement identified as compounded root cause |
+| 2026-04-06 | — | Styling system corrected: `app/layout.tsx` imports `./globals.css`, `app/globals.css` uses `@import "tailwindcss"`, and all custom tokens move into `@theme` |
+| 2026-04-06 | — | Missing support classes and tokens restored: `badge-secondary`, `btn-secondary`, `.label`, `--color-success`, `--color-warning`, `--color-danger`; Google Fonts import moved to top of stylesheet |
 
 ---
 

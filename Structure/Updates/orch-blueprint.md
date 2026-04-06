@@ -1,7 +1,7 @@
 ---
 title: orch-blueprint
 created: 2026-04-05
-updated: 2026-04-05
+updated: 2026-04-06
 author: Codex
 tags:
   - structure
@@ -303,6 +303,17 @@ These rules apply to ALL agents including orch itself.
 5. **API routes in `app/api/`.** Route Handlers never outside the `api/` directory.
 6. **No phantom completions.** "Done" means: file exists, has content, build passes.
 7. **Truth over speed.** Wrong output that looks right is worse than honest delay.
+
+### Frontend styling enforcement addendum (2026-04-06)
+
+For KasiLink specifically, orch must enforce these CSS rules during any frontend edit or audit:
+
+1. `app/layout.tsx` must import `./globals.css`.
+2. `app/globals.css` is the canonical stylesheet. `styles/globals.css` is not the app entrypoint.
+3. Tailwind CSS 4 uses `@import "tailwindcss";` rather than the v3 `@tailwind base/components/utilities` directives.
+4. Theme tokens that need utility generation must live in `@theme` inside `app/globals.css`.
+5. `tailwind.config.ts` may exist for editor support, but orch must not assume custom color utilities come from it.
+6. If a page appears "unstyled," orch audits import path, Tailwind entry syntax, and token location before changing component code.
 
 ---
 

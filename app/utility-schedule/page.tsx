@@ -16,8 +16,8 @@ interface Schedule {
   source: string;
 }
 
-function timeUntil(iso: string): string {
-  const diff = new Date(iso).getTime() - Date.now();
+function timeUntil(iso: string, now: number): string {
+  const diff = new Date(iso).getTime() - now;
   if (diff <= 0) return "Now";
   const h = Math.floor(diff / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
@@ -103,7 +103,7 @@ export default function UtilitySchedulePage() {
                   Next Outage In
                 </p>
                 <p className="text-2xl font-extrabold text-primary">
-                  {timeUntil(next.startTime)}
+                  {timeUntil(next.startTime, now)}
                 </p>
               </div>
             </div>

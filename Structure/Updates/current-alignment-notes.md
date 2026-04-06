@@ -1,7 +1,7 @@
 ---
 title: Current Alignment Notes
 created: 2026-04-04
-updated: 2026-04-05
+updated: 2026-04-06
 author: Lead
 tags:
   - alignment
@@ -47,6 +47,16 @@ Related documents:
 6. Prefer extending existing aligned routes before creating new parallel ones.
 7. Run `npm run build` after any structural edits.
 8. If a file already exists in `Structure/Updates/`, treat it as coordination or planning only.
+
+## Styling Alignment Rules
+
+1. The only canonical global stylesheet is `app/globals.css`.
+2. `app/layout.tsx` must import `./globals.css`, not `@/styles/globals.css`.
+3. Tailwind CSS 4 entry syntax is `@import "tailwindcss";` only.
+4. Theme tokens that must produce utilities belong in `app/globals.css` inside `@theme { ... }`.
+5. Do not treat `tailwind.config.ts` as the source of truth for custom colors in Tailwind CSS 4.
+6. Put Google Fonts `@import` rules before all other CSS rules.
+7. Keep dark theme values as defaults and light theme values in `[data-theme="light"]` overrides unless the theme model is intentionally redesigned.
 
 ---
 

@@ -32,16 +32,25 @@ export async function GET(req: NextRequest) {
     await connectDB();
     const { searchParams } = req.nextUrl;
     const suburb = searchParams.get("suburb") ?? "";
+    const mine = searchParams.get("mine") === "true";
 
     const filter: Record<string, unknown> = { resolved: false };
     if (suburb) filter.suburb = new RegExp(clean(suburb, 80), "i");
 
-    const alerts = await WaterAlert.find(filter)
-      .sort({ createdAt: -1 })
-      .limit(20)
-      .lean();
+    if (mine) {
+      const { userId } = await auth();
+      if (!userId) {
+        return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
+      }
+      filter.reporterId = userId;
+    }
 
-    return NextResponse.json({ alerts });
+    const [alerts, total] = await Promise.all([
+      WaterAlert.find(filter).sort({ createdAt: -1 }).limit(20).lean(),
+      WaterAlert.countDocuments(filter),
+    ]);
+
+    return NextResponse.json({ alerts, total });
   } catch (err) {
     console.error("[GET /api/water-alerts]", err);
     return NextResponse.json(

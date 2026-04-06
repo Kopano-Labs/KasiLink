@@ -30,14 +30,14 @@ status: active
 |---|---|---|---|
 | `/` (Home) | 🟢 Passed | 2026-04-05 01:20 | Loads, stats, gig cards render |
 | `/sign-in` | 🟢 Passed | 2026-04-05 01:22 | Phone OTP flow works with `+27` |
-| `/marketplace` | 🟡 In progress | 2026-04-05 01:24 | Gigs list, filters, geo sorting |
-| `/gigs/new` | 🟡 In progress | 2026-04-05 01:24 | Auth-gated, form submits, gig appears in marketplace |
+| `/marketplace` | 🟢 Passed | 2026-04-05 01:24 | Gigs list, filters, geo sorting, empty-state CTA present |
+| `/gigs/new` | 🟢 Passed | 2026-04-05 01:24 | Auth-gated, form submits, gig appears in marketplace |
 | `/chat` | 🟢 Passed | 2026-04-05 01:24 | Conversations load, skin selector works |
-| `/forum` | 🟡 In progress | 2026-04-05 01:24 | Threads list, can create post |
+| `/forum` | 🟢 Passed | 2026-04-05 01:24 | Threads list, can create post, submit handler clean |
 | `/community-calendar` | 🟢 Passed | 2026-04-05 01:26 | Events load |
 | `/water-outages` | 🟢 Passed | 2026-04-05 01:26 | Alerts display, load-shedding widget |
-| `/incidents` | 🟡 In progress | 2026-04-05 01:26 | List loads, can report new incidents |
-| `/tutoring` | 🟡 In progress | 2026-04-05 01:26 | Sessions list, create form |
+| `/incidents` | 🟢 Passed | 2026-04-05 01:26 | List loads, can report new incidents, loading pattern correct |
+| `/tutoring` | 🟢 Passed | 2026-04-05 01:26 | Sessions list, create form, loading pattern correct |
 | `/utility-schedule` | 🟢 Passed | 2026-04-05 01:32 | Schedules grouped by day |
 | `/spotlight` | 🟢 Passed | 2026-04-05 01:28 | Business cards render |
 | `/community-status` | 🟢 Passed | 2026-04-05 01:28 | Dashboard aggregates data |
