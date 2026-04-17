@@ -40,11 +40,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "KasiLink" }],
   creator: "KasiLink",
-  metadataBase: new URL("https://www.kasilink.com"),
+  metadataBase: new URL("https://kasilink.com"),
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    url: "https://www.kasilink.com",
+    url: "https://kasilink.com",
     siteName: "KasiLink",
     title: "KasiLink — Township Gigs & Opportunities",
     description:
