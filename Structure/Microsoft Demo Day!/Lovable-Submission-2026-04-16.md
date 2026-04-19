@@ -26,7 +26,7 @@ KasiLink is built around three truths the market ignores:
 
 **2. Trust is the product.** Without formal credentials, community reputation is the only signal. KasiLink has a verified provider system, community reviews, and a neighbourhood forum where workers build trust before money changes hands.
 
-**3. Load-shedding is baseline, not edge case.** Cape Town workers and job posters need to plan around power cuts. KasiLink is the only gig marketplace with a live utility disruption rescheduler — when you post a job, the AI checks the current Eskom stage and suggests power-safe time windows for that suburb. This is powered by Kopano Context, our AI intelligence layer at context.kopanolabs.com.
+**3. Load-shedding is baseline, not edge case.** Cape Town workers and job posters need to plan around power cuts. KasiLink is the only gig marketplace with a live utility disruption rescheduler — when you post a job, the AI checks the current Eskom stage and suggests power-safe time windows for that suburb. This is powered by Kopano Context, our AI intelligence layer (github.com/RobynAwesome/Introduction-to-MCP).
 
 **What's live and working right now:**
 - Full gig marketplace (post, browse, apply, chat)
@@ -37,7 +37,7 @@ KasiLink is built around three truths the market ignores:
 - Community forum, water outage alerts, utility schedule
 - Real-time demo leaderboard at kasilink.com/demo
 
-**Intelligence layer:** context.kopanolabs.com — Kopano Context is the AI orchestration engine behind KasiLink's utility awareness, matching, and community moderation.
+**Intelligence layer:** Kopano Context — the AI orchestration engine behind KasiLink's utility awareness, matching, and community moderation. Source: github.com/RobynAwesome/Introduction-to-MCP
 
 **Contact:** rkholofelo@kopanolabs.com
 
@@ -50,7 +50,7 @@ KasiLink is built around three truths the market ignores:
 | **Originality (10)** | Only gig platform with load-shedding-aware job scheduling. USSD fallback for no-data users. Township-first proximity matching. |
 | **Execution (10)** | Full-stack: Next.js + MongoDB + Clerk auth + 25 API endpoints + real data. Live at kasilink.com. |
 | **Usefulness (10)** | Solves real unemployment + utility disruption for Cape Town residents. Built for the people it serves. |
-| **Presentation (10)** | Live demo at kasilink.com. Real-time leaderboard at kasilink.com/demo. KC intelligence at context.kopanolabs.com. |
+| **Presentation (10)** | Live demo at kasilink.com. Real-time leaderboard at kasilink.com/demo. KC codebase at github.com/RobynAwesome/Introduction-to-MCP. |
 
 ---
 
@@ -60,11 +60,11 @@ KasiLink is built around three truths the market ignores:
 2. **kasilink.com/marketplace** — browse live gigs by suburb
 3. **kasilink.com/gigs/new** — post a gig, watch Kopano Context check load-shedding and suggest safe time windows
 4. **kasilink.com/demo** — live leaderboard (auto-refreshes every 12s, "Just posted" highlights)
-5. **context.kopanolabs.com** — the AI intelligence layer powering it all
+5. **github.com/RobynAwesome/Introduction-to-MCP** — the Kopano Context AI intelligence layer powering it all
 
 ---
 
 ## Notes
 - Product link: https://www.kasilink.com
 - Demo leaderboard: https://www.kasilink.com/demo
-- KC platform: https://context.kopanolabs.com
+- KC platform (GitHub): https://github.com/RobynAwesome/Introduction-to-MCP
