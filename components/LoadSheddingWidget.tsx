@@ -8,21 +8,34 @@ export default function LoadSheddingWidget() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const FETCH_MS = 8000;
+
     const fetchStage = async () => {
       setLoading(true);
+      const ac = new AbortController();
+      const timeoutId = setTimeout(() => ac.abort(), FETCH_MS);
       try {
-        const res = await fetch("/api/orch/loadshedding?area_id=default");
-        const fallback = await fetch("/api/load-shedding");
-        const response = res.ok ? res : fallback;
-        const data = await response.json();
-        if (response.ok) {
-          setStage(typeof data.stage === "number" ? data.stage : 0);
-        } else {
+        const tryJson = async (url: string) => {
+          const r = await fetch(url, { signal: ac.signal });
+          const data = await r.json().catch(() => ({}));
+          return { ok: r.ok, data };
+        };
+
+        let { ok, data } = await tryJson("/api/orch/loadshedding?area_id=default");
+        if (!ok) {
+          ({ ok, data } = await tryJson("/api/load-shedding"));
+        }
+        if (ok && typeof data.stage === "number") {
+          setStage(data.stage);
+        } else if (ok) {
           setStage(0);
+        } else {
+          setStage(null);
         }
       } catch {
-        setStage(0);
+        setStage(null);
       } finally {
+        clearTimeout(timeoutId);
         setLoading(false);
       }
     };
@@ -51,11 +64,15 @@ export default function LoadSheddingWidget() {
             <span className="text-sm text-outline animate-pulse font-medium">
               Checking...
             </span>
+          ) : stage === null ? (
+            <span className="badge badge-secondary text-base py-1.5 px-3">
+              Status unavailable
+            </span>
           ) : (
             <span
-              className={`badge ${stage && stage > 0 ? "badge-danger" : "badge-success"} text-base py-1.5 px-3`}
+              className={`badge ${stage > 0 ? "badge-danger" : "badge-success"} text-base py-1.5 px-3`}
             >
-              {stage && stage > 0 ? `Stage ${stage}` : "No active cuts"}
+              {stage > 0 ? `Stage ${stage}` : "No active cuts"}
             </span>
           )}
         </div>

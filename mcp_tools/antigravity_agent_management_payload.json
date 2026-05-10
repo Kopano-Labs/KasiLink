@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "project": "Bookit-5s-Arena",
+  "owner": "rkholofelo@gmail.com",
+  "updated": "2026-05-10T02:15:00+02:00",
+
+  "constraints": {
+    "bookit_availability_route": {
+      "path": "app/api/availability/route.js",
+      "rule": "DO_NOT_REGRESS",
+      "notes": [
+        "Uses default import: connectDB from '@/lib/mongodb'",
+        "Loads Court model from '@/models/Court'",
+        "Operating hours 10:00–22:00 via lib/bookingSlots",
+        "Returns courts[].slots[].availableDurations",
+        "Any draft that empties durations or changes connectDB shape is a regression"
+      ]
+    },
+    "paystack_webhook": {
+      "path": "app/api/webhooks/paystack/route.js",
+      "rule": "STATUS_CONDITIONAL_WRITES",
+      "notes": [
+        "Only writes on paymentStatus:'paid', status:'confirmed'",
+        "Stores externalPaymentRef",
+        "No writes on cancelled / already-paid / refunded"
+      ]
+    },
+    "whin2_env": {
+      "vars": ["WHIN2_API_KEY", "WHIN2_API_HOST", "WHIN2_SEND_URL"],
+      "owner_action_required": true,
+      "checklist": "Structure/Microsoft Demo Day!/WhatsApp Owner Checklist.md"
+    }
+  },
+
+  "open_tasks": [
+    {
+      "id": "BQ-001",
+      "title": "Wire Node INSERT into broadcast_queue on Whin2 failure",
+      "when": "Next broker touch",
+      "status": "pending",
+      "detail": "In the KC event broker, catch Whin2 POST failures and INSERT the payload into SQLite broadcast_queue so the Python worker can retry."
+    },
+    {
+      "id": "BQ-002",
+      "title": "Schedule broadcast_queue_worker.py on IdeaPad",
+      "when": "After KC_BROADCAST_DB exists on E:\\",
+      "status": "pending",
+      "detail": "Task Scheduler or cron: Monday 08:00, or --loop with 120s interval. Requires KC_BROADCAST_DB, WHIN2_API_KEY, WHIN2_API_HOST, WHIN2_SEND_URL."
+    },
+    {
+      "id": "ADMIN-001",
+      "title": "Diagnose /admin crash from Vercel telemetry",
+      "when": "Owner pastes Technical Details or Vercel log lines",
+      "status": "blocked_on_owner",
+      "detail": "Cannot debug until the error crosses the airgap. Paste the /admin Technical Details (or Vercel log lines) into chat."
+    }
+  ],
+
+  "hooks": {
+    "broadcast_queue_sql": "Structure/05-Training/Logic/vault/setup_broadcast_queue.sql",
+    "broadcast_queue_worker": "Structure/05-Training/Logic/vault/broadcast_queue_worker.py",
+    "court_lexicon_static": "mcp_tools/court_lexicon_static.py",
+    "get_court_details_mcp": "mcp_tools/get_court_details.py",
+    "whatsapp_owner_checklist": "Structure/Microsoft Demo Day!/WhatsApp Owner Checklist.md"
+  },
+
+  "telemetry": {
+    "admin_route_status": "crash — awaiting owner log paste",
+    "last_known_error": null,
+    "action": "Paste /admin Technical Details here; nothing moves until it crosses the airgap."
+  }
+}
