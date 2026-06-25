@@ -711,6 +711,11 @@ a:hover { color: var(--primary-hover); }
 
 .page-hero-copy {
   max-width: 44rem;
+  min-width: 0;
+}
+
+.page-hero-aside {
+  min-width: 0;
 }
 
 .page-hero-title {
@@ -1191,8 +1196,15 @@ a:hover { color: var(--primary-hover); }
   .page-hero-grid {
     padding: var(--space-5);
   }
+  .page-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .page-hero-actions .btn {
+    width: 100%;
+  }
 }
-@media (min-width: 641px) {
+@media (min-width: 768px) {
   .hide-desktop { display: none !important; }
 }
 
@@ -1202,12 +1214,17 @@ a:hover { color: var(--primary-hover); }
   }
 
   .page-hero-grid {
-    grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
-    align-items: end;
+    align-items: start;
   }
 
   .form-shell {
     grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
   }
 }
 
@@ -1305,6 +1322,324 @@ a:hover { color: var(--primary-hover); }
   gap: 0.75rem;
   padding-top: 0.95rem;
   border-top: 1px solid color-mix(in srgb, var(--border) 52%, transparent);
+}
+
+/* ============================================================
+   Kopano steward dock — CF comms-log surface (Schematics match)
+   ============================================================ */
+.kopano-steward-dock {
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--card-border));
+  border-radius: var(--radius-2xl);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--surface-1) 88%, var(--primary) 12%), var(--surface-variant));
+  box-shadow: var(--card-shadow);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.kopano-steward-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.kopano-steward-title {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-width: min(100%, 20rem);
+}
+
+.cf-seat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, #1a1a18));
+  color: var(--on-primary, #fff);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.kopano-steward-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.kopano-steward-pin {
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.kopano-steward-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cf-vector {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-full);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.cf-lite-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.steward-triad {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.5rem;
+}
+
+.steward-actor {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  padding: 0.65rem 0.75rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.steward-actor--kc { border-color: color-mix(in srgb, var(--info) 35%, var(--card-border)); }
+.steward-actor--cassy { border-color: color-mix(in srgb, var(--primary) 40%, var(--card-border)); }
+.steward-actor--mesh { border-color: color-mix(in srgb, var(--secondary, #cb6bbe) 35%, var(--card-border)); }
+.steward-actor--cf_cloud { border-color: color-mix(in srgb, var(--warning) 35%, var(--card-border)); }
+
+.steward-actor-id {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.steward-actor-role {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.steward-actor-mode {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.cf-comms-feed {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.cf-comms-row {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+  padding: 0.85rem 1rem;
+}
+
+.cf-comms-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.cf-comms-ts {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.cf-verdict {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.verdict-save,
+.verdict-ship {
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  color: var(--success);
+  border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
+}
+
+.verdict-watch {
+  background: color-mix(in srgb, var(--warning) 18%, transparent);
+  color: var(--warning);
+  border: 1px solid color-mix(in srgb, var(--warning) 35%, transparent);
+}
+
+.verdict-hold {
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+  color: var(--danger);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.cf-comms-tranche {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.cf-comms-dispatch {
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
+.cf-comms-bracket {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.cf-comms-body {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.kc-ask-lane {
+  border-top: 1px solid var(--card-border);
+  padding-top: var(--space-3);
+  display: grid;
+  gap: 0.65rem;
+}
+
+.kc-ask-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.kc-ask-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--on-primary, #fff);
+  font-size: 0.62rem;
+  font-weight: 900;
+}
+
+.kc-ask-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.kc-ask-input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-lg);
+  background: var(--input-bg);
+  color: var(--input-text);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.kc-ask-input:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.kc-ask-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.kc-ask-chip {
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--card-border));
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.kc-ask-chip:hover {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.home-command-board {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.home-command-hero {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .home-command-hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+    align-items: start;
+  }
+}
+
+.home-live-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.home-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--card-border);
+  background: var(--surface-1);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.home-live-pill strong {
+  color: var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {

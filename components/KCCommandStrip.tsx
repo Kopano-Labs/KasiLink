@@ -36,9 +36,12 @@ export default function KCCommandStrip({ onOpen }: KCCommandStripProps) {
         </div>
         <span className="text-sm font-semibold text-white">Kopano Context</span>
         <span className="ml-auto text-[10px] font-semibold uppercase tracking-[0.18em] text-[#4595C0]">
-          AI · Township Intelligence
+          Ledger route · Save | Watch
         </span>
       </div>
+      <p className="mb-3 text-xs leading-6 text-slate-300">
+        Ask the cold review lane first. Cassy explains and the agent mesh executes in the steward dock.
+      </p>
 
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input

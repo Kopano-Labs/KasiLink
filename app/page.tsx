@@ -1,9 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Shield, MessageSquare, TrendingUp, Zap, Users, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  Briefcase,
+  Building2,
+  Clock,
+  MapPin,
+  MessageSquare,
+  Search,
+  TrendingUp,
+  Users,
+  Zap,
+} from "lucide-react";
 import LoadSheddingWidget from "@/components/LoadSheddingWidget";
 import GrokChatModal from "@/components/GrokChatModal";
 import KCCommandStrip from "@/components/KCCommandStrip";
+import KopanoStewardDock from "@/components/KopanoStewardDock";
 import {
   EmptyStateCard,
   Eyebrow,
@@ -11,89 +23,211 @@ import {
   SectionHeading,
 } from "@/components/ui/PagePrimitives";
 import { getRecentGigs } from "@/features/home/recent-gigs";
+import {
+  formatLiteCurrency,
+  getLiteLocations,
+  getLiteOverview,
+  getLiteRecommendations,
+  getSwfusBadgeClass,
+  getSwfusUiLabel,
+} from "@/lib/lite-investor-discovery";
 
 export const dynamic = "force-dynamic";
 
-const heroStats = [
-  { label: "SA unemployment", value: "31.4%", helper: "National recovery is still uneven on the ground" },
-  { label: "Youth without work", value: "57%", helper: "Township-first access is still necessary" },
-  { label: "CV required", value: "0", helper: "Speed, proximity, and trust lead first" },
-];
+type HomeGig = {
+  _id: string;
+  title: string;
+  description: string;
+  payDisplay: string;
+  category: string;
+  isUrgent?: boolean;
+  isProviderVerified?: boolean;
+  location?: {
+    suburb?: string | null;
+    city?: string | null;
+  } | null;
+};
 
-const signalCards = [
+const commandRoutes = [
   {
-    title: "Utility-aware job search",
-    description: "Check load-shedding and water disruption before accepting a booking or dispatching work.",
-    href: "/water-outages",
-    cta: "Track utility alerts",
+    title: "Scan live gigs",
+    description:
+      "Open the work board first. Sort by urgency, pay, and what is actually close enough to act on today.",
+    href: "/marketplace",
+    cta: "Open marketplace",
+    meta: "Work near you",
+    Icon: Briefcase,
+  },
+  {
+    title: "Post urgent work",
+    description:
+      "Dispatch a nearby job without forcing the whole neighbourhood through a heavy hiring process.",
+    href: "/gigs/new",
+    cta: "Post a gig",
+    meta: "Fast route",
     Icon: Zap,
   },
   {
-    title: "Trusted local providers",
-    description: "Verified profiles and community reviews reduce risk before money, transport, or time is spent.",
-    href: "/verified",
-    cta: "Browse verified providers",
-    Icon: Shield,
-  },
-  {
-    title: "Neighbourhood coordination",
-    description: "Forum updates help communities share availability, safety notes, and local demand in real time.",
+    title: "Read community signals",
+    description:
+      "Check incidents, local demand, and neighbourhood context before you spend transport, time, or money.",
     href: "/forum",
-    cta: "Open the forum",
+    cta: "Open community",
+    meta: "Coordination",
     Icon: Users,
   },
-];
-
-const quickActions = [
-  { href: "/marketplace", label: "Browse live gigs", helper: "See work near you right now", Icon: MapPin },
-  { href: "/gigs/new", label: "Post urgent work", helper: "Reach nearby people faster", Icon: Zap },
-  { href: "/chat", label: "Continue chats", helper: "Follow up with providers and applicants", Icon: MessageSquare },
-  { href: "/utility-schedule", label: "Check schedules", helper: "Plan work around outages", Icon: Clock },
-];
-
-const localSystemNotes = [
   {
-    title: "Township-first by design",
-    body: "KasiLink is not a generic jobs board. It is a proximity and coordination layer built for township work and services.",
-  },
-  {
-    title: "Proximity lowers failure cost",
-    body: "Distance is a real economic variable. Nearby matching reduces transport spend, travel uncertainty, and failed work attempts.",
-  },
-  {
-    title: "Trust is part of the product",
-    body: "Verified providers, forum context, and utility awareness work together as one trust system instead of disconnected features.",
+    title: "Open Lite mode",
+    description:
+      "Switch to the lower-data investor and opportunity scan when you need a fast township intelligence layer.",
+    href: "/lite",
+    cta: "Open Lite",
+    meta: "Investor Discovery",
+    Icon: TrendingUp,
   },
 ];
 
-const communityLinks = [
+const operatingPrinciples = [
+  {
+    title: "Distance is a real cost",
+    body:
+      "KasiLink treats proximity as part of the product. Nearby work reduces failed trips, transport spend, and dead waiting time.",
+  },
+  {
+    title: "Trust belongs on the same screen",
+    body:
+      "Verified providers, community notes, and direct messaging work as one local trust loop instead of a disconnected stack.",
+  },
+  {
+    title: "The network should absorb disruption",
+    body:
+      "Utility schedules, water alerts, and local updates belong inside the work flow because outages change whether work can happen at all.",
+  },
+];
+
+const communityRoutes = [
   { href: "/incidents", label: "Report an incident", badge: "Safety" },
   { href: "/community-calendar", label: "Community calendar", badge: "Events" },
   { href: "/spotlight", label: "Business spotlight", badge: "Local" },
   { href: "/tutoring", label: "Find a tutor", badge: "Education" },
   { href: "/community-status", label: "Community status", badge: "Live" },
-  { href: "/my-water-reports", label: "Water reports", badge: "Alerts" },
+  { href: "/utility-schedule", label: "Utility schedule", badge: "Planning" },
 ];
 
-const journeySteps = [
-  { step: "01", title: "Create a simple local profile", description: "Start with a phone number. Become visible for nearby work without heavy setup.", Icon: Users },
-  { step: "02", title: "Find or post work nearby", description: "Match by distance, category, urgency, and the trust signals that matter on the ground.", Icon: MapPin },
-  { step: "03", title: "Coordinate directly", description: "Use in-app chat and community signals to confirm timing, safety, and availability.", Icon: MessageSquare },
-  { step: "04", title: "Build a stronger local reputation", description: "Completed gigs, reviews, and provider verification reinforce the trust loop over time.", Icon: TrendingUp },
+const networkSteps = [
+  {
+    step: "01",
+    title: "Spot nearby demand",
+    description:
+      "Start with a work board, not a dead directory. Urgency, category, and distance should be visible immediately.",
+    Icon: Search,
+  },
+  {
+    step: "02",
+    title: "Check local friction",
+    description:
+      "Before moving, inspect utility conditions, community notes, and the trust history around the person or service.",
+    Icon: Clock,
+  },
+  {
+    step: "03",
+    title: "Coordinate directly",
+    description:
+      "Use messages and local context to confirm timing, safety, and whether the trip is still worth taking.",
+    Icon: MessageSquare,
+  },
+  {
+    step: "04",
+    title: "Grow the local graph",
+    description:
+      "Completed work, reviews, and Lite signals reinforce the neighbourhood network instead of scattering evidence across apps.",
+    Icon: Building2,
+  },
 ];
+
+const ecosystemRoutes = [
+  {
+    label: "KRRababalela",
+    href: "https://krrababalela.com",
+    note: "Chief portfolio",
+    status: "Live",
+  },
+  {
+    label: "Kopano Labs",
+    href: "https://kopanolabs.com",
+    note: "Studio surface",
+    status: "Live",
+  },
+  {
+    label: "Five's Arena",
+    href: "https://fivesarena.com",
+    note: "Venue product",
+    status: "Live",
+  },
+  {
+    label: "5s Arena Blog",
+    href: "https://blog.fivesarena.com",
+    note: "Editorial lane",
+    status: "Live",
+  },
+  {
+    label: "Starfall Salvage",
+    href: "https://starfallsalvage.kopanolabs.com",
+    note: "Game lane",
+    status: "Live",
+  },
+  {
+    label: "Kopano Context",
+    href: "https://context.kopanolabs.com",
+    note: "Reserved domain",
+    status: "Reserved",
+  },
+];
+
+function getGigLocation(gig: HomeGig): string {
+  return gig.location?.suburb || gig.location?.city || "Local";
+}
 
 export default async function HomePage() {
-  const gigs = await getRecentGigs();
+  const gigs = (await getRecentGigs()) as HomeGig[];
+  const liteOverview = getLiteOverview();
+  const liteHighlights = getLiteRecommendations(4);
+  const liteLocations = getLiteLocations().slice(0, 4);
+
+  const urgentGigCount = gigs.filter((gig) => gig.isUrgent).length;
+  const verifiedGigCount = gigs.filter((gig) => gig.isProviderVerified).length;
+  const activeGigLocations = new Set(gigs.map(getGigLocation)).size;
+
+  const homeBoardStats = [
+    {
+      label: "Live gigs",
+      value: gigs.length.toString(),
+      helper: "Fresh work currently visible on the board",
+    },
+    {
+      label: "Urgent posts",
+      value: urgentGigCount.toString(),
+      helper: "Jobs that need a fast local response",
+    },
+    {
+      label: "Investor signals",
+      value: liteOverview.totalOpportunities.toString(),
+      helper: "Lite opportunity cards available now",
+    },
+    {
+      label: "Strong trust marks",
+      value: verifiedGigCount.toString(),
+      helper: "Visible provider verification on the live board",
+    },
+  ];
 
   return (
     <div className="pb-12">
-      {/* ── HERO ──────────────────────────────────────────── */}
       <section className="container page-shell">
         <div className="page-hero animate-fade-in">
           <div className="page-hero-grid">
             <div className="page-hero-copy">
-              {/* Logo + animation */}
-              <div className="mb-5 flex items-center gap-4">
+              <div className="mb-5 flex flex-wrap items-center gap-4">
                 <Image
                   src="/kasilink-logo.png"
                   alt="KasiLink"
@@ -102,248 +236,421 @@ export default async function HomePage() {
                   className="rounded-2xl shadow-lg"
                   priority
                 />
-                <video
-                  src="/kasiLink-Logo-animation.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="h-14 w-auto rounded-xl"
-                  aria-hidden="true"
-                />
               </div>
-              <Eyebrow>South Africa&apos;s Township Platform</Eyebrow>
+              <Eyebrow>Township work operating surface</Eyebrow>
               <h1 className="page-hero-title mt-4 font-headline font-black text-on-background">
-                Local gigs.{" "}
-                <span className="text-primary">Near you.</span>{" "}
-                Right now.
+                Local gigs. <span className="text-primary">Near you.</span> Right now.
               </h1>
               <p className="page-hero-description">
-                KasiLink is a township-first work and services network built around proximity,
-                trust, and real-time local conditions. Find work, post urgent jobs, and coordinate
-                without losing momentum to distance, paperwork, or local disruption.
+                KasiLink is the full neighbourhood work network: nearby gigs, trusted providers,
+                community signals, and utility-aware planning on the same surface. The home page
+                should help you move, not pitch itself.
               </p>
               <div className="page-hero-actions">
                 <Link href="/marketplace" className="btn btn-primary btn-lg">
                   Find gigs near me
                 </Link>
                 <Link href="/gigs/new" className="btn btn-outline btn-lg">
-                  Post a gig
+                  Post urgent work
                 </Link>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
+                <Link
+                  href="/lite"
+                  className="inline-flex items-center gap-2 font-semibold text-primary no-underline"
+                >
+                  Open Lite mode
+                  <ArrowRight size={16} />
+                </Link>
+                <span className="text-on-surface-variant">
+                  Investor Discovery for lower-data scans, funding signals, and fast opportunity reads.
+                </span>
+              </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <div className="mini-stat">
+                  <p className="mini-stat-label">Operating logic</p>
+                  <p className="mini-stat-value">Closer first</p>
+                  <p className="mt-2 text-sm text-on-surface-variant">
+                    Distance, transport, and disruption are treated as product realities.
+                  </p>
+                </div>
+                <div className="mini-stat">
+                  <p className="mini-stat-label">Trust layer</p>
+                  <p className="mini-stat-value">Visible</p>
+                  <p className="mt-2 text-sm text-on-surface-variant">
+                    Reviews, verification, and community signals sit next to the work.
+                  </p>
+                </div>
+                <div className="mini-stat">
+                  <p className="mini-stat-label">Lite mode</p>
+                  <p className="mini-stat-value">Low data</p>
+                  <p className="mt-2 text-sm text-on-surface-variant">
+                    Investor Discovery scans township opportunity without loading the full stack.
+                  </p>
+                </div>
+                <div className="mini-stat">
+                  <p className="mini-stat-label">Community role</p>
+                  <p className="mini-stat-value">Live</p>
+                  <p className="mt-2 text-sm text-on-surface-variant">
+                    Forum, status, and alerts help the network absorb ground truth quickly.
+                  </p>
+                </div>
               </div>
             </div>
 
             <aside className="page-hero-aside">
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline">
-                Why it feels different
+                Today on the network
               </p>
-              <MetricGrid items={heroStats} className="mt-4" />
+              <MetricGrid items={homeBoardStats} className="mt-4 md:grid-cols-2" />
               <div className="mt-4 rounded-2xl border border-outline-variant/35 bg-surface-container-low p-4">
-                <p className="text-sm font-semibold text-on-background">
-                  Work should start closer to home.
-                </p>
-                <p className="mt-2 text-sm leading-7 text-on-surface-variant">
-                  SA is in recovery — but township residents need tools that meet them where they
-                  are now. No CV. Less commute. Faster local work.
-                </p>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold text-on-background">
+                      One board, two speeds
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-on-surface-variant">
+                      Full KasiLink handles gigs, chat, and community coordination. Lite gives a
+                      faster scan for opportunity, funding need, and neighbourhood growth signals.
+                    </p>
+                  </div>
+                  <span className="badge badge-primary shrink-0">Lite ready</span>
+                </div>
+                <div className="mt-4 grid gap-3">
+                  <div className="flex items-center justify-between rounded-xl border border-outline-variant/30 bg-surface-container px-3 py-2">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">
+                        Active gig zones
+                      </p>
+                      <p className="mt-1 text-sm text-on-background">{activeGigLocations} locations in the live board</p>
+                    </div>
+                    <MapPin size={18} className="text-primary" />
+                  </div>
+                  <div className="flex items-center justify-between rounded-xl border border-outline-variant/30 bg-surface-container px-3 py-2">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">
+                        Lite funding demand
+                      </p>
+                      <p className="mt-1 text-sm text-on-background">
+                        {formatLiteCurrency(liteOverview.totalFundingNeeded)}
+                      </p>
+                    </div>
+                    <TrendingUp size={18} className="text-primary" />
+                  </div>
+                </div>
               </div>
               <div className="mt-3 flex items-center gap-2 rounded-xl border border-[#4595C0]/30 bg-[#4595C0]/5 px-4 py-2.5">
-                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#4595C0] text-white font-black text-[10px]">KC</div>
-                <p className="text-xs text-[#4595C0] font-semibold">Intelligence powered by Kopano Context</p>
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#4595C0] text-[10px] font-black text-white">
+                  KC
+                </div>
+                <p className="text-xs font-semibold text-[#4595C0]">
+                  Intelligence powered by Kopano Context
+                </p>
               </div>
             </aside>
           </div>
         </div>
       </section>
 
-      {/* ── KC COMMAND STRIP ─────────────────────────────── */}
       <section className="container pb-6">
-        <KCCommandStrip />
+        <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
+          <KCCommandStrip />
+          <KopanoStewardDock />
+        </div>
       </section>
 
-      {/* ── BENTO: SIGNAL PANEL + SYSTEM NOTES ──────────── */}
       <section className="container pb-10">
-        <div className="bento-grid md:grid-cols-12">
-          <div className="feature-panel-contrast md:col-span-7 text-on-background">
+        <SectionHeading
+          eyebrow={<Eyebrow tone="neutral">Choose a route</Eyebrow>}
+          title="Home should help you act in one screen"
+          description="These are the product’s primary modes: work, dispatch, community coordination, and Lite investor discovery."
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {commandRoutes.map((route) => (
+            <Link
+              key={route.href}
+              href={route.href}
+              className="feature-panel group flex h-full flex-col no-underline transition-colors hover:border-primary/45 hover:bg-primary/5"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <span className="badge badge-primary">{route.meta}</span>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <route.Icon size={18} />
+                </div>
+              </div>
+              <h3 className="mt-4 text-xl font-black text-on-background group-hover:text-primary">
+                {route.title}
+              </h3>
+              <p className="mt-3 flex-1 text-sm leading-7 text-on-surface-variant">
+                {route.description}
+              </p>
+              <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                {route.cta}
+                <ArrowRight size={16} />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="container pb-10">
+        <SectionHeading
+          eyebrow={<Eyebrow tone="neutral">Ground truth</Eyebrow>}
+          title="The network works because it respects local conditions"
+          description="KasiLink is useful when it treats distance, trust, and disruption as real operating inputs instead of edge cases."
+        />
+        <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="feature-panel-contrast text-on-background">
             <div className="flex items-center gap-3">
-              <span className="badge badge-primary">Live local board</span>
+              <span className="badge badge-primary">Why it holds</span>
               <span className="text-xs uppercase tracking-[0.16em] text-outline">
-                Township-first infrastructure
+                Product law
               </span>
             </div>
-            <h2 className="mt-4 text-3xl font-black">
-              Local work discovery should absorb reality instead of ignoring it.
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-on-surface-variant">
-              Recovery indicators at national level do not remove the township need for hyperlocal
-              work discovery. KasiLink keeps jobs, trust, and community coordination in the same
-              decision space.
-            </p>
-            <div className="mt-5 signal-strip">
-              {signalCards.map((signal) => (
-                <Link key={signal.title} href={signal.href} className="signal-tile no-underline">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary mb-2">
-                    <signal.Icon size={16} />
-                  </div>
-                  <h3 className="signal-tile-title">{signal.title}</h3>
-                  <p className="signal-tile-copy">{signal.description}</p>
-                  <span className="text-sm font-semibold text-primary">{signal.cta} →</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="feature-panel md:col-span-5">
-            <p className="mini-stat-label">What the product leads with</p>
-            <div className="impact-list mt-4">
-              {localSystemNotes.map((item) => (
-                <div key={item.title} className="impact-row">
-                  <div>
-                    <p className="text-sm font-semibold">{item.title}</p>
-                    <p className="mt-1 text-sm text-on-surface-variant">{item.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── UTILITY WIDGET + COMMUNITY PULSE ────────────── */}
-      <section className="container pb-10">
-        <SectionHeading
-          eyebrow={<Eyebrow tone="neutral">Working surface</Eyebrow>}
-          title="Operational signals before the marketplace decision"
-          description="Utility status and community context help you decide faster — not compete with the marketplace for attention."
-        />
-        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-          <LoadSheddingWidget />
-          <div className="feature-panel flex flex-col gap-4">
-            <p className="mini-stat-label">Community channels</p>
-            <div className="grid grid-cols-2 gap-2">
-              {communityLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="group flex flex-col gap-1 rounded-xl border border-outline-variant/30 bg-surface-container-low p-3 no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+            <div className="mt-5 space-y-4">
+              {operatingPrinciples.map((principle, index) => (
+                <div
+                  key={principle.title}
+                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4"
                 >
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-outline">
-                    {link.badge}
-                  </span>
-                  <span className="text-sm font-semibold text-on-background group-hover:text-primary">
-                    {link.label}
-                  </span>
-                </Link>
+                  <div className="flex items-start gap-3">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
+                      0{index + 1}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{principle.title}</p>
+                      <p className="mt-2 text-sm leading-7 text-white/70">{principle.body}</p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
-            <Link href="/community-status" className="btn btn-outline btn-sm mt-auto w-full text-center">
-              View full community status →
-            </Link>
           </div>
-        </div>
-      </section>
 
-      {/* ── QUICK ACTIONS ────────────────────────────────── */}
-      <section className="container pb-12">
-        <div className="surface-band">
-          <SectionHeading
-            eyebrow={<Eyebrow tone="neutral">Quick actions</Eyebrow>}
-            title="Fast access for the most common local decisions"
-            description="The homepage should behave like a board, not a brochure. Your next step should be visible immediately."
-          />
-          <div className="signal-strip">
-            {quickActions.map((action, index) => (
-              <Link
-                key={action.href}
-                href={action.href}
-                className="signal-tile no-underline animate-slide-up"
-                style={{ animationDelay: `${index * 70}ms` }}
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary mb-2">
-                  <action.Icon size={16} />
+          <div className="grid gap-4">
+            <LoadSheddingWidget />
+            <div className="feature-panel">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="mini-stat-label">Community routes</p>
+                  <h3 className="mt-2 text-2xl font-black text-on-background">
+                    Check signals before you move
+                  </h3>
                 </div>
-                <p className="signal-tile-title">{action.label}</p>
-                <p className="signal-tile-copy">{action.helper}</p>
-              </Link>
-            ))}
+                <Users size={20} className="text-primary" />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {communityRoutes.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="group flex flex-col gap-1 rounded-xl border border-outline-variant/30 bg-surface-container-low p-3 no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+                  >
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-outline">
+                      {link.badge}
+                    </span>
+                    <span className="text-sm font-semibold text-on-background group-hover:text-primary">
+                      {link.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── LATEST GIGS ──────────────────────────────────── */}
       <section className="container pb-12">
         <SectionHeading
-          eyebrow={<Eyebrow tone="success">Marketplace pulse</Eyebrow>}
-          title="Latest gigs"
-          description="Fresh opportunities appear here first. Category, urgency, location, and pay in one clean scan."
-          action={
-            <Link href="/marketplace" className="btn btn-outline btn-sm">
-              See all gigs
-            </Link>
-          }
+          eyebrow={<Eyebrow tone="success">Live board</Eyebrow>}
+          title="Work and investor signals should sit on the same home surface"
+          description="Full KasiLink handles local work flow. Lite gives the faster opportunity scan. Both should be legible without leaving the product story."
         />
-
-        {gigs.length === 0 ? (
-          <EmptyStateCard
-            title="No gigs yet"
-            description="Be the first to post a nearby opportunity and give the marketplace a local starting point."
-            action={
-              <Link href="/gigs/new" className="btn btn-primary">
-                Post a gig
+        <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+          <div className="surface-band">
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p className="mini-stat-label">Marketplace pulse</p>
+                <h3 className="mt-2 text-2xl font-black text-on-background">Latest local gigs</h3>
+              </div>
+              <Link href="/marketplace" className="btn btn-outline btn-sm">
+                See all gigs
               </Link>
-            }
-          />
-        ) : (
-          <>
-            <div className="sr-only" role="status" aria-live="polite">
-              {gigs.length} recent gigs loaded
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-              {gigs.map((gig: any) => (
-                <Link key={gig._id} href={`/gigs/${gig._id}`} className="no-underline">
-                  <article className="kasi-card flex h-full flex-col">
+
+            {gigs.length === 0 ? (
+              <EmptyStateCard
+                title="No gigs yet"
+                description="Be the first to post nearby work and give the local board a real starting point."
+                action={
+                  <Link href="/gigs/new" className="btn btn-primary">
+                    Post a gig
+                  </Link>
+                }
+              />
+            ) : (
+              <div className="space-y-3">
+                {gigs.slice(0, 4).map((gig) => (
+                  <Link
+                    key={gig._id}
+                    href={`/gigs/${gig._id}`}
+                    className="group flex flex-col gap-3 rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-4 no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+                  >
                     <div className="flex flex-wrap gap-2">
-                      {gig.isUrgent && <span className="badge badge-danger">Urgent</span>}
+                      {gig.isUrgent ? <span className="badge badge-danger">Urgent</span> : null}
                       <span className="badge badge-primary">{gig.category.replace("_", " ")}</span>
-                      {gig.isProviderVerified && <span className="badge badge-success">Verified</span>}
-                      <span className="inline-flex items-center gap-1 rounded-full border border-[#4595C0]/40 bg-[#4595C0]/10 px-2 py-0.5 text-[10px] font-bold text-[#4595C0]">
-                        KC ✓
-                      </span>
+                      {gig.isProviderVerified ? (
+                        <span className="badge badge-success">Verified</span>
+                      ) : null}
                     </div>
-                    <h3 className="mt-4 text-xl font-bold">{gig.title}</h3>
-                    <p className="mt-3 line-clamp-3 text-sm leading-7 text-on-surface-variant">
-                      {gig.description}
-                    </p>
-                    <div className="mt-auto pt-5">
-                      <div className="flex items-center justify-between gap-3 border-t border-outline-variant/30 pt-4">
-                        <span className="text-lg font-bold text-primary">{gig.payDisplay}</span>
-                        <span className="text-xs uppercase tracking-[0.16em] text-outline">
-                          {gig.location?.suburb || "Local"}
-                        </span>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="text-base font-bold text-on-background group-hover:text-primary">
+                          {gig.title}
+                        </p>
+                        <p className="mt-2 line-clamp-2 text-sm leading-7 text-on-surface-variant">
+                          {gig.description}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-black text-primary">{gig.payDisplay}</p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-outline">
+                          {getGigLocation(gig)}
+                        </p>
                       </div>
                     </div>
-                  </article>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="surface-band">
+            <div className="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p className="mini-stat-label">KasiLink Lite</p>
+                <h3 className="mt-2 text-2xl font-black text-on-background">
+                  Investor Discovery
+                </h3>
+              </div>
+              <Link href="/lite" className="btn btn-primary btn-sm">
+                Open Lite
+              </Link>
+            </div>
+            <div className="grid gap-3">
+              {liteHighlights.map((opportunity) => (
+                <Link
+                  key={opportunity.id}
+                  href={`/lite?q=${encodeURIComponent(opportunity.location)}#search`}
+                  className="group rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-4 no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={getSwfusBadgeClass(opportunity.swfus_status)}>
+                          {getSwfusUiLabel(opportunity.swfus_status)}
+                        </span>
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-outline">
+                          {opportunity.location} · {opportunity.category}
+                        </span>
+                      </div>
+                      <p className="mt-3 text-base font-bold text-on-background group-hover:text-primary">
+                        {opportunity.business_name}
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-on-surface-variant">
+                        {opportunity.recommendation}
+                      </p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <p className="text-lg font-black text-primary">
+                        {opportunity.opportunity_score}
+                      </p>
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-outline">
+                        score
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    <div className="rounded-xl border border-outline-variant/25 bg-surface-container px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-outline">
+                        Funding
+                      </p>
+                      <p className="mt-1 text-sm font-semibold text-on-background">
+                        {formatLiteCurrency(opportunity.funding_needed)}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-outline-variant/25 bg-surface-container px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-outline">
+                        Jobs
+                      </p>
+                      <p className="mt-1 text-sm font-semibold text-on-background">
+                        {opportunity.jobs_possible}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-outline-variant/25 bg-surface-container px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-outline">
+                        Risk
+                      </p>
+                      <p className="mt-1 text-sm font-semibold text-on-background">
+                        {opportunity.risk_level}
+                      </p>
+                    </div>
+                  </div>
                 </Link>
               ))}
             </div>
-          </>
-        )}
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {liteLocations.map((location) => (
+                <div
+                  key={location.id}
+                  className="rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-4"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-on-background">{location.name}</p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-outline">
+                        {location.city} · {location.province}
+                      </p>
+                    </div>
+                    <span className="badge badge-primary">{location.opportunity_score}</span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <p className="text-outline">Jobs</p>
+                      <p className="mt-1 font-semibold text-on-background">
+                        {location.total_jobs_possible}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-outline">Funding</p>
+                      <p className="mt-1 font-semibold text-on-background">
+                        {formatLiteCurrency(location.total_funding_needed)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-outline">Risk</p>
+                      <p className="mt-1 font-semibold text-on-background">{location.risk_score}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ── HOW IT WORKS ─────────────────────────────────── */}
       <section className="container pb-12">
         <SectionHeading
-          eyebrow={<Eyebrow tone="neutral">Core flow</Eyebrow>}
-          title="How the product should feel"
-          description="Each step is designed to reduce uncertainty: identify local demand, confirm trust, coordinate clearly, close the work loop."
+          eyebrow={<Eyebrow tone="neutral">Core loop</Eyebrow>}
+          title="How the network closes distance"
+          description="This is not a static directory. It is a local work loop that should move someone from signal to action with less friction."
           align="center"
         />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {journeySteps.map((step) => (
+          {networkSteps.map((step) => (
             <article key={step.step} className="kasi-card h-full">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <step.Icon size={18} />
                 </div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-outline">
@@ -357,49 +664,84 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA FOOTER BAND ──────────────────────────────── */}
+      <section className="container pb-12">
+        <SectionHeading
+          eyebrow={<Eyebrow tone="neutral">Ecosystem</Eyebrow>}
+          title="KasiLink should route through the same public graph"
+          description="The full work network, the investor Lite mode, the portfolio, the arena, the blog, and the game should all read as one connected system."
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {ecosystemRoutes.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="feature-panel no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-base font-bold text-on-background">{item.label}</p>
+                <span
+                  className={`badge ${item.status === "Reserved" ? "badge-secondary" : "badge-primary"}`}
+                >
+                  {item.status}
+                </span>
+              </div>
+              <p className="mt-3 text-sm leading-7 text-on-surface-variant">{item.note}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section className="container pb-6">
         <div className="page-hero">
           <div className="page-hero-grid">
             <div className="page-hero-copy">
-              <Eyebrow tone="success">Ready to start</Eyebrow>
+              <Eyebrow tone="success">Switch mode when needed</Eyebrow>
               <h2 className="page-hero-title mt-4 font-headline font-black text-on-background">
-                Join the neighbourhood work loop.
+                Full network for work. Lite for the fast scan.
               </h2>
               <p className="page-hero-description">
-                Start with the marketplace if you need work now, or create a gig if you need
-                trusted local help fast.
+                Use the full KasiLink stack when you need gigs, providers, messages, and local
+                coordination. Switch to Lite when you need the lower-data investor or business
+                discovery path.
               </p>
               <div className="page-hero-actions">
-                <Link href="/sign-in" className="btn btn-primary btn-lg">
-                  Get started
+                <Link href="/marketplace" className="btn btn-primary btn-lg">
+                  Open full KasiLink
                 </Link>
-                <Link href="/verified" className="btn btn-outline btn-lg">
-                  Explore trusted providers
+                <Link href="/lite" className="btn btn-outline btn-lg">
+                  Open Lite mode
                 </Link>
               </div>
             </div>
             <div className="page-hero-aside">
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline">
-                Community pulse
+                What stays on one surface
               </p>
               <div className="mt-4 space-y-3">
                 <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">Browse</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">
+                    Work
+                  </p>
                   <p className="mt-2 text-sm text-on-surface-variant">
-                    Open the marketplace to see what is available close to home.
+                    Find gigs, post jobs, and move quickly when nearby demand shows up.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">Verify</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">
+                    Trust
+                  </p>
                   <p className="mt-2 text-sm text-on-surface-variant">
-                    Use verified profiles and reviews before you commit to travel.
+                    Verified providers, messages, and community context reduce guesswork.
                   </p>
                 </div>
                 <div className="rounded-2xl border border-outline-variant/30 bg-surface-container-low px-4 py-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">Coordinate</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-outline">
+                    Opportunity
+                  </p>
                   <p className="mt-2 text-sm text-on-surface-variant">
-                    Use chat and community signals to confirm timing before you move.
+                    Lite turns township activity into a ranked investor and growth signal layer.
                   </p>
                 </div>
               </div>

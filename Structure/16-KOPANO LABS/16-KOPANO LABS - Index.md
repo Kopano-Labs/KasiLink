@@ -73,13 +73,16 @@ To be defined. Signals from `08-IDEAS AT BIRTH`.
 
 ## Intelligence Layer — Kopano Context (KC)
 
-KC is not a chatbot. KC is Kopano Labs' reasoning engine.
+KC is not a loose chatbot layer. Under current KPEFS law, `Kopano Context` is the umbrella intelligence layer with two distinct constitutional surfaces:
+
+- `[KC_Teacher_Review]` — ledger-only review authority
+- `[Cassy_Women_In_Tech_Lane]` — supervised teaching and apprenticeship surface
 
 | Role | Description |
 |------|-------------|
-| **Current** | Intern-Dev — writing code, filing reports |
-| **Near-term** | Orchestration agent — routing tasks to sub-agents |
-| **Long-term** | Co-pilot for township product decisions |
+| **Current** | Review ledger + supervised apprenticeship lane |
+| **Near-term** | Better routing between review, teaching, and product evidence surfaces |
+| **Long-term** | Township product intelligence with strict review authority boundaries intact |
 
 KC's development is tracked in `09-KOPANO PROGRESSION`.
 

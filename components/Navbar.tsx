@@ -30,10 +30,11 @@ export interface AppNotification {
 
 const navLinks = [
   { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/marketplace", label: "Find Gigs", icon: BriefcaseIcon },
+  { href: "/marketplace", label: "Gigs", icon: BriefcaseIcon },
   { href: "/forum", label: "Community", icon: UsersIcon },
   { href: "/studio", label: "Studio", icon: ZapIcon },
   { href: "/chat", label: "Messages", icon: MessageIcon },
+  { href: "/lite", label: "Lite", icon: ZapIcon },
 ];
 
 export default function Navbar() {
@@ -52,7 +53,7 @@ export default function Navbar() {
     { href: "/", label: "Home", icon: HomeIcon },
     { href: "/marketplace", label: "Gigs", icon: BriefcaseIcon },
     { href: "/forum", label: "Forum", icon: UsersIcon },
-    { href: "/chat", label: "Chat", icon: MessageIcon },
+    { href: "/lite", label: "Lite", icon: ZapIcon },
     {
       href: isLoaded && isSignedIn ? "/profile" : "/sign-in",
       label: isLoaded && isSignedIn ? "Profile" : "Join",
@@ -162,7 +163,7 @@ export default function Navbar() {
               <span className="block text-lg font-black tracking-tight text-on-background">
                 Kasi<span className="text-primary">Link</span>
               </span>
-              <span className="hide-mobile block text-[10px] uppercase tracking-[0.22em] text-outline">
+              <span className="hidden xl:block text-[10px] uppercase tracking-[0.22em] text-outline">
                 Township-first work network
               </span>
             </span>
@@ -197,8 +198,8 @@ export default function Navbar() {
 
           {/* Right side actions */}
           <div className="ml-auto flex items-center gap-3">
-            <div className="hide-mobile rounded-full border border-outline-variant/35 bg-surface-container-low px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-outline md:block">
-              Utility-aware hiring
+            <div className="hidden xl:block rounded-full border border-outline-variant/35 bg-surface-container-low px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-outline">
+              Closer first · Lite ready
             </div>
             <ThemeToggle />
 
@@ -244,7 +245,7 @@ export default function Navbar() {
 
             {/* Mobile menu toggle */}
             <button
-              className="btn btn-ghost btn-sm p-2 md:hidden"
+              className="btn btn-ghost btn-sm p-2 hide-desktop"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
@@ -259,11 +260,33 @@ export default function Navbar() {
           <div className="flex flex-col gap-2 border-t border-outline-variant/30 bg-surface-container-low p-4 md:hidden">
             <div className="mb-2 rounded-2xl border border-outline-variant/30 bg-surface-container px-4 py-3">
               <p className="text-[10px] uppercase tracking-[0.18em] text-outline">
-                Quick move
+                Township board
               </p>
               <p className="mt-1 text-sm text-on-surface-variant">
-                Stay close to gigs, messages, and community updates.
+                KC reviews. Cassy teaches. Lite scans fast. Use this menu to move between the work network and the lower-data route.
               </p>
+            </div>
+            <div className="mb-2 grid grid-cols-2 gap-2">
+              <Link
+                href="/gigs/new"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-2xl border border-outline-variant/30 bg-background px-4 py-3 no-underline"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-outline">
+                  Dispatch
+                </p>
+                <p className="mt-1 text-sm font-semibold text-on-background">Post work fast</p>
+              </Link>
+              <Link
+                href="/lite"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-2xl border border-outline-variant/30 bg-background px-4 py-3 no-underline"
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-outline">
+                  Lite
+                </p>
+                <p className="mt-1 text-sm font-semibold text-on-background">Investor discovery</p>
+              </Link>
             </div>
             {navLinks.map(({ href, label, icon: Icon }) => {
               const active =

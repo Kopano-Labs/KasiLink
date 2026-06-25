@@ -1,7 +1,7 @@
 ---
 title: KasiLink Structure Map
 created: 2026-04-05
-updated: 2026-05-10
+updated: 2026-06-05
 author: Codex
 tags:
   - structure
@@ -50,6 +50,23 @@ This phase is not a generic cleanup. The control scope is:
 2. `06-Reference/` as the factual source of truth for township, service, and trust content.
 3. `04-Updates/` as the coordination and execution layer.
 
+### Active tranche - 2026-06-05
+
+- Main Brain-first strategy correction for `KasiLink Lite -> Investor Discovery Mode`
+- Main Brain-first KPEFS bracket protocol pack is now the discrete constitutional read surface, not only one umbrella note
+- Active repo execution only at `C:\Users\rkhol\kasi-link\`
+- KPEFS activation order applies before local implementation:
+  - `[Main_Brain_Audit]`
+  - `[KC_Teacher_Review]`
+  - `[Cassy_Women_In_Tech_Lane]`
+  - `[BlackMask]`
+  - `(x changes under y constraints)`
+- Lite is an integrated route inside KasiLink, not a separate product
+- Constitutional pointer:
+  - `C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics\18-PROTOCOLS\KPEFS\README.md`
+ - Activation pointer:
+   - `C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics\05-Training\KC And Cassy Activation Under KPEFS - 2026-06-05.md`
+
 ## Non-Negotiable Security Rule
 
 1. Never commit raw secrets, tokens, API keys, service-account files, `.env*` values, or copied credentials.
@@ -67,7 +84,7 @@ This phase is not a generic cleanup. The control scope is:
 - [02-Strategy/](02-Strategy/) — strategy, billing, delegation, orchestration blueprint
 - [03-Architecture/03-Architecture - Index.md](03-Architecture/03-Architecture%20-%20Index.md) — architecture, design mockups, route audit
 - [04-Updates/04-Updates - Index.md](04-Updates/04-Updates%20-%20Index.md) — coordination hub, comms, dev tracker, assignments
-- [05-Training/Observer-Onboarding.md](05-Training/Observer-Onboarding.md) — training materials
+- [05-Training/05-Training - Index.md](05-Training/05-Training%20-%20Index.md) — training materials, KC/Cassey activation, and local onboarding
 - [05-Session-Playbooks/05-Session-Playbooks - Index.md](05-Session-Playbooks/05-Session-Playbooks%20-%20Index.md) — ↗ MAIN-BRAIN redirect
 - [06-Reference/06-Reference - Index.md](06-Reference/06-Reference%20-%20Index.md) — source-backed facts, FAQs, services, archive
 - [07-Sessions By Day/](07-Sessions%20By%20Day/) — dated session files

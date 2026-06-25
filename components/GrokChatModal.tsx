@@ -38,15 +38,19 @@ export default function KCChatModal() {
   };
 
   if (!isOpen) {
-    return (
+      return (
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-8 right-8 bg-gradient-to-r from-[#4595C0] to-[#2d7ba8] text-white rounded-2xl shadow-2xl hover:shadow-[#4595C0]/50 transition-all duration-300 flex items-center gap-3 px-6 py-4 z-50 hover:scale-105"
+        className="fixed right-4 bottom-[calc(5.8rem+env(safe-area-inset-bottom))] z-[210] flex max-w-[calc(100vw-2rem)] items-center gap-2 rounded-full border border-primary/30 bg-surface/96 px-4 py-3 text-on-background shadow-[0_18px_40px_rgba(0,0,0,0.35)] transition hover:border-primary/50 md:right-6 md:bottom-6"
+        aria-label="Ask KC"
       >
-        <span className="text-3xl">💬</span>
-        <div>
-          <div className="font-semibold text-lg leading-none">Ask KC</div>
-          <div className="text-xs opacity-75">KasiLink AI</div>
+        <span className="kc-ask-badge">KC</span>
+        <div className="hidden text-left md:block">
+          <div className="text-sm font-bold leading-none">Ask KC</div>
+          <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
+            Save | Watch
+          </div>
         </div>
       </button>
     );

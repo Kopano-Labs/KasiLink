@@ -14,10 +14,12 @@ const ZapIcon = () => (
 );
 
 const platformLinks = [
-  { label: "Find Gigs", href: "/marketplace" },
+  { label: "Gigs", href: "/marketplace" },
   { label: "Post a Gig", href: "/gigs/new" },
   { label: "Verified Providers", href: "/verified" },
   { label: "Messages", href: "/chat" },
+  { label: "Lite", href: "/lite" },
+  { label: "Studio", href: "/studio" },
 ];
 
 const communityLinks = [
@@ -38,6 +40,45 @@ const legalLinks = [
   { label: "Resources & FAQ", href: "/resources" },
 ];
 
+const ecosystemLinks = [
+  {
+    label: "KRRababalela",
+    href: "https://krrababalela.com",
+    note: "Chief portfolio",
+    status: "Live",
+  },
+  {
+    label: "Kopano Labs",
+    href: "https://kopanolabs.com",
+    note: "Studio surface",
+    status: "Live",
+  },
+  {
+    label: "Five's Arena",
+    href: "https://fivesarena.com",
+    note: "Football venue",
+    status: "Live",
+  },
+  {
+    label: "5s Arena Blog",
+    href: "https://blog.fivesarena.com",
+    note: "Editorial lane",
+    status: "Live",
+  },
+  {
+    label: "Starfall Salvage",
+    href: "https://starfallsalvage.kopanolabs.com",
+    note: "WebGL game",
+    status: "Live",
+  },
+  {
+    label: "Kopano Context",
+    href: "https://context.kopanolabs.com",
+    note: "Reserved domain",
+    status: "Reserved",
+  },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -47,17 +88,18 @@ export default function Footer() {
         <div className="mb-8 grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
           <div className="surface-band">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline">
-              Built For Real Neighbourhood Work
+              Built for neighbourhood work
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <span className="badge badge-primary">Nearby gigs</span>
               <span className="badge badge-secondary">Community trust</span>
               <span className="badge badge-info">Utility-aware planning</span>
+              <span className="badge badge-success">Lite discovery</span>
             </div>
           </div>
           <div className="surface-band">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline">
-              Fast Routes
+              Fast routes
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <Link href="/marketplace" className="btn btn-outline btn-sm">
@@ -65,6 +107,9 @@ export default function Footer() {
               </Link>
               <Link href="/gigs/new" className="btn btn-primary btn-sm">
                 Post work
+              </Link>
+              <Link href="/lite" className="btn btn-ghost btn-sm">
+                Open Lite
               </Link>
             </div>
           </div>
@@ -90,9 +135,9 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-on-surface-variant max-w-[28rem] leading-[1.65]">
-              Connecting township job seekers with nearby gigs and
-              opportunities. Built for South Africa, powered by community, and
-              tuned for trust, speed, and local conditions.
+              A township-first work network built for proximity, trust, and real-time local
+              conditions. Full KasiLink runs the neighbourhood work loop. Lite gives the faster
+              opportunity scan.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2">
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -167,6 +212,46 @@ export default function Footer() {
             >
               rkholofelo@kopanolabs.com
             </a>
+          </div>
+        </div>
+
+        <div className="mb-6 rounded-2xl border border-outline-variant/20 bg-surface-container px-5 py-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline">
+                Ecosystem routes
+              </p>
+              <p className="mt-2 max-w-2xl text-sm leading-7 text-on-surface-variant">
+                KasiLink should read as part of the same public graph as the portfolio, studio,
+                arena, editorial, and game lanes. Kopano Context stays visible, but honestly marked
+                as reserved until the public runtime is owner-proven.
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {ecosystemLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl border border-outline-variant/25 bg-surface-container-low px-4 py-4 no-underline transition-colors hover:border-primary/40 hover:bg-primary/5"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-on-background">{item.label}</p>
+                  <span
+                    className={`rounded-full px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                      item.status === "Reserved"
+                        ? "bg-secondary-container text-secondary"
+                        : "bg-primary-container text-primary"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+                <p className="mt-2 text-xs uppercase tracking-[0.16em] text-outline">{item.note}</p>
+              </a>
+            ))}
           </div>
         </div>
 

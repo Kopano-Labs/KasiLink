@@ -1,0 +1,31 @@
+{
+  "schema": "kpgs_gssb_config_v1",
+  "trinity": {
+    "core": "Father — Source of all agents",
+    "altar": "Son — Validation gate",
+    "engine": "Holy Spirit — Distribution power"
+  },
+  "gssb": "KasiLink",
+  "slug": "kasilink",
+  "domain": "kasilink.com",
+  "nso_group": "NSO-COMMUNITY",
+  "governance": {
+    "named_agents": [
+      "CASSEY",
+      "YASSIE",
+      "THARI"
+    ],
+    "named_count": 3,
+    "utility_agents": 50,
+    "total_agents": 53,
+    "pillars": [
+      "COMMUNITY",
+      "MIND",
+      "SOVEREIGNTY"
+    ]
+  },
+  "apwa_status": "NEEDS_REBRAND",
+  "scripture": "1 Corinthians 12:4-6",
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "distributed_at": "2026-06-24T07:42:01.929249+00:00"
+}

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import { Eyebrow } from "@/components/ui/PagePrimitives";
 import { formatRelativeTime } from "@/lib/format";
+import PowerWarningBadge from "@/components/PowerWarningBadge";
+import InfraDeclineModal from "@/components/InfraDeclineModal";
 
 interface Gig {
   _id: string;
@@ -19,6 +21,9 @@ interface Gig {
   isUrgent: boolean;
   slots: number;
   applicationCount: number;
+  startDate?: string;
+  endDate?: string;
+  loadshedding?: { aware: boolean; stage?: number };
   createdAt: string;
 }
 
@@ -34,6 +39,7 @@ export default function GigDetailsPage({
   const [applying, setApplying] = useState(false);
   const [message, setMessage] = useState("");
   const [appStatus, setAppStatus] = useState<string | null>(null);
+  const [showDeclineModal, setShowDeclineModal] = useState(false);
 
   const [rating, setRating] = useState(5);
   const [reviewComment, setReviewComment] = useState("");
@@ -263,6 +269,31 @@ export default function GigDetailsPage({
               </p>
             </div>
 
+            {/* Task 7: Power Warning — Eskom × KasiLink Predictive Scheduling */}
+            {gig.startDate && gig.location?.suburb && (
+              <PowerWarningBadge
+                zone={gig.location.suburb}
+                gigStart={gig.startDate}
+                gigEnd={gig.endDate}
+                category={gig.category}
+              />
+            )}
+
+            {/* Load-shedding stage from provider */}
+            {gig.loadshedding?.aware && gig.loadshedding.stage != null && gig.loadshedding.stage > 0 && (
+              <div className="surface-band">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline mb-2">
+                  Provider&apos;s load-shedding note
+                </p>
+                <span className={`ls-badge ls-stage-${Math.min(gig.loadshedding.stage, 6)}`}>
+                  Stage {gig.loadshedding.stage} expected
+                </span>
+                <p className="text-xs text-on-surface-variant mt-2">
+                  The provider has flagged expected load-shedding during this gig.
+                </p>
+              </div>
+            )}
+
             <div className="surface-band">
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-outline mb-3">
                 Before you apply
@@ -274,12 +305,39 @@ export default function GigDetailsPage({
               </div>
             </div>
 
+            {/* Infrastructure decline — no trust penalty */}
+            {isSignedIn && (
+              <button
+                type="button"
+                onClick={() => setShowDeclineModal(true)}
+                className="btn btn-ghost text-xs text-on-surface-variant"
+              >
+                Can&apos;t do this gig due to infrastructure?
+              </button>
+            )}
+
             <Link href="/marketplace" className="btn btn-outline text-center">
               ← More gigs nearby
             </Link>
           </aside>
         </div>
       </section>
+
+      {/* Infrastructure Decline Modal */}
+      {gig && (
+        <InfraDeclineModal
+          isOpen={showDeclineModal}
+          onClose={() => setShowDeclineModal(false)}
+          onConfirm={(reason, feedback) => {
+            console.log("[Identic RLHF] Infrastructure decline:", { reason, feedback, gigId: id });
+            setShowDeclineModal(false);
+          }}
+          gigId={id}
+          gigTitle={gig.title}
+          userId="" // Clerk ID injected at runtime
+          conflictType="loadshedding"
+        />
+      )}
     </div>
   );
 }
