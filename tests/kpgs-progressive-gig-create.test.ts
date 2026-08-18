@@ -3,6 +3,7 @@ import {
   governedGigPayloadHash,
   KPGS_PROGRESSIVE_UPDATE_SOURCE,
   markGigStateApplied,
+  markReplayProofPassed,
   markServerProofPassed,
   preflightGigCreate,
 } from "../lib/kpgs/progressiveUpdate";
@@ -28,7 +29,7 @@ function governedBody(
       protocol: KPGS_PROGRESSIVE_UPDATE_SOURCE.contract,
       canonical_source_sha: KPGS_PROGRESSIVE_UPDATE_SOURCE.commit,
       apu_state: "GREEN",
-      nb_boundary: true,
+      boundary_marker: "#NB",
       crud_intent: "CREATE",
       state_class: "pending_proposal",
       authority_effect: "none",
@@ -39,9 +40,22 @@ function governedBody(
 }
 
 describe("KasiLink canonical progressive Gig CREATE adapter", () => {
-  it("keeps legacy requests on the compatibility path without inventing a receipt", () => {
+  it("keeps requests with no kpgs property on the legacy path without inventing a receipt", () => {
     const result = preflightGigCreate({ title: "legacy" });
     expect(result).toEqual({ mode: "legacy" });
+  });
+
+  it("does not let a malformed kpgs envelope downgrade into the legacy mutation lane", () => {
+    for (const kpgs of [null, [], "GREEN", 7]) {
+      const result = preflightGigCreate({ title: "not legacy", kpgs });
+      expect(result.mode).toBe("governed");
+      if (result.mode !== "governed") throw new Error("expected governed result");
+      expect(result.admittedToServerProof).toBe(false);
+      expect(result.receipt.code).toBe("INVALID_KPGS_ENVELOPE");
+      expect(result.receipt.stages.telemetry.status).toBe("REJECT");
+      expect(result.receipt.stages.stateUpdate.status).toBe("NOT_REACHED");
+      expect(result.receipt.stages.distribution.status).toBe("NOT_REACHED");
+    }
   });
 
   it("pins the canonical Introduction-to-MCP source and contract", () => {
@@ -73,12 +87,18 @@ describe("KasiLink canonical progressive Gig CREATE adapter", () => {
     expect(result.receipt.stages.stateUpdate.status).toBe("NOT_REACHED");
   });
 
-  it("requires the explicit #NB operator boundary", () => {
-    const result = preflightGigCreate(governedBody({ nb_boundary: false }));
-    expect(result.mode).toBe("governed");
-    if (result.mode !== "governed") throw new Error("expected governed result");
-    expect(result.receipt.code).toBe("NB_BOUNDARY_REQUIRED");
-    expect(result.receipt.outcome).toBe("HOLD");
+  it("requires the literal #NB boundary marker rather than a truthy alias", () => {
+    const missing = preflightGigCreate(governedBody({ boundary_marker: "NB" }));
+    expect(missing.mode).toBe("governed");
+    if (missing.mode !== "governed") throw new Error("expected governed result");
+    expect(missing.receipt.code).toBe("NB_BOUNDARY_REQUIRED");
+    expect(missing.receipt.outcome).toBe("HOLD");
+
+    const aliasOnly = governedBody({ boundary_marker: undefined, nb_boundary: true });
+    const aliasResult = preflightGigCreate(aliasOnly);
+    expect(aliasResult.mode).toBe("governed");
+    if (aliasResult.mode !== "governed") throw new Error("expected governed result");
+    expect(aliasResult.receipt.code).toBe("NB_BOUNDARY_REQUIRED");
   });
 
   it("rejects authoritative state and non-none authority effects", () => {
@@ -114,11 +134,12 @@ describe("KasiLink canonical progressive Gig CREATE adapter", () => {
     if (result.mode !== "governed") throw new Error("expected governed result");
     expect(result.admittedToServerProof).toBe(true);
     expect(result.receipt.code).toBe("SERVER_PROOF_REQUIRED");
+    expect(result.receipt.evidenceRefs).toEqual([]);
     expect(result.receipt.stages.pocFocCheck.status).toBe("READY");
     expect(result.receipt.stages.stateUpdate.status).toBe("NOT_REACHED");
   });
 
-  it("advances proof before state update and never fabricates SWFUS distribution", () => {
+  it("advances fresh server proof before state update and never fabricates SWFUS distribution", () => {
     const result = preflightGigCreate(governedBody());
     if (result.mode !== "governed") throw new Error("expected governed result");
 
@@ -126,6 +147,11 @@ describe("KasiLink canonical progressive Gig CREATE adapter", () => {
     expect(proven.stages.pocFocCheck.status).toBe("PASS");
     expect(proven.stages.stateUpdate.status).toBe("READY");
     expect(proven.stages.distribution.status).toBe("NOT_REACHED");
+    expect(proven.evidenceRefs).toEqual([
+      "runtime://clerk/authenticated",
+      "runtime://kasilink/provider-profile/validated",
+      "runtime://kasilink/gig-input-location/validated",
+    ]);
 
     const applied = markGigStateApplied(proven, "kasilink://gigs/abc123", false);
     expect(applied.stages.stateUpdate.status).toBe("PASS");
@@ -133,6 +159,24 @@ describe("KasiLink canonical progressive Gig CREATE adapter", () => {
     expect(applied.transportGrantsAuthority).toBe(false);
     expect(applied.canonical).toBe(false);
     expect(applied.authorityEffect).toBe("none");
+  });
+
+  it("uses stored governed identity + owner + payload hash as replay evidence without claiming fresh validation", () => {
+    const result = preflightGigCreate(governedBody());
+    if (result.mode !== "governed") throw new Error("expected governed result");
+
+    const replay = markReplayProofPassed(result.receipt);
+    expect(replay.code).toBe("REPLAY_STATE_READY");
+    expect(replay.stages.pocFocCheck.status).toBe("PASS");
+    expect(replay.stages.pocFocCheck.detail).toContain("exact replay eligibility");
+    expect(replay.evidenceRefs).toEqual([
+      "runtime://clerk/authenticated",
+      "mongo://gigs/kpgsProgressive.updateId",
+      "runtime://kasilink/idempotency-owner-payload-match",
+    ]);
+    expect(replay.evidenceRefs).not.toContain(
+      "runtime://kasilink/provider-profile/validated",
+    );
   });
 
   it("produces stable payload hashes independent of governance-envelope metadata", () => {
