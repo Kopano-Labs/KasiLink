@@ -34,19 +34,24 @@ jobs:
           node-version: "20"
           cache: "npm"
 
-      - name: Install deterministic dependencies
+      - id: install
+        name: Install deterministic dependencies
         run: npm ci
 
-      - name: Lint
+      - id: lint
+        name: Lint
         run: npm run lint
 
-      - name: Type-check
+      - id: typecheck
+        name: Type-check
         run: npm run typecheck
 
-      - name: Test (Vitest)
+      - id: test
+        name: Test (Vitest)
         run: npm run test
 
-      - name: Build
+      - id: build
+        name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_stub
@@ -56,30 +61,42 @@ jobs:
           KasiLinkAI_XAI_API_KEY: xai-stub
 
       - name: Emit KPGS proof receipt
+        if: always()
         env:
           TESTED_SHA: ${{ github.sha }}
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
           REF_NAME: ${{ github.ref_name }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          LINT_OUTCOME: ${{ steps.lint.outcome }}
+          TYPECHECK_OUTCOME: ${{ steps.typecheck.outcome }}
+          TEST_OUTCOME: ${{ steps.test.outcome }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
         shell: bash
         run: |
+          proof_status="PASS"
+          for outcome in "$INSTALL_OUTCOME" "$LINT_OUTCOME" "$TYPECHECK_OUTCOME" "$TEST_OUTCOME" "$BUILD_OUTCOME"; do
+            if [ "$outcome" != "success" ]; then
+              proof_status="FAIL"
+            fi
+          done
           mkdir -p governance/receipts
           cat > governance/receipts/kpgs-branch-proof.json <<EOF
           {
             "schema": "kasilink.kpgs.branch-proof.v1",
-            "status": "PASS",
+            "status": "${proof_status}",
             "tested_sha": "${TESTED_SHA}",
             "branch": "${REF_NAME}",
             "workflow": "KPGS Branch Proof",
             "run_id": "${RUN_ID}",
             "run_attempt": "${RUN_ATTEMPT}",
-            "commands": [
-              "npm ci",
-              "npm run lint",
-              "npm run typecheck",
-              "npm run test",
-              "npm run build"
-            ],
+            "steps": {
+              "npm_ci": "${INSTALL_OUTCOME}",
+              "lint": "${LINT_OUTCOME}",
+              "typecheck": "${TYPECHECK_OUTCOME}",
+              "test": "${TEST_OUTCOME}",
+              "build": "${BUILD_OUTCOME}"
+            },
             "canonical_source": {
               "repository": "RobynAwesome/Introduction-to-MCP",
               "commit": "70f40324978ee8c3c1a8a77a29e6ac84c7f6bf3a",
@@ -89,8 +106,13 @@ jobs:
           EOF
 
       - name: Commit proof receipt
+        if: always()
         shell: bash
         run: |
+          if [ ! -f governance/receipts/kpgs-branch-proof.json ]; then
+            echo "No proof receipt was emitted."
+            exit 1
+          fi
           if git diff --quiet -- governance/receipts/kpgs-branch-proof.json; then
             echo "Proof receipt already represents this exact SHA."
             exit 0
