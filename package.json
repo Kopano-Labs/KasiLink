@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "npm run lint && npm run typecheck && npm run test && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
