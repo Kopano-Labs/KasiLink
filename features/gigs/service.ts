@@ -6,6 +6,7 @@ import {
   governedGigPayloadHash,
   KPGS_PROGRESSIVE_UPDATE_SOURCE,
   markGigStateApplied,
+  markReplayProofPassed,
   markServerProofPassed,
   type KpgsProgressiveReceipt,
 } from "@/lib/kpgs/progressiveUpdate";
@@ -255,12 +256,12 @@ export async function createGovernedGig({
       userId,
       payloadHash,
     });
-    const proofReceipt = markServerProofPassed(preflightReceipt);
+    const replayReceipt = markReplayProofPassed(preflightReceipt);
     return {
       gig: existing,
       replay: true,
       receipt: markGigStateApplied(
-        proofReceipt,
+        replayReceipt,
         `kasilink://gigs/${String(existing._id)}`,
         true,
       ),
