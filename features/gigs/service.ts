@@ -304,11 +304,12 @@ export async function createGovernedGig({
           userId,
           payloadHash,
         });
+        const replayReceipt = markReplayProofPassed(preflightReceipt);
         return {
           gig: raced,
           replay: true,
           receipt: markGigStateApplied(
-            proofReceipt,
+            replayReceipt,
             `kasilink://gigs/${String(raced._id)}`,
             true,
           ),
