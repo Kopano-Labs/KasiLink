@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Zap, MapPin, Clock, Users, TrendingUp, ExternalLink, RefreshCw } from "lucide-react";
 
 interface Gig {
@@ -42,23 +42,32 @@ export default function DemoLeaderboard() {
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [pulse, setPulse] = useState(false);
   const [newGigIds, setNewGigIds] = useState<Set<string>>(new Set());
+  const gigsRef = useRef<Gig[]>([]);
+  const pulseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const fetchGigs = useCallback(async (prevGigs: Gig[]) => {
+  const fetchGigs = useCallback(async () => {
     try {
       const res = await fetch("/api/gigs?limit=12&status=open");
       if (!res.ok) return;
       const data = await res.json();
       const fetched: Gig[] = data.gigs ?? [];
 
-      // Find brand-new gig IDs to highlight
-      const prevIds = new Set(prevGigs.map((g) => g._id));
+      // Compare against the latest committed feed without forcing a state update
+      // solely to expose previous values to the polling callback.
+      const prevIds = new Set(gigsRef.current.map((g) => g._id));
       const fresh = new Set(fetched.filter((g) => !prevIds.has(g._id)).map((g) => g._id));
       if (fresh.size > 0) {
         setPulse(true);
         setNewGigIds(fresh);
-        setTimeout(() => { setPulse(false); setNewGigIds(new Set()); }, 3000);
+        if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
+        pulseTimerRef.current = setTimeout(() => {
+          setPulse(false);
+          setNewGigIds(new Set());
+          pulseTimerRef.current = null;
+        }, 3000);
       }
 
+      gigsRef.current = fetched;
       setGigs(fetched);
       setStats({
         total: data.total ?? fetched.length,
@@ -72,9 +81,16 @@ export default function DemoLeaderboard() {
   }, []);
 
   useEffect(() => {
-    fetchGigs([]);
-    const id = setInterval(() => setGigs((prev) => { fetchGigs(prev); return prev; }), 12000);
-    return () => clearInterval(id);
+    // Polling is an external-system subscription. Defer the first request to the
+    // timer callback so the effect itself never synchronously cascades state.
+    const initialId = window.setTimeout(() => void fetchGigs(), 0);
+    const intervalId = window.setInterval(() => void fetchGigs(), 12000);
+
+    return () => {
+      window.clearTimeout(initialId);
+      window.clearInterval(intervalId);
+      if (pulseTimerRef.current) clearTimeout(pulseTimerRef.current);
+    };
   }, [fetchGigs]);
 
   return (
