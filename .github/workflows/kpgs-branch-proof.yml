@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - "kpgs-*"
+    paths-ignore:
+      - "governance/receipts/kpgs-branch-proof.json"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: kpgs-branch-proof-${{ github.ref }}
@@ -22,6 +24,9 @@ jobs:
     steps:
       - name: Checkout exact head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -49,3 +54,49 @@ jobs:
           MONGODB_URI: mongodb://localhost:27017/stub
           CLERK_WEBHOOK_SECRET: whsec_stub
           KasiLinkAI_XAI_API_KEY: xai-stub
+
+      - name: Emit KPGS proof receipt
+        env:
+          TESTED_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          REF_NAME: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          mkdir -p governance/receipts
+          cat > governance/receipts/kpgs-branch-proof.json <<EOF
+          {
+            "schema": "kasilink.kpgs.branch-proof.v1",
+            "status": "PASS",
+            "tested_sha": "${TESTED_SHA}",
+            "branch": "${REF_NAME}",
+            "workflow": "KPGS Branch Proof",
+            "run_id": "${RUN_ID}",
+            "run_attempt": "${RUN_ATTEMPT}",
+            "commands": [
+              "npm ci",
+              "npm run lint",
+              "npm run typecheck",
+              "npm run test",
+              "npm run build"
+            ],
+            "canonical_source": {
+              "repository": "RobynAwesome/Introduction-to-MCP",
+              "commit": "70f40324978ee8c3c1a8a77a29e6ac84c7f6bf3a",
+              "contract": "kpgs.progressive-update.v1"
+            }
+          }
+          EOF
+
+      - name: Commit proof receipt
+        shell: bash
+        run: |
+          if git diff --quiet -- governance/receipts/kpgs-branch-proof.json; then
+            echo "Proof receipt already represents this exact SHA."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add governance/receipts/kpgs-branch-proof.json
+          git commit -m "chore(kpgs): record exact-head branch proof"
+          git push origin HEAD:${{ github.ref_name }}
