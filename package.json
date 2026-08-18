@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "npm run lint && npm run typecheck && npm run test && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -54,8 +55,7 @@
   },
   "overrides": {
     "vite": ">=6.3.5",
-    "js-cookie": ">=3.1.0",
-    "brace-expansion": ">=2.0.2",
+    "js-cookie": "3.0.8",
     "uuid": ">=11.1.1",
     "postcss": ">=8.5.6",
     "@opentelemetry/core": ">=2.6.1",

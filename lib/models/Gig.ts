@@ -76,6 +76,13 @@ export interface IGig extends Document {
   isUrgent: boolean;
   expiresAt?: Date;
 
+  // KPGS domain-adapter replay identity. This is non-authoritative metadata only.
+  kpgsProgressive?: {
+    updateId: string;
+    payloadHash: string;
+    canonicalSourceSha: string;
+  };
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -176,6 +183,13 @@ const GigSchema = new Schema<IGig>(
     // Flags
     isUrgent: { type: Boolean, default: false },
     expiresAt: { type: Date },
+
+    // Canonical KPGS adapter metadata used only for exact replay/collision control.
+    kpgsProgressive: {
+      updateId: { type: String, trim: true },
+      payloadHash: { type: String, trim: true },
+      canonicalSourceSha: { type: String, trim: true },
+    },
   },
   {
     timestamps: true,
@@ -191,6 +205,9 @@ GigSchema.index({ location: "2dsphere" });
 GigSchema.index({ status: 1, category: 1, createdAt: -1 });
 GigSchema.index({ providerId: 1, createdAt: -1 });
 GigSchema.index({ status: 1, expiresAt: 1 });
+
+// Exact governed replay identity. Sparse keeps all legacy records valid.
+GigSchema.index({ "kpgsProgressive.updateId": 1 }, { unique: true, sparse: true });
 
 // Full-text search
 GigSchema.index({ title: "text", description: "text" });

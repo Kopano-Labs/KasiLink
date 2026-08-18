@@ -2,6 +2,14 @@ import Gig from "@/lib/models/Gig";
 import User from "@/lib/models/User";
 import connectDB from "@/lib/db";
 import { distanceKm } from "@/lib/geo";
+import {
+  governedGigPayloadHash,
+  KPGS_PROGRESSIVE_UPDATE_SOURCE,
+  markGigStateApplied,
+  markReplayProofPassed,
+  markServerProofPassed,
+  type KpgsProgressiveReceipt,
+} from "@/lib/kpgs/progressiveUpdate";
 
 export class RouteError extends Error {
   status: number;
@@ -116,7 +124,7 @@ export async function listGigs({ searchParams, currentUserId }: ListGigsInput) {
   };
 }
 
-export async function createGig({
+async function prepareGigCreate({
   userId,
   body,
 }: {
@@ -149,7 +157,7 @@ export async function createGig({
     throw new RouteError(400, "location.coordinates must be [longitude, latitude]");
   }
 
-  const gig = await Gig.create({
+  return {
     title: body.title.trim(),
     description: body.description.trim(),
     category: body.category,
@@ -179,7 +187,135 @@ export async function createGig({
     },
     isUrgent: body.isUrgent ?? false,
     expiresAt: body.expiresAt ? new Date(body.expiresAt) : undefined,
-  });
+  };
+}
 
-  return gig;
+export async function createGig({
+  userId,
+  body,
+}: {
+  userId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any;
+}) {
+  const document = await prepareGigCreate({ userId, body });
+  return Gig.create(document);
+}
+
+function duplicateKey(error: unknown): boolean {
+  return Boolean(
+    error &&
+      typeof error === "object" &&
+      "code" in error &&
+      (error as { code?: number }).code === 11000,
+  );
+}
+
+function assertReplayMatch({
+  providerId,
+  storedHash,
+  userId,
+  payloadHash,
+}: {
+  providerId: string;
+  storedHash?: string;
+  userId: string;
+  payloadHash: string;
+}) {
+  if (providerId !== userId || storedHash !== payloadHash) {
+    throw new RouteError(
+      409,
+      "KPGS idempotency conflict: update_id was already used for different governed content.",
+    );
+  }
+}
+
+export async function createGovernedGig({
+  userId,
+  body,
+  preflightReceipt,
+}: {
+  userId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any;
+  preflightReceipt: KpgsProgressiveReceipt;
+}) {
+  const updateId = preflightReceipt.updateId;
+  if (!updateId) {
+    throw new RouteError(400, "KPGS update_id is required for governed gig creation.");
+  }
+
+  const payloadHash = governedGigPayloadHash(body, userId);
+  await connectDB();
+
+  const existing = await Gig.findOne({ "kpgsProgressive.updateId": updateId });
+  if (existing) {
+    assertReplayMatch({
+      providerId: existing.providerId,
+      storedHash: existing.kpgsProgressive?.payloadHash,
+      userId,
+      payloadHash,
+    });
+    const replayReceipt = markReplayProofPassed(preflightReceipt);
+    return {
+      gig: existing,
+      replay: true,
+      receipt: markGigStateApplied(
+        replayReceipt,
+        `kasilink://gigs/${String(existing._id)}`,
+        true,
+      ),
+    };
+  }
+
+  // Server-side profile and input validation is the POC evidence gate. It executes
+  // before Gig.create(), so client-supplied proof can never self-authorize mutation.
+  const document = await prepareGigCreate({ userId, body });
+  const proofReceipt = markServerProofPassed(preflightReceipt);
+
+  try {
+    const gig = await Gig.create({
+      ...document,
+      kpgsProgressive: {
+        updateId,
+        payloadHash,
+        canonicalSourceSha: KPGS_PROGRESSIVE_UPDATE_SOURCE.commit,
+      },
+    });
+
+    return {
+      gig,
+      replay: false,
+      receipt: markGigStateApplied(
+        proofReceipt,
+        `kasilink://gigs/${String(gig._id)}`,
+        false,
+      ),
+    };
+  } catch (error) {
+    // The sparse unique update-id index closes the concurrent retry race. If the
+    // winner wrote identical content, return it as replay; otherwise fail closed.
+    if (duplicateKey(error)) {
+      const raced = await Gig.findOne({ "kpgsProgressive.updateId": updateId });
+      if (raced) {
+        assertReplayMatch({
+          providerId: raced.providerId,
+          storedHash: raced.kpgsProgressive?.payloadHash,
+          userId,
+          payloadHash,
+        });
+        const replayReceipt = markReplayProofPassed(preflightReceipt);
+        return {
+          gig: raced,
+          replay: true,
+          receipt: markGigStateApplied(
+            replayReceipt,
+            `kasilink://gigs/${String(raced._id)}`,
+            true,
+          ),
+        };
+      }
+    }
+    throw error;
+  }
 }
