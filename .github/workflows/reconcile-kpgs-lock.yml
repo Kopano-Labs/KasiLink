@@ -1,0 +1,46 @@
+name: Reconcile KPGS dependency lock
+
+on:
+  push:
+    branches:
+      - kpgs-gig-progressive-update
+    paths:
+      - package.json
+      - .github/workflows/reconcile-kpgs-lock.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile-lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: kpgs-gig-progressive-update
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Regenerate lockfile from declared overrides
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Commit lockfile only when npm changed it
+        shell: bash
+        run: |
+          if git diff --quiet -- package-lock.json; then
+            echo "package-lock.json already matches package.json"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "chore(deps): reconcile package lock"
+          git push origin HEAD:kpgs-gig-progressive-update
