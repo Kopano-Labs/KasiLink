@@ -334,12 +334,15 @@ function stableJson(value: unknown): string {
       .map((key) => `${JSON.stringify(key)}:${stableJson(record[key])}`)
       .join(",")}}`;
   }
-  return JSON.stringify(value);
+  const encoded = JSON.stringify(value);
+  return encoded === undefined ? "null" : encoded;
 }
 
 export function governedGigPayloadHash(body: unknown, userId: string): string {
   const record = asRecord(body) ?? {};
-  const { kpgs: _governanceEnvelope, ...gigPayload } = record;
+  const gigPayload = Object.fromEntries(
+    Object.entries(record).filter(([key]) => key !== "kpgs"),
+  );
   return createHash("sha256")
     .update(stableJson({ userId, gigPayload }))
     .digest("hex");
