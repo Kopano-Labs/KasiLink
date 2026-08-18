@@ -38,6 +38,7 @@ export type KpgsProgressiveReceipt = {
     stateUpdate: KpgsStage;
     distribution: KpgsStage;
   };
+  evidenceRefs: string[];
   resourceRef: string | null;
   replay: boolean;
 };
@@ -88,6 +89,7 @@ function emptyReceipt(updateId: string | null): KpgsProgressiveReceipt {
       stateUpdate: stage("NOT_REACHED", "State update not reached."),
       distribution: stage("NOT_REACHED", "SWFUS distribution not reached."),
     },
+    evidenceRefs: [],
     resourceRef: null,
     replay: false,
   };
@@ -119,8 +121,25 @@ function stop(
  */
 export function preflightGigCreate(body: unknown): GigCreatePreflight {
   const bodyRecord = asRecord(body);
-  const kpgs = asRecord(bodyRecord?.kpgs);
-  if (!kpgs) return { mode: "legacy" };
+
+  // Compatibility is opt-out, not a malformed-envelope escape hatch. Once a
+  // caller supplies a `kpgs` property it has selected the governed lane and must
+  // pass the governed contract; null/string/array envelopes fail closed.
+  if (!bodyRecord || !Object.prototype.hasOwnProperty.call(bodyRecord, "kpgs")) {
+    return { mode: "legacy" };
+  }
+
+  const kpgs = asRecord(bodyRecord.kpgs);
+  if (!kpgs) {
+    return stop(
+      emptyReceipt(null),
+      "telemetry",
+      "REJECT",
+      "INVALID_KPGS_ENVELOPE",
+      "kpgs must be a JSON object once the governed lane is selected.",
+      400,
+    );
+  }
 
   const updateId = typeof kpgs.update_id === "string" ? kpgs.update_id.trim() : "";
   const receipt = emptyReceipt(updateId || null);
@@ -214,13 +233,13 @@ export function preflightGigCreate(body: unknown): GigCreatePreflight {
       400,
     );
   }
-  if (kpgs.nb_boundary !== true) {
+  if (kpgs.boundary_marker !== "#NB") {
     return stop(
       receipt,
       "invariantAudit",
       "HOLD",
       "NB_BOUNDARY_REQUIRED",
-      "#NB must be explicit before a mutating CRUD stage can continue.",
+      "The literal #NB boundary_marker is required before mutating CRUD can continue.",
       422,
     );
   }
@@ -248,7 +267,7 @@ export function preflightGigCreate(body: unknown): GigCreatePreflight {
   }
   receipt.stages.invariantAudit = stage(
     "PASS",
-    "#NB present; CREATE bounded; APU GREEN; authority remains none.",
+    "Literal #NB present; CREATE bounded; APU GREEN; authority remains none.",
   );
 
   if (kpgs.foc_asserted === true) {
@@ -284,6 +303,11 @@ export function markServerProofPassed(
     ...receipt,
     outcome: "READY",
     code: "STATE_UPDATE_READY",
+    evidenceRefs: [
+      "runtime://clerk/authenticated",
+      "runtime://kasilink/provider-profile/validated",
+      "runtime://kasilink/gig-input-location/validated",
+    ],
     stages: {
       ...receipt.stages,
       pocFocCheck: stage(
@@ -291,6 +315,35 @@ export function markServerProofPassed(
         "Server-side Clerk authentication, provider-profile lookup and gig-input/location validation passed.",
       ),
       stateUpdate: stage("READY", "Bounded Gig CREATE is admitted to persistence."),
+      distribution: stage("NOT_REACHED", "SWFUS distribution has not executed."),
+    },
+  };
+}
+
+/**
+ * Exact replay has a different proof basis from a fresh mutation. The runtime
+ * must not claim provider/profile/input validation re-ran when it only matched
+ * an already admitted governed record by authenticated owner + payload hash.
+ */
+export function markReplayProofPassed(
+  receipt: KpgsProgressiveReceipt,
+): KpgsProgressiveReceipt {
+  return {
+    ...receipt,
+    outcome: "READY",
+    code: "REPLAY_STATE_READY",
+    evidenceRefs: [
+      "runtime://clerk/authenticated",
+      "mongo://gigs/kpgsProgressive.updateId",
+      "runtime://kasilink/idempotency-owner-payload-match",
+    ],
+    stages: {
+      ...receipt.stages,
+      pocFocCheck: stage(
+        "PASS",
+        "Existing governed Gig plus authenticated owner and payload-hash match prove exact replay eligibility.",
+      ),
+      stateUpdate: stage("READY", "Existing governed Gig may be returned without rerunning mutation."),
       distribution: stage("NOT_REACHED", "SWFUS distribution has not executed."),
     },
   };
