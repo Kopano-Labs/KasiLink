@@ -2,15 +2,22 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/kpgs-vnext-gig-create]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kasilink-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   ci:
     name: Lint · Type-check · Test · Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -19,11 +26,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install exact dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: KPGS gig CREATE progressive proof
+        run: npx vitest run tests/kpgs-progressive-gig.test.ts tests/gigs-kpgs-route.test.ts
 
       - name: Lint
         run: npm run lint
@@ -31,13 +41,13 @@ jobs:
       - name: Type-check
         run: npm run typecheck
 
-      - name: Test (Vitest)
-        run: npx vitest run
+      - name: Full test suite
+        run: npm run test
 
-      - name: Build
+      - name: Production build
         run: npm run build
         env:
-          # Stub env vars — build must pass without real secrets
+          # Stub env vars — compilation must not require production secrets.
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_stub
           CLERK_SECRET_KEY: sk_test_stub
           MONGODB_URI: mongodb://localhost:27017/stub
