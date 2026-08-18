@@ -13,35 +13,52 @@
  * ───────────────────────────────────────────────────────────
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { WifiOff, RefreshCw } from "lucide-react";
 
+function subscribeConnectivity(onStoreChange: () => void) {
+  window.addEventListener("online", onStoreChange);
+  window.addEventListener("offline", onStoreChange);
+
+  return () => {
+    window.removeEventListener("online", onStoreChange);
+    window.removeEventListener("offline", onStoreChange);
+  };
+}
+
+function getOnlineSnapshot() {
+  return navigator.onLine;
+}
+
+function getServerOnlineSnapshot() {
+  // Server rendering cannot observe browser connectivity. Assume online until
+  // hydration subscribes to the browser's authoritative connectivity signal.
+  return true;
+}
+
 export default function OfflineBanner() {
-  const [isOffline, setIsOffline] = useState(false);
+  const isOnline = useSyncExternalStore(
+    subscribeConnectivity,
+    getOnlineSnapshot,
+    getServerOnlineSnapshot,
+  );
+  const isOffline = !isOnline;
   const [justReconnected, setJustReconnected] = useState(false);
 
   useEffect(() => {
-    // Check initial state
-    setIsOffline(!navigator.onLine);
-
-    const goOffline = () => {
-      setIsOffline(true);
-      setJustReconnected(false);
-    };
+    let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 
     const goOnline = () => {
-      setIsOffline(false);
       setJustReconnected(true);
-      // Show "back online" briefly
-      setTimeout(() => setJustReconnected(false), 3000);
+      if (reconnectTimer) clearTimeout(reconnectTimer);
+      reconnectTimer = setTimeout(() => setJustReconnected(false), 3000);
     };
 
-    window.addEventListener("offline", goOffline);
     window.addEventListener("online", goOnline);
 
     return () => {
-      window.removeEventListener("offline", goOffline);
       window.removeEventListener("online", goOnline);
+      if (reconnectTimer) clearTimeout(reconnectTimer);
     };
   }, []);
 
