@@ -16,8 +16,8 @@
     "seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
-    "@ai-sdk/react": "^3.0.148",
-    "@ai-sdk/xai": "^3.0.77",
+    "@ai-sdk/react": "^3.0.280",
+    "@ai-sdk/xai": "^3.0.130",
     "@clerk/nextjs": "^7.2.4",
     "@opentelemetry/api": "^1.9.1",
     "@opentelemetry/api-logs": "^0.205.0",
@@ -28,7 +28,7 @@
     "@opentelemetry/sdk-trace-base": "^2.6.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/otel": "^2.1.1",
-    "ai": "^6.0.146",
+    "ai": "^6.0.277",
     "braintrust": "^2.0.0",
     "lucide-react": "^1.8.0",
     "mongodb": "^7.1.1",
